@@ -1,0 +1,3 @@
+####### requirements.txt for pip #######
+
+flask >= 0.11

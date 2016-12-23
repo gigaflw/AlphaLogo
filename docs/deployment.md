@@ -3,19 +3,18 @@
 
 ### 系统要求
 * python 2.7
-
-python库:
-
 * flask
-	
-		pip install flask  # in case flask is not installed
-		
+
+### 配置环境
+    
+    `pip install -r requirements.txt`
 
 ### 运行
-	
-	python run.py
-	
-	# visit 'localhost:5000' in your browser
-	# you should see 'hello world'
+    
+    python run.py
 
-    # Now you can code! Enjoy it.
+    # visit 'localhost:5000' in your browser
+    # you should see 'hello world'
+
+    # Now you can start coding! Enjoy it.
+
