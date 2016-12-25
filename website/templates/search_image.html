@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+
+{% block style %}
+    <link rel="stylesheet" href="static/search_image.css">
+{% endblock %}
+
+{% block script %}
+    <script src="static/search_image.js"></script>
+{% endblock %}
+
+{% block body %}
+    {% for logo in logos %}
+        <div>
+            <div>{{ logo.ent_name }}</div>
+            <img src="{{ url_for('static',filename=logo.filename) }}">
+        </div>
+    {% endfor %}
+{% endblock %}
