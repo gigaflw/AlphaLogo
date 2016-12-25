@@ -1,5 +1,7 @@
 A searching engine about logos
 
+示例图片已上传
+
 ### 部署
 [here](docs/deployment.md)
 
