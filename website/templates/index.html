@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="static/index.css">
-        <script src="static/index.js"></script>
-    </head>
-    <body>
-        <header class="foo">I have a dream. --- Matin Luder Jin</header>
-
-        <form id="textForm" action="/search" method="POST">
-            <input name="kw" type="text">            
-            <input name="type" value="text" hidden>
-            <button type="submit">submit</button>
-        </form>
-
-        <form id="imageForm" action="/search" enctype="multipart/form-data" method="POST">
-            <input name="logo" type="file"> 
-            <input name="type" value="image" hidden>
-            <button type="submit">submit</button>
-        </form>
-
-    </body>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="static/index.css">
+		<script src="static/index.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="title">
+				AlphaLoGo
+			</div>
+			<div class="linkTitle">
+				<span style="padding-left:8px; padding-right:8px">搜索</span>
+				<a href="/im" style="padding-left:8px; padding-right:8px">匹配</a>
+			</div>
+			<div class="input">
+				<form id="textForm" action="/search" method="POST">
+					<label for="keyword" style="padding-left:8px; padding-right:8px">请输入公司的名字</label>
+					<input type="text" id="keyword" name="kw" style="width: 300px">
+					<input name="type" value="text" hidden>
+					<button type="submit" style="padding-left:8px; padding-right:8px">Go</button>
+				</form>
+			</div>
+		</div>
+	</body>
 </html>

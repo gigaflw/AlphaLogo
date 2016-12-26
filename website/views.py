@@ -12,9 +12,12 @@ bp = Blueprint('bp', __name__, template_folder='templates')
 
 
 @bp.route('/')
-def hello_world():
+def index():
     return render_template('index.html')
 
+@bp.route('/im')
+def index_image():
+    return render_template('index_image.html')
 
 @bp.route('/search', methods=['POST'])
 def search():
@@ -28,6 +31,7 @@ def search():
         tmpl = "search_image.html"
         search = image_search
         kw = request.files.get('logo')
+        print kw
 
         if kw is None:
             flash("file with name 'logo' is required in the post data. Check your form's enctype.")
