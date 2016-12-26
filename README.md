@@ -12,5 +12,5 @@ A searching engine about logos
 [here](docs/usage.md)
 
 ### TODO
-- [ ] 在文本搜索中,为 Logo对象 加上完全匹配标志服
+- [ ] 在文本搜索中,为 Logo对象 加上完全匹配标志符
 - [ ] 纠错 & 联想
