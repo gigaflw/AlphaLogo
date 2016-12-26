@@ -1,27 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<link rel="stylesheet" type="text/css" href="static/index.css">
-		<script src="static/index.js"></script>
-	</head>
-	<body>
-		<div class="container">
-			<div class="title">
-				AlphaLoGo
-			</div>
-			<div class="linkTitle">
-				<span style="padding-left:8px; padding-right:8px">搜索</span>
-				<a href="/im" style="padding-left:8px; padding-right:8px">匹配</a>
-			</div>
-			<div class="input">
-				<form id="textForm" action="/search" method="POST">
-					<label for="keyword" style="padding-left:8px; padding-right:8px">请输入公司的名字</label>
-					<input type="text" id="keyword" name="kw" style="width: 300px">
-					<input name="type" value="text" hidden>
-					<button type="submit" style="padding-left:8px; padding-right:8px">Go</button>
-				</form>
-			</div>
+{% extends "layout.html" %}
+
+
+{% block style %}
+    <link rel="stylesheet" type="text/css" href="static/index.css">
+{% endblock %}
+
+{% block script %}
+    <script src="static/index.js"></script>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+		<div class="title">
+			AlphaLoGo
 		</div>
-	</body>
-</html>
+		<div class="linkTitle">
+			<span style="padding-left:8px; padding-right:8px">搜索</span>
+			<a href="/im" style="padding-left:8px; padding-right:8px">匹配</a>
+		</div>
+		<div class="input">
+			<form id="textForm" action="/search" method="POST">
+				<label for="keyword" style="padding-left:8px; padding-right:8px">请输入公司的名字</label>
+				<input type="text" id="keyword" name="kw" style="width: 300px">
+				<input name="type" value="text" hidden>
+				<button type="submit" style="padding-left:8px; padding-right:8px">Go</button>
+			</form>
+		</div>
+	</div>
+{% endblock %}

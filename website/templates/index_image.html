@@ -1,27 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<link rel="stylesheet" href="static/index.css">
-		<script src="static/index.js"></script>
-	</head>
-	<body>
-		<div class="container">
-			<div class="title">
-				AlphaLoGo
-			</div>
-			<div class="linkTitle">
-				<a href="/" style="padding-left:8px; padding-right:8px">搜索</a>
-				<span style="padding-left:8px; padding-right:8px">匹配</span>
-			</div>
-			<div class="input">
-				<form id="imageForm" action="/search" enctype="multipart/form-data" method="POST">
-					<label for="logo" style="padding-left:8px; padding-right:8px">请上传一张Logo图片</label>
-					<input type="file" id="logo" name="logo">
-					<input name="type" value="image" hidden>
-					<button type="submit" style="padding-left:8px; padding-right:8px">Go</button> 
-				</form>
-			</div>
+{% extends "layout.html" %}
+
+
+{% block style %}
+    <link rel="stylesheet" type="text/css" href="static/index.css">
+{% endblock %}
+
+{% block script %}
+    <script src="static/index.js"></script>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+		<div class="title">
+			AlphaLoGo
 		</div>
-	</body>
-</html>
+		<div class="linkTitle">
+			<a href="/" style="padding-left:8px; padding-right:8px">搜索</a>
+			<span style="padding-left:8px; padding-right:8px">匹配</span>
+		</div>
+		<div class="input">
+			<form id="imageForm" action="/search" enctype="multipart/form-data" method="POST">
+				<label for="logo" style="padding-left:8px; padding-right:8px">请上传一张Logo图片</label>
+				<input type="file" id="logo" name="logo">
+				<input name="type" value="image" hidden>
+				<button type="submit" style="padding-left:8px; padding-right:8px">Go</button> 
+			</form>
+		</div>
+	</div>
+{% endblock %}
