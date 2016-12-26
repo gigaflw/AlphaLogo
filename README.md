@@ -10,3 +10,7 @@ A searching engine about logos
 
 ### git入门
 [here](docs/usage.md)
+
+### TODO
+[ ] 在文本搜索中,为 Logo对象 加上完全匹配标志服
+[ ] 纠错 & 联想
