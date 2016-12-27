@@ -73,8 +73,8 @@ def get_page(page):
 
 
 def add_page_to_folder(picNum, img_binary, title, tags, explain, imgurl):
-    index_filename = 'PICTURES.txt'
-    title_filename = "TITLE.txt"
+    index_filename = os.path.join(BASE_PATH, 'PICTURES.txt')
+    title_filename = os.path.join(BASE_PATH, "TITLE.txt")
     global folder
     filename = str(picNum).zfill(5) + '.' + imgurl.split('.')[-1]
     if not os.path.exists(folder):
@@ -163,10 +163,11 @@ prefix = 'http://logonc.com/'
 reload(sys)
 sys.setdefaultencoding('utf8')
 
+BASE_PATH = os.path.dirname(__file__)
 #'输入thread数量、爬取图片数、文件夹存放图片
 thread_num = 10
 max_pics = 300
-folder = 'pic'
+folder = os.path.join(BASE_PATH, 'pic')
 
 main(thread_num, max_pics)
 a = raw_input()

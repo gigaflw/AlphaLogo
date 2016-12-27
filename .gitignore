@@ -5,3 +5,6 @@
 dataset
 !dataset/demo
 uploads
+
+crawl
+!crawl/crawl.py
