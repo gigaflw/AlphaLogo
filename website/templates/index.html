@@ -11,23 +11,23 @@
 
 {% block body %}
     <div class="container">
-		<div class="title">
-			AlphaLogo
-		</div>
-		<div class="linkTitle">
-			<span style="padding-left:8px; padding-right:8px">搜索</span>
-			<a href="/im" style="padding-left:8px; padding-right:8px">匹配</a>
-		</div>
-		<div class="input">
-			<form id="textForm" action="/search" method="POST">
-				<label for="keyword" style="padding-left:8px; padding-right:8px">请输入公司的名字</label>
-				<input type="text" id="keyword" name="kw" style="width: 300px">
-				<input name="type" value="text" hidden>
-				<button type="submit" style="padding-left:8px; padding-right:8px">Go</button>
-			</form>
-		</div>
-		<div class="linkTitle">
-			<a href="/senior_search" style="padding-left:8px; padding-right:8px">高级搜索</a>
-		</div>
-	</div>
+        <div class="title">
+            AlphaLogo
+        </div>
+        <div class="linkTitle">`
+            <span style="padding-left:8px; padding-right:8px">搜索</span>
+            <a href="/im" style="padding-left:8px; padding-right:8px">匹配</a>
+        </div>
+        <div class="input">
+            <form id="textForm" action="/search" method="POST">
+                <label for="keyword" style="padding-left:8px; padding-right:8px">请输入公司的名字</label>
+                <input type="text" id="keyword" name="kw" style="width: 300px">
+                <input name="type" value="text" hidden>
+                <button type="submit" style="padding-left:8px; padding-right:8px">Go</button>
+            </form>
+        </div>
+        <div class="linkTitle">
+            <a href="/senior_search" style="padding-left:8px; padding-right:8px">高级搜索</a>
+        </div>
+    </div>
 {% endblock %}

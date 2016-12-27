@@ -2,21 +2,21 @@
 * @Author: GigaFlower
 * @Date:   2016-12-23 23:12:10
 * @Last Modified by:   GigaFlower
-* @Last Modified time: 2016-12-23 23:12:58
+* @Last Modified time: 2016-12-27 12:40:02
 */
 
 div.container {
-	width: 100%;
+    width: 100%;
 }
 
 div.left {
-	text-align: center;
-	padding-top: 20px;
-	padding-bottom: 20px;
-	float: left;
-	width: 200px;
-	font-size: 40px;
-	font-weight: bold;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    float: left;
+    width: 200px;
+    font-size: 40px;
+    font-weight: bold;
 }
 
 div.linkTitle {
@@ -34,40 +34,40 @@ div.input {
 }
 
 div.resultSimilarTitle {
-	font-size: 22px;
-	font-weight: bold;
-	margin-top: 20px;
-	margin-bottom: 20px;
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 div.askTitle {
-	font-size: 22px;
-	font-weight: bold;
-	margin-top: 20px;
-	margin-bottom: 20px;
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 div.matchedResult {
-	width: 600px;
-	height: 800px;
-	padding-left: 10px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	padding-left: 10px;
+    width: 600px;
+    height: 800px;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
 }
 div.matchedResult:hover{
-	box-shadow: 1px 1px 5px 5px #888888;
+    box-shadow: 1px 1px 5px 5px #888888;
 }
 
 div.similarResult {
-	float: left;
-	width: 300px;
-	height: 400px;
-	padding-left: 10px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	padding-left: 10px;
+    float: left;
+    width: 300px;
+    height: 400px;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
 }
 div.similarResult:hover{
-	box-shadow: 1px 1px 5px 5px #888888;
+    box-shadow: 1px 1px 5px 5px #888888;
 }

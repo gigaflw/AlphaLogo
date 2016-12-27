@@ -2,32 +2,32 @@
 * @Author: GigaFlower
 * @Date:   2016-12-23 23:12:10
 * @Last Modified by:   GigaFlower
-* @Last Modified time: 2016-12-23 23:12:58
+* @Last Modified time: 2016-12-27 12:40:04
 */
 
 div.container {
-	width: 100%;
+    width: 100%;
 }
 
 div.title {
-	text-align: center;
-	font-size: 70px;
-	font-weight: bold;
-	padding-top: 60px;
-	padding-bottom: 40px;
+    text-align: center;
+    font-size: 70px;
+    font-weight: bold;
+    padding-top: 60px;
+    padding-bottom: 40px;
 }
 
 div.linkTitle {
-	text-align: center;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	font-size: 20px;
-	font-weight: bold;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 div.input {
-	text-align: center;
-	padding-top: 8px;
-	padding-bottom: 8px;
-	font-size: 16px;
+    text-align: center;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-size: 16px;
 }
