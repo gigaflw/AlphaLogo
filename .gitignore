@@ -8,3 +8,5 @@ uploads
 
 crawl
 !crawl/crawl.py
+
+web.index

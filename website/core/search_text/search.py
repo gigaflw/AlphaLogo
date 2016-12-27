@@ -18,7 +18,7 @@ from org.apache.lucene.util import Version
 from java.io import File
 
 # Index dir name
-BASE_DIR = os.path.join(os.path.dirname(__file__), "index")
+BASE_DIR = os.path.join(os.path.dirname(__file__), "web.index")
 
 # Lucene initialize
 vm_env = lucene.initVM(vmargs=['-Djava.awt.headless=true'])
@@ -37,7 +37,7 @@ def _get_lucene_searcher(rel_path):
 class SearchConfig:
     index_dir = ''
     searchable_field = "keywords"
-    result_keys = ['filename']
+    result_keys = ['filename', 'ent_name', 'info']
 
 
 def search_func(field, searcher, doc_to_ret_func):
@@ -62,7 +62,7 @@ def search_func(field, searcher, doc_to_ret_func):
 
 
 def retrieve(keywords, doc):
-    return dict(filename=doc.get('filename'))
+    return {k: doc.get(k) for k in SearchConfig.result_keys}
 
 
 search = search_func(field=SearchConfig.searchable_field,

@@ -60,7 +60,7 @@ def get_page(page):
         explain = tmp2.p.text
         if explain == '' or explain == None:
             explain = title
-        explain.replace("&nbsp;",'')
+        explain.replace("&nbsp;", '')
         title = simplify(title)
         req = urllib2.Request(url=imgurl, headers={"Referer": page})
         img_binary = urllib2.urlopen(req).read()
@@ -86,8 +86,8 @@ def add_page_to_folder(picNum, img_binary, title, tags, explain, imgurl):
 
     varLock.acquire()
     index = open(index_filename, 'a')
-    index.write(unicode(picNum) + u'\t' + title + u'\t' + explain + u'\t')
-    index.write('%'.join(tags) + '\t'+ imgurl + u'\n')
+    index.write(u'\t'.join([unicode(picNum), title, explain, '%'.join(tags), imgurl, filename]))
+    index.write(u'\n')
     index.close()
     titlelist = open(title_filename, 'a')
     titlelist.write(title + u'\n')
