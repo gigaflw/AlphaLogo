@@ -26,22 +26,27 @@
                 <button type="submit" style="padding-left:8px; padding-right:8px">Go</button>
             </form>
         </div>
-        <div class="resultSimilarTitle">
-            共搜索到{{ logos|length() }}个相似结果
+        {% if (logo_matched|length > 0) %}
+        	<div class="resultTitle" id="matchedResultTitle">
+            	您要找的是不是：
+        	</div>
+        	{% for logo in logo_matched %}
+	        	<div class="matchedResult">
+	                <div>{{ logo.ent_name }}</div>
+	                <img src="{{ url_for('static',filename=logo.filename) }}">
+	            </div>
+        	{% endfor %}
+        {% endif %}
+
+        <div class="resultTitle" id="similarResultTitle">
+            共搜索到{{ logo_similar|length }}个相似结果
         </div>
 
-        {% for logo in logos %}
-            {% if logo.is_complete_match %}
-                <div class="matchedResult">
-                    <div>{{ logo.ent_name }}</div>
-                    <img src="{{ url_for('static',filename=logo.filename) }}">
-                </div>
-            {% else %}
-                <div class="similarResult">
-                    <div>{{ logo.ent_name }}</div>
-                    <img src="{{ url_for('static',filename=logo.filename) }}">
-                </div>
-            {% endif %}
+        {% for logo in logo_similar %}
+            <div class="similarResult">
+                <div>{{ logo.ent_name }}</div>
+                <img src="{{ url_for('static',filename=logo.filename) }}">
+            </div>
         {% endfor %}
     </div>
     

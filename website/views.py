@@ -44,7 +44,10 @@ def search():
     else:
         logos = search_(kw)
 
-    return render_template(tmpl, logos=logos, kw=kw)
+    logo_matched = logos[:1] # fake data
+    logo_similar = logos[1:] # fake data
+
+    return render_template(tmpl, logo_matched=logo_matched, logo_similar=logo_similar, kw=kw)
 
 @bp.route('/senior_search', methods=['POST', 'GET'])
 def senior_search():
@@ -63,7 +66,10 @@ def senior_search():
     else:
         logos = search_(kw)
 
-    return render_template(tmpl, logos=logos, kw=kw)
+    logo_matched = logos[:1] # fake data
+    logo_similar = logos[1:] # fake data
+
+    return render_template(tmpl, logo_matched=logo_matched, logo_similar=logo_similar, kw=kw)
 
 @bp.route('/match', methods=['POST'])
 def match():
@@ -90,4 +96,7 @@ def match():
     else:
         logos = search_(kw)
 
-    return render_template(tmpl, logos=logos)
+    logo_matched = logos[:1] # fake data
+    logo_similar = logos[1:] # fake data
+
+    return render_template(tmpl, logo_matched=logo_matched, logo_similar=logo_similar, kw=kw)
