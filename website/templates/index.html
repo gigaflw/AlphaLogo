@@ -1,18 +1,18 @@
 {% extends "layout.html" %}
 
 
-{% block style %}
+{% block styles %}
     <link rel="stylesheet" type="text/css" href="static/index.css">
 {% endblock %}
 
-{% block script %}
+{% block scripts %}
     <script src="static/index.js"></script>
 {% endblock %}
 
 {% block body %}
     <div class="container">
 		<div class="title">
-			AlphaLoGo
+			AlphaLogo
 		</div>
 		<div class="linkTitle">
 			<span style="padding-left:8px; padding-right:8px">搜索</span>
@@ -25,6 +25,9 @@
 				<input name="type" value="text" hidden>
 				<button type="submit" style="padding-left:8px; padding-right:8px">Go</button>
 			</form>
+		</div>
+		<div class="linkTitle">
+			<a href="/senior_search" style="padding-left:8px; padding-right:8px">高级搜索</a>
 		</div>
 	</div>
 {% endblock %}

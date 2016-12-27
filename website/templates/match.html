@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+
+{% block styles %}
+	<link rel="stylesheet" href="static/search_match.css">
+{% endblock %}
+
+{% block scripts %}
+	<script src="static/match.js"></script>
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="left">
+			AlphaLogo
+		</div>
+		<div class="linkTitle">
+			<a href="/" style="padding-left:8px; padding-right:8px">搜索</a>
+			<span style="padding-left:8px; padding-right:8px">匹配</span>
+		</div>
+		<div class="input">
+			<form id="textForm" action="/match" method="POST">
+				<form id="imageForm" action="/search" enctype="multipart/form-data" method="POST">
+				<input type="file" id="logo" name="logo">
+				<input name="type" value="image" hidden>
+				<button type="submit" style="padding-left:8px; padding-right:8px">Go</button> 
+			</form>
+		</div>
+		<div class="resultSimilarTitle">
+			共搜索到{{ logos|length() }}个相似结果
+		</div>
+
+		{% for logo in logos %}
+			{% if logo.is_complete_match %}
+				<div class="matchedResult">
+					<div>{{ logo.ent_name }}</div>
+					<img src="{{ url_for('static',filename=logo.filename) }}">
+				</div>
+			{% else %}
+				<div class="similarResult">
+					<div>{{ logo.ent_name }}</div>
+					<img src="{{ url_for('static',filename=logo.filename) }}">
+				</div>
+			{% endif %}
+		{% endfor %}
+	</div>
+	
+{% endblock %}

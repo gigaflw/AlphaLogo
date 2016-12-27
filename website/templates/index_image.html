@@ -1,25 +1,25 @@
 {% extends "layout.html" %}
 
 
-{% block style %}
+{% block styles %}
     <link rel="stylesheet" type="text/css" href="static/index.css">
 {% endblock %}
 
-{% block script %}
+{% block scripts %}
     <script src="static/index.js"></script>
 {% endblock %}
 
 {% block body %}
     <div class="container">
 		<div class="title">
-			AlphaLoGo
+			AlphaLogo
 		</div>
 		<div class="linkTitle">
 			<a href="/" style="padding-left:8px; padding-right:8px">搜索</a>
 			<span style="padding-left:8px; padding-right:8px">匹配</span>
 		</div>
 		<div class="input">
-			<form id="imageForm" action="/search" enctype="multipart/form-data" method="POST">
+			<form id="imageForm" action="/match" enctype="multipart/form-data" method="POST">
 				<label for="logo" style="padding-left:8px; padding-right:8px">请上传一张Logo图片</label>
 				<input type="file" id="logo" name="logo">
 				<input name="type" value="image" hidden>

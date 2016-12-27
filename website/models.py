@@ -7,5 +7,5 @@
 
 from collections import namedtuple
 
-Logo = namedtuple('Logo', ['filename', 'ent_name'])
+Logo = namedtuple('Logo', ['filename', 'ent_name', 'is_complete_match'])
 
