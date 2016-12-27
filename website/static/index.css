@@ -17,11 +17,48 @@ div.title {
     padding-bottom: 40px;
 }
 
-div.linkTitle {
+div.linkBar {
+    margin: 0 auto;
+    height: 40px;
     text-align: center;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     font-size: 20px;
+    font-weight: bold;
+}
+
+div.linkTitle {
+    display: inline-block;
+    background-color: #CCCCCC;
+    width: 120px;
+    height: 25px;
+    cursor: pointer;
+    text-align: center;
+    color: #888888;
+    padding-top: 10px;
+    margin-left: -2.5px;
+    margin-right: -2.5px;
+    font-size: 18px;
+}
+
+div.linkTitle:hover {
+    color: #444444;
+}
+
+div.currentLinkTitle {
+    display: inline-block;
+    background-color: #CCCCCC;
+    width: 120px;
+    height: 25px;
+    cursor: default;
+    text-align: center;
+    padding-top: 10px;
+    margin-left: -2.5px;
+    margin-right: -2.5px;
+    border: 0px solid #000000;
+    border-bottom-width: 4px;
+    border-bottom-color: #0000FF;
+    font-size: 18px;
     font-weight: bold;
 }
 
@@ -30,4 +67,9 @@ div.input {
     padding-top: 8px;
     padding-bottom: 8px;
     font-size: 16px;
+}
+
+.textDefaultStyle {
+    padding-left:8px;
+    padding-right:8px;
 }

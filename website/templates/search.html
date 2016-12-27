@@ -15,20 +15,26 @@
         <div class="left">
             AlphaLogo
         </div>
-        <div class="linkTitle">
-            <span style="padding-left:8px; padding-right:8px">搜索</span>
-            <a href="/im" style="padding-left:8px; padding-right:8px">匹配</a>
+        <div class="linkBar">
+            <div class="linkTitle" id="search">
+                <span class="textDefaultStyle">搜索</span>
+            </div>
+            <div class="currentLinkTitle" id="senior_search">
+                <span class="textDefaultStyle">高级搜索</span>
+            </div>
+            <div class="linkTitle" id="match">
+                <span class="textDefaultStyle">匹配</span>
+            </div>
         </div>
+        
         <div class="input">
             <form id="textForm" action="/search" method="POST">
                 <input type="text" id="keyword" name="kw" value="{{ kw }}" style="width: 300px">
-                <input name="type" value="text" hidden>
+                <input type="hidden" name="type" value="text">
                 <button type="submit" style="padding-left:8px; padding-right:8px">Go</button>
             </form>
         </div>
-        <div class="linkTitle">
-            <a href="/senior_search" style="padding-left:8px; padding-right:8px">高级搜索</a>
-        </div>
+        
 
         {% if (logo_matched|length > 0) %}
         	<div class="resultTitle" id="matchedResultTitle">

@@ -14,20 +14,32 @@
         <div class="title">
             AlphaLogo
         </div>
-        <div class="linkTitle">
-            <span style="padding-left:8px; padding-right:8px">搜索</span>
-            <a href="/im" style="padding-left:8px; padding-right:8px">匹配</a>
+        <div class="linkBar">
+            <div class="currentLinkTitle" id="search">
+                <span class="textDefaultStyle">搜索</span>
+            </div>
+            <div class="linkTitle" id="senior_search">
+                <span class="textDefaultStyle">高级搜索</span>
+            </div>
+            <div class="linkTitle" id="match">
+                <span class="textDefaultStyle">匹配</span>
+            </div>
         </div>
-        <div class="input">
+        <div class="input" id="input_search">
             <form id="textForm" action="/search" method="POST">
-                <label for="keyword" style="padding-left:8px; padding-right:8px">请输入公司的名字</label>
+                <label for="keyword" class="textDefaultStyle">请输入公司的名字</label>
                 <input type="text" id="keyword" name="kw" style="width: 300px">
                 <input name="type" value="text" hidden>
-                <button type="submit" style="padding-left:8px; padding-right:8px">Go</button>
+                <button type="submit" class="textDefaultStyle">Go</button>
             </form>
         </div>
-        <div class="linkTitle">
-            <a href="/senior_search" style="padding-left:8px; padding-right:8px">高级搜索</a>
+        <div class="input" id="input_match">
+            <form id="imageForm" action="/match" enctype="multipart/form-data" method="POST">
+                <label for="logo" style="padding-left:8px; padding-right:8px">请上传一张Logo图片</label>
+                <input type="file" id="logo" name="logo">
+                <input name="type" value="image" hidden>
+                <button type="submit" style="padding-left:8px; padding-right:8px">Go</button> 
+            </form>
         </div>
     </div>
 {% endblock %}
