@@ -4,7 +4,7 @@
 # @Last Modified by:   GigaFlower
 # @Last Modified time: 2016-12-25 15:22:54
 
-from flask import Blueprint, render_template, abort, request, flash, redirect
+from flask import Blueprint, render_template, abort, request, flash, redirect, url_for
 
 from website.core import image_search, text_search
 
@@ -31,36 +31,14 @@ def search():
     search_ = text_search
 
     if (len(kw) == 0):
-        logos = []
+        return redirect(url_for("bp.index"))
     else:
         logos = search_(kw)
 
     logo_matched = logos[:1] # fake data
     logo_similar = logos[1:] # fake data
 
-    return render_template(tmpl, logo_matched=logo_matched, logo_similar=logo_similar, kw=kw)
-
-@bp.route('/senior_search', methods=['POST'])
-def senior_search():
-    """
-    Senior search. Searching by the keywords.
-    """
-    type_ = request.form.get('type')
-    kw = None
-
-    tmpl = "senior_search.html"
-    search_ = text_search
-    kw = request.form.get('kw')
-
-    if kw is None:
-        logos = []
-    else:
-        logos = search_(kw)
-
-    logo_matched = logos[:1] # fake data
-    logo_similar = logos[1:] # fake data
-
-    return render_template(tmpl, logo_matched=logo_matched, logo_similar=logo_similar, kw=kw)
+    return render_template(tmpl, logo_matched=logo_matched, logo_similar=logo_similar, webtype=type_, kw=kw)
 
 @bp.route('/match', methods=['POST'])
 def match():
@@ -73,7 +51,7 @@ def match():
     if type_ is None:
         flash("parameter 'type' is required in the post data!")
 
-    elif type_ == "image":
+    elif type_ == "match":
         tmpl = "match.html"
         search_ = image_search
         kw = request.files.get('logo')

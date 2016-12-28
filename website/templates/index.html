@@ -11,7 +11,7 @@
 
 {% block body %}
     <div class="container">
-        <div class="title">
+        <div class="title" id="index_title">
             AlphaLogo
         </div>
         <div class="linkBar">
@@ -29,17 +29,44 @@
             <form id="textForm" action="/search" method="GET">
                 <label for="keyword" class="textDefaultStyle">请输入公司的名字</label>
                 <input type="text" id="keyword" name="kw" style="width: 300px">
-                <input name="type" value="text" hidden>
+                <input name="type" id="type_search" value="search" hidden>
                 <button type="submit" class="textDefaultStyle">Go</button>
             </form>
         </div>
         <div class="input" id="input_match">
             <form id="imageForm" action="/match" enctype="multipart/form-data" method="POST">
-                <label for="logo" style="padding-left:8px; padding-right:8px">请上传一张Logo图片</label>
+                <label for="logo" class="textDefaultStyle">请上传一张Logo图片</label>
                 <input type="file" id="logo" name="logo">
-                <input name="type" value="image" hidden>
-                <button type="submit" style="padding-left:8px; padding-right:8px">Go</button> 
+                <input name="type" id="type_match" value="match" hidden>
+                <button type="submit" class="textDefaultStyle">Go</button> 
             </form>
+        </div>
+        <div class="seniorSearchPanel" id="senior_search_panel">
+            <div class="seniorSearchBar">
+                <div class="seniorSearchTitle">
+                    颜色：
+                </div>
+                <div class="seniorSearchType">
+                    蓝色
+                </div>
+                <div class="seniorSearchType">
+                    红色
+                </div>
+                <div class="seniorSearchType">
+                    绿色
+                </div>
+            </div>
+            <div class="seniorSearchBar">
+                <div class="seniorSearchTitle">
+                    风格：
+                </div>
+                <div class="seniorSearchType">
+                    简约
+                </div>
+                <div class="seniorSearchType">
+                    激情
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}
