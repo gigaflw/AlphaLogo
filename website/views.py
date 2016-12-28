@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-22 20:25:31
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2016-12-25 15:22:54
+# @Last Modified time: 2016-12-28 21:32:10
 
 from flask import Blueprint, render_template, abort, request, flash, redirect, url_for
 
@@ -30,8 +30,27 @@ def search():
     tmpl = "search.html"
     search_ = text_search
 
-    if (len(kw) == 0):
+    if len(kw) == 0:
         return redirect(url_for("bp.index"))
+    else:
+        logo_matched, logo_similar = search_(keywords=kw, ent_name='')
+
+    return render_template(tmpl, logo_matched=logo_matched, logo_similar=logo_similar, kw=kw)
+
+@bp.route('/senior_search', methods=['POST'])
+def senior_search():
+    """
+    Senior search. Searching by the keywords.
+    """
+    type_ = request.form.get('type')
+    kw = None
+
+    tmpl = "senior_search.html"
+    search_ = text_search
+    kw = request.form.get('kw')
+
+    if kw is None:
+        logos = []
     else:
         logos = search_(kw)
 

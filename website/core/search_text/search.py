@@ -25,45 +25,44 @@ vm_env = lucene.initVM(vmargs=['-Djava.awt.headless=true'])
 
 class SearchConfig:
     result_keys = ['filename', 'ent_name', 'info']
-    searchable_field = "keywords"
+    searchable_fields = ['ent_name', 'keywords']
 
 
 def get_search_func():
-    # Lucene initialize
-
     jieba.initialize()
 
-    # Standard analyzer
     analyzer = StandardAnalyzer(Version.LUCENE_CURRENT)
     searcher = IndexSearcher(DirectoryReader.open(SimpleFSDirectory(File(LUCENE_INDEX_DIR))))
 
-    search = search_func_factory(field=SearchConfig.searchable_field,
-                                 analyzer=analyzer,
+    search = search_func_factory(analyzer=analyzer,
                                  searcher=searcher)
 
     return search
 
 
-def search_func_factory(field, analyzer, searcher):
+def search_func_factory(analyzer, searcher):
     """Search function factory"""
 
-    def retrieve(keywords, doc):
+    def retrieve(doc):
         return {k: doc.get(k) for k in SearchConfig.result_keys}
 
-    def search(keywords):
+    def search(**kwargs):
         vm_env.attachCurrentThread()
+        query = BooleanQuery() 
 
-        keywords = list(filter(lambda x: x, jieba.cut(keywords, cut_all=True)))
-        # construct query
-        query = BooleanQuery()
-        querys = [QueryParser(Version.LUCENE_CURRENT, field, analyzer).parse(kw) for kw in keywords]
+        for field_name, keywords in kwargs.items():
+            # assert field_name in SearchConfig.searchable_fields
 
-        for q in querys:
-            query.add(q, BooleanClause.Occur.SHOULD)
+            keywords = list(filter(None, jieba.cut(keywords, cut_all=True)))
+
+            # construct query
+            for kw in keywords:
+                q = QueryParser(Version.LUCENE_CURRENT, field_name, analyzer).parse(kw)
+                query.add(q, BooleanClause.Occur.SHOULD)
 
         # search
         scoreDocs = searcher.search(query, 50).scoreDocs
 
-        return [retrieve(keywords, searcher.doc(scoreDoc.doc)) for scoreDoc in scoreDocs]
+        return [retrieve(searcher.doc(scoreDoc.doc)) for scoreDoc in scoreDocs]
 
     return search

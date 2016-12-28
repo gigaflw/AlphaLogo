@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-23 23:18:28
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2016-12-28 16:07:34
+# @Last Modified time: 2016-12-28 20:53:17
 from __future__ import unicode_literals
 
 import os
@@ -16,23 +16,37 @@ from website.utility import save_img_to_uploads
 ##########################
 # Interface
 ##########################
-def text_search(kw):
+def text_search(keywords, ent_name=""):
     """
     Search logos by keywords
 
-    @param: kw : a string, the keywords, may contain whitespaces as splits 
-    @returns: a list of info on matched images
+    @param: keywords : the characteristic of image, search from crawled data, may contain whitespaces as splits 
+    @param: ent_name : the name of the enterprise, search from crawled data
+    @returns: a list of 'Logo' instance
     """
-
-    ret = lucene_search(kw)
+    ret = lucene_search(keywords=keywords, ent_name=ent_name)
 
     def para_to_logo(para):
         para['filename'] = os.path.join('dataset', para['filename'])
         return Logo(**para)
 
-    logos = [para_to_logo(l) for l in ret]
+    def is_good_match(logo):
+        """
+        Find out good matches
+        To be intensified
+        """
+        if ent_name in logo.ent_name:
+            return True
+        else:
+            return False
 
-    return logos
+    good = []
+    normal = []
+
+    for l in map(para_to_logo, ret):
+        (good if is_good_match(l) else normal).append(l)
+
+    return good, normal
 
 
 def image_search(im):
