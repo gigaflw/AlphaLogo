@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-27 21:45:08
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2016-12-28 15:58:48
+# @Last Modified time: 2016-12-28 16:14:48
 
 from __future__ import with_statement, print_function
 
@@ -26,7 +26,7 @@ LUCENE_CATELOG_FILE = os.path.join(BASE_DIR, 'web.index', 'PICTURES.txt')
 
 FIELD_FORMAT = ["ind", "ent_name", "info", "keywords", "imgurl"]
 STORE_FIELDS = {"filename", "ent_name", "info"}
-INDEX_FIELDS = {"keywords"}
+INDEX_FIELDS = {"ent_name", "keywords"}
 ADD_FIELDS = set.union(STORE_FIELDS, INDEX_FIELDS)
 
 
