@@ -18,30 +18,38 @@ from org.apache.lucene.util import Version
 from java.io import File
 
 # Index dir name
-BASE_DIR = os.path.join(os.path.dirname(__file__), "web.index")
+from website.core.search_text.index import LUCENE_INDEX_DIR
 
-# Lucene initialize
 vm_env = lucene.initVM(vmargs=['-Djava.awt.headless=true'])
-
-jieba.initialize()
-
-# Standard analyzer
-analyzer = StandardAnalyzer(Version.LUCENE_CURRENT)
-
-
-def _get_lucene_searcher(rel_path):
-    path = os.path.join(BASE_DIR, rel_path)
-    return IndexSearcher(DirectoryReader.open(SimpleFSDirectory(File(path))))
 
 
 class SearchConfig:
-    index_dir = ''
-    searchable_field = "keywords"
     result_keys = ['filename', 'ent_name', 'info']
+    searchable_field = "keywords"
 
 
-def search_func(field, searcher, doc_to_ret_func):
+def get_search_func():
+    # Lucene initialize
+
+    jieba.initialize()
+
+    # Standard analyzer
+    analyzer = StandardAnalyzer(Version.LUCENE_CURRENT)
+    searcher = IndexSearcher(DirectoryReader.open(SimpleFSDirectory(File(LUCENE_INDEX_DIR))))
+
+    search = search_func_factory(field=SearchConfig.searchable_field,
+                                 analyzer=analyzer,
+                                 searcher=searcher)
+
+    return search
+
+
+def search_func_factory(field, analyzer, searcher):
     """Search function factory"""
+
+    def retrieve(keywords, doc):
+        return {k: doc.get(k) for k in SearchConfig.result_keys}
+
     def search(keywords):
         vm_env.attachCurrentThread()
 
@@ -56,15 +64,6 @@ def search_func(field, searcher, doc_to_ret_func):
         # search
         scoreDocs = searcher.search(query, 50).scoreDocs
 
-        return list(doc_to_ret_func(keywords, searcher.doc(scoreDoc.doc)) for scoreDoc in scoreDocs)
+        return [retrieve(keywords, searcher.doc(scoreDoc.doc)) for scoreDoc in scoreDocs]
 
     return search
-
-
-def retrieve(keywords, doc):
-    return {k: doc.get(k) for k in SearchConfig.result_keys}
-
-
-search = search_func(field=SearchConfig.searchable_field,
-                     searcher=_get_lucene_searcher(SearchConfig.index_dir),
-                     doc_to_ret_func=retrieve)

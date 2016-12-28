@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-23 23:18:28
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2016-12-27 23:02:37
+# @Last Modified time: 2016-12-28 16:07:34
 from __future__ import unicode_literals
 
 import os
@@ -25,20 +25,13 @@ def text_search(kw):
     """
 
     ret = lucene_search(kw)
+
     def para_to_logo(para):
         para['filename'] = os.path.join('dataset', para['filename'])
         return Logo(**para)
 
     logos = [para_to_logo(l) for l in ret]
 
-    # fake data
-    # logos = [
-        # Logo(os.path.join('dataset', 'demo', '1.jpg'), '手持一把锟斤拷，口中疾呼烫烫烫'),
-        # Logo(os.path.join('dataset', 'demo', '2.jpg'), '问天再借五百年'),
-        # Logo(os.path.join('dataset', 'demo', '3.jpg'), 'A quick brown fox jumps over the lazy dog'),
-        # Logo(os.path.join('dataset', 'demo', '4.jpg'), '大美兴，川普王'),
-        # Logo(os.path.join('dataset', 'demo', '5.jpg'), '黄焖鸡米饭')
-    # ]
     return logos
 
 
