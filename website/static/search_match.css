@@ -108,3 +108,8 @@ div.similarResult {
 div.similarResult:hover{
     box-shadow: 1px 1px 5px 5px #888888;
 }
+
+.textDefaultStyle {
+    padding-left:8px;
+    padding-right:8px;
+}
