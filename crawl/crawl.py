@@ -56,6 +56,7 @@ def get_page(page):
         explain = tmp2.p.text
         if explain == '' or explain == None:
             explain = title
+        explain = explain.replace('\r\n','').replace('\n','')
         title = simplify(title)
         req = urllib2.Request(url=imgurl, headers={"Referer": page})
         img_binary = urllib2.urlopen(req).read()
