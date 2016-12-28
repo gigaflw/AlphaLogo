@@ -20,26 +20,17 @@ def index_image():
     return render_template('index_image.html')
 
 
-@bp.route('/search', methods=['POST', 'GET'])
+@bp.route('/search', methods=['GET'])
 def search():
     """
     Searching by the name of the company or the keywords.
     """
-    type_ = request.form.get('type')
-    kw = None
+    type_ = request.args.get('type')
+    kw = request.args.get('kw')
+    tmpl = "search.html"
+    search_ = text_search
 
-    if type_ is None:
-        flash("parameter 'type' is required in the post data!")
-
-    elif type_ == "text":
-        tmpl = "search.html"
-        search_ = text_search
-        kw = request.form.get('kw')
-
-        if kw is None:
-            flash("parameter 'kw' is required in the post data!")
-
-    if kw is None:
+    if (len(kw) == 0):
         logos = []
     else:
         logos = search_(kw)
@@ -49,7 +40,7 @@ def search():
 
     return render_template(tmpl, logo_matched=logo_matched, logo_similar=logo_similar, kw=kw)
 
-@bp.route('/senior_search', methods=['POST', 'GET'])
+@bp.route('/senior_search', methods=['POST'])
 def senior_search():
     """
     Senior search. Searching by the keywords.

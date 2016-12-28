@@ -14,15 +14,22 @@
         <div class="left">
             AlphaLogo
         </div>
-        <div class="linkTitle">
-            <a href="/" style="padding-left:8px; padding-right:8px">搜索</a>
-            <span style="padding-left:8px; padding-right:8px">匹配</span>
+        <div class="linkBar">
+            <div class="linkTitle">
+                <a href="/" style="padding-left:8px; padding-right:8px">搜索</a>
+            </div>
+            <div class="linkTitle">
+                <span style="padding-left:8px; padding-right:8px">匹配</span>
+            </div>
+            <div class="linkTitle">
+                <a href="/senior_search" style="padding-left:8px; padding-right:8px">高级搜索</a>
+            </div>
         </div>
         <div class="input">
             <form id="textForm" action="/match" method="POST">
                 <form id="imageForm" action="/search" enctype="multipart/form-data" method="POST">
                 <input type="file" id="logo" name="logo">
-                <input name="type" value="image" hidden>
+                <input type="hidden" name="type" value="image">
                 <button type="submit" style="padding-left:8px; padding-right:8px">Go</button> 
             </form>
         </div>
