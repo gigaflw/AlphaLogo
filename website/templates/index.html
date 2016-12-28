@@ -18,19 +18,18 @@
             <div class="currentLinkTitle" id="search">
                 <span class="textDefaultStyle">搜索</span>
             </div>
-            <div class="linkTitle" id="senior_search">
-                <span class="textDefaultStyle">高级搜索</span>
-            </div>
             <div class="linkTitle" id="match">
                 <span class="textDefaultStyle">匹配</span>
             </div>
         </div>
         <div class="input" id="input_search">
             <form id="textForm" action="/search" method="GET">
-                <label for="keyword" class="textDefaultStyle">请输入公司的名字</label>
-                <input type="text" id="keyword" name="kw" style="width: 300px">
+                <input type="text" class="keyword" name="kw">
                 <input name="type" id="type_search" value="search" hidden>
-                <button type="submit" class="textDefaultStyle">Go</button>
+                <button class="passiveSeniorTitle" id="senior_search">
+                    <span id="senior_sign">高级搜索</span>
+                </button>
+                <button type="submit" class="submit">Go</button>
             </form>
         </div>
         <div class="input" id="input_match">
@@ -38,7 +37,7 @@
                 <label for="logo" class="textDefaultStyle">请上传一张Logo图片</label>
                 <input type="file" id="logo" name="logo">
                 <input name="type" id="type_match" value="match" hidden>
-                <button type="submit" class="textDefaultStyle">Go</button> 
+                <button type="submit" class="submit">Go</button> 
             </form>
         </div>
         <div class="seniorSearchPanel" id="senior_search_panel">

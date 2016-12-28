@@ -7,49 +7,63 @@
 
 'use strict';
 
+var divSearch = document.getElementById("search");
+var divMatch = document.getElementById("match");
+var divSenior = document.getElementById("senior_search");
+var idSearch = document.getElementById("search");
+var idSeniorSearch = document.getElementById("senior_search");
+var idMatch = document.getElementById("match");
+var idTypeSearch = document.getElementById("type_search");
+var idInputSearch = document.getElementById("input_search");
+var idInputMatch = document.getElementById("input_match");
+var idSeniorSearchPanel = document.getElementById("senior_search_panel");
+var idIndexTitle = document.getElementById("index_title");
+
 window.addEventListener('load', function(){
     console.log('远看黄山黑黝黝,上面小来下面大,若将黄山倒过来,上面大来下面小');
-    document.getElementById("search").className = "currentLinkTitle";
-    document.getElementById("senior_search").className = "linkTitle";
-    document.getElementById("match").className = "linkTitle";
-    document.getElementById("type_search").value = "search";
-    document.getElementById("input_search").style.display = "block";
-    document.getElementById("input_match").style.display = "none";
-    document.getElementById("senior_search_panel").style.display = "none";
-    document.getElementById("index_title").style.marginTop = "100px";
+    modeSearch();
 });
 
-var divSearch = document.getElementById("search");
 divSearch.addEventListener("click", function(){
-    document.getElementById("search").className = "currentLinkTitle";
-    document.getElementById("senior_search").className = "linkTitle";
-    document.getElementById("match").className = "linkTitle";
-    document.getElementById("type_search").value = "search";
-    document.getElementById("input_search").style.display = "block";
-    document.getElementById("input_match").style.display = "none";
-    document.getElementById("senior_search_panel").style.display = "none";
-    document.getElementById("index_title").style.marginTop = "100px";
+    modeSearch();
 })
 
-var divMatch = document.getElementById("match");
 divMatch.addEventListener("click", function() {
-    document.getElementById("search").className = "linkTitle";
-    document.getElementById("match").className = "currentLinkTitle";
-    document.getElementById("senior_search").className = "linkTitle";
-    document.getElementById("input_search").style.display = "none";
-    document.getElementById("input_match").style.display = "block";
-    document.getElementById("senior_search_panel").style.display = "none";
-    document.getElementById("index_title").style.marginTop = "100px";
+    modeMatch();
 })
 
-var divSenior = document.getElementById("senior_search");
 divSenior.addEventListener("click", function() {
-    document.getElementById("search").className = "linkTitle";
-    document.getElementById("senior_search").className = "currentLinkTitle";
-    document.getElementById("match").className = "linkTitle";
-    document.getElementById("type_search").value = "senior_search";
-    document.getElementById("input_search").style.display = "block";
-    document.getElementById("input_match").style.display = "none";
-    document.getElementById("senior_search_panel").style.display = "block";
-    document.getElementById("index_title").style.marginTop = "20px";
+    switchSeniorSearch();
 })
+
+function modeSearch() {
+    idSearch.className = "currentLinkTitle";
+    idMatch.className = "linkTitle";
+    idSeniorSearch.className = "passiveSeniorTitle";
+    idTypeSearch.value = "search";
+    idInputSearch.style.display = "block";
+    idInputMatch.style.display = "none";
+    idSeniorSearchPanel.style.display = "none";
+    idIndexTitle.style.marginTop = "100px";
+}
+
+function modeMatch() {
+    idSearch.className = "linkTitle";
+    idMatch.style.className = "currentLinkTitle";
+    idSeniorSearch.style.display = "none";
+    idInputSearch.style.display = "none";
+    idInputMatch.style.display = "block";
+    idIndexTitle.style.marginTop = "100px";
+}
+
+function switchSeniorSearch() {
+    if (idSeniorSearch.className == "passiveSeniorTitle") {
+        idSeniorSearch.className == "activeSeniorTitle";
+        idTypeSearch.value = "senior_search";
+        idSeniorSearchPanel.style.display = "block";
+    } else {
+        idSeniorSearch.className == "passiveSeniorTitle";
+        idTypeSearch.value = "search";
+        idSeniorSearchPanel.style.display = "none";
+    }
+}
