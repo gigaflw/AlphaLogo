@@ -17,7 +17,7 @@ var idTypeSearch = document.getElementById("type_search");
 var idInputSearch = document.getElementById("input_search");
 var idInputMatch = document.getElementById("input_match");
 var idSeniorSearchPanel = document.getElementById("senior_search_panel");
-var idIndexTitle = document.getElementById("index_title");
+var idTitle = document.getElementById("title");
 
 window.addEventListener('load', function(){
     console.log('远看黄山黑黝黝,上面小来下面大,若将黄山倒过来,上面大来下面小');
@@ -59,7 +59,7 @@ function modeSearch() {
     idInputSearch.style.display = "block";
     idInputMatch.style.display = "none";
     idSeniorSearchPanel.style.display = "none";
-    idIndexTitle.style.marginTop = "100px";
+    idTitle.style.marginTop = "100px";
 }
 
 function modeMatch() {
@@ -69,7 +69,7 @@ function modeMatch() {
     idInputSearch.style.display = "none";
     idInputMatch.style.display = "block";
     idSeniorSearchPanel.style.display = "none";
-    idIndexTitle.style.marginTop = "100px";
+    idTitle.style.marginTop = "100px";
 }
 
 function switchSeniorSearch() {
@@ -77,11 +77,11 @@ function switchSeniorSearch() {
         idTypeSearch.value = "senior_search";
         idSeniorSearchPanel.style.display = "block";
         divSeniorSearch.className = "activeSeniorTitle";
-        idIndexTitle.style.marginTop = "20px";
+        idTitle.style.marginTop = "20px";
     } else {
         idTypeSearch.value = "search";
         idSeniorSearchPanel.style.display = "none";
         divSeniorSearch.className = "passiveSeniorTitle";
-        idIndexTitle.style.marginTop = "100px";
+        idTitle.style.marginTop = "100px";
     }
 }

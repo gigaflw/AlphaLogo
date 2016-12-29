@@ -7,15 +7,17 @@
 
 div.container {
     width: 100%;
+
+    font-family: "Century Gothic", Verdana, Tahoma,"微软雅黑", Arial;
 }
 
-div.left {
-    text-align: center;
-    padding-top: 20px;
-    padding-bottom: 20px;
+div.title {
+    margin-top: 100px;
+    margin-bottom: 40px;
     float: left;
-    width: 200px;
-    font-size: 40px;
+
+    text-align: center;
+    font-size: 70px;
     font-weight: bold;
 }
 

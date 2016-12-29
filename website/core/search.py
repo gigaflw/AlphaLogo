@@ -35,7 +35,7 @@ def text_search(keywords, ent_name=""):
         Find out good matches
         To be intensified
         """
-        if ent_name in logo.ent_name:
+        if ent_name and ent_name in logo.ent_name:
             return True
         else:
             return False
