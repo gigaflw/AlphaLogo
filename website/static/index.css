@@ -90,6 +90,7 @@ input.keyword {
     font-size: 18px;
     text-indent: 10px;
     outline-width: 0;
+    vertical-align: top;
 }
 input.keyword:hover {
     border: 3px #888888 solid;
@@ -201,10 +202,63 @@ div.seniorSearchType {
     margin-right: -2.5px;
     font-size: 18px;
 }
-
 div.seniorSearchType:hover {
     color: #444444;
     border: 1px solid #BBBBBB;
+}
+
+input.browse {
+    cursor: pointer;
+    background-color: #DDDDDD;
+
+    height: 38px;
+    width: 65px;
+
+    border: 3px #AAAAAA solid;
+    border-radius: 10px;
+
+    font-size: 18px;
+    text-align: center;
+    color: #888888;
+    outline-width: 0;
+    vertical-align: top;
+}
+input.browse:hover {
+    border: 3px #888888 solid;
+
+    color: #000000;
+}
+
+input.logo {
+    display: none;
+
+    width: 59px;
+    height: 32px;
+
+    border: 3px #AAAAAA solid;
+    border-radius: 15px;
+
+    font-size: 18px;
+    text-indent: 10px;
+}
+
+input.textfield {
+    background-color: transparent;
+
+    width: 300px;
+    height: 30px;
+
+    border: 3px #AAAAAA solid;
+    border-radius: 15px;
+
+    font-size: 18px;
+    text-indent: 10px;
+    color: #888888;
+    outline-width: 0;
+    vertical-align: top;
+}
+input.textfield:hover {
+    border: 3px #888888 solid;
 }
 
 .textDefaultStyle {

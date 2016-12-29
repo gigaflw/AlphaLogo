@@ -10,6 +10,9 @@
 var divSearch = document.getElementById("search");
 var divMatch = document.getElementById("match");
 var divSeniorSearch = document.getElementById("senior");
+var idBrowse = document.getElementById("browse");
+var idLogo = document.getElementById("logo");
+var idTextfield = document.getElementById("textfield");
 var idTypeSearch = document.getElementById("type_search");
 var idInputSearch = document.getElementById("input_search");
 var idInputMatch = document.getElementById("input_match");
@@ -32,6 +35,20 @@ divMatch.addEventListener("click", function() {
 divSeniorSearch.addEventListener("click", function() {
     switchSeniorSearch();
 })
+
+idBrowse.addEventListener("click", function() {
+    idLogo.click();
+})
+
+function showTextField() {
+    var fileName = idLogo.value;
+    var reg = new RegExp("\\\\\.[^\\\\]*$");
+    //alert(reg.exec(fileName));
+    var regFileName = reg.exec(fileName);
+    regFileName = JSON.stringify(regFileName);
+    idTextfield.value = regFileName.substring(4, regFileName.length-2);
+}
+
 
 function modeSearch() {
     divSearch.className = "currentLinkTitle";
@@ -60,9 +77,11 @@ function switchSeniorSearch() {
         idTypeSearch.value = "senior_search";
         idSeniorSearchPanel.style.display = "block";
         divSeniorSearch.className = "activeSeniorTitle";
+        idIndexTitle.style.marginTop = "20px";
     } else {
         idTypeSearch.value = "search";
         idSeniorSearchPanel.style.display = "none";
         divSeniorSearch.className = "passiveSeniorTitle";
+        idIndexTitle.style.marginTop = "100px";
     }
 }

@@ -24,7 +24,7 @@
         </div>
         <div class="input" id="input_search">
             <form id="textForm" action="/search" method="GET">
-                <input type="text" class="keyword" name="kw">
+                <input type="text" class="keyword" name="kw" placeholder="请输入要搜索的logo特征">
                 <input name="type" id="type_search" value="search" hidden>
                 <div class="passiveSeniorTitle" id="senior">
                     <span class="textDefaultStyle">高级搜索</span>
@@ -35,8 +35,9 @@
         
         <div class="input" id="input_match">
             <form id="imageForm" action="/match" enctype="multipart/form-data" method="POST">
-                <label for="logo" class="textDefaultStyle">请上传一张Logo图片</label>
-                <input type="file" id="logo" name="logo">
+                <input type="text" name="textfield" id="textfield" class="textfield" value="请选择一张logo图片" disabled="disable"> 
+                <input type="file" class="logo" id="logo" name="logo" onchange="showTextField()">
+                <input type="button" class="browse" id="browse" value="浏览">
                 <input name="type" id="type_match" value="match" hidden>
                 <button type="submit" class="submit">Go</button> 
             </form>
