@@ -26,12 +26,13 @@
             <form id="textForm" action="/search" method="GET">
                 <input type="text" class="keyword" name="kw">
                 <input name="type" id="type_search" value="search" hidden>
-                <button class="passiveSeniorTitle" id="senior_search">
-                    <span id="senior_sign">高级搜索</span>
-                </button>
+                <div class="passiveSeniorTitle" id="senior">
+                    <span class="textDefaultStyle">高级搜索</span>
+                </div>
                 <button type="submit" class="submit">Go</button>
             </form>
         </div>
+        
         <div class="input" id="input_match">
             <form id="imageForm" action="/match" enctype="multipart/form-data" method="POST">
                 <label for="logo" class="textDefaultStyle">请上传一张Logo图片</label>

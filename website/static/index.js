@@ -9,10 +9,7 @@
 
 var divSearch = document.getElementById("search");
 var divMatch = document.getElementById("match");
-var divSenior = document.getElementById("senior_search");
-var idSearch = document.getElementById("search");
-var idSeniorSearch = document.getElementById("senior_search");
-var idMatch = document.getElementById("match");
+var divSeniorSearch = document.getElementById("senior");
 var idTypeSearch = document.getElementById("type_search");
 var idInputSearch = document.getElementById("input_search");
 var idInputMatch = document.getElementById("input_match");
@@ -32,14 +29,15 @@ divMatch.addEventListener("click", function() {
     modeMatch();
 })
 
-divSenior.addEventListener("click", function() {
+divSeniorSearch.addEventListener("click", function() {
     switchSeniorSearch();
 })
 
 function modeSearch() {
-    idSearch.className = "currentLinkTitle";
-    idMatch.className = "linkTitle";
-    idSeniorSearch.className = "passiveSeniorTitle";
+    divSearch.className = "currentLinkTitle";
+    divMatch.className = "linkTitle";
+    divSeniorSearch.className = "passiveSeniorTitle";
+    divSeniorSearch.style.display = "inline-block";
     idTypeSearch.value = "search";
     idInputSearch.style.display = "block";
     idInputMatch.style.display = "none";
@@ -48,22 +46,23 @@ function modeSearch() {
 }
 
 function modeMatch() {
-    idSearch.className = "linkTitle";
-    idMatch.style.className = "currentLinkTitle";
-    idSeniorSearch.style.display = "none";
+    divSearch.className = "linkTitle";
+    divMatch.className = "currentLinkTitle";
+    divSeniorSearch.style.display = "none";
     idInputSearch.style.display = "none";
     idInputMatch.style.display = "block";
+    idSeniorSearchPanel.style.display = "none";
     idIndexTitle.style.marginTop = "100px";
 }
 
 function switchSeniorSearch() {
-    if (idSeniorSearch.className == "passiveSeniorTitle") {
-        idSeniorSearch.className == "activeSeniorTitle";
+    if (divSeniorSearch.className == "passiveSeniorTitle") {
         idTypeSearch.value = "senior_search";
         idSeniorSearchPanel.style.display = "block";
+        divSeniorSearch.className = "activeSeniorTitle";
     } else {
-        idSeniorSearch.className == "passiveSeniorTitle";
         idTypeSearch.value = "search";
         idSeniorSearchPanel.style.display = "none";
+        divSeniorSearch.className = "passiveSeniorTitle";
     }
 }
