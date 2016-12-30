@@ -61,10 +61,14 @@ def image_search(im):
 
     # fake data
     logos = [
-        Logo(os.path.join('dataset', 'demo', '1.jpg'), '手持一把锟斤拷，口中疾呼烫烫烫'),
-        Logo(os.path.join('dataset', 'demo', '2.jpg'), '问天再借五百年'),
-        Logo(os.path.join('dataset', 'demo', '3.jpg'), 'A quick brown fox jumps over the lazy dog'),
-        Logo(os.path.join('dataset', 'demo', '4.jpg'), '大美兴，川普王'),
-        Logo(os.path.join('dataset', 'demo', '5.jpg'), '黄焖鸡米饭')
+        Logo(os.path.join('dataset', 'demo', '1.jpg'), '手持一把锟斤拷，口中疾呼烫烫烫', '测试1'),
+        Logo(os.path.join('dataset', 'demo', '2.jpg'), '问天再借五百年', '测试2'),
+        Logo(os.path.join('dataset', 'demo', '3.jpg'), 'A quick brown fox jumps over the lazy dog', '测试3'),
+        Logo(os.path.join('dataset', 'demo', '4.jpg'), '大美兴，川普王', '测试4'),
+        Logo(os.path.join('dataset', 'demo', '5.jpg'), '黄焖鸡米饭', '测试5')
     ]
-    return logos
+
+    good = [logos[0]]
+    normal = logos[1:]
+
+    return good, normal

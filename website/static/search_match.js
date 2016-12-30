@@ -17,12 +17,6 @@ var idTypeSearch = document.getElementById("type_search");
 var idInputSearch = document.getElementById("input_search");
 var idInputMatch = document.getElementById("input_match");
 var idSeniorSearchPanel = document.getElementById("senior_search_panel");
-var idTitle = document.getElementById("title");
-
-window.addEventListener('load', function(){
-    console.log('远看黄山黑黝黝,上面小来下面大,若将黄山倒过来,上面大来下面小');
-    modeSearch();
-});
 
 divSearch.addEventListener("click", function(){
     modeSearch();
@@ -57,7 +51,6 @@ function modeSearch() {
     idInputSearch.style.display = "block";
     idInputMatch.style.display = "none";
     idSeniorSearchPanel.style.display = "none";
-    idTitle.style.marginTop = "100px";
 }
 
 function modeMatch() {
@@ -67,7 +60,6 @@ function modeMatch() {
     idInputSearch.style.display = "none";
     idInputMatch.style.display = "block";
     idSeniorSearchPanel.style.display = "none";
-    idTitle.style.marginTop = "100px";
 }
 
 function switchSeniorSearch() {
@@ -75,11 +67,18 @@ function switchSeniorSearch() {
         idTypeSearch.value = "senior_search";
         idSeniorSearchPanel.style.display = "block";
         divSeniorSearch.className = "activeSeniorTitle";
-        idTitle.style.marginTop = "40px";
     } else {
         idTypeSearch.value = "search";
         idSeniorSearchPanel.style.display = "none";
         divSeniorSearch.className = "passiveSeniorTitle";
-        idTitle.style.marginTop = "100px";
     }
+}
+
+function getParameter(name){
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var matched = window.location.search.substr(1).match(reg);
+    if (matched != null) {
+        return unescape(matched[2])
+    }
+    return null;
 }

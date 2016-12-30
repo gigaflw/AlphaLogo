@@ -11,18 +11,15 @@
 
 {% block body %}
     <div class="container">
-        <div class="left">
+        <div class="title" id="title">
             AlphaLogo
         </div>
         <div class="linkBar">
-            <div class="linkTitle">
-                <a href="/" style="padding-left:8px; padding-right:8px">搜索</a>
+            <div class="currentLinkTitle" id="search">
+                <span class="textDefaultStyle">搜索</span>
             </div>
-            <div class="linkTitle">
-                <span style="padding-left:8px; padding-right:8px">匹配</span>
-            </div>
-            <div class="linkTitle">
-                <a href="/senior_search" style="padding-left:8px; padding-right:8px">高级搜索</a>
+            <div class="linkTitle" id="match">
+                <span class="textDefaultStyle">匹配</span>
             </div>
         </div>
         <div class="input">

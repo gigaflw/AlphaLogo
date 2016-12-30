@@ -2,10 +2,11 @@
 
 
 {% block styles %}
-    <link rel="stylesheet" href="static/search.css">
+    <link rel="stylesheet" href="static/search_match.css">
 {% endblock %}
 
 {% block scripts %}
+    <script src="static/search_match.js"></script>
     <script src="static/search.js"></script>
 {% endblock %}
 
@@ -32,6 +33,16 @@
                 <button type="submit" class="submit">Go</button>
             </form>
         </div>
+        <div class="input" id="input_match">
+            <form id="imageForm" action="/match" enctype="multipart/form-data" method="POST">
+                <input type="text" name="textfield" id="textfield" class="textfield" value="请选择一张logo图片" disabled="disable"> 
+                <input type="file" class="logo" id="logo" name="logo" onchange="showTextField()">
+                <input type="button" class="browse" id="browse" value="浏览">
+                <input name="type" id="type_match" value="match" hidden>
+                <button type="submit" class="submit">Go</button> 
+            </form>
+        </div>
+
         <div class="seniorSearchPanel" id="senior_search_panel" hidden>
             <div class="seniorSearchBar">
                 <div class="seniorSearchTitle">
