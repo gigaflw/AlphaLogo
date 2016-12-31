@@ -6,6 +6,7 @@
 {% endblock %}
 
 {% block scripts %}
+    <script src="static/search_match.js"></script>
     <script src="static/match.js"></script>
 {% endblock %}
 
@@ -22,36 +23,85 @@
                 <span class="textDefaultStyle">匹配</span>
             </div>
         </div>
-        <div class="input">
-            <form id="textForm" action="/match" method="POST">
-                <form id="imageForm" action="/search" enctype="multipart/form-data" method="POST">
-                <input type="file" id="logo" name="logo">
-                <input type="hidden" name="type" value="image">
-                <button type="submit" style="padding-left:8px; padding-right:8px">Go</button> 
+        <div class="input" id="input_search">
+            <form id="textForm" action="/search" method="GET">
+                <input type="text" class="keyword" name="kw" placeholder="请输入要搜索的logo特征">
+                <input name="type" id="type_search" value="search" hidden>
+                <div class="passiveSeniorTitle" id="senior">
+                    <span class="textDefaultStyle">高级搜索</span>
+                </div>
+                <button type="submit" class="submit">Go</button>
             </form>
         </div>
-        {% if (logo_matched|length > 0) %}
-            <div class="resultTitle" id="matchedResultTitle">
-                您要找的是不是：
-            </div>
-            {% for logo in logo_matched %}
-                <div class="matchedResult">
-                    <div>{{ logo.ent_name }}</div>
-                    <img src="{{ url_for('static',filename=logo.filename) }}">
-                </div>
-            {% endfor %}
-        {% endif %}
-
-        <div class="resultTitle" id="similarResultTitle">
-            共搜索到{{ logo_similar|length }}个相似结果
+        <div class="input" id="input_match">
+            <form id="imageForm" action="/match" enctype="multipart/form-data" method="POST">
+                <input type="text" name="textfield" id="textfield" class="textfield" value="{{ kw }}" disabled="disable"> 
+                <input type="file" class="logo" id="logo" name="logo" onchange="showTextField()">
+                <input type="button" class="browse" id="browse" value="浏览">
+                <input name="type" id="type_match" value="match" hidden>
+                <button type="submit" class="submit">Go</button> 
+            </form>
         </div>
 
-        {% for logo in logo_similar %}
-            <div class="similarResult">
-                <div>{{ logo.ent_name }}</div>
-                <img src="{{ url_for('static',filename=logo.filename) }}">
+        <div class="seniorSearchPanel" id="senior_search_panel" hidden>
+            <div class="seniorSearchBar">
+                <div class="seniorSearchTitle">
+                    颜色：
+                </div>
+                <div class="seniorSearchType">
+                    蓝色
+                </div>
+                <div class="seniorSearchType">
+                    红色
+                </div>
+                <div class="seniorSearchType">
+                    绿色
+                </div>
             </div>
-        {% endfor %}
+            <div class="seniorSearchBar">
+                <div class="seniorSearchTitle">
+                    风格：
+                </div>
+                <div class="seniorSearchType">
+                    简约
+                </div>
+                <div class="seniorSearchType">
+                    激情
+                </div>
+            </div>
+            <div class="seniorSearchBar">
+                <div class="seniorSearchTitle">
+                    企业名：
+                </div>
+                <input type="text" class="companyName" name="companyNameName" placeholder="请输入企业名称">
+                <input name="type" id="type_search" value="senior_search" hidden>
+            </div>
+        </div>
+        
+        <div class="container" id="search_container">
+            {% if (logo_matched|length > 0) %}
+                <div class="resultTitle" id="matchedResultTitle">
+                    您要找的是不是：
+                </div>
+                {% for logo in logo_matched %}
+                    <div class="matchedResult">
+                        <div>{{ logo.ent_name }}</div>
+                        <img src="{{ url_for('static',filename=logo.filename) }}" class="matchedImg">
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <div class="resultTitle" id="similarResultTitle">
+                共搜索到{{ logo_similar|length }}个相似结果
+            </div>
+
+            {% for logo in logo_similar %}
+                <div class="similarResult">
+                    <div>{{ logo.ent_name }}</div>
+                    <img src="{{ url_for('static',filename=logo.filename) }}" class="similarImg">
+                </div>
+            {% endfor %}
+        </div>
     </div>
     
 {% endblock %}

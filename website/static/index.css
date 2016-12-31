@@ -124,12 +124,14 @@ div.passiveSeniorTitle {
     background-color: transparent;
 
     margin-left: -150px;
-    padding-top: 10px;
+    padding-top: 8px;
 
     height: 26px;
     width: 100px;
 
-    border: 0;
+    border: 3px #FFFFFF solid;
+    border-radius: 10px;
+    border-color: transparent;
 
     font-size: 18px;
     text-align: center;
@@ -165,19 +167,23 @@ div.activeSeniorTitle {
 div.seniorSearchPanel {
     background-color: #EEEEEE;
 
-    margin: 50px auto;
-    padding-bottom: 5px;
+    margin: 40px auto;
+    padding-bottom: 10px;
 
     width: 50%;
+
+    border: 3px #FFFFFF solid;
+    border-radius: 20px;
+    border-color: transparent;
     
     text-align: center;
     font-size: 18px;
 }
 
 div.seniorSearchBar {
-    margin: 10px auto;
+    margin: 5px 0px 5px 0px;
 
-    height: 30px;
+    height: 40px;
 
     text-align: center;
     font-size: 18px;
@@ -194,6 +200,9 @@ div.seniorSearchTitle {
     height: 25px;
     float: left;
     
+    border: 3px #FFFFFF solid;
+    border-color: transparent;
+
     text-align: center;
     font-size: 18px;
 }
@@ -209,14 +218,40 @@ div.seniorSearchType {
     width: 80px;
     height: 25px;
     
+    border: 2px #FFFFFF solid;
+    border-radius: 10px;
+    border-color: transparent;
+
     text-align: center;
     color: #888888;
     font-size: 18px;
 }
 div.seniorSearchType:hover {
-    border: 1px solid #BBBBBB;
+    border: 2px solid #BBBBBB;
 
     color: #444444;
+}
+
+input.companyName {
+    background-color: transparent;
+
+    margin-top: 3px;
+
+
+    width: 200px;
+    height: 28px;
+    float: left;
+
+    border: 3px #AAAAAA solid;
+    border-radius: 15px;
+
+    font-size: 18px;
+    text-indent: 10px;
+    outline-width: 0;
+    vertical-align: top;
+}
+input.companyName:hover {
+    border: 3px #888888 solid;
 }
 
 input.browse {
