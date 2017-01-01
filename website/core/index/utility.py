@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2017-01-01 20:51:30
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-01 21:52:58
+# @Last Modified time: 2017-01-01 23:00:19
 # 
 # Helper function for search engine indexing
 # 
@@ -29,6 +29,7 @@ def theme_colors_for_web(im_name):
     
     assert im is not None, "Empty image file '%s'" % im_name
 
+    im = im[:,:,::-1]  # BGR -> RGB
     colors = MMCQ(im, COLOR_LEVEL, COLOR_SLOTS)
     colors = reduce_colors(colors)
     colors = list(map(to_web_color, colors))

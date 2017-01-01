@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-28 22:46:45
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-01 20:38:54
+# @Last Modified time: 2017-01-01 22:56:31
 #
 # MMCQ (Modified Median Cut Quantization) Algorithm
 # src: http://collaboration.cmc.ec.gc.ca/science/rpn/biblio/ddj/Website/articles/DDJ/1994/9409/9409e/9409e.htm
@@ -183,7 +183,10 @@ def MMCQ(im, color_level, slots):
     A implementation of MMCQ (modified median cut quantification) algorithm
 
     @param: im:
-        the image array (type = np.ndarray), should have 3 channels
+        the image array (type = np.ndarray), should have 3 channels.
+        The order and the type of channels are not specified,
+         the returned colors will be in the same type of channels,
+        i.e. given a RGB image, return RGB colors, and HSV colors for HSV images, etc.
 
     @param: color_level:
         each color component (R,G,B) will be split into `color_level` levels
