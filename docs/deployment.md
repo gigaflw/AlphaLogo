@@ -2,11 +2,13 @@
 本文将指导你搭建环境
 
 ### 系统要求
-* python 2.7
+* pyth  on 2.7
 * flask
+* pylucene
 
 ### 配置环境
-    
+
+    < install pylucene yourself >    
     `pip install -r requirements.txt`
 
 ### 运行
