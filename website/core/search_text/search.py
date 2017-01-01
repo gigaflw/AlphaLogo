@@ -20,27 +20,27 @@ from java.io import File
 # Index dir name
 from website.core.index.index import LUCENE_INDEX_DIR
 
-vm_env = lucene.initVM(vmargs=['-Djava.awt.headless=true'])
-
 
 class SearchConfig:
-    result_keys = ['filename', 'ent_name', 'info']
-    searchable_fields = ['ent_name', 'keywords']
+    result_keys = ['filename', 'ent_name', 'info', 'theme_colors']
+    searchable_fields = ['ent_name', 'keywords', 'n_colors']
 
 
 def get_search_func():
     jieba.initialize()
+    vm_env = lucene.initVM(vmargs=['-Djava.awt.headless=true'])
 
     analyzer = StandardAnalyzer(Version.LUCENE_CURRENT)
     searcher = IndexSearcher(DirectoryReader.open(SimpleFSDirectory(File(LUCENE_INDEX_DIR))))
 
     search = search_func_factory(analyzer=analyzer,
-                                 searcher=searcher)
+                                 searcher=searcher,
+                                 vm_env=vm_env)
 
     return search
 
 
-def search_func_factory(analyzer, searcher):
+def search_func_factory(analyzer, searcher, vm_env):
     """Search function factory"""
 
     def retrieve(doc):

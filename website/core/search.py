@@ -2,73 +2,83 @@
 # @Author: GigaFlower
 # @Date:   2016-12-23 23:18:28
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2016-12-30 09:43:18
+# @Last Modified time: 2017-01-01 22:28:51
 from __future__ import unicode_literals
 
 import os
 
 from website.models import Logo
-from website.core.search_text import search as lucene_search  # can't load until lucene index is ready
-from website.core.search_image import search as sift_search
+from website.core.search_text import get_search_func as get_text_search_func
+# from website.core.search_image import search as sift_search
 from website.utility import save_img_to_uploads
 
 
 ##########################
 # Interface
 ##########################
-def text_search(keywords, ent_name=""):
-    """
-    Search logos by keywords
+class Searcher(object):
+    def init(self):
+        self.lucene_search = get_text_search_func()
 
-    @param: keywords : the characteristic of image, search from crawled data, may contain whitespaces as splits 
-    @param: ent_name : the name of the enterprise, search from crawled data
-    @returns: a list of 'Logo' instance
-    """
-    ret = lucene_search(keywords=keywords, ent_name=ent_name)
-
-    def para_to_logo(para):
-        para['filename'] = os.path.join('dataset', para['filename'])
-        return Logo(**para)
-
-    def is_good_match(logo):
+    def text_search(self, keywords, ent_name="", n_colors=""):
         """
-        Find out good matches
-        To be intensified
+        Search logos by keywords
+
+        @param: keywords : the characteristic of image, search from crawled data, may contain whitespaces as splits 
+        @param: ent_name : the name of the enterprise, search from crawled data
+        @returns: a list of 'Logo' instance
         """
-        if ent_name and ent_name in logo.ent_name:
-            return True
-        else:
-            return False
+        if not hasattr(self, 'lucene_search'):
+            self.init()
+        
+        ret = self.lucene_search(keywords=keywords, ent_name=ent_name, n_colors=n_colors)
+        # print(ret)
 
-    good = []
-    normal = []
+        def para_to_logo(para):
+            para['filename'] = os.path.join('dataset', para['filename'])
+            para['theme_colors'] = para['theme_colors'].split()
+            return Logo(**para)
 
-    for l in map(para_to_logo, ret):
-        (good if is_good_match(l) else normal).append(l)
+        def is_good_match(logo):
+            """
+            Find out good matches
+            To be intensified
+            """
+            if (ent_name and ent_name in logo.ent_name) and \
+                (n_colors and abs(int(n_colors) - len(logo.theme_colors)) <= 1):
+                return True
+            else:
+                return False
 
-    return good, normal
+        good = []
+        normal = []
 
+        for l in map(para_to_logo, ret):
+            (good if is_good_match(l) else normal).append(l)
 
-def image_search(im):
-    """
-    Search similar logos
+        return good, normal
 
-    @param: im : a `werkzeug.datastructures.FileStorage` instance
-    @returnsL a list of `Logo` instance, sorted in the order of similarity
-    """
-    # path = save_img_to_uploads(im)
-    # logos = sift_search(path)
+    @staticmethod
+    def image_search(im):
+        """
+        Search similar logos
 
-    # fake data
-    logos = [
-        Logo(os.path.join('dataset', 'demo', '1.jpg'), '手持一把锟斤拷，口中疾呼烫烫烫', '测试1'),
-        Logo(os.path.join('dataset', 'demo', '2.jpg'), '问天再借五百年', '测试2'),
-        Logo(os.path.join('dataset', 'demo', '3.jpg'), 'A quick brown fox jumps over the lazy dog', '测试3'),
-        Logo(os.path.join('dataset', 'demo', '4.jpg'), '大美兴，川普王', '测试4'),
-        Logo(os.path.join('dataset', 'demo', '5.jpg'), '黄焖鸡米饭', '测试5')
-    ]
+        @param: im : a `werkzeug.datastructures.FileStorage` instance
+        @returnsL a list of `Logo` instance, sorted in the order of similarity
+        """
+        # path = save_img_to_uploads(im)
+        # logos = sift_search(path)
 
-    good = [logos[0]]
-    normal = logos[1:]
+        # fake data
+        logos = [
+            Logo(os.path.join('dataset', 'demo', '1.jpg'), '手持一把锟斤拷，口中疾呼烫烫烫', '测试1'),
+            Logo(os.path.join('dataset', 'demo', '2.jpg'), '问天再借五百年', '测试2'),
+            Logo(os.path.join('dataset', 'demo', '3.jpg'), 'A quick brown fox jumps over the lazy dog', '测试3'),
+            Logo(os.path.join('dataset', 'demo', '4.jpg'), '大美兴，川普王', '测试4'),
+            Logo(os.path.join('dataset', 'demo', '5.jpg'), '黄焖鸡米饭', '测试5')
+        ]
 
-    return good, normal
+        good = [logos[0]]
+        normal = logos[1:]
+
+        return good, normal
