@@ -2,13 +2,15 @@
 # @Author: GigaFlower
 # @Date:   2016-12-27 21:45:08
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2016-12-28 16:14:48
+# @Last Modified time: 2017-01-01 22:00:05
 
 from __future__ import with_statement, print_function
 
 import os
 from time import time
 import lucene
+
+from website.core.index.utility import theme_colors_for_web
 
 # nasty Lucene imports
 from java.io import File
@@ -24,10 +26,17 @@ BASE_DIR = os.path.dirname(__file__)
 LUCENE_INDEX_DIR = os.path.join(BASE_DIR, 'web.index')
 LUCENE_CATELOG_FILE = os.path.join(BASE_DIR, 'web.index', 'PICTURES.txt')
 
-FIELD_FORMAT = ["ind", "ent_name", "info", "keywords", "imgurl"]
-STORE_FIELDS = {"filename", "ent_name", "info"}
-INDEX_FIELDS = {"ent_name", "keywords"}
-ADD_FIELDS = set.union(STORE_FIELDS, INDEX_FIELDS)
+FILE_FIELD_FORMAT = ["ind", "ent_name", "info", "keywords", "imgurl"]
+STORE_FIELDS = ["filename", "ent_name", "info", "theme_colors"]
+INDEX_FIELDS = ["ent_name", "keywords", "n_colors"]
+ADD_FIELDS = STORE_FIELDS + INDEX_FIELDS
+
+FIELD_FUNCS = {
+    "filename" : lambda f:"{:05d}".format(int(f['ind'])) + '.jpg',
+    "keywords" : lambda f:f['keywords'].replace('%', ' '),
+    "theme_colors" : lambda f:" ".join(theme_colors_for_web(f['filename'])),
+    "n_colors" : lambda f:str(f['theme_colors'].count(' '))
+}
 
 
 def create_index():
@@ -68,24 +77,23 @@ def index_docs(indexFile, writer):
 
     for line in indexFile:
 
-        fields = dict(zip(FIELD_FORMAT, line.split('\t')))
+        fields = dict(zip(FILE_FIELD_FORMAT, line.split('\t')))
 
-        fields['filename'] = "{:05d}".format(int(fields['ind'])) + '.jpg'
-        fields['keywords'] = fields['keywords'].replace('%', ' ')
+        # fields['filename'] = "{:05d}".format(int(fields['ind'])) + '.jpg'
+        # fields['keywords'] = fields['keywords'].replace('%', ' ')
+        for f in ADD_FIELDS:
+            if f in FIELD_FUNCS:
+                fields[f] = FIELD_FUNCS[f](fields)
 
         print("adding %s" % fields['ind'])
 
         try:
             doc = Document()
 
-            for k in ADD_FIELDS:
-                doc.add(Field(k, fields[k], *FIELD_PARA[k]))
+            for f in ADD_FIELDS:
+                doc.add(Field(f, fields[f], *FIELD_PARA[f]))
 
             writer.addDocument(doc)
 
         except Exception, e:
             print("Failed in indexDocs: %r" % e)
-
-
-if __name__ == '__main__':
-    create_index()
