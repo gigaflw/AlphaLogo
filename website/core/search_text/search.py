@@ -18,7 +18,7 @@ from org.apache.lucene.util import Version
 from java.io import File
 
 # Index dir name
-from website.core.search_text.index import LUCENE_INDEX_DIR
+from website.core.index.index import LUCENE_INDEX_DIR
 
 vm_env = lucene.initVM(vmargs=['-Djava.awt.headless=true'])
 
