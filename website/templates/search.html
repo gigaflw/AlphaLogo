@@ -87,6 +87,12 @@
 		        	<div class="matchedResult">
 		                <div>{{ logo.ent_name }}</div>
 		                <img src="{{ url_for('static',filename=logo.filename) }}" class="matchedImg">
+                        <!-- Just for demo, such code style is never encouraged -->
+                        <div>
+                        {% for color in logo.theme_colors %}
+                            <div style="width: 20px;height: 20px;float:left;background-color: {{color}}"></div>
+                        {% endfor %}
+                        </div>
 		            </div>
 	        	{% endfor %}
 	        {% endif %}
@@ -99,6 +105,11 @@
 	            <div class="similarResult">
 	                <div>{{ logo.ent_name }}</div>
 	                <img src="{{ url_for('static',filename=logo.filename) }}" class="similarImg">
+                    <div>
+                    {% for color in logo.theme_colors %}
+                        <div style="width: 20px;height: 20px;float:left;background-color: {{color}}"></div>
+                    {% endfor %}
+                    </div>
 	            </div>
 	        {% endfor %}
         </div>

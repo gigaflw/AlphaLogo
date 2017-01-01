@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-23 23:18:28
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-01 22:28:51
+# @Last Modified time: 2017-01-01 23:04:39
 from __future__ import unicode_literals
 
 import os
@@ -26,13 +26,18 @@ class Searcher(object):
 
         @param: keywords : the characteristic of image, search from crawled data, may contain whitespaces as splits 
         @param: ent_name : the name of the enterprise, search from crawled data
+
+        @param: n_colors : number of main colors appeared in the logo image.
+            The range of this value is defined in `core.config.py`, named `COLOR_SLOTS` and `COLOR_LEVEL`
+            Where the first one denotes the upper bound of n_colors, 
+            and `COLOR_LEVEL` denotes the resolution for each color channel in R,G,B.
+        
         @returns: a list of 'Logo' instance
         """
         if not hasattr(self, 'lucene_search'):
             self.init()
         
         ret = self.lucene_search(keywords=keywords, ent_name=ent_name, n_colors=n_colors)
-        # print(ret)
 
         def para_to_logo(para):
             para['filename'] = os.path.join('dataset', para['filename'])
@@ -70,14 +75,15 @@ class Searcher(object):
         # logos = sift_search(path)
 
         # fake data
-        logos = [
-            Logo(os.path.join('dataset', 'demo', '1.jpg'), '手持一把锟斤拷，口中疾呼烫烫烫', '测试1'),
-            Logo(os.path.join('dataset', 'demo', '2.jpg'), '问天再借五百年', '测试2'),
-            Logo(os.path.join('dataset', 'demo', '3.jpg'), 'A quick brown fox jumps over the lazy dog', '测试3'),
-            Logo(os.path.join('dataset', 'demo', '4.jpg'), '大美兴，川普王', '测试4'),
-            Logo(os.path.join('dataset', 'demo', '5.jpg'), '黄焖鸡米饭', '测试5')
-        ]
-
+        logos = []
+        for fname, info, ent_name in [
+            (os.path.join('dataset', 'demo', '1.jpg'), '手持一把锟斤拷，口中疾呼烫烫烫', '测试1'),
+            (os.path.join('dataset', 'demo', '2.jpg'), '问天再借五百年', '测试2'),
+            (os.path.join('dataset', 'demo', '3.jpg'), 'A quick brown fox jumps over the lazy dog', '测试3'),
+            (os.path.join('dataset', 'demo', '4.jpg'), '大美兴，川普王', '测试4'),
+            (os.path.join('dataset', 'demo', '5.jpg'), '黄焖鸡米饭', '测试5')
+        ]:
+            logos.append(Logo(fname, info, ent_name, "#000000"))
         good = [logos[0]]
         normal = logos[1:]
 

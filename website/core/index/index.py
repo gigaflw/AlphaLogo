@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-27 21:45:08
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-01 22:00:05
+# @Last Modified time: 2017-01-01 22:57:18
 
 from __future__ import with_statement, print_function
 
@@ -10,6 +10,7 @@ import os
 from time import time
 import lucene
 
+from website.core.config import LUCENE_INDEX_DIR, LUCENE_CATELOG_FILE
 from website.core.index.utility import theme_colors_for_web
 
 # nasty Lucene imports
@@ -22,10 +23,6 @@ from org.apache.lucene.store import SimpleFSDirectory
 from org.apache.lucene.util import Version
 # end
 
-BASE_DIR = os.path.dirname(__file__)
-LUCENE_INDEX_DIR = os.path.join(BASE_DIR, 'web.index')
-LUCENE_CATELOG_FILE = os.path.join(BASE_DIR, 'web.index', 'PICTURES.txt')
-
 FILE_FIELD_FORMAT = ["ind", "ent_name", "info", "keywords", "imgurl"]
 STORE_FIELDS = ["filename", "ent_name", "info", "theme_colors"]
 INDEX_FIELDS = ["ent_name", "keywords", "n_colors"]
@@ -35,7 +32,7 @@ FIELD_FUNCS = {
     "filename" : lambda f:"{:05d}".format(int(f['ind'])) + '.jpg',
     "keywords" : lambda f:f['keywords'].replace('%', ' '),
     "theme_colors" : lambda f:" ".join(theme_colors_for_web(f['filename'])),
-    "n_colors" : lambda f:str(f['theme_colors'].count(' '))
+    "n_colors" : lambda f:str(f['theme_colors'].count(' ') + 1)
 }
 
 
@@ -45,13 +42,13 @@ def create_index():
 
     start = time()
     with open(LUCENE_CATELOG_FILE, 'r') as index_f:
-        index_files(storeDir=LUCENE_INDEX_DIR, indexFile=index_f)
+        _index_files(storeDir=LUCENE_INDEX_DIR, indexFile=index_f)
     end = time()
 
     print("time consumed: %.5f" % (end - start))
 
 
-def index_files(storeDir, indexFile):
+def _index_files(storeDir, indexFile):
     store = SimpleFSDirectory(File(storeDir))
     analyzer = StandardAnalyzer(Version.LUCENE_CURRENT)
     analyzer = LimitTokenCountAnalyzer(analyzer, 1048576)
@@ -61,7 +58,7 @@ def index_files(storeDir, indexFile):
 
     writer = IndexWriter(store, config)
 
-    index_docs(indexFile, writer)
+    _index_docs(indexFile, writer)
 
     print('commit index')
     writer.commit()
@@ -69,7 +66,7 @@ def index_files(storeDir, indexFile):
     print('done')
 
 
-def index_docs(indexFile, writer):
+def _index_docs(indexFile, writer):
     FIELD_PARA = {f: (
         Field.Store.YES if f in STORE_FIELDS else Field.Store.NO,
         Field.Index.ANALYZED if f in INDEX_FIELDS else Field.Index.NO,
@@ -79,8 +76,6 @@ def index_docs(indexFile, writer):
 
         fields = dict(zip(FILE_FIELD_FORMAT, line.split('\t')))
 
-        # fields['filename'] = "{:05d}".format(int(fields['ind'])) + '.jpg'
-        # fields['keywords'] = fields['keywords'].replace('%', ' ')
         for f in ADD_FIELDS:
             if f in FIELD_FUNCS:
                 fields[f] = FIELD_FUNCS[f](fields)
