@@ -2,8 +2,8 @@
 # @Author: GigaFlower
 # @Date:   2016-12-23 23:18:28
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-01 23:04:39
-from __future__ import unicode_literals
+# @Last Modified time: 2017-01-01 23:41:54
+from __future__ import unicode_literals, print_function
 
 import os
 
@@ -49,8 +49,8 @@ class Searcher(object):
             Find out good matches
             To be intensified
             """
-            if (ent_name and ent_name in logo.ent_name) and \
-                (n_colors and abs(int(n_colors) - len(logo.theme_colors)) <= 1):
+            if (ent_name == '' or ent_name in logo.ent_name) and \
+                (n_colors == '' or abs(int(n_colors) - len(logo.theme_colors)) <= 1):
                 return True
             else:
                 return False
