@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-23 23:18:28
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-02 11:34:29
+# @Last Modified time: 2017-01-02 11:39:55
 from __future__ import unicode_literals, print_function
 
 import os
@@ -77,11 +77,11 @@ class Searcher(object):
         # fake data
         logos = []
         for fname, info, ent_name in [
-            (os.path.join('dataset', 'demo', '1.jpg'), '手持一把锟斤拷，口中疾呼烫烫烫', '测试1'),
-            (os.path.join('dataset', 'demo', '2.jpg'), '问天再借五百年', '测试2'),
-            (os.path.join('dataset', 'demo', '3.jpg'), 'A quick brown fox jumps over the lazy dog', '测试3'),
-            (os.path.join('dataset', 'demo', '4.jpg'), '大美兴，川普王', '测试4'),
-            (os.path.join('dataset', 'demo', '5.jpg'), '黄焖鸡米饭', '测试5')
+            (os.path.join('dataset',  '00001.jpg'), '手持一把锟斤拷，口中疾呼烫烫烫', '测试1'),
+            (os.path.join('dataset',  '00002.jpg'), '问天再借五百年', '测试2'),
+            (os.path.join('dataset',  '00003.jpg'), 'A quick brown fox jumps over the lazy dog', '测试3'),
+            (os.path.join('dataset',  '00004.jpg'), '大美兴，川普王', '测试4'),
+            (os.path.join('dataset',  '00005.jpg'), '黄焖鸡米饭', '测试5')
         ]:
             logos.append(Logo(fname, info, ent_name, "#000000"))
         good = [logos[0]]
