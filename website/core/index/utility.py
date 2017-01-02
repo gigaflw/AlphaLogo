@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2017-01-01 20:51:30
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-02 09:57:46
+# @Last Modified time: 2017-01-02 12:15:52
 #
 # Helper function for search engine indexing
 #

@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-27 21:45:08
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-01 22:57:18
+# @Last Modified time: 2017-01-02 12:13:36
 
 from __future__ import with_statement, print_function
 
@@ -10,8 +10,7 @@ import os
 from time import time
 import lucene
 
-from website.core.config import LUCENE_INDEX_DIR, LUCENE_CATELOG_FILE
-from website.core.index.utility import theme_colors_for_web
+from website.core.config import *
 
 # nasty Lucene imports
 from java.io import File
@@ -22,18 +21,6 @@ from org.apache.lucene.index import FieldInfo, IndexWriter, IndexWriterConfig
 from org.apache.lucene.store import SimpleFSDirectory
 from org.apache.lucene.util import Version
 # end
-
-FILE_FIELD_FORMAT = ["ind", "ent_name", "info", "keywords", "imgurl"]
-STORE_FIELDS = ["filename", "ent_name", "info", "theme_colors"]
-INDEX_FIELDS = ["ent_name", "keywords", "n_colors"]
-ADD_FIELDS = STORE_FIELDS + INDEX_FIELDS
-
-FIELD_FUNCS = {
-    "filename" : lambda f:"{:05d}".format(int(f['ind'])) + '.jpg',
-    "keywords" : lambda f:f['keywords'].replace('%', ' '),
-    "theme_colors" : lambda f:" ".join(theme_colors_for_web(f['filename'])),
-    "n_colors" : lambda f:str(f['theme_colors'].count(' ') + 1)
-}
 
 
 def create_index():

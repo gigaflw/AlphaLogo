@@ -2,8 +2,19 @@
 # @Author: GigaFlower
 # @Date:   2017-01-02 09:41:37
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-02 11:32:46
+# @Last Modified time: 2017-01-02 12:18:11
 
+# 
+# To reset index dirs :
+#   python manage.py -r
+# To move images:
+#   python manage.py -m (or you can copy the dir yourself)
+# To run pylucene index script :
+#   python manage.py -c
+# To do the above altogether:
+#   python manage.py -i
+# 
+ 
 import subprocess
 import os
 import shutil
@@ -24,7 +35,7 @@ CRAWL_CATELOG_FILE = os.path.join('crawl', 'PICTURES.txt')
 ##########################
 parser = argparse.ArgumentParser()
 parser.add_argument('-r', action="store_true", help="Reset index dirs")
-parser.add_argument('-m', action="store_true", help="Move and convert images")
+parser.add_argument('-m', action="store_true", help="Move images")
 parser.add_argument('-c', action="store_true", help="Create index")
 parser.add_argument('-i', action="store_true", help=" = -rmc")
 
@@ -68,7 +79,7 @@ def move_images():
             cv2.imwrite(os.path.join(DATASET_DIR, new_file_name), im)
             print("Moved '%s'" % new_file_name)
         else:
-            raise ValueError, "Illegal image type '%s' encountered!" % file_name
+            print("Illegal image type '%s' ignored" % file_name)
 
     if os.path.isfile(CRAWL_CATELOG_FILE):
         shutil.copyfile(CRAWL_CATELOG_FILE, LUCENE_CATELOG_FILE)
