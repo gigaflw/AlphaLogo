@@ -2,9 +2,9 @@
 # @Author: GigaFlower
 # @Date:   2016-12-25 14:02:13
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2016-12-25 14:39:56
+# @Last Modified time: 2017-01-02 10:34:12
 
-from config import UPLOAD_DIR, ALLOWED_TYPE
+from config import UPLOAD_DIR, ALLOWED_TYPES
 
 def save_img_to_uploads(im):
     # TODO: type check & size check

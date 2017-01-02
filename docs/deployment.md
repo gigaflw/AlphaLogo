@@ -10,7 +10,8 @@
 
     < install pylucene yourself >    
     `pip install -r requirements.txt`
-
+    `python manage.py -i`   # create index
+    
 ### 运行
     
     python run.py

@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2017-01-01 20:51:30
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-01 23:42:42
+# @Last Modified time: 2017-01-02 09:57:46
 #
 # Helper function for search engine indexing
 #
@@ -26,7 +26,7 @@ def theme_colors_for_web(im_name):
     4) convert colors to web format (e.g. '#ff0c2a')
     5) return color strings 
     """
-    file = os.path.join(IMAGE_PATH, im_name)
+    file = os.path.join(IMAGE_MIRROR_DIR, im_name)
     im = imread(file)
 
     assert im is not None, "Empty image file '%s'" % im_name

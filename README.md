@@ -1,5 +1,8 @@
 A searching engine about logos
 
+Index 管理工具已完成
+在保证 Alphalogo/crawl 正确的前提下运行 `python manage.py -i` 即可生成`web.index`
+
 ### 部署
 [here](docs/deployment.md)
 
