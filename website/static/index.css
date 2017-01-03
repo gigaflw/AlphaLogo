@@ -118,7 +118,7 @@ button.submit:hover {
     color: #000000;
 }
 
-div.passiveSeniorTitle {
+div.passiveAdvancedTitle {
     display: inline-block;
     cursor: pointer;
     background-color: transparent;
@@ -139,11 +139,11 @@ div.passiveSeniorTitle {
     outline-width: 0;
     vertical-align: top;
 }
-div.passiveSeniorTitle:hover {
+div.passiveAdvancedTitle:hover {
     color: #444444;
 }
 
-div.activeSeniorTitle {
+div.activeAdvancedTitle {
     display: inline-block;
     cursor: pointer;
     background-color: transparent;
@@ -164,7 +164,7 @@ div.activeSeniorTitle {
     vertical-align: top;
 }
 
-div.seniorSearchPanel {
+div.advancedSearchPanel {
     background-color: #EEEEEE;
 
     margin: 40px auto;
@@ -180,7 +180,7 @@ div.seniorSearchPanel {
     font-size: 18px;
 }
 
-div.seniorSearchBar {
+div.advancedSearchBar {
     margin: 5px 0px 5px 0px;
 
     height: 40px;
@@ -189,7 +189,7 @@ div.seniorSearchBar {
     font-size: 18px;
 }
 
-div.seniorSearchTitle {
+div.advancedSearchTitle {
     cursor: default;
 
     margin-left: -2.5px;
@@ -207,7 +207,7 @@ div.seniorSearchTitle {
     font-size: 18px;
 }
 
-div.seniorSearchType {
+div.advancedSearchType {
     cursor: pointer;
 
     margin-left: -2.5px;
@@ -226,7 +226,7 @@ div.seniorSearchType {
     color: #888888;
     font-size: 18px;
 }
-div.seniorSearchType:hover {
+div.advancedSearchType:hover {
     border: 2px solid #BBBBBB;
 
     color: #444444;

@@ -9,14 +9,14 @@
 
 var divSearch = document.getElementById("search");
 var divMatch = document.getElementById("match");
-var divSeniorSearch = document.getElementById("senior");
+var divAdvancedSearch = document.getElementById("advanced");
 var idBrowse = document.getElementById("browse");
 var idLogo = document.getElementById("logo");
 var idTextfield = document.getElementById("textfield");
 var idTypeSearch = document.getElementById("type_search");
 var idInputSearch = document.getElementById("input_search");
 var idInputMatch = document.getElementById("input_match");
-var idSeniorSearchPanel = document.getElementById("senior_search_panel");
+var idAdvancedSearchPanel = document.getElementById("advanced_search_panel");
 var idTitle = document.getElementById("title");
 
 window.addEventListener('load', function(){
@@ -32,8 +32,8 @@ divMatch.addEventListener("click", function() {
     modeMatch();
 })
 
-divSeniorSearch.addEventListener("click", function() {
-    switchSeniorSearch();
+divAdvancedSearch.addEventListener("click", function() {
+    switchAdvancedSearch();
 })
 
 idBrowse.addEventListener("click", function() {
@@ -51,35 +51,35 @@ function showTextField() {
 function modeSearch() {
     divSearch.className = "currentLinkTitle";
     divMatch.className = "linkTitle";
-    divSeniorSearch.className = "passiveSeniorTitle";
-    divSeniorSearch.style.display = "inline-block";
+    divAdvancedSearch.className = "passiveAdvancedTitle";
+    divAdvancedSearch.style.display = "inline-block";
     idTypeSearch.value = "search";
     idInputSearch.style.display = "block";
     idInputMatch.style.display = "none";
-    idSeniorSearchPanel.style.display = "none";
+    idAdvancedSearchPanel.style.display = "none";
     idTitle.style.marginTop = "100px";
 }
 
 function modeMatch() {
     divSearch.className = "linkTitle";
     divMatch.className = "currentLinkTitle";
-    divSeniorSearch.style.display = "none";
+    divAdvancedSearch.style.display = "none";
     idInputSearch.style.display = "none";
     idInputMatch.style.display = "block";
-    idSeniorSearchPanel.style.display = "none";
+    idAdvancedSearchPanel.style.display = "none";
     idTitle.style.marginTop = "100px";
 }
 
-function switchSeniorSearch() {
-    if (divSeniorSearch.className == "passiveSeniorTitle") {
-        idTypeSearch.value = "senior_search";
-        idSeniorSearchPanel.style.display = "block";
-        divSeniorSearch.className = "activeSeniorTitle";
+function switchAdvancedSearch() {
+    if (divAdvancedSearch.className == "passiveAdvancedTitle") {
+        idTypeSearch.value = "advanced_search";
+        idAdvancedSearchPanel.style.display = "block";
+        divAdvancedSearch.className = "activeAdvancedTitle";
         idTitle.style.marginTop = "40px";
     } else {
         idTypeSearch.value = "search";
-        idSeniorSearchPanel.style.display = "none";
-        divSeniorSearch.className = "passiveSeniorTitle";
+        idAdvancedSearchPanel.style.display = "none";
+        divAdvancedSearch.className = "passiveAdvancedTitle";
         idTitle.style.marginTop = "100px";
     }
 }

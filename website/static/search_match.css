@@ -10,6 +10,9 @@ div.container {
 
     font-family: "Century Gothic", Verdana, Tahoma,"微软雅黑", Arial;
 }
+div#result_container {
+    margin-left: 20px;
+}
 
 div.title {
     margin: 40px 20px 40px 20px;
@@ -120,7 +123,7 @@ button.submit:hover {
     color: #000000;
 }
 
-div.passiveSeniorTitle {
+div.passiveAdvancedTitle {
     display: inline-block;
     cursor: pointer;
     background-color: transparent;
@@ -141,11 +144,11 @@ div.passiveSeniorTitle {
     outline-width: 0;
     vertical-align: top;
 }
-div.passiveSeniorTitle:hover {
+div.passiveAdvancedTitle:hover {
     color: #444444;
 }
 
-div.activeSeniorTitle {
+div.activeAdvancedTitle {
     display: inline-block;
     cursor: pointer;
     background-color: transparent;
@@ -166,7 +169,7 @@ div.activeSeniorTitle {
     vertical-align: top;
 }
 
-div.seniorSearchPanel {
+div.advancedSearchPanel {
     background-color: #EEEEEE;
 
     margin: 20px 50px 20px 50px;
@@ -182,7 +185,7 @@ div.seniorSearchPanel {
     font-size: 18px;
 }
 
-div.seniorSearchBar {
+div.advancedSearchBar {
     margin: 5px 0px 5px 0px;
 
     height: 40px;
@@ -191,7 +194,7 @@ div.seniorSearchBar {
     font-size: 18px;
 }
 
-div.seniorSearchTitle {
+div.advancedSearchTitle {
     cursor: default;
 
     margin-left: -2.5px;
@@ -209,7 +212,7 @@ div.seniorSearchTitle {
     font-size: 18px;
 }
 
-div.seniorSearchType {
+div.advancedSearchType {
     cursor: pointer;
 
     margin-left: -2.5px;
@@ -228,7 +231,7 @@ div.seniorSearchType {
     color: #888888;
     font-size: 18px;
 }
-div.seniorSearchType:hover {
+div.advancedSearchType:hover {
     border: 2px solid #BBBBBB;
 
     color: #444444;
@@ -313,14 +316,14 @@ input.textfield:hover {
 }
 
 div.resultTitle {
-    margin: 20px;
+    margin: 20px 20px 20px 0px;
 
     font-size: 22px;
     font-weight: bold;
 }
 
 div.askTitle {
-    margin: 20px;
+    margin: 20px 20px 20px 0px;
 
     font-size: 22px;
     font-weight: bold;
@@ -348,11 +351,11 @@ div.matchedResult:hover{
 div.similarResult {
     float: left;
 
-    margin: 10px; 
+    margin: 20px;
     padding-top: 20px;
 
-    width: 290px;
-    height: 290px;
+    width: 250px;
+    height: 250px;
     
     border: 3px #FFFFFF solid;
     border-radius: 25px;
@@ -362,6 +365,8 @@ div.similarResult {
     font-size: 18px;
 }
 div.similarResult:hover{
+    transform: scale(1.2);
+
     box-shadow: 3px 3px 6px 2px #888888;
 
     border: 3px #888888 solid;
@@ -377,8 +382,8 @@ img.matchedImg {
 img.similarImg {
     padding-top: 10px;
 
-    max-width: 270px;
-    max-height: 270px;
+    max-width: 200px;
+    max-height: 200px;
 }
 
 .textDefaultStyle {
