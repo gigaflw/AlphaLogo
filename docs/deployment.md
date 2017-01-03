@@ -2,9 +2,9 @@
 本文将指导你搭建环境
 
 ### 系统要求
-* pyth  on 2.7
-* flask
-* pylucene
+* python >= 2.7
+* flask >= 0.10
+* pylucene >= 4.10
 
 ### 配置环境
 
