@@ -2,19 +2,16 @@
 # @Author: GigaFlower
 # @Date:   2016-12-27 21:45:08
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-04 12:56:39
+# @Last Modified time: 2017-01-04 14:53:15
 
 from __future__ import with_statement, print_function
 
 import os
 from time import time
 import lucene
+from flask import g
 
-try:
-    import cPickle as pickle
-except ImportError:
-    import pickle
-
+from website.database import db
 from website.core.config import *
 
 # nasty Lucene imports
@@ -29,6 +26,9 @@ from org.apache.lucene.util import Version
 
 
 def create_index():
+    db.reset_db()
+    db.init()
+
     lucene.initVM(vmargs=['-Djava.awt.headless=true'])
     print('lucene %s is working ...' % lucene.VERSION)
 
@@ -85,10 +85,7 @@ def _index_docs(indexFile, writer):
         except Exception, e:
             print("Failed in indexDocs: %r" % e)
 
-        ##########################
-        # pickle
-        ##########################
-        fields_to_pickle = [fields[k] for k in fields if f in STORE_FIELDS]
-
+        to_store = {k:fields[k] for k in STORE_FIELDS}
+        db.insert(**to_store)
 
 

@@ -65,7 +65,7 @@ class SIFT:
 
         return self.match_for_human(matches, pos1, pos2)
 
-    def process(self, im, save_pyramid=False, draw_keypoints=True, kp_filename="keypoints.jpg",
+    def process(self, im, save_pyramid=False, draw_keypoints=False, kp_filename="keypoints.jpg",
                 use_cv2_keypoints=True, use_bilinear_interp=False):
 
         if im is None:

@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2017-01-01 21:04:27
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-02 12:15:50
+# @Last Modified time: 2017-01-04 14:20:33
 
 # Images in this path will be indexed
 import os
@@ -14,7 +14,7 @@ LUCENE_INDEX_DIR = os.path.join(INDEX_BASE_DIR, 'web.index')
 LUCENE_CATELOG_FILE = os.path.join(INDEX_BASE_DIR, 'web.index', 'PICTURES.txt')
 
 FILE_FIELD_FORMAT = ["ind", "ent_name", "info", "keywords", "imgurl", "filename", "url"]
-STORE_FIELDS = ["filename", "ent_name", "info", "theme_colors"]
+STORE_FIELDS = ["ind", "filename", "ent_name", "info", "theme_colors"]
 INDEX_FIELDS = ["ent_name", "keywords", "n_colors"]
 ADD_FIELDS = STORE_FIELDS + INDEX_FIELDS
 

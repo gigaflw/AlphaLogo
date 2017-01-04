@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2017-01-02 09:41:37
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-02 12:18:11
+# @Last Modified time: 2017-01-04 15:01:51
 
 # 
 # To reset index dirs :
@@ -23,6 +23,7 @@ import argparse
 import cv2
 
 from website.core.index import create_index as core_create_index
+from website.core.search_image import create_index as lsh_create_index
 from website.config import DATASET_DIR, ALLOWED_TYPES
 from website.core.config import IMAGE_MIRROR_DIR, LUCENE_INDEX_DIR, LUCENE_CATELOG_FILE
 
@@ -38,8 +39,9 @@ parser.add_argument('-r', action="store_true", help="Reset index dirs")
 parser.add_argument('-m', action="store_true", help="Move images")
 parser.add_argument('-c', action="store_true", help="Create index")
 parser.add_argument('-i', action="store_true", help=" = -rmc")
+parser.add_argument('-l', action="store_true", help=" = -rmc")
 
-
+# TODO: not move, but symlink!
 ##########################
 # Functions
 ##########################
@@ -111,6 +113,8 @@ def main():
         core_create_index()
     elif args.i:
         create_index()
+    elif args.l:
+        lsh_create_index()
     else:
         parser.print_help()
 
