@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-25 13:07:33
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-04 16:35:08
+# @Last Modified time: 2017-01-04 16:54:56
 
 
 try:
@@ -23,7 +23,7 @@ from website.core.search_image.lsh import LSH
 def create_index():
     sift = SIFT(debug=False)
     lsh = LSH(d=128, l=6)
-    n = 0
+
     for fname in os.listdir(DATASET_DIR):
         if not fname.endswith('.jpg'):
             continue
@@ -32,9 +32,7 @@ def create_index():
         print("Processing '%s'..." % im_path)
         dps, _ = sift.process(cv2.imread(im_path, 0))
         lsh.feed_n(dps)
-        n+=1
-        if n>100:
-            break
+
     lsh.save(IMAGE_INDEX_PKL_FILE)
     print("Images indexing ends.")
 

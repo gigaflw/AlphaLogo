@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-23 23:18:28
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-04 15:33:17
+# @Last Modified time: 2017-01-04 16:56:51
 from __future__ import unicode_literals, print_function
 
 import os
@@ -63,6 +63,8 @@ class Searcher(object):
         good = []
         normal = []
 
+        ret = db.query("SELECT FILENAME, ENT_NAME, INFO, THEME_COLORS FROM LOGOS WHERE IND IN (%s)" %
+                       ','.join(map(str, ret)))
         for l in map(self.para_to_logo, ret):
             (good if is_good_match(l) else normal).append(l)
 
