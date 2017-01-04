@@ -2,17 +2,12 @@
 # @Author: GigaFlower
 # @Date:   2016-12-25 13:07:33
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-04 16:54:56
+# @Last Modified time: 2017-01-04 17:15:57
 
-
-try:
-    import cPickle as pickle
-except ImportError:
-    import pickle
+import os, traceback
 
 import numpy as np
 import cv2
-import os
 
 from website.config import DATASET_DIR
 from website.core.config import IMAGE_INDEX_PKL_FILE
@@ -24,17 +19,22 @@ def create_index():
     sift = SIFT(debug=False)
     lsh = LSH(d=128, l=6)
 
-    for fname in os.listdir(DATASET_DIR):
-        if not fname.endswith('.jpg'):
-            continue
+    try:
+        for fname in os.listdir(DATASET_DIR):
+            if not fname.endswith('.jpg'):
+                continue
 
-        im_path = os.path.join(DATASET_DIR, fname)
-        print("Processing '%s'..." % im_path)
-        dps, _ = sift.process(cv2.imread(im_path, 0))
-        lsh.feed_n(dps)
-
-    lsh.save(IMAGE_INDEX_PKL_FILE)
-    print("Images indexing ends.")
+            im_path = os.path.join(DATASET_DIR, fname)
+            print("Processing '%s'..." % im_path)
+            dps, _ = sift.process(cv2.imread(im_path, 0))
+            lsh.feed_n(dps)
+    except Exception, e:
+        traceback.print_exc() 
+    else:
+        print("Images indexing ends.")
+    finally:
+        lsh.save(IMAGE_INDEX_PKL_FILE)
+        print("Image index saved to %s" % IMAGE_INDEX_PKL_FILE)
 
 
 def get_search_func():

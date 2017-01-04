@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-27 21:45:08
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-04 16:53:07
+# @Last Modified time: 2017-01-04 19:09:52
 
 from __future__ import with_statement, print_function
 
@@ -105,3 +105,4 @@ def _index_docs(indexFile, writer):
         ##########################
         to_store = {k: fields[k] for k in STORE_FIELDS}
         db.insert(**to_store)
+

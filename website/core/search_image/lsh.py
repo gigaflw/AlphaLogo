@@ -2,7 +2,7 @@
 # @Author: BigFlower
 # @Date:   2016-12-23 16:54:28
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-04 15:39:17
+# @Last Modified time: 2017-01-04 19:14:57
 
 from __future__ import division, print_function
 import numpy as np
@@ -48,6 +48,8 @@ class LSH:
 
     def feed_n(self, dps):
         for dp in dps:
+            if len(dp) == 0:  # dp may be a np.ndarray, must use `len`
+                continue
             self.lsh_hash_and_save(dp)
         self._im_ind += 1
 
@@ -87,6 +89,9 @@ class LSH:
         return ret
 
     def _lsh_match(self, dp):
+        if len(dp) == 0:
+            return ()
+
         cosine_hash = self.lsh_hash(dp)
         bucket = self._hash_tables.get(cosine_hash, ())
         return bucket

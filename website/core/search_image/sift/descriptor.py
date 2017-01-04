@@ -97,7 +97,11 @@ class DescriptorCalculator:
                 dp_add(dp)
                 pos_add([row / ratio, col / ratio])
 
-        return np.stack(descriptors), np.array(positions, dtype=np.int)
+        if descriptors:
+            return np.stack(descriptors), np.array(positions, dtype=np.int)
+        else:
+            return np.array([[]]), np.array([[]])
+
 
     def calc(self, row, col, ori, grad_mag, grad_ang, kernels, use_biliner_interpolation):
         descriptor = []

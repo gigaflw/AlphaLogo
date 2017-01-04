@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2017-01-04 13:18:25
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-04 16:49:14
+# @Last Modified time: 2017-01-04 19:10:38
 
 
 from contextlib import closing
@@ -55,11 +55,11 @@ init_db = db.init
 
 if __name__ == '__main__':
     db.init()
-    # db.execute("INSERT INTO LOGOS (FILENAME, ENT_NAME, INFO, THEME_COLORS)"
-    #            "VALUES ('00001.jpg', '交大', '%s', '#000000 #faskdsa')" % s)
-    a = db.query_db("SELECT * from LOGOS")
-    for aa in a:
-        for k, v in aa.items():
-            print(k)
-            print(v)
-    # db.commit()
+    # db.insert(**{'ind':'2', 'filename':'001.jpg', 'info':'foo', 'theme_colors':'bar', 'ent_name':'alibaba'})
+    a = db.query("SELECT * from LOGOS")
+    print(len(a))
+    # for aa in a:
+        # for k, v in aa.items():
+            # print(k)
+            # print(v)
+
