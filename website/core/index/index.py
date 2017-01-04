@@ -2,13 +2,18 @@
 # @Author: GigaFlower
 # @Date:   2016-12-27 21:45:08
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-04 11:25:27
+# @Last Modified time: 2017-01-04 12:56:39
 
 from __future__ import with_statement, print_function
 
 import os
 from time import time
 import lucene
+
+try:
+    import cPickle as pickle
+except ImportError:
+    import pickle
 
 from website.core.config import *
 
@@ -79,3 +84,11 @@ def _index_docs(indexFile, writer):
 
         except Exception, e:
             print("Failed in indexDocs: %r" % e)
+
+        ##########################
+        # pickle
+        ##########################
+        fields_to_pickle = [fields[k] for k in fields if f in STORE_FIELDS]
+
+
+

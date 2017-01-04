@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-23 23:18:28
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-04 11:25:35
+# @Last Modified time: 2017-01-04 13:00:10
 from __future__ import unicode_literals, print_function
 
 import os
@@ -20,7 +20,8 @@ from website.utility import save_img_to_uploads
 class Searcher(object):
     def init(self):
         self.lucene_search = get_text_search_func()
-        self.image_search = get_image_search_func()
+        # self.image_search = get_image_search_func()
+        print("Searcher inited")
 
     def text_search(self, keywords, ent_name="", n_colors=""):
         """

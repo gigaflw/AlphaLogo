@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-25 13:07:33
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-04 11:20:28
+# @Last Modified time: 2017-01-04 12:58:59
 
 
 try:
@@ -16,7 +16,7 @@ import os
 
 from website.config import DATASET_DIR
 
-from website.core.search_image.sift.sift import SIFT
+from website.core.search_image.sift import SIFT
 from website.core.search_image.lsh import LSH
 
 
@@ -35,6 +35,7 @@ def create_index():
 def get_search_func():
     sift = SIFT(debug=False)
     lsh = LSH.restore('lsh.pkl')
+    print("LSH data loaded")
 
     def search(im, max_n=10):
         dps, _ = sift.process(im)
