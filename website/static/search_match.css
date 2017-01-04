@@ -8,13 +8,35 @@
 div.container {
     width: 100%;
 
-    font-family: "Century Gothic", "Verdana", "Tahoma","微软雅黑", "Calibri", "Arial", "黑体";
+    font-family: "微软雅黑", "Calibri", "Century Gothic", "Verdana", "Tahoma", "Arial", "黑体";
 }
 div#resultContainer {
-    margin-left: 20px;
+    position: absolute;
+
+    top: 120px;
+    left: 20px;
 }
-div#titleContainer {
+div.titleContainerDefault {
+    position: relative;
+    background-color: #FFFFFF;
+
+    z-index: 100;
+}
+
+div.titleContainerPassive {
     position: fixed;
+    background-color: #FFFFFF;
+
+    top: 0;
+    left: 0;
+    z-index: 100;
+
+    width: 700px;
+
+    opacity: 0.1;
+}
+div.titleContainerPassive:hover {
+    opacity: 1;
 }
 
 div.title {
@@ -177,7 +199,7 @@ div.activeAdvancedTitle {
 div.advancedSearchPanel {
     background-color: #EEEEEE;
 
-    margin: 40px;
+    margin: 40px 40px 20px 40px;
     padding-bottom: 10px;
 
     width: 800px;

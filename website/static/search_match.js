@@ -15,6 +15,8 @@ var idTextfield = document.getElementById("textfield");
 var idTypeSearch = document.getElementById("typeSearch");
 var idInputSearch = document.getElementById("inputSearch");
 var idInputMatch = document.getElementById("inputMatch");
+var idEnterpriseName = document.getElementById("enterpriseName");
+var divTitleContainer = document.getElementById("titleContainer");
 
 var divAdvancedSearch = document.getElementById("advanced");
 var idAdvancedSearchPanel = document.getElementById("advancedSearchPanel");
@@ -31,9 +33,17 @@ var advancedIndustryManufacturing = document.getElementById("industryManufacturi
 var advancedIndustryEducation = document.getElementById("industryEducation");
 var advancedEnterpriseName = document.getElementById("advancedEnterpriseName");
 
+window.addEventListener('load', function(){
+    advancedSearchTypeInitialization();
+    titleContainerActivate();
+});
+
+window.onscroll = function() {
+    titleContainerActivate();
+}
+
 divSearch.addEventListener("click", function(){
     modeSearch();
-    advancedSearchTypeInitialization();
 })
 
 divMatch.addEventListener("click", function() {
@@ -121,4 +131,17 @@ function switchAdvancedSearchType(advancedSearchType) {
 
 function enterpriseNameInput() {
     idEnterpriseName.value = advancedEnterpriseName.value;
+}
+
+function titleContainerActivate() {
+    var windowScroll = document.documentElement.scrollTop || document.body.scrollTop;
+    if (windowScroll >= 150) {
+        if (divTitleContainer.className == "titleContainerDefault") {
+            divTitleContainer.className = "titleContainerPassive";
+        }
+    } else {
+        if (divTitleContainer.className == "titleContainerPassive") {
+            divTitleContainer.className = "titleContainerDefault";
+        }
+    }
 }
