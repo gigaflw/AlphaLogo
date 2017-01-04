@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2017-01-01 20:51:30
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-02 12:15:52
+# @Last Modified time: 2017-01-04 15:57:04
 #
 # Helper function for search engine indexing
 #
@@ -11,6 +11,7 @@ from __future__ import division
 import os
 import math
 from website.core.config import *
+from website.config import DATASET_DIR
 from website.core.index.MMCQ import MMCQ
 
 from cv2 import imread
@@ -26,7 +27,7 @@ def theme_colors_for_web(im_name):
     4) convert colors to web format (e.g. '#ff0c2a')
     5) return color strings 
     """
-    file = os.path.join(IMAGE_MIRROR_DIR, im_name)
+    file = os.path.join(DATASET_DIR, im_name)
     im = imread(file)
 
     assert im is not None, "Empty image file '%s'" % im_name

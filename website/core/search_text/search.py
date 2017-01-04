@@ -22,7 +22,7 @@ from website.core.index.index import LUCENE_INDEX_DIR
 
 
 class SearchConfig:
-    result_keys = ['filename', 'ent_name', 'info', 'theme_colors']
+    result_keys = ['ind']
     searchable_fields = ['ent_name', 'keywords', 'n_colors']
 
 
@@ -44,7 +44,7 @@ def search_func_factory(analyzer, searcher, vm_env):
     """Search function factory"""
 
     def retrieve(doc):
-        return {k: doc.get(k) for k in SearchConfig.result_keys}
+        return doc.get('ind')
 
     def search(**kwargs):
         vm_env.attachCurrentThread()

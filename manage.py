@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2017-01-02 09:41:37
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-04 15:01:51
+# @Last Modified time: 2017-01-04 16:33:44
 
 # 
 # To reset index dirs :
@@ -23,12 +23,13 @@ import argparse
 import cv2
 
 from website.core.index import create_index as core_create_index
-from website.core.search_image import create_index as lsh_create_index
+from website.core.search_image import create_index as image_create_index
 from website.config import DATASET_DIR, ALLOWED_TYPES
-from website.core.config import IMAGE_MIRROR_DIR, LUCENE_INDEX_DIR, LUCENE_CATELOG_FILE
+from website.core.config import LUCENE_INDEX_DIR, LUCENE_CATELOG_FILE, IMAGE_INDEX_DIR
 
-CRAWL_IMAGE_PATH = os.path.join('crawl', 'pic_jpg')
-CRAWL_CATELOG_FILE = os.path.join('crawl', 'PICTURES.txt')
+CRAWL_BASE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'crawl')
+CRAWL_IMAGE_PATH = os.path.join(CRAWL_BASE, 'pic_jpg')
+CRAWL_CATELOG_FILE = os.path.join(CRAWL_BASE, 'PICTURES.txt')
 
 
 ##########################
@@ -36,17 +37,16 @@ CRAWL_CATELOG_FILE = os.path.join('crawl', 'PICTURES.txt')
 ##########################
 parser = argparse.ArgumentParser()
 parser.add_argument('-r', action="store_true", help="Reset index dirs")
-parser.add_argument('-m', action="store_true", help="Move images")
-parser.add_argument('-c', action="store_true", help="Create index")
-parser.add_argument('-i', action="store_true", help=" = -rmc")
-parser.add_argument('-l', action="store_true", help=" = -rmc")
+parser.add_argument('-i', action="store_true", help="Create index files for image search")
+parser.add_argument('-c', action="store_true", help="Create index files for non-image search")
+parser.add_argument('--init', action="store_true", help="Do everything")
 
 # TODO: not move, but symlink!
 ##########################
 # Functions
 ##########################
 def reset_index():
-    dirs = [DATASET_DIR, LUCENE_INDEX_DIR]
+    dirs = [LUCENE_INDEX_DIR, IMAGE_INDEX_DIR]
     exist_dirs = list(filter(os.path.exists, dirs))
 
     if exist_dirs:
@@ -64,24 +64,9 @@ def reset_index():
         os.mkdir(d)
         print("'%s' created" % d)
 
-    os.remove(IMAGE_MIRROR_DIR)
-    os.symlink(DATASET_DIR, IMAGE_MIRROR_DIR)  # FIXME: can windows use this?
-    print("Image soft link '%s' has been created" % IMAGE_MIRROR_DIR)
 
-    return True
-
-
-def move_images():
-    for file_name in os.listdir(CRAWL_IMAGE_PATH):
-        new_file_name, ext = file_name.rsplit('.', 1)
-        new_file_name = "%s.jpg" % new_file_name
-
-        if ext in ALLOWED_TYPES:
-            im = cv2.imread(os.path.join(CRAWL_IMAGE_PATH, file_name))
-            cv2.imwrite(os.path.join(DATASET_DIR, new_file_name), im)
-            print("Moved '%s'" % new_file_name)
-        else:
-            print("Illegal image type '%s' ignored" % file_name)
+    print("Creating symlink '%s' to '%s'..." % (CRAWL_IMAGE_PATH, DATASET_DIR))
+    subprocess.call(['ln', '-s', CRAWL_IMAGE_PATH, DATASET_DIR])
 
     if os.path.isfile(CRAWL_CATELOG_FILE):
         shutil.copyfile(CRAWL_CATELOG_FILE, LUCENE_CATELOG_FILE)
@@ -96,10 +81,8 @@ def create_index():
     if not reset_index():
         return
 
-    if not move_images():
-        return
-
     core_create_index()
+    image_create_index()
 
 
 def main():
@@ -107,14 +90,12 @@ def main():
 
     if args.r:
         reset_index()
-    elif args.m:
-        move_images()
     elif args.c:
         core_create_index()
     elif args.i:
+        image_create_index()
+    elif args.init:
         create_index()
-    elif args.l:
-        lsh_create_index()
     else:
         parser.print_help()
 
