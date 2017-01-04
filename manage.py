@@ -2,17 +2,17 @@
 # @Author: GigaFlower
 # @Date:   2017-01-02 09:41:37
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-04 16:33:44
+# @Last Modified time: 2017-01-04 16:41:54
 
 # 
 # To reset index dirs :
 #   python manage.py -r
-# To move images:
-#   python manage.py -m (or you can copy the dir yourself)
+# To create index for images:
+#   python manage.py -i
 # To run pylucene index script :
 #   python manage.py -c
 # To do the above altogether:
-#   python manage.py -i
+#   python manage.py --init
 # 
  
 import subprocess
