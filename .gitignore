@@ -13,3 +13,6 @@ crawl
 **/index/web.index
 
 node_modules
+
+*.pickle
+*.pkl

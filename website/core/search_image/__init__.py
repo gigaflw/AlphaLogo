@@ -2,7 +2,8 @@
 # @Author: GigaFlower
 # @Date:   2016-12-25 13:07:33
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2016-12-27 18:53:20
+# @Last Modified time: 2017-01-04 11:20:28
+
 
 try:
     import cPickle as pickle
@@ -11,33 +12,32 @@ except ImportError:
 
 import numpy as np
 import cv2
+import os
 
-from website.config import DATASET_DEMO_DIR
+from website.config import DATASET_DIR
+
+from website.core.search_image.sift.sift import SIFT
+from website.core.search_image.lsh import LSH
 
 
-def pre_compute():
-    """
-    Compute the descriptors of images in datasets ahead of time
-    """
-    pass
+def create_index():
+    sift = SIFT(debug=False)
+    lsh = LSH(d=128, l=6)
 
-def save_data(data):
-    """
-    Save the precompute data into pickle file
-    """
-    pass
+    for i in range(100):
+        im_path = os.path.join(DATASET_DIR, '%05d.jpg' % (i+1))
+        print("Processing '%s'..." % im_path)
+        dps, _ = sift.process(cv2.imread(im_path), 0)
+        lsh.feed_n(dps)
+    lsh.save("lsh.pkl")
 
-def load_data():
-    """
-    Load the precomputed data
-    """
-    pass
 
-def search(path):
-    """
-    logo matching function
-    
-    @param: path: the path to the target logo image file
-    @return: a list of indexes, sorted in the order of similarity
-    """
-    return []
+def get_search_func():
+    sift = SIFT(debug=False)
+    lsh = LSH.restore('lsh.pkl')
+
+    def search(im, max_n=10):
+        dps, _ = sift.process(im)
+        return lsh.match(dps, max_n=max_n) 
+
+    return search

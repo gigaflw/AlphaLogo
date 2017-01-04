@@ -2,14 +2,15 @@
 # @Author: GigaFlower
 # @Date:   2016-12-23 23:18:28
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-02 12:20:18
+# @Last Modified time: 2017-01-04 11:25:35
 from __future__ import unicode_literals, print_function
 
 import os
+from cv2 import imread as cv2_imread
 
 from website.models import Logo
 from website.core.search_text import get_search_func as get_text_search_func
-# from website.core.search_image import search as sift_search
+from website.core.search_image import get_search_func as get_image_search_func
 from website.utility import save_img_to_uploads
 
 
@@ -19,6 +20,7 @@ from website.utility import save_img_to_uploads
 class Searcher(object):
     def init(self):
         self.lucene_search = get_text_search_func()
+        self.image_search = get_image_search_func()
 
     def text_search(self, keywords, ent_name="", n_colors=""):
         """
@@ -63,8 +65,7 @@ class Searcher(object):
 
         return good, normal
 
-    @staticmethod
-    def image_search(im):
+    def image_search(self, im):
         """
         Search similar logos
 
@@ -72,7 +73,9 @@ class Searcher(object):
         @returnsL a list of `Logo` instance, sorted in the order of similarity
         """
         # path = save_img_to_uploads(im)
-        # logos = sift_search(path)
+        # im = cv2_imread(path, 0)
+        # assert im is not None, "Empty image to search!"
+        # logos = self.image_search(im)
 
         # fake data
         logos = []
