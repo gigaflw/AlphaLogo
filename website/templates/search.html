@@ -26,7 +26,7 @@
 	        </div>
 	        <div class="input" id="inputSearch">
 	            <form id="textForm" action="/search" method="GET">
-	                <input type="text" class="keyword" name="kw" value="{{ kw }}">
+	                <input type="text" class="keyword" name="kw" value="{{ kw }}" placeholder="请输入要搜索的logo特征">
 	                <input name="type" id="typeSearch" value="search" hidden>
 	                <input type="text" id="enterpriseName" name="enterpriseName" value="" hidden>
 	                <div class="passiveAdvancedTitle" id="advanced">
@@ -93,7 +93,7 @@
 	                <div class="advancedSearchTitle">
 	                    企业名：
 	                </div>
-	                <input type="text" class="enterpriseName" name="enterpriseName" id="advancedEnterpriseName" placeholder="请输入企业名称" onkeyup="enterpriseNameInput()">
+	                <input type="text" class="enterpriseName" name="enterpriseName" id="advancedEnterpriseName" value="{{ ent_name }}" placeholder="请输入企业名称" onkeyup="enterpriseNameInput()">
 	            </div>
 	        </div>
     	</div>
