@@ -126,7 +126,7 @@ div.passiveAdvancedTitle {
     margin-left: -150px;
     padding-top: 8px;
 
-    height: 26px;
+    height: 24px;
     width: 100px;
 
     border: 3px #FFFFFF solid;
@@ -140,6 +140,8 @@ div.passiveAdvancedTitle {
     vertical-align: top;
 }
 div.passiveAdvancedTitle:hover {
+    border-color: #888888;
+
     color: #444444;
 }
 
@@ -159,7 +161,7 @@ div.activeAdvancedTitle {
 
     font-size: 18px;
     text-align: center;
-    color: #444444;
+    color: #000000;
     outline-width: 0;
     vertical-align: top;
 }
@@ -170,7 +172,7 @@ div.advancedSearchPanel {
     margin: 40px auto;
     padding-bottom: 10px;
 
-    width: 50%;
+    width: 800px;
 
     border: 3px #FFFFFF solid;
     border-radius: 20px;
@@ -192,26 +194,24 @@ div.advancedSearchBar {
 div.advancedSearchTitle {
     cursor: default;
 
-    margin-left: -2.5px;
-    margin-right: -2.5px;
     padding-top: 10px;
+    padding-left: 20px;
 
-    width: 120px;
+    width: 100px;
     height: 25px;
     float: left;
     
     border: 3px #FFFFFF solid;
     border-color: transparent;
 
-    text-align: center;
+    text-align: left;
     font-size: 18px;
 }
 
 div.advancedSearchType {
     cursor: pointer;
 
-    margin-left: -2.5px;
-    margin-right: -2.5px;
+    margin: 0 5px 0 5px;
     padding-top: 10px;
     float: left;
 
@@ -227,16 +227,34 @@ div.advancedSearchType {
     font-size: 18px;
 }
 div.advancedSearchType:hover {
-    border: 2px solid #BBBBBB;
+    border: 2px solid #CCCCCC;
 
     color: #444444;
 }
 
-input.companyName {
+div.advancedSearchTypeActive {
+    cursor: pointer;
+    background-color: #DDDDDD;
+
+    margin: 0 5px 0 5px;
+    padding-top: 10px;
+    float: left;
+
+    width: 80px;
+    height: 25px;
+    
+    border: 2px #888888 solid;
+    border-radius: 10px;
+
+    text-align: center;
+    color: #000000;
+    font-size: 18px;
+}
+
+input.enterpriseName {
     background-color: transparent;
 
     margin-top: 3px;
-
 
     width: 200px;
     height: 28px;
@@ -250,7 +268,7 @@ input.companyName {
     outline-width: 0;
     vertical-align: top;
 }
-input.companyName:hover {
+input.enterpriseName:hover {
     border: 3px #888888 solid;
 }
 
@@ -292,7 +310,7 @@ input.logo {
 input.textfield {
     background-color: transparent;
 
-    width: 300px;
+    width: 390px;
     height: 30px;
 
     border: 3px #AAAAAA solid;

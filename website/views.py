@@ -27,13 +27,17 @@ def search():
     """
     type_ = request.args.get('type')
     kw = request.args.get('kw')
+    ent_name = request.args.get('enterpriseName')
     tmpl = "search.html"
     search_ = text_search
 
     if len(kw) == 0:
         return redirect(url_for("bp.index"))
     else:
-        logo_matched, logo_similar = search_(keywords=kw, ent_name='', n_colors='')
+        if type_ == 'search':
+            logo_matched, logo_similar = search_(keywords=kw, ent_name='', n_colors='')
+        else:
+            logo_matched, logo_similar = search_(keywords=kw, ent_name=ent_name, n_colors='')
 
         # new parameter `n_colors` is added to search function!
         # also `Logo` instance has one more property `theme_colors`

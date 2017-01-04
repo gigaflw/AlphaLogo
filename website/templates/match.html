@@ -23,62 +23,80 @@
                 <span class="textDefaultStyle">匹配</span>
             </div>
         </div>
-        <div class="input" id="input_search">
+        <div class="input" id="inputSearch" hidden>
             <form id="textForm" action="/search" method="GET">
                 <input type="text" class="keyword" name="kw" placeholder="请输入要搜索的logo特征">
-                <input name="type" id="type_search" value="search" hidden>
+                <input name="type" id="typeSearch" value="search" hidden>
+                <input type="text" id="enterpriseName" name="enterpriseName" value="" hidden>
                 <div class="passiveAdvancedTitle" id="advanced">
                     <span class="textDefaultStyle">高级搜索</span>
                 </div>
                 <button type="submit" class="submit">Go</button>
             </form>
         </div>
-        <div class="input" id="input_match">
+        <div class="input" id="inputMatch">
             <form id="imageForm" action="/match" enctype="multipart/form-data" method="POST">
                 <input type="text" name="textfield" id="textfield" class="textfield" value="{{ kw }}" disabled="disable"> 
                 <input type="file" class="logo" id="logo" name="logo" onchange="showTextField()">
                 <input type="button" class="browse" id="browse" value="浏览">
-                <input name="type" id="type_match" value="match" hidden>
+                <input name="type" id="typeMatch" value="match" hidden>
                 <button type="submit" class="submit">Go</button> 
             </form>
         </div>
 
-        <div class="advancedSearchPanel" id="advanced_search_panel" hidden>
+        <div class="advancedSearchPanel" id="advancedSearchPanel" hidden>
             <div class="advancedSearchBar">
                 <div class="advancedSearchTitle">
-                    颜色：
+                    配色数量：
                 </div>
-                <div class="advancedSearchType">
-                    蓝色
+                <div class="advancedSearchType" id="colorNum1">
+                    单色
                 </div>
-                <div class="advancedSearchType">
-                    红色
+                <div class="advancedSearchType" id="colorNum2">
+                    双色
                 </div>
-                <div class="advancedSearchType">
-                    绿色
+                <div class="advancedSearchType" id="colorNum3">
+                    三色
+                </div>
+                <div class="advancedSearchType" id="colorNum4">
+                    四色
+                </div>
+                <div class="advancedSearchType" id="colorNum5">
+                    五色
+                </div>
+                <div class="advancedSearchType" id="colorNumMore">
+                    更多色
                 </div>
             </div>
             <div class="advancedSearchBar">
                 <div class="advancedSearchTitle">
-                    风格：
+                    行业：
                 </div>
-                <div class="advancedSearchType">
-                    简约
+                <div class="advancedSearchType" id="industryBank">
+                    银行
                 </div>
-                <div class="advancedSearchType">
-                    激情
+                <div class="advancedSearchType" id="industryStock">
+                    证券
+                </div>
+                <div class="advancedSearchType" id="industryIT">
+                    互联网
+                </div>
+                <div class="advancedSearchType" id="industryManufacturing">
+                    制造业
+                </div>
+                <div class="advancedSearchType" id="industryEducation">
+                    教育
                 </div>
             </div>
             <div class="advancedSearchBar">
                 <div class="advancedSearchTitle">
                     企业名：
                 </div>
-                <input type="text" class="companyName" name="companyNameName" placeholder="请输入企业名称">
-                <input name="type" id="type_search" value="advanced_search" hidden>
+                <input type="text" class="enterpriseName" name="enterpriseName" id="advancedEnterpriseName" placeholder="请输入企业名称" onkeyup="enterpriseNameInput()">
             </div>
         </div>
         
-        <div class="container" id="result_container">
+        <div class="container" id="resultContainer">
             {% if (logo_matched|length > 0) %}
                 <div class="resultTitle" id="matchedResultTitle">
                     您要找的是不是：

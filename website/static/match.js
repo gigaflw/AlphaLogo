@@ -10,9 +10,9 @@
 var divSearch = document.getElementById("search");
 var divMatch = document.getElementById("match");
 var divAdvancedSearch = document.getElementById("advanced");
-var idInputSearch = document.getElementById("input_search");
-var idInputMatch = document.getElementById("input_match");
-var idAdvancedSearchPanel = document.getElementById("advanced_search_panel");
+var idInputSearch = document.getElementById("inputSearch");
+var idInputMatch = document.getElementById("inputMatch");
+var idAdvancedSearchPanel = document.getElementById("advancedSearchPanel");
 
 window.addEventListener('load', function(){
     console.log('远看黄山黑黝黝,上面小来下面大,若将黄山倒过来,上面大来下面小');
