@@ -8,7 +8,7 @@
 div.container {
     width: 100%;
 
-    font-family: "Century Gothic", Verdana, Tahoma,"微软雅黑", Arial;
+    font-family: "Century Gothic", "Verdana", "Tahoma","微软雅黑", "Calibri", "Arial", "黑体";
 }
 
 div.title {

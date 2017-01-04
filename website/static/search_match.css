@@ -8,10 +8,13 @@
 div.container {
     width: 100%;
 
-    font-family: "Century Gothic", Verdana, Tahoma,"微软雅黑", Arial;
+    font-family: "Century Gothic", "Verdana", "Tahoma","微软雅黑", "Calibri", "Arial", "黑体";
 }
 div#resultContainer {
     margin-left: 20px;
+}
+div#titleContainer {
+    position: fixed;
 }
 
 div.title {
@@ -174,7 +177,7 @@ div.activeAdvancedTitle {
 div.advancedSearchPanel {
     background-color: #EEEEEE;
 
-    margin: 40px auto;
+    margin: 40px;
     padding-bottom: 10px;
 
     width: 800px;
