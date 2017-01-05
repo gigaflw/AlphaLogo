@@ -20,7 +20,7 @@ div.titleContainerDefault {
     position: relative;
     background-color: #FFFFFF;
 
-    width: 700px;
+    width: 1000px;
     height: 130px;
 
     z-index: 100;
@@ -36,7 +36,7 @@ div.titleContainerPassive {
     left: 0;
     z-index: 100;
 
-    width: 700px;
+    width: 1000px;
     height: 140px;
 
     opacity: 0.1;
@@ -62,6 +62,7 @@ div.title {
 
 div.linkBar {
     height: 40px;
+    width: 700px;
 
     padding: 20px;
 
@@ -113,6 +114,8 @@ div.currentLinkTitle {
 }
 
 div.input {
+    width: 700px;
+
     text-align: left;
     font-size: 16px;
 }
@@ -446,6 +449,31 @@ img.similarImg {
 
     max-width: 200px;
     max-height: 200px;
+}
+
+div.previewDiv{
+    position: absolute;
+    background-color: #FFFFFF;
+
+    left: 750px;
+    top: 20px;
+
+    width: 160px;
+    height: 160px;
+
+    box-shadow: 3px 3px 6px 2px #888888;
+    
+    border: 3px #888888 solid;
+    border-radius: 25px;
+
+    text-align: center;
+}
+
+img.previewImg{
+    padding-top: 20px;
+
+    max-width: 150px;
+    max-height: 150px;
 }
 
 .textDefaultStyle {

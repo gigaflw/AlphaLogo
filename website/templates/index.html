@@ -33,6 +33,54 @@
                 </div>
                 <button type="submit" class="submit">Go</button>
             </form>
+            <div class="advancedSearchPanel" id="advancedSearchPanel">
+                <div class="advancedSearchBar">
+                    <div class="advancedSearchTitle">
+                        配色数量：
+                    </div>
+                    <div class="advancedSearchType" id="colorNum2">
+                        双色
+                    </div>
+                    <div class="advancedSearchType" id="colorNum3">
+                        三色
+                    </div>
+                    <div class="advancedSearchType" id="colorNum4">
+                        四色
+                    </div>
+                    <div class="advancedSearchType" id="colorNum5">
+                        五色
+                    </div>
+                    <div class="advancedSearchType" id="colorNumMore">
+                        更多色
+                    </div>
+                </div>
+                <div class="advancedSearchBar">
+                    <div class="advancedSearchTitle">
+                        行业：
+                    </div>
+                    <div class="advancedSearchType" id="industryBank">
+                        银行
+                    </div>
+                    <div class="advancedSearchType" id="industryStock">
+                        证券
+                    </div>
+                    <div class="advancedSearchType" id="industryIT">
+                        互联网
+                    </div>
+                    <div class="advancedSearchType" id="industryManufacturing">
+                        制造业
+                    </div>
+                    <div class="advancedSearchType" id="industryEducation">
+                        教育
+                    </div>
+                </div>
+                <div class="advancedSearchBar">
+                    <div class="advancedSearchTitle">
+                        企业名：
+                    </div>
+                    <input type="text" class="enterpriseName" name="enterpriseName" id="advancedEnterpriseName" placeholder="请输入企业名称" onkeyup="enterpriseNameInput()">
+                </div>
+            </div>
         </div>
         <div class="input" id="inputMatch" hidden>
             <form id="imageForm" action="/match" enctype="multipart/form-data" method="POST">
@@ -40,57 +88,13 @@
                 <input type="file" class="logo" id="logo" name="logo" onchange="showTextField()">
                 <input type="button" class="browse" id="browse" value="浏览">
                 <input name="type" id="typeMatch" value="match" hidden>
-                <button type="submit" class="submit">Go</button> 
+                <button type="submit" class="submit" id="imgSubmit">Go</button> 
             </form>
+            <!-- <div class="previewDiv" id="previewDiv">
+                <img src="" class="previewImg" id="previewImg">
+            </div> -->
         </div>
 
-        <div class="advancedSearchPanel" id="advancedSearchPanel">
-            <div class="advancedSearchBar">
-                <div class="advancedSearchTitle">
-                    配色数量：
-                </div>
-                <div class="advancedSearchType" id="colorNum2">
-                    双色
-                </div>
-                <div class="advancedSearchType" id="colorNum3">
-                    三色
-                </div>
-                <div class="advancedSearchType" id="colorNum4">
-                    四色
-                </div>
-                <div class="advancedSearchType" id="colorNum5">
-                    五色
-                </div>
-                <div class="advancedSearchType" id="colorNumMore">
-                    更多色
-                </div>
-            </div>
-            <div class="advancedSearchBar">
-                <div class="advancedSearchTitle">
-                    行业：
-                </div>
-                <div class="advancedSearchType" id="industryBank">
-                    银行
-                </div>
-                <div class="advancedSearchType" id="industryStock">
-                    证券
-                </div>
-                <div class="advancedSearchType" id="industryIT">
-                    互联网
-                </div>
-                <div class="advancedSearchType" id="industryManufacturing">
-                    制造业
-                </div>
-                <div class="advancedSearchType" id="industryEducation">
-                    教育
-                </div>
-            </div>
-            <div class="advancedSearchBar">
-                <div class="advancedSearchTitle">
-                    企业名：
-                </div>
-                <input type="text" class="enterpriseName" name="enterpriseName" id="advancedEnterpriseName" placeholder="请输入企业名称" onkeyup="enterpriseNameInput()">
-            </div>
-        </div>
+        
     </div>
 {% endblock %}

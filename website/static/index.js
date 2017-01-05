@@ -18,6 +18,8 @@ var idInputMatch = document.getElementById("inputMatch");
 var idTitle = document.getElementById("title");
 var idEnterpriseName = document.getElementById("enterpriseName");
 var idNColors = document.getElementById("nColors");
+var idPreviewImg = document.getElementById("previewImg");
+var idImgSubmit = document.getElementById("imgSubmit");
 
 var divAdvancedSearch = document.getElementById("advanced");
 var idAdvancedSearchPanel = document.getElementById("advancedSearchPanel");
@@ -56,11 +58,15 @@ idBrowse.addEventListener("click", function() {
 })
 
 function showTextField() {
+    idImgSubmit.click();
+
     var fileName = idLogo.value;
     var reg = new RegExp("\\\\\.[^\\\\]*$");
     var regFileName = reg.exec(fileName);
     regFileName = JSON.stringify(regFileName);
     idTextfield.value = regFileName.substring(4, regFileName.length-2);
+
+    //idPreviewImg.src = "/static/uploads/upload.jpg";
 }
 
 function modeSearch() {
