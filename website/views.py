@@ -28,23 +28,34 @@ def search():
     type_ = request.args.get('type')
     kw = request.args.get('kw')
     ent_name = request.args.get('enterpriseName')
+    n_colors = request.args.get('nColors')
     tmpl = "search.html"
     search_ = text_search
+    print n_colors
+
+    n_colors_split = n_colors.split(",")
+    n_color_list = []
+    for i in range(len(n_colors_split)):
+        if (n_colors_split[i] == u"1"):
+            if (i == len(n_colors_split)-1):
+                n_color_list.append(0);
+            else:
+                n_color_list.append(i+2);
 
     if len(kw) == 0:
         return redirect(url_for("bp.index"))
     else:
         if type_ == 'search':
-            logo_matched, logo_similar = search_(keywords=kw, ent_name='', n_colors='')
+            logo_matched, logo_similar = search_(keywords=kw, ent_name='', n_colors=[])
         else:
-            logo_matched, logo_similar = search_(keywords=kw, ent_name=ent_name, n_colors='')
+            logo_matched, logo_similar = search_(keywords=kw, ent_name=ent_name, n_colors=n_color_list)
 
         # new parameter `n_colors` is added to search function!
         # also `Logo` instance has one more property `theme_colors`
         # It will be required to match `n_colors` goodly to gain a 'good match'!
         # more detail can be seen in the docstring of `core.search.text_search`
 
-    return render_template(tmpl, logo_matched=logo_matched, logo_similar=logo_similar, kw=kw, ent_name=ent_name)
+    return render_template(tmpl, logo_matched=logo_matched, logo_similar=logo_similar, kw=kw, ent_name=ent_name, n_colors=n_colors)
 
 @bp.route('/match', methods=['POST'])
 def match():

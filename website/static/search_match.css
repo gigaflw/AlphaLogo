@@ -384,8 +384,7 @@ div.resultTitle {
 }
 
 div.matchedResult {
-    transition: box-shadow 0.8s;
-    transition: border 0.8s;
+    transition: box-shadow,border,transform 1s,1s,0.3s;
 
     display: inline-block;
 
@@ -410,8 +409,7 @@ div.matchedResult:hover{
 }
 
 div.similarResult {
-    transition: box-shadow 0.8s;
-    transition: border 0.8s;
+    transition: box-shadow,border,transform 1s,1s,0.3s;
 
     display: inline-block;
 

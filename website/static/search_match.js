@@ -18,10 +18,10 @@ var idInputMatch = document.getElementById("inputMatch");
 var idEnterpriseName = document.getElementById("enterpriseName");
 var divTitleContainer = document.getElementById("titleContainer");
 var idTitle = document.getElementById("title");
+var idNColors = document.getElementById("nColors");
 
 var divAdvancedSearch = document.getElementById("advanced");
 var idAdvancedSearchPanel = document.getElementById("advancedSearchPanel");
-var advancedColorNum1 = document.getElementById("colorNum1");
 var advancedColorNum2 = document.getElementById("colorNum2");
 var advancedColorNum3 = document.getElementById("colorNum3");
 var advancedColorNum4 = document.getElementById("colorNum4");
@@ -113,7 +113,7 @@ function getParameter(name){
 }
 
 function advancedSearchTypeInitialization() {
-    var advancedSearchTypeArray = new Array(advancedColorNum1, advancedColorNum2, advancedColorNum3, advancedColorNum4, advancedColorNum5,
+    var advancedSearchTypeArray = new Array(advancedColorNum2, advancedColorNum3, advancedColorNum4, advancedColorNum5,
                                             advancedColorNumMore, advancedIndustryBank, advancedIndustryStock, advancedIndustryIT,
                                             advancedIndustryManufacturing, advancedIndustryEducation);
     for (var x=0; x<advancedSearchTypeArray.length; ++x) {
@@ -121,6 +121,10 @@ function advancedSearchTypeInitialization() {
             var i = x;
             advancedSearchTypeArray[i].addEventListener("click", function(){
                 switchAdvancedSearchType(this);
+                var colorTotalNum = 5;
+                if (i < colorTotalNum) {
+                    nColorsInput(i, this);
+                }
             });
         })();
     }
@@ -149,4 +153,19 @@ function titleContainerActivate() {
             divTitleContainer.className = "titleContainerDefault";
         }
     }
+}
+
+function nColorsInput(n, advancedColorNum) {
+    var inputNColors = idNColors.value;
+    //alert(inputNColors);
+    inputNColors = inputNColors.split(",");
+    var nDigit = inputNColors[n];
+    if (nDigit == "0") {
+        inputNColors.splice(n, 1, "1");
+    } else {
+        inputNColors.splice(n, 1, "0");
+    }
+    inputNColors = inputNColors.join(",");
+    //alert(inputNColors);
+    idNColors.value = inputNColors;
 }
