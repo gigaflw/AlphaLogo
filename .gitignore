@@ -9,8 +9,8 @@ uploads
 crawl
 !crawl/crawl.py
 
-**/index/images
 **/index/web.index
+**/index/image.index
 
 node_modules
 

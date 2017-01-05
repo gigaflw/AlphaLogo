@@ -2,7 +2,7 @@
 # @Author: BigFlower
 # @Date:   2016-12-23 16:54:28
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-04 19:14:57
+# @Last Modified time: 2017-01-05 09:38:44
 
 from __future__ import division, print_function
 import numpy as np
@@ -13,7 +13,6 @@ try:
 except ImportError:
     import pickle
 
-import bisect
 
 from sift import SIFT
 
@@ -57,7 +56,6 @@ class LSH:
         self._im_dps_cum.append(len(dps) + self._im_dps_cum[-1])
 
     def clear(self):
-        # self._descriptors = []
         self._dp_ind = 0
         self._im_ind = 0
         self._hash_tables = {}
@@ -81,10 +79,14 @@ class LSH:
 
         for dp in dps:
             im_inds = self._lsh_match(dp)
+            # print("total : ", len(im_inds))
+            # print(im_inds.count(10408) >= 1)
             stat[im_inds] += 1
 
         ret = np.argpartition(stat, -max_n)[-max_n:]
         ret = ret[np.argsort(stat[ret])][::-1]
+        # print(ret)
+        # print(stat[ret])
 
         return ret
 
@@ -134,7 +136,7 @@ if __name__ == '__main__':
 
     sift = SIFT()
 
-    lsh = LSH(d=128, l=6)
+    # lsh = LSH(d=128, l=6)
 
     # for j in range(4):
     #     for i in range(j*100, (j+1)*100):
@@ -142,11 +144,11 @@ if __name__ == '__main__':
     #         lsh.feed_n(dps)
     #     lsh.save("lsh-n-%d.pickle" % j)
 
-    lsh = LSH.restore('lsh-n-0.pickle')
-    dps, _ = sift.process(cv2.imread("../../index/images/test.jpg", 0))
-    t1 = time.time()
-    print(lsh.match(dps, max_n=10) + 1, end='\t')
-    print(time.time() - t1)
+    lsh = LSH.restore('../index/image.index/lsh.pkl')
+    # dps, _ = sift.process(cv2.imread("../../index/images/test.jpg", 0))
+    # t1 = time.time()
+    # print(lsh.match(dps, max_n=10) + 1, end='\t')
+    # print(time.time() - t1)
 
     # profile.run("lsh.match(dps)","a.profile")
     # # t0 = time.time()

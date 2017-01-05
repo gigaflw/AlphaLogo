@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-25 13:07:33
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-04 17:15:57
+# @Last Modified time: 2017-01-04 19:59:46
 
 import os, traceback
 
@@ -17,7 +17,7 @@ from website.core.search_image.lsh import LSH
 
 def create_index():
     sift = SIFT(debug=False)
-    lsh = LSH(d=128, l=6)
+    lsh = LSH(d=128, l=10)
 
     try:
         for fname in os.listdir(DATASET_DIR):

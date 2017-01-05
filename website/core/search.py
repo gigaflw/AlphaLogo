@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-23 23:18:28
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-04 16:56:51
+# @Last Modified time: 2017-01-05 09:37:08
 from __future__ import unicode_literals, print_function
 
 import os
@@ -21,7 +21,7 @@ from website.utility import save_img_to_uploads
 class Searcher(object):
 
     def init(self):
-        self.lucene_search = get_text_search_func()
+        self._text_search = get_text_search_func()
         self._image_search = get_image_search_func()
         print("Searcher inited")
 
@@ -29,6 +29,11 @@ class Searcher(object):
         para['filename'] = os.path.join('dataset', para['filename'])
         para['theme_colors'] = para['theme_colors'].split()
         return Logo(**para)
+
+    def get_logos_from_db(self, inds):
+        for i in inds:
+            para = db.query("SELECT FILENAME, ENT_NAME, INFO, THEME_COLORS FROM LOGOS WHERE IND = (%s)" % i)[0]
+            yield self.para_to_logo(para)
 
     def text_search(self, keywords, ent_name="", n_colors=""):
         """
@@ -42,12 +47,12 @@ class Searcher(object):
             Where the first one denotes the upper bound of n_colors, 
             and `COLOR_LEVEL` denotes the resolution for each color channel in R,G,B.
 
-        @returns: a list of 'Logo' instance
+        @returns: two list of 'Logo' instance, where the first one contains good matches, and the second normal ones
         """
-        if not hasattr(self, 'lucene_search'):
+        if not hasattr(self, '_text_search'):
             self.init()
 
-        ret = self.lucene_search(keywords=keywords, ent_name=ent_name, n_colors=n_colors)
+        ret = self._text_search(keywords=keywords, ent_name=ent_name, n_colors=n_colors)
 
         def is_good_match(logo):
             """
@@ -63,9 +68,7 @@ class Searcher(object):
         good = []
         normal = []
 
-        ret = db.query("SELECT FILENAME, ENT_NAME, INFO, THEME_COLORS FROM LOGOS WHERE IND IN (%s)" %
-                       ','.join(map(str, ret)))
-        for l in map(self.para_to_logo, ret):
+        for l in self.get_logos_from_db(ret):
             (good if is_good_match(l) else normal).append(l)
 
         return good, normal
@@ -75,18 +78,17 @@ class Searcher(object):
         Search similar logos
 
         @param: im : a `werkzeug.datastructures.FileStorage` instance
-        @returnsL a list of `Logo` instance, sorted in the order of similarity
+        @returns: two list of 'Logo' instance, where the first one contains good matches, and the second normal ones
         """
-        if not hasattr(self, '_image_search'):
-            self.init()
-
         path = save_img_to_uploads(im)
         im = cv2_imread(path, 0)
-        assert im is not None, "Empty image to search!"
-        logo_inds = self._image_search(im) + 1
 
-        ret = db.query("SELECT FILENAME, ENT_NAME, INFO, THEME_COLORS FROM LOGOS WHERE IND IN (%s)" %
-                       ','.join(map(str, logo_inds)))
-        ret = list(map(self.para_to_logo, ret))
+        if im is None:
+            print("Empty image to search!")
+            return [], []
+
+        logo_inds = self._image_search(im) + 1  # ind begins with 1
+
+        ret = list(self.get_logos_from_db(logo_inds))
 
         return ret[:1], ret[1:]
