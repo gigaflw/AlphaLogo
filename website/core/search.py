@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-23 23:18:28
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-05 18:55:37
+# @Last Modified time: 2017-01-05 19:31:19
 from __future__ import unicode_literals, print_function
 
 import os
@@ -66,7 +66,9 @@ class Searcher(object):
             else:
                 return False
 
-        if N_COLORS_MORE_THAN_SIX in n_colors:
+        if not n_colors:
+            check_n_color = None
+        elif N_COLORS_MORE_THAN_SIX in n_colors:
             check_n_color = lambda logo: len(logo.theme_colors) in n_colors or len(logo.theme_colors) >= 6
         else:
             check_n_color = lambda logo: len(logo.theme_colors) in n_colors
