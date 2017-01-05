@@ -17,6 +17,7 @@ var idInputSearch = document.getElementById("inputSearch");
 var idInputMatch = document.getElementById("inputMatch");
 var idEnterpriseName = document.getElementById("enterpriseName");
 var divTitleContainer = document.getElementById("titleContainer");
+var idTitle = document.getElementById("title");
 
 var divAdvancedSearch = document.getElementById("advanced");
 var idAdvancedSearchPanel = document.getElementById("advancedSearchPanel");
@@ -56,6 +57,10 @@ divAdvancedSearch.addEventListener("click", function() {
 
 idBrowse.addEventListener("click", function() {
     idLogo.click();
+})
+
+idTitle.addEventListener("click", function() {
+    window.location.href = "/";
 })
 
 function showTextField() {

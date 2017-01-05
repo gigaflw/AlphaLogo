@@ -20,10 +20,14 @@ div.titleContainerDefault {
     position: relative;
     background-color: #FFFFFF;
 
+    width: 700px;
+
     z-index: 100;
 }
 
 div.titleContainerPassive {
+    transition: opacity 0.5s;
+
     position: fixed;
     background-color: #FFFFFF;
 
@@ -36,10 +40,14 @@ div.titleContainerPassive {
     opacity: 0.1;
 }
 div.titleContainerPassive:hover {
+    transition: opacity 1s;
+
     opacity: 1;
 }
 
 div.title {
+    cursor: pointer;
+
     margin: 40px 20px 40px 20px;
     float: left;
 
@@ -368,6 +376,9 @@ div.resultTitle {
 }
 
 div.matchedResult {
+    transition: box-shadow 0.8s;
+    transition: border 0.8s;
+
     display: inline-block;
 
     margin: 30px 80px 30px 30px; 
@@ -391,6 +402,9 @@ div.matchedResult:hover{
 }
 
 div.similarResult {
+    transition: box-shadow 0.8s;
+    transition: border 0.8s;
+
     display: inline-block;
 
     margin: 25px;
