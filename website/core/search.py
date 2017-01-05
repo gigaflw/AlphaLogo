@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-23 23:18:28
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-05 13:40:10
+# @Last Modified time: 2017-01-05 18:55:37
 from __future__ import unicode_literals, print_function
 
 import os
@@ -12,6 +12,7 @@ from website.models import Logo
 from website.database import db
 from website.core.search_text import get_search_func as get_text_search_func
 from website.core.search_image import get_search_func as get_image_search_func
+from website.core.config import N_COLORS_MORE_THAN_SIX
 from website.utility import save_img_to_uploads
 
 
@@ -60,15 +61,20 @@ class Searcher(object):
             Find out good matches
             To be intensified
             """
-            if (ent_name and ent_name in logo.ent_name) and len(logo.theme_colors) in n_colors:
+            if ent_name and ent_name in logo.ent_name:
                 return True
             else:
                 return False
 
+        if N_COLORS_MORE_THAN_SIX in n_colors:
+            check_n_color = lambda logo: len(logo.theme_colors) in n_colors or len(logo.theme_colors) >= 6
+        else:
+            check_n_color = lambda logo: len(logo.theme_colors) in n_colors
+
         good = []
         normal = []
 
-        for l in self.get_logos_from_db(ret):
+        for l in filter(check_n_color, self.get_logos_from_db(ret)):
             (good if is_good_match(l) else normal).append(l)
 
         return good, normal

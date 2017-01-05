@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2017-01-01 21:04:27
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-04 16:07:08
+# @Last Modified time: 2017-01-05 18:56:10
 
 # Images in this path will be indexed
 import os
@@ -17,3 +17,4 @@ IMAGE_INDEX_PKL_FILE = os.path.join(IMAGE_INDEX_DIR, 'lsh.pkl')
 COLOR_SLOTS = 8
 COLOR_LEVEL = 8
 
+N_COLORS_MORE_THAN_SIX = 0
