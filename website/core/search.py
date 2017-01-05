@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-23 23:18:28
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-05 09:37:08
+# @Last Modified time: 2017-01-05 13:40:10
 from __future__ import unicode_literals, print_function
 
 import os
@@ -33,16 +33,17 @@ class Searcher(object):
     def get_logos_from_db(self, inds):
         for i in inds:
             para = db.query("SELECT FILENAME, ENT_NAME, INFO, THEME_COLORS FROM LOGOS WHERE IND = (%s)" % i)[0]
+            # FIXME: hard code, not good
             yield self.para_to_logo(para)
 
-    def text_search(self, keywords, ent_name="", n_colors=""):
+    def text_search(self, keywords, ent_name="", n_colors=[]):
         """
         Search logos by keywords
 
         @param: keywords : the characteristic of image, search from crawled data, may contain whitespaces as splits 
         @param: ent_name : the name of the enterprise, search from crawled data
 
-        @param: n_colors : number of main colors appeared in the logo image.
+        @param: n_colors : a list of number of main colors appeared in the logo image.
             The range of this value is defined in `core.config.py`, named `COLOR_SLOTS` and `COLOR_LEVEL`
             Where the first one denotes the upper bound of n_colors, 
             and `COLOR_LEVEL` denotes the resolution for each color channel in R,G,B.
@@ -52,15 +53,14 @@ class Searcher(object):
         if not hasattr(self, '_text_search'):
             self.init()
 
-        ret = self._text_search(keywords=keywords, ent_name=ent_name, n_colors=n_colors)
+        ret = self._text_search(keywords=keywords, ent_name=ent_name)
 
         def is_good_match(logo):
             """
             Find out good matches
             To be intensified
             """
-            if (ent_name and ent_name in logo.ent_name) and \
-                    (n_colors == '' or abs(int(n_colors) - len(logo.theme_colors)) <= 1):
+            if (ent_name and ent_name in logo.ent_name) and len(logo.theme_colors) in n_colors:
                 return True
             else:
                 return False

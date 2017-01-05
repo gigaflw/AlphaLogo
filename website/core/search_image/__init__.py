@@ -2,9 +2,10 @@
 # @Author: GigaFlower
 # @Date:   2016-12-25 13:07:33
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-04 19:59:46
+# @Last Modified time: 2017-01-05 13:45:21
 
-import os, traceback
+import os
+import traceback
 
 import numpy as np
 import cv2
@@ -17,7 +18,7 @@ from website.core.search_image.lsh import LSH
 
 def create_index():
     sift = SIFT(debug=False)
-    lsh = LSH(d=128, l=10)
+    lsh = LSH(d=128, l=12)
 
     try:
         for fname in os.listdir(DATASET_DIR):
@@ -28,11 +29,13 @@ def create_index():
             print("Processing '%s'..." % im_path)
             dps, _ = sift.process(cv2.imread(im_path, 0))
             lsh.feed_n(dps)
+
     except Exception, e:
-        traceback.print_exc() 
+        traceback.print_exc()
     else:
         print("Images indexing ends.")
     finally:
+        lsh.compress()
         lsh.save(IMAGE_INDEX_PKL_FILE)
         print("Image index saved to %s" % IMAGE_INDEX_PKL_FILE)
 

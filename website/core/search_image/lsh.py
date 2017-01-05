@@ -2,7 +2,7 @@
 # @Author: BigFlower
 # @Date:   2016-12-23 16:54:28
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-05 09:38:44
+# @Last Modified time: 2017-01-05 13:32:00
 
 from __future__ import division, print_function
 import numpy as np
@@ -15,7 +15,7 @@ except ImportError:
 
 
 from sift import SIFT
-
+from array import array
 
 class LSH:
     """
@@ -37,10 +37,9 @@ class LSH:
         self._hash_tables = {}
 
         self._rand_vec = np.random.random((l, d)) * 2 - 1
+
         self._dp_ind = 0
         self._im_ind = 0
-        self._im_dps = []
-        self._im_dps_cum = [0]
 
     def feed(self, dp):
         self.lsh_hash_and_save(dp)
@@ -52,15 +51,11 @@ class LSH:
             self.lsh_hash_and_save(dp)
         self._im_ind += 1
 
-        self._im_dps.append(len(dps))
-        self._im_dps_cum.append(len(dps) + self._im_dps_cum[-1])
 
     def clear(self):
         self._dp_ind = 0
         self._im_ind = 0
         self._hash_tables = {}
-        self._im_dps = []
-        self._im_dps_cum = [0]
 
     # def randomize_index(self):
     #     self._rand_vec = [np.random.random((1, self.d)) * 2 - 1 for _ in range(self.l)]
@@ -85,8 +80,8 @@ class LSH:
 
         ret = np.argpartition(stat, -max_n)[-max_n:]
         ret = ret[np.argsort(stat[ret])][::-1]
-        # print(ret)
-        # print(stat[ret])
+        print("Match inds(begin with 0):\t", ret)
+        print("Their scores(max %d):\t" % (len(dps)), stat[ret])
 
         return ret
 
@@ -103,7 +98,7 @@ class LSH:
 
     def lsh_hash_and_save(self, dp):
         cosine_hash = self.cosine_hash(dp, self._rand_vec)
-        self._hash_tables.setdefault(cosine_hash, []).append(self._im_ind)
+        self._hash_tables.setdefault(cosine_hash, set()).add(self._im_ind)
         self._dp_ind += 1
 
     @staticmethod
@@ -128,6 +123,18 @@ class LSH:
     def restore(filename='lsh.pickle'):
         with open(filename, 'rb') as f:
             return pickle.load(f)
+
+    def compress(self):
+        print("Compressing hash tables size...")
+        s1 = sum(t.__sizeof__() for t in self._hash_tables.values())
+
+        for k,v in self._hash_tables.items():
+            v = array('I', v)
+            self._hash_tables[k] = v
+
+        s2 = sum(t.__sizeof__() for t in self._hash_tables.values())
+        
+        print("Hash table total size reduced from %d to %d (bits)" % (s1, s2))
 
 
 if __name__ == '__main__':
