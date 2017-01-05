@@ -13,8 +13,21 @@ div.container {
 
 div.title {
     cursor: default;
+    transition: margin-top 1s;
 
     margin-top: 100px;
+    margin-bottom: 40px;
+
+    text-align: center;
+    font-size: 70px;
+    font-weight: bold;
+}
+
+div.titleUp {
+    cursor: default;
+    transition: margin-top 1s;
+
+    margin-top: 40px;
     margin-bottom: 40px;
 
     text-align: center;
@@ -169,12 +182,17 @@ div.activeAdvancedTitle {
 }
 
 div.advancedSearchPanel {
+    transition: transform 1s;
+    transform: rotateX(90deg);
+    transform-origin: 50% 0;
+
     background-color: #EEEEEE;
 
     margin: 40px auto;
-    padding-bottom: 10px;
 
-    width: 800px;
+    width: 750px;
+
+    box-shadow: 3px 3px 6px 3px #888888;
 
     border: 3px #FFFFFF solid;
     border-radius: 20px;

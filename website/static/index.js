@@ -71,8 +71,8 @@ function modeSearch() {
     idTypeSearch.value = "search";
     idInputSearch.style.display = "block";
     idInputMatch.style.display = "none";
-    idAdvancedSearchPanel.style.display = "none";
-    idTitle.style.marginTop = "100px";
+    idTitle.className = "title";
+    idAdvancedSearchPanel.style.transform = "rotateX(90deg)";
 }
 
 function modeMatch() {
@@ -81,21 +81,21 @@ function modeMatch() {
     divAdvancedSearch.style.display = "none";
     idInputSearch.style.display = "none";
     idInputMatch.style.display = "block";
-    idAdvancedSearchPanel.style.display = "none";
-    idTitle.style.marginTop = "100px";
+    idTitle.className = "title";
+    idAdvancedSearchPanel.style.transform = "rotateX(90deg)";
 }
 
 function switchAdvancedSearch() {
     if (divAdvancedSearch.className == "passiveAdvancedTitle") {
         idTypeSearch.value = "advancedSearch";
-        idAdvancedSearchPanel.style.display = "block";
         divAdvancedSearch.className = "activeAdvancedTitle";
-        idTitle.style.marginTop = "40px";
+        idTitle.className = "titleUp";
+        idAdvancedSearchPanel.style.transform = "rotateX(0deg)";
     } else {
         idTypeSearch.value = "search";
-        idAdvancedSearchPanel.style.display = "none";
         divAdvancedSearch.className = "passiveAdvancedTitle";
-        idTitle.style.marginTop = "100px";
+        idTitle.className = "title";
+        idAdvancedSearchPanel.style.transform = "rotateX(90deg)";
     }
 }
 

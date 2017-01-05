@@ -25,5 +25,5 @@ function modeMatch() {
     divAdvancedSearch.style.display = "none";
     idInputSearch.style.display = "none";
     idInputMatch.style.display = "block";
-    idAdvancedSearchPanel.style.display = "none";
+    idAdvancedSearchPanel.style.transform = "rotateX(90deg)";
 }

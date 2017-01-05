@@ -21,6 +21,7 @@ div.titleContainerDefault {
     background-color: #FFFFFF;
 
     width: 700px;
+    height: 130px;
 
     z-index: 100;
 }
@@ -36,6 +37,7 @@ div.titleContainerPassive {
     z-index: 100;
 
     width: 700px;
+    height: 140px;
 
     opacity: 0.1;
 }
@@ -205,12 +207,18 @@ div.activeAdvancedTitle {
 }
 
 div.advancedSearchPanel {
+    transition: transform 1s;
+    transform: rotateX(90deg);
+    transform-origin: 50% 0;
+
     background-color: #EEEEEE;
 
-    margin: 40px 40px 20px 40px;
-    padding-bottom: 10px;
+    margin: 20px;
+    padding-bottom: 5px;
 
-    width: 800px;
+    width: 750px;
+
+    box-shadow: 3px 3px 6px 3px #888888;
 
     border: 3px #FFFFFF solid;
     border-radius: 20px;
