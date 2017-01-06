@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-28 22:46:45
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-06 20:52:03
+# @Last Modified time: 2017-01-06 21:51:26
 #
 # MMCQ (Modified Median Cut Quantization) Algorithm
 # src: http://collaboration.cmc.ec.gc.ca/science/rpn/biblio/ddj/Website/articles/DDJ/1994/9409/9409e/9409e.htm
@@ -193,6 +193,10 @@ def MMCQ(im, color_level, slots):
 
     @param: slots:
         number of returned colors
+
+    @return: a list like 
+        [([r,g,b], pixel weights), (..,), ...]
+        the pixel weights not necessarily add up to 1 !
     """
     # init
     VBox.init(im, color_level)
