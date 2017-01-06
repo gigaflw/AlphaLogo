@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-25 14:02:13
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-06 14:35:35
+# @Last Modified time: 2017-01-06 15:57:13
 
 import os, shutil
 from time import ctime
@@ -37,4 +37,4 @@ def full_path_uploads(name):
 
 
 def full_path_dataset(name):
-    return os.path.join([DATASET_DIR, name])
+    return os.path.join(DATASET_DIR, name)

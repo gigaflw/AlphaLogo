@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-28 22:46:45
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-01 22:56:31
+# @Last Modified time: 2017-01-06 21:51:26
 #
 # MMCQ (Modified Median Cut Quantization) Algorithm
 # src: http://collaboration.cmc.ec.gc.ca/science/rpn/biblio/ddj/Website/articles/DDJ/1994/9409/9409e/9409e.htm
@@ -135,7 +135,7 @@ class VBox(object):
     def aver_and_var(self):
         """
         The average and variance along 3 color axis in the vbox
-    
+
         In total, 6 floats will be yields
 
         @yield: aver_color, var_of_color
@@ -193,6 +193,10 @@ def MMCQ(im, color_level, slots):
 
     @param: slots:
         number of returned colors
+
+    @return: a list like 
+        [([r,g,b], pixel weights), (..,), ...]
+        the pixel weights not necessarily add up to 1 !
     """
     # init
     VBox.init(im, color_level)
@@ -211,7 +215,8 @@ def MMCQ(im, color_level, slots):
         box = q.get(timeout=0)
         ret.append(box)
 
-    return [VBox.revert_color(box.aver) for box in sorted(ret, key=lambda x:x.n_pix, reverse=True)]
+    return [(VBox.revert_color(box.aver), box.n_pix/box.im.size)
+            for box in sorted(ret, key=lambda x:x.n_pix, reverse=True)]
 
 
 def demo():

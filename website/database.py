@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2017-01-04 13:18:25
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-04 19:10:38
+# @Last Modified time: 2017-01-06 19:32:06
 
 
 from contextlib import closing
@@ -28,7 +28,7 @@ class DB(object):
         k,v = zip(*kwargs.items())
         k = ', '.join(k)
         v = [vv.decode('utf-8') if isinstance(vv, str) else vv for vv in v]
-        cmd = "INSERT INTO LOGOS (%s) VALUES (?,?,?,?,?)" % k
+        cmd = "INSERT INTO LOGOS (%s) VALUES (%s)" % (k, ','.join(['?'] * len(kwargs)))
         self._db.execute(cmd, v)
         self._db.commit()
 
