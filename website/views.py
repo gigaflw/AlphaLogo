@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-22 20:25:31
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-06 14:32:09
+# @Last Modified time: 2017-01-06 14:40:52
 
 from flask import Blueprint, render_template, abort, request, flash, redirect, url_for
 
@@ -81,7 +81,18 @@ def match():
             flash("file with name 'logo' is required in the post data. Check your post data.")
             upload_name = ""
         else:
-            upload_name = save_img_to_uploads(kw)
+            upload_name = save_img_to_uploads(kw, clear_others_if_more_than=10)
+            ##########################
+            # Delete after reading
+            ##########################
+            # TODO: Hu:
+            # upload_name is the filename of the uploaded file, no directory names included
+            # will passed to your template with the name 'upload'
+            # When there are more than 10 picutrues in the upload dir, all images will deleted automatically
+            # this behavior can be modified by the parameter `clear_others_if_more_than`
+            # usage:
+            # <img src="/static/uploads/{{ upload }}">
+
 
     if kw is None:
         logos = []
