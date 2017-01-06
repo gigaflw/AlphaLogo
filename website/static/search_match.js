@@ -64,8 +64,12 @@ idTitle.addEventListener("click", function() {
     window.location.href = "/";
 })
 
+idImgSubmit.addEventListener("click", function() {
+    setTimeout('idImgSubmit.disabled = "disabled"', 50);
+})
+
 function showTextField() {
-    idImgSubmit.click();
+    //idImgSubmit.click();
 
     var fileName = idLogo.value;
     var reg = new RegExp("\\\\\.[^\\\\]*$");

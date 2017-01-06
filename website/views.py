@@ -78,6 +78,7 @@ def match():
         kw = request.files.get('logo')
 
         if not kw.filename:
+            return redirect(url_for("bp.index"))
             flash("file with name 'logo' is required in the post data. Check your post data.")
             upload_name = ""
         else:
@@ -93,9 +94,8 @@ def match():
             # usage:
             # <img src="/static/uploads/{{ upload }}">
 
-
     if kw is None:
-        logos = []
+        return redirect(url_for("bp.index"))
     else:
         logo_matched, logo_similar = search_(full_path_uploads(upload_name))
 
