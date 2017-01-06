@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-23 23:18:28
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-06 14:32:08
+# @Last Modified time: 2017-01-06 19:32:23
 from __future__ import unicode_literals, print_function
 
 import os
@@ -32,7 +32,7 @@ class Searcher(object):
 
     def get_logos_from_db(self, inds):
         for i in inds:
-            para = db.query("SELECT FILENAME, ENT_NAME, INFO, THEME_COLORS FROM LOGOS WHERE IND = (%s)" % i)[0]
+            para = db.query("SELECT FILENAME, ENT_NAME, INFO, THEME_COLORS, STYLE_TAG FROM LOGOS WHERE IND = (%s)" % i)[0]
             # FIXME: hard code, not good
             yield self.para_to_logo(para)
 
