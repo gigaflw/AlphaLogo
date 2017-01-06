@@ -2,11 +2,13 @@
 # @Author: GigaFlower
 # @Date:   2016-12-22 20:25:31
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-01 23:05:26
+# @Last Modified time: 2017-01-06 14:32:09
 
 from flask import Blueprint, render_template, abort, request, flash, redirect, url_for
 
 from website.core import image_search, text_search
+from website.utility import save_img_to_uploads, full_path_uploads
+
 
 bp = Blueprint('bp', __name__, template_folder='templates')
 
@@ -14,6 +16,7 @@ bp = Blueprint('bp', __name__, template_folder='templates')
 @bp.route('/')
 def index():
     return render_template('index.html')
+
 
 @bp.route('/im')
 def index_image():
@@ -38,9 +41,9 @@ def search():
     for i in range(len(n_colors_split)):
         if (n_colors_split[i] == u"1"):
             if (i == len(n_colors_split)-1):
-                n_color_list.append(0);
+                n_color_list.append(0)
             else:
-                n_color_list.append(i+2);
+                n_color_list.append(i+2)
 
     if len(kw) == 0:
         return redirect(url_for("bp.index"))
@@ -57,6 +60,7 @@ def search():
 
     return render_template(tmpl, logo_matched=logo_matched, logo_similar=logo_similar, kw=kw, ent_name=ent_name, n_colors=n_colors)
 
+
 @bp.route('/match', methods=['POST'])
 def match():
     """
@@ -72,14 +76,16 @@ def match():
         tmpl = "match.html"
         search_ = image_search
         kw = request.files.get('logo')
-        print kw
 
-        if kw is None:
-            flash("file with name 'logo' is required in the post data. Check your form's enctype.")
+        if not kw.filename:
+            flash("file with name 'logo' is required in the post data. Check your post data.")
+            upload_name = ""
+        else:
+            upload_name = save_img_to_uploads(kw)
 
     if kw is None:
         logos = []
     else:
-        logo_matched, logo_similar = search_(kw)
+        logo_matched, logo_similar = search_(full_path_uploads(upload_name))
 
-    return render_template(tmpl, logo_matched=logo_matched, logo_similar=logo_similar, kw=kw)
+    return render_template(tmpl, logo_matched=logo_matched, logo_similar=logo_similar, kw=kw, upload=upload_name)

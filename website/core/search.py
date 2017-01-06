@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-23 23:18:28
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-05 19:31:19
+# @Last Modified time: 2017-01-06 14:32:08
 from __future__ import unicode_literals, print_function
 
 import os
@@ -13,7 +13,6 @@ from website.database import db
 from website.core.search_text import get_search_func as get_text_search_func
 from website.core.search_image import get_search_func as get_image_search_func
 from website.core.config import N_COLORS_MORE_THAN_SIX
-from website.utility import save_img_to_uploads
 
 
 ##########################
@@ -81,18 +80,17 @@ class Searcher(object):
 
         return good, normal
 
-    def image_search(self, im):
+    def image_search(self, path):
         """
         Search similar logos
 
-        @param: im : a `werkzeug.datastructures.FileStorage` instance
+        @param: path : the complete path to the image file
         @returns: two list of 'Logo' instance, where the first one contains good matches, and the second normal ones
         """
-        path = save_img_to_uploads(im)
         im = cv2_imread(path, 0)
 
         if im is None:
-            print("Empty image to search!")
+            print("No image at '%s' ,match failed!" % path)
             return [], []
 
         logo_inds = self._image_search(im) + 1  # ind begins with 1
