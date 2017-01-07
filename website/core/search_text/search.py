@@ -13,7 +13,8 @@ from org.apache.lucene.index import DirectoryReader
 from org.apache.lucene.queryparser.classic import QueryParser
 from org.apache.lucene.store import SimpleFSDirectory
 from org.apache.lucene.search import IndexSearcher, BooleanClause, BooleanQuery
-from org.apache.lucene.analysis.standard import StandardAnalyzer
+# from org.apache.lucene.analysis.standard import StandardAnalyzer
+from org.apache.lucene.analysis.core import SimpleAnalyzer
 from org.apache.lucene.util import Version
 from java.io import File
 
@@ -30,7 +31,7 @@ def get_search_func():
     jieba.initialize()
     vm_env = lucene.initVM(vmargs=['-Djava.awt.headless=true'])
 
-    analyzer = StandardAnalyzer(Version.LUCENE_CURRENT)
+    analyzer = SimpleAnalyzer(Version.LUCENE_CURRENT)
     searcher = IndexSearcher(DirectoryReader.open(SimpleFSDirectory(File(LUCENE_INDEX_DIR))))
 
     search = search_func_factory(analyzer=analyzer,
@@ -53,12 +54,19 @@ def search_func_factory(analyzer, searcher, vm_env):
         for field_name, keywords in kwargs.items():
             # assert field_name in SearchConfig.searchable_fields
 
-            keywords = list(filter(None, jieba.cut(keywords, cut_all=True)))
-
+            # keywords = list(filter(None, jieba.cut(keywords, cut_all=True)))
+            keywords = list(filter(None, jieba.cut_for_search(keywords)))
+            for kw in keywords:
+                print(kw)
             # construct query
             for kw in keywords:
                 q = QueryParser(Version.LUCENE_CURRENT, field_name, analyzer).parse(kw)
                 query.add(q, BooleanClause.Occur.SHOULD)
+
+            if field_name == 'keywords':
+                for kw in keywords:
+                    q = QueryParser(Version.LUCENE_CURRENT, 'ent_name', analyzer).parse(kw)
+                    query.add(q, BooleanClause.Occur.SHOULD)
 
         # search
         scoreDocs = searcher.search(query, 50).scoreDocs
