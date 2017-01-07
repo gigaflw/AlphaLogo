@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2017-01-02 09:41:37
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-04 16:41:54
+# @Last Modified time: 2017-01-07 13:57:43
 
 # 
 # To reset index dirs :
@@ -22,7 +22,7 @@ import argparse
 
 import cv2
 
-from website.core.index import create_index as core_create_index
+from website.core.index import lucene_create_index, create_db
 from website.core.search_image import create_index as image_create_index
 from website.config import DATASET_DIR, ALLOWED_TYPES
 from website.core.config import LUCENE_INDEX_DIR, LUCENE_CATELOG_FILE, IMAGE_INDEX_DIR
@@ -37,8 +37,9 @@ CRAWL_CATELOG_FILE = os.path.join(CRAWL_BASE, 'PICTURES.txt')
 ##########################
 parser = argparse.ArgumentParser()
 parser.add_argument('-r', action="store_true", help="Reset index dirs")
+parser.add_argument('-d', action="store_true", help="Create sqlite database")
 parser.add_argument('-i', action="store_true", help="Create index files for image search")
-parser.add_argument('-c', action="store_true", help="Create index files for non-image search")
+parser.add_argument('-l', action="store_true", help="Create lucene index files for non-image search")
 parser.add_argument('--init', action="store_true", help="Do everything")
 
 # TODO: not move, but symlink!
@@ -81,8 +82,9 @@ def create_index():
     if not reset_index():
         return
 
-    core_create_index()
+    lucene_create_index()
     image_create_index()
+    create_db()
 
 
 def main():
@@ -90,10 +92,12 @@ def main():
 
     if args.r:
         reset_index()
-    elif args.c:
-        core_create_index()
+    elif args.d:
+        create_db()
     elif args.i:
         image_create_index()
+    elif args.l:
+        lucene_create_index()
     elif args.init:
         create_index()
     else:
