@@ -1,5 +1,8 @@
 {% extends "layout.html" %}
 
+{% block title %}
+    <title>LOGO相似匹配 - AlphaLogo</title>
+{% endblock %}
 
 {% block styles %}
     <link rel="stylesheet" href="static/search_match.css">
@@ -10,7 +13,6 @@
     <script src="static/match.js"></script>
     <script src="static/jquery.js"></script>
 	<script src="static/jquery.peity.js"></script>
-
 {% endblock %}
 
 {% block body %}
@@ -135,15 +137,10 @@
                     <img src="/static/uploads/{{ upload.filename }}" class="previewImg" id="previewImg">
                 </div>
 
-                <div class="moreInfoContainer" id="moreInfoContainer">
+                <div class="moreInfoContainer" id="moreInfoContainer" >
                     <!-- Write the codes of moreInfoContainer here, including various infos of the certain picture(preview image here), the color graph and the style. The border is shown only for the location, which needn't be used in the future. 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-
-
-
-
-
-                    <div class="moreInfoTitle" style="line-height: 125%; text-align: left; ">
+                    <div class="moreInfoTitle" style="line-height: 125%; text-align: left; " style="text-">
                         <h1 style="font-size: 15px"> 产品或组织名称： </h1>
                         {{ upload.filename }}
                     </div>
@@ -152,7 +149,7 @@
 
                     
 
-					<div class="moreInfoPie" style="line-height: 125%; text-align: left;">
+					<div class="moreInfoPie" style="line-height: 125%; text-align: left;" s>
                         <h1 style="font-size: 15px"> 图像sv数据：</h1>
                         s = {{upload.s}}
                         </br>
@@ -169,15 +166,6 @@
                     {{ upload.info }}
                     </p>
                     </div>
-
-
-
-
-
-
-
-
-
 <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
                 </div>
