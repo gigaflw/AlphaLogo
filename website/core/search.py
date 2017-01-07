@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-23 23:18:28
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-07 22:39:24
+# @Last Modified time: 2017-01-07 23:07:29
 from __future__ import unicode_literals, print_function
 
 import os
@@ -12,7 +12,7 @@ from website.models import Logo
 from website.database import db
 from website.core.search_text import get_search_func as get_text_search_func
 # from website.core.search_image import get_search_func as get_image_search_func
-from website.core.index.color_match import get_search_func as get_image_search_func
+from website.core.search_image.color_match import get_search_func as get_image_search_func
 from website.core.config import N_COLORS_MORE_THAN_SIX, LEVEL_NOT_REQUIRED, sat_level_check, val_level_check
 
 

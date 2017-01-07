@@ -2,12 +2,12 @@
 # @Author: GigaFlower
 # @Date:   2016-12-22 20:25:31
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-07 11:45:40
+# @Last Modified time: 2017-01-07 23:10:09
 
 from flask import Blueprint, render_template, abort, request, flash, redirect, url_for
 
 from website.core import image_search, text_search
-from website.utility import save_img_to_uploads, full_path_uploads
+from website.utility import save_img_to_uploads, full_path_uploads, get_uploaded_logo
 
 
 bp = Blueprint('bp', __name__, template_folder='templates')
@@ -76,26 +76,18 @@ def match():
         if not kw.filename:
             return redirect(url_for("bp.index"))
             flash("file with name 'logo' is required in the post data. Check your post data.")
-            upload_name = ""
+            uploaded_logo = None
         else:
             upload_name = save_img_to_uploads(kw, clear_others_if_more_than=10)
-            ##########################
-            # Delete after reading
-            ##########################
-            # TODO: Hu:
-            # upload_name is the filename of the uploaded file, no directory names included
-            # will passed to your template with the name 'upload'
-            # When there are more than 10 picutrues in the upload dir, all images will deleted automatically
-            # this behavior can be modified by the parameter `clear_others_if_more_than`
-            # usage:
-            # <img src="/static/uploads/{{ upload }}">
+            uploaded_logo = get_uploaded_logo(upload_name)
+
 
     if kw is None:
         return redirect(url_for("bp.index"))
     else:
         logo_matched, logo_similar = search_(full_path_uploads(upload_name))
 
-    return render_template(tmpl, logo_matched=logo_matched, logo_similar=logo_similar, kw=kw, upload=upload_name)
+    return render_template(tmpl, logo_matched=logo_matched, logo_similar=logo_similar, kw=kw, upload=uploaded_logo)
 
 def data_convertion(data, mode=0):
     # mode=0 means normal mode excluding color input; mode=1 means color input.

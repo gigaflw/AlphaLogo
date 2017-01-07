@@ -2,9 +2,10 @@
 # @Author: GigaFlower
 # @Date:   2016-12-25 14:02:13
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-06 15:57:13
+# @Last Modified time: 2017-01-07 23:10:00
 
-import os, shutil
+import os
+import shutil
 from time import ctime
 from hashlib import md5
 
@@ -38,3 +39,18 @@ def full_path_uploads(name):
 
 def full_path_dataset(name):
     return os.path.join(DATASET_DIR, name)
+
+
+# delayed import to avoid cyclic import
+from website.models import Logo
+from website.core.index.utility import get_theme_colors, to_web_color
+
+
+def get_uploaded_logo(name):
+    theme_colors, theme_weights, s, v = get_theme_colors(full_path_uploads(name))
+    theme_colors_for_web = list(map(to_web_color, theme_colors))
+    theme_weights = list(theme_weights)
+
+    return Logo(ind=-1, filename=name, ent_name='', info='',
+                theme_colors=theme_colors_for_web, theme_weights=theme_weights,
+                s=s, v=v)
