@@ -51,13 +51,16 @@ def search_func_factory(analyzer, searcher, vm_env):
         vm_env.attachCurrentThread()
         query = BooleanQuery() 
 
+        print("Searched keywords:")
         for field_name, keywords in kwargs.items():
             # assert field_name in SearchConfig.searchable_fields
 
             # keywords = list(filter(None, jieba.cut(keywords, cut_all=True)))
-            keywords = list(filter(None, jieba.cut_for_search(keywords)))
+            keywords = list(filter(None, (k.strip() for k in jieba.cut_for_search(keywords))))
+            
             for kw in keywords:
                 print(kw)
+
             # construct query
             for kw in keywords:
                 q = QueryParser(Version.LUCENE_CURRENT, field_name, analyzer).parse(kw)
