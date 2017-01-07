@@ -14,6 +14,7 @@ var idInputSearch = document.getElementById("inputSearch");
 var idInputMatch = document.getElementById("inputMatch");
 var idAdvancedSearchPanel = document.getElementById("advancedSearchPanel");
 var idPreviewImg = document.getElementById("previewImg");
+var divResultContainer = document.getElementById("resultContainer");
 
 window.addEventListener('load', function(){
     console.log('远看黄山黑黝黝,上面小来下面大,若将黄山倒过来,上面大来下面小');

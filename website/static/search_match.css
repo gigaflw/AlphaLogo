@@ -10,12 +10,31 @@ div.container {
 
     font-family: "微软雅黑", "Calibri", "Century Gothic", "Verdana", "Tahoma", "Arial", "黑体";
 }
-div#resultContainer {
-    position: absolute;
+div#totalContainer {
+    display: flex;
 
-    top: 120px;
-    left: 20px;
+    flex-flow: row wrap;
 }
+div#resultContainer {
+    margin: 0px 250px 0 20px;
+
+    width: 100%;
+
+    flex-grow: 10;
+}
+div#matchedResultContainer {
+    display: flex;
+
+    flex-flow: row wrap;
+    justify-content: flex-start;
+}
+div#similarResultContainer {
+    display: flex;
+
+    flex-flow: row wrap;
+    justify-content: flex-start;
+}
+
 div.titleContainerDefault {
     position: relative;
     background-color: #FFFFFF;
@@ -378,7 +397,7 @@ input.textfield:hover {
 }
 
 div.resultTitle {
-    margin: 20px 20px 20px 0px;
+    margin: 30px 20px 20px 0;
 
     width: 100%;
 
@@ -391,11 +410,11 @@ div.matchedResult {
 
     display: inline-block;
 
-    margin: 30px 80px 30px 30px; 
-    padding-top: 20px;
+    margin: 30px; 
+    padding: 20px 20px 0 20px;
 
-    width: 270px;
-    height: 270px;
+    width: 200px;
+    height: 220px;
 
     border: 3px #FFFFFF solid;
     border-radius: 25px;
@@ -416,11 +435,11 @@ div.similarResult {
 
     display: inline-block;
 
-    margin: 25px;
-    padding-top: 20px;
+    margin: 25px 30px 25px 30px;
+    padding: 20px 20px 0 20px;
 
-    width: 250px;
-    height: 250px;
+    width: 180px;
+    height: 200px;
     
     border: 3px #FFFFFF solid;
     border-radius: 25px;
@@ -440,28 +459,26 @@ div.similarResult:hover{
 img.matchedImg {
     padding-top: 10px;
 
-    max-width: 220px;
-    max-height: 220px;
+    max-width: 170px;
+    max-height: 170px;
 }
 
 img.similarImg {
     padding-top: 10px;
 
-    max-width: 200px;
-    max-height: 200px;
+    max-width: 150px;
+    max-height: 150px;
 }
 
-div.previewDiv{
-    position: absolute;
-    background-color: #FFFFFF;
+div.moreInfoImgDiv {
+    position: fixed;
+    background-color: transparent;
 
-    left: 750px;
-    top: 20px;
+    top: 0px;
+    right: 0px;
 
-    width: 160px;
-    height: 160px;
-
-    box-shadow: 3px 3px 6px 2px #888888;
+    height: 99%;
+    width: 250px;
     
     border: 3px #888888 solid;
     border-radius: 25px;
@@ -469,11 +486,33 @@ div.previewDiv{
     text-align: center;
 }
 
-img.previewImg{
+div.previewImgDiv {
+    display: inline-block;
+    background-color: #FFFFFF;
+
+    margin: 10px;
+
+    width: 160px;
+    height: 160px;
+
+    border: 0px #888888 solid;
+    border-radius: 25px;
+
+    text-align: center;
+}
+
+img.previewImg {
     padding-top: 20px;
 
     max-width: 150px;
     max-height: 150px;
+}
+
+div.moreInfoContainer {
+    padding: 20px;
+
+    border: 3px #888888 solid;
+    border-radius: 25px;
 }
 
 .textDefaultStyle {
