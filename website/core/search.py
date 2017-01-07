@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-23 23:18:28
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-07 12:03:18
+# @Last Modified time: 2017-01-07 12:55:57
 from __future__ import unicode_literals, print_function
 
 import os
@@ -85,7 +85,7 @@ class Searcher(object):
         ret = list(filter(filters, self.get_logos_from_db(ret)))
         return ret
 
-    def image_search(self, path):
+    def image_search(self, path, threshold=0.7):
         """
         Search similar logos
 
@@ -98,8 +98,17 @@ class Searcher(object):
             print("No image at '%s' ,match failed!" % path)
             return [], []
 
-        logo_inds = self._image_search(im) + 1  # ind begins with 1
+        logo_inds, scores = self._image_search(im)
+        logo_inds += 1  # ind begins with 1
 
-        ret = list(self.get_logos_from_db(logo_inds))
+        ret = self.get_logos_from_db(logo_inds)
 
-        return ret[:1], ret[1:]
+
+        good = []
+        normal = []
+
+        for logo, score in zip(ret, scores):
+            (good if score > threshold else normal).append(logo)
+
+
+        return good, normal
