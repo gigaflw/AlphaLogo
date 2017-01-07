@@ -37,17 +37,9 @@ def search():
     tmpl = "search.html"
     search_ = text_search
 
-    print n_colors
-    print saturation
-    print value
-
     n_color_list = data_convertion(n_colors, 1)
     saturation_list = data_convertion(saturation)
     value_list = data_convertion(value)
-
-    print n_color_list
-    print saturation_list
-    print value_list
 
     if len(kw) == 0:
         return redirect(url_for("bp.index"))
@@ -55,7 +47,7 @@ def search():
         if type_ == 'search':
             logo_matched = search_(keywords=kw, ent_name='', n_colors=[])
         else:
-            logo_matched = search_(keywords=kw, ent_name=ent_name, n_colors=n_color_list, saturation_level=saturation_list, value_level=value_list)
+            logo_matched = search_(keywords=kw, ent_name=ent_name, n_colors=n_color_list, saturation_levels=saturation_list, value_levels=value_list)
 
         # new parameter `n_colors` is added to search function!
         # also `Logo` instance has one more property `theme_colors`
@@ -108,16 +100,19 @@ def match():
 def data_convertion(data, mode=0):
     # mode=0 means normal mode excluding color input; mode=1 means color input.
     data_list = []
-    data_split = data.split(",")
-    if (mode == 0):
-        for i in range(len(data_split)):
-            if (data_split[i] == u"1"):
-                data_list.append(i)
-    elif (mode == 1):
-        for i in range(len(data_split)):
-            if (data_split[i] == u"1"):
-                if (i == len(data_split)-1):
-                    data_list.append(0)
-                else:
-                    data_list.append(i+2)
+    try:
+        data_split = data.split(",")
+        if (mode == 0):
+            for i in range(len(data_split)):
+                if (data_split[i] == u"1"):
+                    data_list.append(i)
+        elif (mode == 1):
+            for i in range(len(data_split)):
+                if (data_split[i] == u"1"):
+                    if (i == len(data_split)-1):
+                        data_list.append(0)
+                    else:
+                        data_list.append(i+2)
+    except:
+        pass
     return data_list

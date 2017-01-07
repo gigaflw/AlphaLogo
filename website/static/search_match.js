@@ -19,6 +19,8 @@ var idEnterpriseName = document.getElementById("enterpriseName");
 var divTitleContainer = document.getElementById("titleContainer");
 var idTitle = document.getElementById("title");
 var idNColors = document.getElementById("nColors");
+var idSaturation = document.getElementById("saturation");
+var idBrightness = document.getElementById("brightness");
 var idImgSubmit = document.getElementById("imgSubmit");
 
 var divAdvancedSearch = document.getElementById("advanced");
@@ -33,6 +35,12 @@ var advancedIndustryStock = document.getElementById("industryStock");
 var advancedIndustryIT = document.getElementById("industryIT");
 var advancedIndustryManufacturing = document.getElementById("industryManufacturing");
 var advancedIndustryEducation = document.getElementById("industryEducation");
+var advancedSaturationLow = document.getElementById("saturationLow");
+var advancedSaturationMiddle = document.getElementById("saturationMiddle");
+var advancedSaturationHigh = document.getElementById("saturationHigh");
+var advancedBrightnessLow = document.getElementById("brightnessLow");
+var advancedBrightnessMiddle = document.getElementById("brightnessMiddle");
+var advancedBrightnessHigh = document.getElementById("brightnessHigh");
 var advancedEnterpriseName = document.getElementById("advancedEnterpriseName");
 
 window.addEventListener('load', function(){
@@ -122,17 +130,21 @@ function getParameter(name){
 }
 
 function advancedSearchTypeInitialization() {
-    var advancedSearchTypeArray = new Array(advancedColorNum2, advancedColorNum3, advancedColorNum4, advancedColorNum5,
-                                            advancedColorNumMore, advancedIndustryBank, advancedIndustryStock, advancedIndustryIT,
-                                            advancedIndustryManufacturing, advancedIndustryEducation);
+    var advancedSearchTypeArray = new Array(advancedColorNum2, advancedColorNum3, advancedColorNum4, advancedColorNum5, advancedColorNumMore, 
+                                            advancedSaturationLow, advancedSaturationMiddle, advancedSaturationHigh, advancedBrightnessLow, 
+                                            advancedBrightnessMiddle, advancedBrightnessHigh,advancedIndustryBank, advancedIndustryStock, 
+                                            advancedIndustryIT, advancedIndustryManufacturing, advancedIndustryEducation);
     for (var x=0; x<advancedSearchTypeArray.length; ++x) {
         (function(){    // js的函数闭包问题
             var i = x;
             advancedSearchTypeArray[i].addEventListener("click", function(){
                 switchAdvancedSearchType(this);
-                var colorTotalNum = 5;
-                if (i < colorTotalNum) {
+                if (i < 5) {
                     nColorsInput(i, this);
+                } else if (i < 8) {
+                    saturationInput(i-5, this);
+                } else if (i < 11) {
+                    brightnessInput(i-8, this);
                 }
             });
         })();
@@ -166,15 +178,30 @@ function titleContainerActivate() {
 
 function nColorsInput(n, advancedColorNum) {
     var inputNColors = idNColors.value;
-    //alert(inputNColors);
-    inputNColors = inputNColors.split(",");
-    var nDigit = inputNColors[n];
-    if (nDigit == "0") {
-        inputNColors.splice(n, 1, "1");
-    } else {
-        inputNColors.splice(n, 1, "0");
-    }
-    inputNColors = inputNColors.join(",");
-    //alert(inputNColors);
+    inputNColors = advancedValueModification(n, inputNColors);
     idNColors.value = inputNColors;
+}
+
+function saturationInput(n, advancedSaturationNum) {
+    var inputSaturation = idSaturation.value;
+    inputSaturation = advancedValueModification(n, inputSaturation);
+    idSaturation.value = inputSaturation;
+}
+
+function brightnessInput(n, advancedBrightnessNum) {
+    var inputBrightness = idBrightness.value;
+    inputBrightness = advancedValueModification(n, inputBrightness);
+    idBrightness.value = inputBrightness;
+}
+
+function advancedValueModification(n, value) {
+    var valueList = value.split(",");
+    var nDigit = valueList[n];
+    if (nDigit == "0") {
+        valueList.splice(n, 1, "1");
+    } else {
+        valueList.splice(n, 1, "0");
+    }
+    value = valueList.join(",");
+    return value;
 }

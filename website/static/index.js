@@ -132,15 +132,12 @@ function advancedSearchTypeInitialization() {
             var i = x;
             advancedSearchTypeArray[i].addEventListener("click", function(){
                 switchAdvancedSearchType(this);
-                var COLOR_NUM = 5;
-                var SATURATION_NUM = 8;
-                var BRIGHTNESS_NUM = 11;
-                if (i < COLOR_NUM) {
+                if (i < 5) {
                     nColorsInput(i, this);
-                } else if (i < SATURATION_NUM) {
-                    saturationInput(i-COLOR_NUM, this);
-                } else if (i < BRIGHTNESS_NUM) {
-                    brightnessInput(i-SATURATION_NUM, this);
+                } else if (i < 8) {
+                    saturationInput(i-5, this);
+                } else if (i < 11) {
+                    brightnessInput(i-8, this);
                 }
             });
         })();

@@ -84,7 +84,7 @@ class Searcher(object):
             if not value_levels:
                 return True
             else:
-                return any(val_level_check(level, logo.s) for level in value_levels)
+                return any(val_level_check(level, logo.v) for level in value_levels)
 
         filters = lambda logo: all(f(logo) for f in (check_ent_name, check_n_colors, check_sat, check_val))
 

@@ -30,6 +30,8 @@
 	                <input name="type" id="typeSearch" value="search" hidden>
 	                <input type="text" id="enterpriseName" name="enterpriseName" value="" hidden>
 	                <input type="text" id="nColors" name="nColors" value="0,0,0,0,0" hidden>
+                <input type="text" id="saturation" name="saturation" value="0,0,0" hidden>
+                <input type="text" id="brightness" name="brightness" value="0,0,0" hidden>
 	                <div class="passiveAdvancedTitle" id="advanced">
 	                    <span class="textDefaultStyle">高级搜索</span>
 	                </div>
@@ -49,54 +51,82 @@
 		        </div>
 	        </div>
 	        
-	        <div class="advancedSearchPanel" id="advancedSearchPanel">
-	            <div class="advancedSearchBar">
-	                <div class="advancedSearchTitle">
-                    	配色数量：
-	                </div>
-	                <div class="advancedSearchType" id="colorNum2">
-	                    双色
-	                </div>
-	                <div class="advancedSearchType" id="colorNum3">
-	                    三色
-	                </div>
-	                <div class="advancedSearchType" id="colorNum4">
-	                    四色
-	                </div>
-	                <div class="advancedSearchType" id="colorNum5">
-	                    五色
-	                </div>
-	                <div class="advancedSearchType" id="colorNumMore">
-	                    更多色
-	                </div>
-	            </div>
-	            <div class="advancedSearchBar">
-	                <div class="advancedSearchTitle">
-	                    行业：
-	                </div>
-	                <div class="advancedSearchType" id="industryBank">
-	                    银行
-	                </div>
-	                <div class="advancedSearchType" id="industryStock">
-	                    证券
-	                </div>
-	                <div class="advancedSearchType" id="industryIT">
-	                    互联网
-	                </div>
-	                <div class="advancedSearchType" id="industryManufacturing">
-	                    制造业
-	                </div>
-	                <div class="advancedSearchType" id="industryEducation">
-	                    教育
-	                </div>
-	            </div>
-	            <div class="advancedSearchBar">
-	                <div class="advancedSearchTitle">
-	                    企业名：
-	                </div>
-	                <input type="text" class="enterpriseName" name="enterpriseName" id="advancedEnterpriseName" value="" placeholder="请输入企业名称" onkeyup="enterpriseNameInput()">
-	            </div>
-	        </div>
+	        <div class="advancedSearchPanel" id="advancedSearchPanel" >
+                <div class="advancedSearchBar">
+                    <div class="advancedSearchTitle">
+                        配色数量：
+                    </div>
+                    <div class="advancedSearchType" id="colorNum2">
+                        双色
+                    </div>
+                    <div class="advancedSearchType" id="colorNum3">
+                        三色
+                    </div>
+                    <div class="advancedSearchType" id="colorNum4">
+                        四色
+                    </div>
+                    <div class="advancedSearchType" id="colorNum5">
+                        五色
+                    </div>
+                    <div class="advancedSearchType" id="colorNumMore">
+                        更多色
+                    </div>
+                </div>
+                <div class="advancedSearchBar">
+                    <div class="advancedSearchTitle">
+                        行业：
+                    </div>
+                    <div class="advancedSearchType" id="industryBank">
+                        银行
+                    </div>
+                    <div class="advancedSearchType" id="industryStock">
+                        证券
+                    </div>
+                    <div class="advancedSearchType" id="industryIT">
+                        互联网
+                    </div>
+                    <div class="advancedSearchType" id="industryManufacturing">
+                        制造业
+                    </div>
+                    <div class="advancedSearchType" id="industryEducation">
+                        教育
+                    </div>
+                </div>
+                <div class="advancedSearchBar">
+                    <div class="advancedSearchTitle">
+                        饱和度：
+                    </div>
+                    <div class="advancedSearchType" id="saturationLow">
+                        低
+                    </div>
+                    <div class="advancedSearchType" id="saturationMiddle">
+                        中
+                    </div>
+                    <div class="advancedSearchType" id="saturationHigh">
+                        高
+                    </div>
+                </div>
+                <div class="advancedSearchBar">
+                    <div class="advancedSearchTitle">
+                        亮度：
+                    </div>
+                    <div class="advancedSearchType" id="brightnessLow">
+                        低
+                    </div>
+                    <div class="advancedSearchType" id="brightnessMiddle">
+                        中
+                    </div>
+                    <div class="advancedSearchType" id="brightnessHigh">
+                        高
+                    </div>
+                </div>
+                <div class="advancedSearchBar">
+                    <div class="advancedSearchTitle">
+                        企业名：
+                    </div>
+                    <input type="text" class="enterpriseName" name="enterpriseName" id="advancedEnterpriseName" placeholder="请输入企业名称" onkeyup="enterpriseNameInput()">
+                </div>
+            </div>
     	</div>
 
     	<div class="searchResultContainer" id="resultContainer">
@@ -114,6 +144,8 @@
 	                        <div style="width: 20px;height: 20px;float:left;background-color: {{color}}"></div>
 	                    {% endfor %}
 	                    </div>
+	                    {{ logo.s }}
+		                {{ logo.v }}
 		            </div>
 		        {% endfor %}
 	        </div>
