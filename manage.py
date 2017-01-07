@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2017-01-02 09:41:37
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-07 13:57:43
+# @Last Modified time: 2017-01-07 15:31:34
 
 # 
 # To reset index dirs :
@@ -66,8 +66,8 @@ def reset_index():
         print("'%s' created" % d)
 
 
-    print("Creating symlink '%s' to '%s'..." % (CRAWL_IMAGE_PATH, DATASET_DIR))
-    subprocess.call(['ln', '-s', CRAWL_IMAGE_PATH, DATASET_DIR])
+    # print("Creating symlink '%s' to '%s'..." % (CRAWL_IMAGE_PATH, DATASET_DIR))
+    # subprocess.call(['ln', '-s', CRAWL_IMAGE_PATH, DATASET_DIR])
 
     if os.path.isfile(CRAWL_CATELOG_FILE):
         shutil.copyfile(CRAWL_CATELOG_FILE, LUCENE_CATELOG_FILE)

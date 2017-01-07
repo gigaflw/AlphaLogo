@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-23 23:18:28
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-07 14:55:17
+# @Last Modified time: 2017-01-07 22:39:24
 from __future__ import unicode_literals, print_function
 
 import os
@@ -11,7 +11,8 @@ from cv2 import imread as cv2_imread
 from website.models import Logo
 from website.database import db
 from website.core.search_text import get_search_func as get_text_search_func
-from website.core.search_image import get_search_func as get_image_search_func
+# from website.core.search_image import get_search_func as get_image_search_func
+from website.core.index.color_match import get_search_func as get_image_search_func
 from website.core.config import N_COLORS_MORE_THAN_SIX, LEVEL_NOT_REQUIRED, sat_level_check, val_level_check
 
 
@@ -91,7 +92,23 @@ class Searcher(object):
         ret = list(filter(filters, self.get_logos_from_db(ret)))
         return ret
 
-    def image_search(self, path, threshold=0.7):
+
+    def image_search(self, path):
+        im = cv2_imread(path)
+
+        if im is None:
+            print("No image at '%s' ,match failed!" % path)
+            return [], []
+
+        logo_inds = self._image_search(im)
+        logo_inds += 1  # ind begins with 1
+
+        ret = list(self.get_logos_from_db(logo_inds))
+
+        return [], ret
+
+    
+    def _image_search(self, path, threshold=0.7):
         """
         Search similar logos
 
@@ -108,7 +125,6 @@ class Searcher(object):
         logo_inds += 1  # ind begins with 1
 
         ret = self.get_logos_from_db(logo_inds)
-
 
         good = []
         normal = []

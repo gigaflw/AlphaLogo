@@ -2,7 +2,7 @@
 # @Author: BigFlower
 # @Date:   2016-12-23 16:54:28
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-07 12:52:46
+# @Last Modified time: 2017-01-07 21:51:25
 
 from __future__ import division, print_function
 import numpy as np
@@ -117,7 +117,7 @@ class LSH:
 
     def save(self, filename='lsh.pickle'):
         with open(filename, 'wb') as f:
-            pickle.dump(self, f)
+            pickle.dump(self, f, protocol=2)
 
     @staticmethod
     def restore(filename='lsh.pickle'):

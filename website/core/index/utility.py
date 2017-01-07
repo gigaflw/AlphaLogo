@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2017-01-01 20:51:30
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-07 12:01:41
+# @Last Modified time: 2017-01-07 15:42:08
 #
 # Helper function for search engine indexing
 #
@@ -151,7 +151,8 @@ def hsv_reduce_colors(colors, weights, threshold=0.4):
     inds = []
 
     for i, color in enumerate(hsv_colors_xyz):
-        dist = ((hsv_colors_xyz[inds] - color)**2).sum(axis=1)**0.5
+        # dist = ((hsv_colors_xyz[inds] - color)**2).sum(axis=1)**0.5
+        dist = np.linalg.norm(hsv_colors_xyz[inds] - color, axis=1)
         if not dist.size or dist.min() > threshold:
             inds.append(i)
 
