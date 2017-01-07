@@ -22,6 +22,7 @@ var idNColors = document.getElementById("nColors");
 var idSaturation = document.getElementById("saturation");
 var idBrightness = document.getElementById("brightness");
 var idImgSubmit = document.getElementById("imgSubmit");
+var divResultContainer = document.getElementById("resultContainer");
 
 var divAdvancedSearch = document.getElementById("advanced");
 var idAdvancedSearchPanel = document.getElementById("advancedSearchPanel");
@@ -168,10 +169,12 @@ function titleContainerActivate() {
     if (windowScroll >= 150) {
         if (divTitleContainer.className == "titleContainerDefault") {
             divTitleContainer.className = "titleContainerPassive";
+            divResultContainer.style.marginTop = "120px";
         }
     } else {
         if (divTitleContainer.className == "titleContainerPassive") {
             divTitleContainer.className = "titleContainerDefault";
+            divResultContainer.style.marginTop = "0px";
         }
     }
 }
