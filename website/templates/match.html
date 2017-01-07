@@ -8,6 +8,9 @@
 {% block scripts %}
     <script src="static/search_match.js"></script>
     <script src="static/match.js"></script>
+    <script src="static/jquery.js"></script>
+	<script src="static/jquery.peity.js"></script>
+
 {% endblock %}
 
 {% block body %}
@@ -129,12 +132,54 @@
         <div class="container" id="rightSideContainer">
             <div class="moreInfoImgDiv" id="previewDiv">
                 <div class="previewImgDiv" id="previewImgDiv">
-                    <img src="/static/uploads/{{ upload }}" class="previewImg" id="previewImg">
+                    <img src="/static/uploads/{{ upload.filename }}" class="previewImg" id="previewImg">
                 </div>
 
                 <div class="moreInfoContainer" id="moreInfoContainer">
-                    <!-- Write the codes of moreInfoContainer here, including various infos of the certain picture(preview image here), the color graph and the style. The border is shown only for the location, which needn't be used in the future. -->
-                    Write the codes of moreInfoContainer here, including various infos of the certain picture(preview image here), the color graph and the style. The border is shown only for the location, which needn't be used in the future.
+                    <!-- Write the codes of moreInfoContainer here, including various infos of the certain picture(preview image here), the color graph and the style. The border is shown only for the location, which needn't be used in the future. 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+
+
+
+
+                    <div class="moreInfoTitle" style="line-height: 125%; text-align: left; ">
+                        <h1 style="font-size: 15px"> 产品或组织名称： </h1>
+                        {{ upload.filename }}
+                    </div>
+
+                    </br>
+
+                    
+
+					<div class="moreInfoPie" style="line-height: 125%; text-align: left;">
+                        <h1 style="font-size: 15px"> 图像sv数据：</h1>
+                        s = {{upload.s}}
+                        </br>
+                        v = {{upload.v}}
+                        {{upload.theme_colors}}
+                        <div class="pieAnimationDiv" style="font-size: 0px">
+                            <span id="pie1" class="pie">{{upload.theme_weights | join(",")}},800
+                            </span>
+                        </div>
+                    </div>
+                    </br>
+                    <div  style="overflow:scroll ;height: 150px; overflow-x: hidden;";>
+                    <p style="text-indent: 2em;font-size: 20px; text-align:justify; line-height: 120%">
+                    {{ upload.info }}
+                    </p>
+                    </div>
+
+
+
+
+
+
+
+
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
                 </div>
             </div>
         </div>

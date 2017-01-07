@@ -82,6 +82,7 @@ def match():
             uploaded_logo = get_uploaded_logo(upload_name)
 
 
+
     if kw is None:
         return redirect(url_for("bp.index"))
     else:

@@ -208,3 +208,28 @@ function advancedValueModification(n, value) {
     value = valueList.join(",");
     return value;
 }
+
+
+ // function drawPie(pieNo,portion,colors){
+    // document.write('<span id="pie'+pieNo+'" class="pie">'+{{logo_matched[0].theme_weights | join(",")}}',800                            </span>")
+    jQuery(function(){
+    function pieAnimation(pieNo){
+        var updatingChart = $("#pie"+pieNo).peity("pie", {"fill":["red","green","blue","white"], "radius":30 })
+        setInterval(function() {
+        var values = updatingChart.text().split(",");
+        var tmp = values.pop();
+        if (tmp>100){
+            tmp = tmp*0.3;}
+        else if (tmp>0.1){
+            tmp=tmp*0.7;}
+        else if(tmp>0.05){
+            tmp = tmp-0.01;}
+        else if (tmp>0.00){
+            tmp = tmp -0.005;}
+        values.push(tmp);
+        updatingChart.text(values.join(",")).change();
+        }, 64)};
+    pieAnimation("1");
+    pieAnimation("2");
+})
+// }
