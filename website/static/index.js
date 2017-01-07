@@ -68,7 +68,12 @@ function showTextField() {
     var reg = new RegExp("\\\\\.[^\\\\]*$");
     var regFileName = reg.exec(fileName);
     regFileName = JSON.stringify(regFileName);
-    idTextfield.value = regFileName.substring(4, regFileName.length-2);
+    if (fileName.length == 0) {
+        idTextfield.value = "";
+    }
+    else {
+        idTextfield.value = regFileName.substring(4, regFileName.length-2);
+    }
 
     //idPreviewImg.src = "/static/uploads/upload.jpg";
 }

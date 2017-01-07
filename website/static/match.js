@@ -27,5 +27,4 @@ function modeMatch() {
     idInputSearch.style.display = "none";
     idInputMatch.style.display = "block";
     idAdvancedSearchPanel.style.transform = "rotateX(90deg)";
-    idPreviewImg.src = "/static/uploads/upload.jpg";
 }

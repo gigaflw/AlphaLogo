@@ -182,7 +182,7 @@ div.activeAdvancedTitle {
 }
 
 div.advancedSearchPanel {
-    transition: transform 1s;
+    transition: transform 0.6s;
     transform: rotateX(90deg);
     transform-origin: 50% 0;
 
