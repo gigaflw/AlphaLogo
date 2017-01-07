@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-23 23:18:28
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-07 12:55:57
+# @Last Modified time: 2017-01-07 14:55:17
 from __future__ import unicode_literals, print_function
 
 import os
@@ -38,7 +38,7 @@ class Searcher(object):
             yield self.para_to_logo(para)
 
     def text_search(self, keywords, ent_name="", n_colors=[],
-                    saturation_level=LEVEL_NOT_REQUIRED, value_level=LEVEL_NOT_REQUIRED):
+                    saturation_levels=[], value_levels=[]):
         """
         Search logos by keywords
 
@@ -50,7 +50,7 @@ class Searcher(object):
             Where the first one denotes the upper bound of n_colors, 
             and `COLOR_LEVEL` denotes the resolution for each color channel in R,G,B.
         
-        @param: saturation_level, value_level: constants denoted the level of s,v values,
+        @param: saturation_levels, value_levels: a list of constants denoted the level of s,v values,
             defined in `website.core.config.py `, named something like 'SAT_LEVEL_LOW'
             
         @returns: one list of 'Logo' instance
@@ -75,10 +75,16 @@ class Searcher(object):
                 return len(logo.theme_colors) in n_colors
 
         def check_sat(logo):
-            return sat_level_check(saturation_level, logo.s)
+            if not saturation_levels:
+                return True
+            else:
+                return any(sat_level_check(level, logo.s) for level in saturation_levels)
 
         def check_val(logo):
-            return val_level_check(value_level, logo.v)
+            if not value_levels:
+                return True
+            else:
+                return any(val_level_check(level, logo.s) for level in value_levels)
 
         filters = lambda logo: all(f(logo) for f in (check_ent_name, check_n_colors, check_sat, check_val))
 
