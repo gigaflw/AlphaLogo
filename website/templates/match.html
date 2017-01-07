@@ -151,18 +151,33 @@
 
 					<div class="moreInfoPie" style="line-height: 125%; text-align: left;" s>
                         <h1 style="font-size: 15px"> 图像sv数据：</h1>
-                        s = {{upload.s}}
+                        <h6 style="font-size: 11px;">灰度:{{upload.s}}</h6>
+                        <div class="rectangle">
+                            <div class="rectanglePart" id="rect1">灰度:{{upload.s}}</div>
+                        </div>
+                        <h6 style="font-size: 11px;">鲜艳度:{{upload.v}}</h6>
+                        <div class="rectangle2">
+                            <div class="rectanglePart2" id="rect2">鲜艳度:{{upload.v}}</div>
+                        </div>
                         </br>
-                        v = {{upload.v}}
-                        {{upload.theme_colors}}
-                        <div class="pieAnimationDiv" style="font-size: 0px">
+                        <h1 style="font-size: 15px"> 图像主要颜色占比图：</h1>
+                        <div class="pieAnimationDiv" style="font-size: 0px; display:block;float: left; min-width: 81px;min-height: 91px;">
                             <span id="pie1" class="pie">{{upload.theme_weights | join(",")}},800
                             </span>
                         </div>
+                        <div style="width:12px;height:50px;float: left;display: block;"></div>
+                        <div style="display: block;float: left">
+                        <div style="height:19px;width:110px;border-width:0px; border-style: solid; display: block;background-color: transparent;"></div>
+                            <div style="height:8px;width:8px;border-width:1px; border-style: solid; display: block;background-color: {{upload.theme_colors[0]}}"></div>
+                            <div style="font-size: 10px;display: block; margin:auto"> {{upload.theme_weights[0]}} </div>
+                            <div style="height:8px;width:8px; border-width: 1px;border-style: solid;display: block;background-color: {{upload.theme_colors[1]}}"></div>
+                            <div style="font-size: 10px;display: block; margin:auto"> {{upload.theme_weights[1]}} </div>
+                        </div>
                     </div>
                     </br>
-                    <div  style="overflow:scroll ;height: 150px; overflow-x: hidden;";>
+                    <div  style="overflow:scroll ;height: 150px; overflow-x: hidden; min-width: 150px;";>
                     <p style="text-indent: 2em;font-size: 20px; text-align:justify; line-height: 120%">
+                    饼图的颜色还不是实际的分布颜色，需要更改。
                     {{ upload.info }}
                     </p>
                     </div>

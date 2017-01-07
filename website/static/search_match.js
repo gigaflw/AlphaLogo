@@ -210,11 +210,35 @@ function advancedValueModification(n, value) {
 }
 
 
+
+(function(){
+    var rectangleTmp = 100;
+    setInterval(function(){
+    var temp = document.getElementById("rect1")
+    var rectvalue = temp.textContent.split(":")[1];
+    rectangleTmp = parseInt(rectangleTmp*0.9+(100-rectvalue*100)*0.1);
+    temp.style="width:"+rectangleTmp+"%";
+    },64);
+}) ();
+
+
+
+(function(){
+    var rectangleTmp2 = 100;
+    setInterval(function(){
+    var temp2 = document.getElementById("rect2")
+    var rectvalue2 = temp2.textContent.split(":")[1];
+    rectangleTmp2 = parseInt(rectangleTmp2*0.9+(100-rectvalue2*100)*0.1);
+    temp2.style="width:"+rectangleTmp2+"%";
+    },64);
+}) ();
+
+
  // function drawPie(pieNo,portion,colors){
     // document.write('<span id="pie'+pieNo+'" class="pie">'+{{logo_matched[0].theme_weights | join(",")}}',800                            </span>")
     jQuery(function(){
     function pieAnimation(pieNo){
-        var updatingChart = $("#pie"+pieNo).peity("pie", {"fill":["red","green","blue","white"], "radius":30 })
+        var updatingChart = $("#pie"+pieNo).peity("pie", {"fill":["red","green","blue","white"], "radius":40 })
         setInterval(function() {
         var values = updatingChart.text().split(",");
         var tmp = values.pop();
