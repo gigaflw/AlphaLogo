@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2017-01-01 21:04:27
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-07 11:10:27
+# @Last Modified time: 2017-01-07 22:55:55
 
 # Images in this path will be indexed
 from website.config import DATABASE_DIR
@@ -14,6 +14,7 @@ LUCENE_INDEX_DIR = os.path.join(INDEX_BASE_DIR, 'web.index')
 LUCENE_CATELOG_FILE = os.path.join(INDEX_BASE_DIR, 'PICTURES.txt')
 IMAGE_INDEX_DIR = os.path.join(INDEX_BASE_DIR, 'image.index')
 IMAGE_INDEX_PKL_FILE = os.path.join(IMAGE_INDEX_DIR, 'lsh.pkl')
+IMAGE_INDEX_TTH_FILE = os.path.join(IMAGE_INDEX_DIR, 'tth.pkl')
 
 N_COLORS_MORE_THAN_SIX = 0
 

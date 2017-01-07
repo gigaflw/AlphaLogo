@@ -2,18 +2,19 @@
 # @Author: GigaFlower
 # @Date:   2017-01-07 20:39:08
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-07 22:46:52
+# @Last Modified time: 2017-01-07 22:56:52
 
 from __future__ import division
 import math
 import pickle
 import cv2
 import numpy as np
-import os
+
+from website.core.config import IMAGE_INDEX_TTH_FILE
 
 
 def get_search_func():
-    with open(os.path.join(os.path.dirname(__file__), 'tth.pkl'), 'rb') as f:
+    with open(IMAGE_INDEX_TTH_FILE, 'rb') as f:
         data = pickle.load(f)
         print("TTH data load.")
 
