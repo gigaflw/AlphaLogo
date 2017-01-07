@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2017-01-01 20:51:30
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-06 22:14:31
+# @Last Modified time: 2017-01-07 12:01:41
 #
 # Helper function for search engine indexing
 #
@@ -38,9 +38,11 @@ def get_theme_colors(im_name, color_level=8, color_slots=8):
     3) reduce the similiar colors returned
     4) compute color style
 
-    @returns : (theme_colors, color_styles), where
+    @returns : (theme_colors, theme_weights, s_aver, v_aver), where
         theme_colors: a list of rgb colors, typed int
-        color_styles: a interger among `STYLE_X` constants
+        theme_weights: a list of floats, sumed to 1
+        s_aver: average value of 's' in hsv , ranged (0, 1)
+        v_aver: average value of 'v' in hsv , ranged (0, 1)
     """
     # filename = full_path_dataset(im_name)
     im = cv2.imread(im_name)
@@ -51,18 +53,30 @@ def get_theme_colors(im_name, color_level=8, color_slots=8):
     colors = MMCQ(im, color_level, color_slots)
     colors, weights = zip(*colors)
 
-    theme_colors = hsv_reduce_colors(colors)
+    theme_colors, theme_weights = hsv_reduce_colors(colors, weights)
 
     # remove white backgrounds
-    # if len(theme_colors) > 2 and weights[0] > 0.1 and theme_colors[0][2] >= 220:
-    #     print(colors, weights, theme_colors)
-    #     print("white background ignored")
-    #     colors, weights = colors[1:], weights[1:]
+    if len(theme_colors) > 2 and theme_weights[0] > 0.5 and theme_colors[0][2] >= 220:
+        # print(colors, weights, theme_colors)
+        print("white background ignored")
+        colors, weights = colors[1:], weights[1:]
 
-    color_style = color_style_tag(colors, weights)
+    aver, std = hsv_stat(colors, weights)
+    s_aver, v_aver = aver[1], aver[2]
 
-    # print(theme_colors, color_style)
-    return theme_colors, color_style
+    # print(theme_colors, theme_weights, s_aver, v_aver)
+    return theme_colors, theme_weights, s_aver, v_aver
+
+
+def hsv_stat(colors, weights):
+    """
+    return values:
+    (h_aver, s_aver, v_aver),(h_std, s_std, v_std)
+    """
+    colors = rgb_to_hsv(colors)
+    hsv = colors / 255
+    aver, std = np.average(hsv, axis=0, weights=weights), np.std(hsv, axis=0)
+    return aver, std
 
 
 def color_style_tag(colors, weights):
@@ -113,7 +127,7 @@ def lab_reduce_colors(colors, threshold=30):
     return ret
 
 
-def hsv_reduce_colors(colors, threshold=0.35):
+def hsv_reduce_colors(colors, weights, threshold=0.4):
     """
     Reduce colors into serveral main colors with HSV cone color space
     Requires:
@@ -142,9 +156,11 @@ def hsv_reduce_colors(colors, threshold=0.35):
             inds.append(i)
 
     ret = [colors[i] for i in inds]
+    w = np.array(weights)[inds]
+    w /= w.sum()
     # print(len(ret), ret)
 
-    return ret
+    return ret, w
 
 
 def to_web_color(color):

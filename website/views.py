@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-22 20:25:31
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-06 14:40:52
+# @Last Modified time: 2017-01-07 11:45:40
 
 from flask import Blueprint, render_template, abort, request, flash, redirect, url_for
 
@@ -49,16 +49,16 @@ def search():
         return redirect(url_for("bp.index"))
     else:
         if type_ == 'search':
-            logo_matched, logo_similar = search_(keywords=kw, ent_name='', n_colors=[])
+            logo_matched = search_(keywords=kw, ent_name='', n_colors=[])
         else:
-            logo_matched, logo_similar = search_(keywords=kw, ent_name=ent_name, n_colors=n_color_list)
+            logo_matched = search_(keywords=kw, ent_name=ent_name, n_colors=n_color_list)
 
         # new parameter `n_colors` is added to search function!
         # also `Logo` instance has one more property `theme_colors`
         # It will be required to match `n_colors` goodly to gain a 'good match'!
         # more detail can be seen in the docstring of `core.search.text_search`
 
-    return render_template(tmpl, logo_matched=logo_matched, logo_similar=logo_similar, kw=kw, ent_name=ent_name, n_colors=n_colors)
+    return render_template(tmpl, logo_matched=logo_matched, logo_similar=[], kw=kw, ent_name=ent_name, n_colors=n_colors)
 
 
 @bp.route('/match', methods=['POST'])
