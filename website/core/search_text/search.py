@@ -18,7 +18,7 @@ from org.apache.lucene.util import Version
 from java.io import File
 
 # Index dir name
-from website.core.index.index import LUCENE_INDEX_DIR
+from website.core.config import LUCENE_INDEX_DIR
 
 
 class SearchConfig:

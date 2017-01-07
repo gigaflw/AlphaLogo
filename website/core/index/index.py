@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-27 21:45:08
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-06 22:21:32
+# @Last Modified time: 2017-01-07 11:37:47
 
 from __future__ import with_statement, print_function
 
@@ -61,7 +61,6 @@ def _index_files(storeDir, indexFile):
 
 
 def _index_docs(indexFile, writer):
-    stat = [0] * 9
     for line in indexFile:
 
         ind, ent_name, info, keywords, imgurl, filename, url = line.split('\t')
@@ -70,15 +69,12 @@ def _index_docs(indexFile, writer):
         filename = "{:05d}".format(int(ind)) + '.jpg'
         keywords = keywords.replace('%', ' ')
 
-        theme_colors, style_tag = get_theme_colors(full_path_dataset(filename))
-        
-        theme_colors_for_web = " ".join(map(to_web_color, theme_colors))
-        # stat[style_tag] += 1
-        n_colors = str(len(theme_colors))
+        theme_colors, theme_weights, s, v = get_theme_colors(full_path_dataset(filename))
 
-        # if sum(stat) > 1000:
-            # print(stat)
-            # raw_input('')
+        theme_colors_for_web = " ".join(map(to_web_color, theme_colors))
+        theme_weights = " ".join("%02x" % (x*255) for x in theme_weights)
+
+        n_colors = str(len(theme_colors))
 
         #########################
         # pylucene insertion
@@ -102,8 +98,10 @@ def _index_docs(indexFile, writer):
         to_store = {"ind": ind,
                     "filename": filename,
                     "ent_name": ent_name,
-                    "info": info, 
+                    "info": info,
                     "theme_colors": theme_colors_for_web,
-                    "style_tag": style_tag
+                    "theme_weights": theme_weights,
+                    "s": s,
+                    "v": v
                     }
         db.insert(**to_store)

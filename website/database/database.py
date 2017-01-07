@@ -2,16 +2,14 @@
 # @Author: GigaFlower
 # @Date:   2017-01-04 13:18:25
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-06 19:32:06
+# @Last Modified time: 2017-01-07 11:14:33
 
 
 from contextlib import closing
-import os
 
 import sqlite3
 
-DATABASE_PATH = os.path.join(os.path.dirname(__file__), 'logos.db')
-SCHEMA_PATH = os.path.join(os.path.dirname(__file__), 'schema.sql')
+from website.config import DATABASE_PATH, DATABASE_SCHEMA_PATH
 
 class DB(object):
     def init(self):
@@ -35,7 +33,7 @@ class DB(object):
     @classmethod
     def reset_db(cls):
         with closing(cls._connect_db()) as db:
-            with open(SCHEMA_PATH, 'r') as f:
+            with open(DATABASE_SCHEMA_PATH, 'r') as f:
                 db.cursor().executescript(f.read())
             db.commit()
 
@@ -50,7 +48,6 @@ class DB(object):
         self._db.close()
 
 db = DB()
-init_db = db.init
 
 
 if __name__ == '__main__':

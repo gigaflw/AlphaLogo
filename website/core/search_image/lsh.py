@@ -2,7 +2,7 @@
 # @Author: BigFlower
 # @Date:   2016-12-23 16:54:28
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-05 13:32:00
+# @Last Modified time: 2017-01-07 12:52:46
 
 from __future__ import division, print_function
 import numpy as np
@@ -83,7 +83,7 @@ class LSH:
         print("Match inds(begin with 0):\t", ret)
         print("Their scores(max %d):\t" % (len(dps)), stat[ret])
 
-        return ret
+        return ret, stat[ret] / len(dps)
 
     def _lsh_match(self, dp):
         if len(dp) == 0:
