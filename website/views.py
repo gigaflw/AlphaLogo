@@ -32,18 +32,22 @@ def search():
     kw = request.args.get('kw')
     ent_name = request.args.get('enterpriseName')
     n_colors = request.args.get('nColors')
+    saturation = request.args.get('saturation')
+    value = request.args.get('brightness')
     tmpl = "search.html"
     search_ = text_search
-    print n_colors
 
-    n_colors_split = n_colors.split(",")
-    n_color_list = []
-    for i in range(len(n_colors_split)):
-        if (n_colors_split[i] == u"1"):
-            if (i == len(n_colors_split)-1):
-                n_color_list.append(0)
-            else:
-                n_color_list.append(i+2)
+    print n_colors
+    print saturation
+    print value
+
+    n_color_list = data_convertion(n_colors, 1)
+    saturation_list = data_convertion(saturation)
+    value_list = data_convertion(value)
+
+    print n_color_list
+    print saturation_list
+    print value_list
 
     if len(kw) == 0:
         return redirect(url_for("bp.index"))
@@ -51,7 +55,7 @@ def search():
         if type_ == 'search':
             logo_matched = search_(keywords=kw, ent_name='', n_colors=[])
         else:
-            logo_matched = search_(keywords=kw, ent_name=ent_name, n_colors=n_color_list)
+            logo_matched = search_(keywords=kw, ent_name=ent_name, n_colors=n_color_list, saturation_level=saturation_list, value_level=value_list)
 
         # new parameter `n_colors` is added to search function!
         # also `Logo` instance has one more property `theme_colors`
@@ -100,3 +104,20 @@ def match():
         logo_matched, logo_similar = search_(full_path_uploads(upload_name))
 
     return render_template(tmpl, logo_matched=logo_matched, logo_similar=logo_similar, kw=kw, upload=upload_name)
+
+def data_convertion(data, mode=0):
+    # mode=0 means normal mode excluding color input; mode=1 means color input.
+    data_list = []
+    data_split = data.split(",")
+    if (mode == 0):
+        for i in range(len(data_split)):
+            if (data_split[i] == u"1"):
+                data_list.append(i)
+    elif (mode == 1):
+        for i in range(len(data_split)):
+            if (data_split[i] == u"1"):
+                if (i == len(data_split)-1):
+                    data_list.append(0)
+                else:
+                    data_list.append(i+2)
+    return data_list

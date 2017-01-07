@@ -13,10 +13,10 @@ div.container {
 
 div.title {
     cursor: default;
-    transition: margin-top 1s;
+    transition: margin-top 0.6s;
 
-    margin-top: 100px;
-    margin-bottom: 40px;
+    margin-top: 80px;
+    margin-bottom: 20px;
 
     text-align: center;
     font-size: 70px;
@@ -25,10 +25,10 @@ div.title {
 
 div.titleUp {
     cursor: default;
-    transition: margin-top 1s;
+    transition: margin-top 0.6s;
 
     margin-top: 40px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 
     text-align: center;
     font-size: 70px;
@@ -45,7 +45,7 @@ div.linkBar {
 
 div.linkTitle {
     display: inline-block;
-    background-color: #DDDDDD;
+    background-color: transparent;
     cursor: pointer;
 
     width: 120px;
@@ -54,7 +54,7 @@ div.linkTitle {
     margin: 0 -2.5px;
     padding-top: 10px;
 
-    border: 2px #888888 solid;
+    border: 2px transparent solid;
     border-radius: 5px;
 
     text-align: center;
@@ -62,14 +62,14 @@ div.linkTitle {
     font-size: 18px;
 }
 div.linkTitle:hover {
-    border: 2px #444444 solid;
+    border: 2px #BBBBBB solid;
 
     color: #444444;
 }
 
 div.currentLinkTitle {
     display: inline-block;
-    background-color: #DDDDDD;
+    background-color: transparent;
     cursor: default;
 
     width: 120px;
@@ -78,7 +78,7 @@ div.currentLinkTitle {
     margin: 0 -2.5px;
     padding-top: 10px;
 
-    border: 2px #888888 solid;
+    border: 2px transparent solid;
     border-bottom-width: 4px;
     border-bottom-color: #0000FF;
     border-radius: 5px;
@@ -186,9 +186,10 @@ div.advancedSearchPanel {
     transform: rotateX(90deg);
     transform-origin: 50% 0;
 
+    display: inline-block;
     background-color: #EEEEEE;
 
-    margin: 40px auto;
+    margin: 40px 0 0 0;
 
     width: 750px;
 

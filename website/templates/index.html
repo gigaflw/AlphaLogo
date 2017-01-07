@@ -28,12 +28,14 @@
                 <input name="type" id="typeSearch" value="search" hidden>
                 <input type="text" id="enterpriseName" name="enterpriseName" value="" hidden>
                 <input type="text" id="nColors" name="nColors" value="0,0,0,0,0" hidden>
+                <input type="text" id="saturation" name="saturation" value="0,0,0" hidden>
+                <input type="text" id="brightness" name="brightness" value="0,0,0" hidden>
                 <div class="passiveAdvancedTitle" id="advanced">
                     <span class="textDefaultStyle">高级搜索</span>
                 </div>
                 <button type="submit" class="submit">Go</button>
             </form>
-            <div class="advancedSearchPanel" id="advancedSearchPanel">
+            <div class="advancedSearchPanel" id="advancedSearchPanel" >
                 <div class="advancedSearchBar">
                     <div class="advancedSearchTitle">
                         配色数量：
@@ -72,6 +74,34 @@
                     </div>
                     <div class="advancedSearchType" id="industryEducation">
                         教育
+                    </div>
+                </div>
+                <div class="advancedSearchBar">
+                    <div class="advancedSearchTitle">
+                        饱和度：
+                    </div>
+                    <div class="advancedSearchType" id="saturationLow">
+                        低
+                    </div>
+                    <div class="advancedSearchType" id="saturationMiddle">
+                        中
+                    </div>
+                    <div class="advancedSearchType" id="saturationHigh">
+                        高
+                    </div>
+                </div>
+                <div class="advancedSearchBar">
+                    <div class="advancedSearchTitle">
+                        亮度：
+                    </div>
+                    <div class="advancedSearchType" id="brightnessLow">
+                        低
+                    </div>
+                    <div class="advancedSearchType" id="brightnessMiddle">
+                        中
+                    </div>
+                    <div class="advancedSearchType" id="brightnessHigh">
+                        高
                     </div>
                 </div>
                 <div class="advancedSearchBar">

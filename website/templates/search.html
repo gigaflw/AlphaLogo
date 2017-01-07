@@ -99,33 +99,13 @@
 	        </div>
     	</div>
 
-    	<div class="container" id="resultContainer">
-    		<div class="container" id="matchedResultContainer">
-	        	{% if (logo_matched|length > 0) %}
-		        	<div class="resultTitle" id="matchedResultTitle">
-		            	您要找的是不是：
-		        	</div>
-		        	{% for logo in logo_matched %}
-			        	<div class="matchedResult">
-			                <div>{{ logo.ent_name }}</div>
-			                <img src="{{ url_for('static',filename=logo.filename) }}" class="matchedImg">
-	                        <!-- Just for demo, such code style is never encouraged -->
-	                        <div>
-	                        {% for color in logo.theme_colors %}
-	                            <div style="width: 20px;height: 20px;float:left;background-color: {{color}}"></div>
-	                        {% endfor %}
-	                        </div>
-			            </div>
-		        	{% endfor %}
-		        {% endif %}
-		    </div>
-
+    	<div class="searchResultContainer" id="resultContainer">
 		    <div class="container" id="similarResultContainer">
 		        <div class="resultTitle" id="similarResultTitle">
-		            共搜索到{{ logo_similar|length }}个相似结果
+		            共搜索到{{ logo_matched|length }}个结果
 		        </div>
 
-		        {% for logo in logo_similar %}
+		        {% for logo in logo_matched %}
 		            <div class="similarResult">
 		                <div>{{ logo.ent_name }}</div>
 		                <img src="{{ url_for('static',filename=logo.filename) }}" class="similarImg">
