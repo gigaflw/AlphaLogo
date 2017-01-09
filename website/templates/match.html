@@ -62,16 +62,22 @@
                         <div style="width:12px;height:50px;float: left;display: block;"></div>
                         <div style="display: block;float: left">
                         <div style="height:19px;width:110px;border-width:0px; border-style: solid; display: block;background-color: transparent;"></div>
-                            <div style="height:8px;width:8px;border-width:1px; border-style: solid; display: block;background-color: {{upload.theme_colors[0]}}"></div>
+                            <div style="height:8px;width:8px;padding: 0;border-width:1px; border-style: solid; display: block;background-color: {{upload.theme_colors[0]}}">
+                                <a onlick="return false;" title={{upload.theme_colors[0]}}s style="float:left; width:9px;height:9px;text-decoration: none;"></a>
+                            </div>
                             <div style="font-size: 10px;display: block; margin:auto"> {{upload.theme_weights[0]}} </div>
-                            <div style="height:8px;width:8px; border-width: 1px;border-style: solid;display: block;background-color: {{upload.theme_colors[1]}}"></div>
+                            <div style="height:8px;width:8px; border-width: 1px;border-style: solid;display: block;background-color: {{upload.theme_colors[1]}}">
+                                <a onlick="return false;" title={{upload.theme_colors[1]}} style="float:left; width:9px;height:9px;text-decoration: none;"></a>
+                            </div>
                             <div style="font-size: 10px;display: block; margin:auto"> {{upload.theme_weights[1]}} </div>
                         </div>
                     </div>
                     </br>
-                    <div  style="overflow:scroll ;height: 150px; overflow-x: hidden; min-width: 150px;";>
+                    <div  style="height: 150px; overflow-x: hidden; min-width: 150px;";>
                     <p style="text-indent: 2em;font-size: 15px; text-align:justify; line-height: 120%">
                     饼图的颜色还不是实际的分布颜色，需要更改。未来需要把style等属性移到css！！！
+                    <a onclick="return false;" title="饼图的颜色还不是实际的分布颜色，需要更改。&#13;未来需要把style等属性移到css！！！" 
+                    style="float:left;width: auto;text-indent: 0;background-color:#33CC70 ;text-decoration: none;cursor:default;color: #FFFFFF">MORE</a>
                     {{ upload.info }}
                     </p>
                     </div>

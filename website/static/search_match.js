@@ -212,25 +212,25 @@ function advancedValueModification(n, value) {
 
 
 (function() {
-    var rectangleTmp = 100;
+    var rectangleTmp = 111;
     setInterval(function() {
         var temp = document.getElementById("rect1")
         var rectvalue = temp.textContent.split(":")[1];
-        rectangleTmp = parseInt(rectangleTmp * 0.9 + (100 - rectvalue * 100) * 0.1);
-        temp.style = "width:" + rectangleTmp + "%";
-    }, 64);
+        temp.style = "width:" + Math.min(100,rectangleTmp) + "%";
+        rectangleTmp = parseInt(rectangleTmp * 0.92 + (100 - rectvalue * 100) * 0.08);
+    }, 50);
 })();
 
 
 
 (function() {
-    var rectangleTmp2 = 100;
+    var rectangleTmp2 = 111;
     setInterval(function() {
         var temp2 = document.getElementById("rect2")
         var rectvalue2 = temp2.textContent.split(":")[1];
-        rectangleTmp2 = parseInt(rectangleTmp2 * 0.9 + (100 - rectvalue2 * 100) * 0.1);
-        temp2.style = "width:" + rectangleTmp2 + "%";
-    }, 64);
+        temp2.style = "width:" + Math.min(100,rectangleTmp2) + "%";
+        rectangleTmp2 = parseInt(rectangleTmp2 * 0.92 + (100 - rectvalue2 * 100) * 0.08);
+    }, 50);
 })();
 
 
