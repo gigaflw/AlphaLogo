@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2017-01-07 20:39:08
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-07 22:56:52
+# @Last Modified time: 2017-01-09 14:06:25
 
 from __future__ import division
 import math
@@ -28,7 +28,7 @@ def get_search_func():
         print("TTH find match inds(begin with 0):\t", ret)
         print("Their scores(smaller is better):\t", scores[ret])
 
-        return ret
+        return ret, scores[ret]
 
     return match
 
@@ -59,14 +59,12 @@ def get_grade(v1, v2):  # 比较的两个图像特征向量
     hsv2[:, 0] /= 360
 
     # background
-    m = hsv2[-1] - hsv1[-1]  # -1 is background
-    x[0] = math.exp(-np.linalg.norm(m))
+    # m = hsv2[-1] - hsv1[-1]  # -1 is background
+    # x[0] = math.exp(-np.linalg.norm(m))
 
     # logo body
     def delta(_v1, _w1, _v2, _w2):
-        return math.exp(np.linalg.norm(_v1-_v2)) * \
-            (_w1 / 0.01) * \
-            math.exp((10*(_w1-_w2))**2)
+        return math.exp(np.linalg.norm(_v1-_v2) + 100 * (_w1-_w2)**2) * (_w1 * 100)
 
     for i in range(len(hsv1) - 1):
         y = [delta(hsv1[i], w1[i], hsv2[j], w2[j]) for j in range(len(hsv2) - 1)]
