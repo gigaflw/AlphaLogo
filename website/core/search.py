@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-23 23:18:28
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-09 14:07:34
+# @Last Modified time: 2017-01-09 14:23:05
 from __future__ import unicode_literals, print_function
 
 from cv2 import imread as cv2_imread
@@ -37,8 +37,8 @@ class Searcher(object):
     def init(self):
         self._text_search = get_text_search_func()
 
-        # self._image_search = get_image_search_func()
-        self._image_search = tth_get_image_search_func()
+        self._image_search = get_image_search_func()
+        # self._image_search = tth_get_image_search_func()
         
         print("Searcher inited")
 
@@ -118,7 +118,7 @@ class Searcher(object):
         @param: path : the complete path to the image file
         @returns: two list of 'Logo' instance, where the first one contains good matches, and the second normal ones
         """
-        im = cv2_imread(path, 0)
+        im = cv2_imread(path)
 
         if im is None:
             print("No image at '%s' ,match failed!" % path)

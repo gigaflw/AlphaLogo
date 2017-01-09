@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-25 13:07:33
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-07 23:07:27
+# @Last Modified time: 2017-01-09 14:24:10
 
 import os
 import traceback
@@ -46,6 +46,9 @@ def get_search_func():
     print("Image index data loaded")
 
     def search(im, max_n=10):
+        if len(im.shape) == 3:
+            im = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
+
         dps, _ = sift.process(im)
         return lsh.match(dps, max_n=max_n)
 
