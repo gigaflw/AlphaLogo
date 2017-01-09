@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-22 20:25:31
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-07 23:10:09
+# @Last Modified time: 2017-01-09 14:01:22
 
 from flask import Blueprint, render_template, abort, request, flash, redirect, url_for
 
@@ -47,7 +47,8 @@ def search():
         if type_ == 'search':
             logo_matched = search_(keywords=kw, ent_name='', n_colors=[])
         else:
-            logo_matched = search_(keywords=kw, ent_name=ent_name, n_colors=n_color_list, saturation_levels=saturation_list, value_levels=value_list)
+            logo_matched = search_(keywords=kw, ent_name=ent_name, n_colors=n_color_list,
+                                   saturation_levels=saturation_list, value_levels=value_list)
 
         # new parameter `n_colors` is added to search function!
         # also `Logo` instance has one more property `theme_colors`
@@ -70,7 +71,6 @@ def match():
 
     elif type_ == "match":
         tmpl = "match.html"
-        search_ = image_search
         kw = request.files.get('logo')
 
         if not kw.filename:
@@ -81,14 +81,15 @@ def match():
             upload_name = save_img_to_uploads(kw, clear_others_if_more_than=10)
             uploaded_logo = get_uploaded_logo(upload_name)
 
-
-
     if kw is None:
         return redirect(url_for("bp.index"))
     else:
-        logo_matched, logo_similar = search_(full_path_uploads(upload_name))
+        (logo_matched, logo_similar), t = image_search(full_path_uploads(upload_name))
+        flash("Time consumed: %.5f sec" % t)
 
-    return render_template(tmpl, logo_matched=logo_matched, logo_similar=logo_similar, kw=kw, upload=uploaded_logo)
+    return render_template(tmpl, logo_matched=logo_matched, logo_similar=logo_similar,
+                           kw=kw, upload=uploaded_logo, time=t)
+
 
 def data_convertion(data, mode=0):
     # mode=0 means normal mode excluding color input; mode=1 means color input.
