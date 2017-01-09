@@ -1,9 +1,9 @@
 /*
-* @Author: GigaFlower
-* @Date:   2016-12-23 23:12:23
-* @Last Modified by:   GigaFlower
-* @Last Modified time: 2016-12-23 23:16:48
-*/
+ * @Author: GigaFlower
+ * @Date:   2016-12-23 23:12:23
+ * @Last Modified by:   GigaFlower
+ * @Last Modified time: 2016-12-23 23:16:48
+ */
 
 'use strict';
 
@@ -44,7 +44,7 @@ var advancedBrightnessMiddle = document.getElementById("brightnessMiddle");
 var advancedBrightnessHigh = document.getElementById("brightnessHigh");
 var advancedEnterpriseName = document.getElementById("advancedEnterpriseName");
 
-window.addEventListener('load', function(){
+window.addEventListener('load', function() {
     advancedSearchTypeInitialization();
     titleContainerActivate();
 });
@@ -53,7 +53,7 @@ window.onscroll = function() {
     titleContainerActivate();
 }
 
-divSearch.addEventListener("click", function(){
+divSearch.addEventListener("click", function() {
     modeSearch();
 })
 
@@ -84,7 +84,7 @@ function showTextField() {
     var reg = new RegExp("\\\\\.[^\\\\]*$");
     var regFileName = reg.exec(fileName);
     regFileName = JSON.stringify(regFileName);
-    idTextfield.value = regFileName.substring(4, regFileName.length-2);
+    idTextfield.value = regFileName.substring(4, regFileName.length - 2);
 
     //idPreviewImg.src = "/static/uploads/upload.jpg";
 }
@@ -121,7 +121,7 @@ function switchAdvancedSearch() {
     }
 }
 
-function getParameter(name){
+function getParameter(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
     var matched = window.location.search.substr(1).match(reg);
     if (matched != null) {
@@ -131,21 +131,21 @@ function getParameter(name){
 }
 
 function advancedSearchTypeInitialization() {
-    var advancedSearchTypeArray = new Array(advancedColorNum2, advancedColorNum3, advancedColorNum4, advancedColorNum5, advancedColorNumMore, 
-                                            advancedSaturationLow, advancedSaturationMiddle, advancedSaturationHigh, advancedBrightnessLow, 
-                                            advancedBrightnessMiddle, advancedBrightnessHigh,advancedIndustryBank, advancedIndustryStock, 
-                                            advancedIndustryIT, advancedIndustryManufacturing, advancedIndustryEducation);
-    for (var x=0; x<advancedSearchTypeArray.length; ++x) {
-        (function(){    // js的函数闭包问题
+    var advancedSearchTypeArray = new Array(advancedColorNum2, advancedColorNum3, advancedColorNum4, advancedColorNum5, advancedColorNumMore,
+        advancedSaturationLow, advancedSaturationMiddle, advancedSaturationHigh, advancedBrightnessLow,
+        advancedBrightnessMiddle, advancedBrightnessHigh, advancedIndustryBank, advancedIndustryStock,
+        advancedIndustryIT, advancedIndustryManufacturing, advancedIndustryEducation);
+    for (var x = 0; x < advancedSearchTypeArray.length; ++x) {
+        (function() { // js的函数闭包问题
             var i = x;
-            advancedSearchTypeArray[i].addEventListener("click", function(){
+            advancedSearchTypeArray[i].addEventListener("click", function() {
                 switchAdvancedSearchType(this);
                 if (i < 5) {
                     nColorsInput(i, this);
                 } else if (i < 8) {
-                    saturationInput(i-5, this);
+                    saturationInput(i - 5, this);
                 } else if (i < 11) {
-                    brightnessInput(i-8, this);
+                    brightnessInput(i - 8, this);
                 }
             });
         })();
@@ -211,49 +211,51 @@ function advancedValueModification(n, value) {
 
 
 
-(function(){
+(function() {
     var rectangleTmp = 100;
-    setInterval(function(){
-    var temp = document.getElementById("rect1")
-    var rectvalue = temp.textContent.split(":")[1];
-    rectangleTmp = parseInt(rectangleTmp*0.9+(100-rectvalue*100)*0.1);
-    temp.style="width:"+rectangleTmp+"%";
-    },64);
-}) ();
+    setInterval(function() {
+        var temp = document.getElementById("rect1")
+        var rectvalue = temp.textContent.split(":")[1];
+        rectangleTmp = parseInt(rectangleTmp * 0.9 + (100 - rectvalue * 100) * 0.1);
+        temp.style = "width:" + rectangleTmp + "%";
+    }, 64);
+})();
 
 
 
-(function(){
+(function() {
     var rectangleTmp2 = 100;
-    setInterval(function(){
-    var temp2 = document.getElementById("rect2")
-    var rectvalue2 = temp2.textContent.split(":")[1];
-    rectangleTmp2 = parseInt(rectangleTmp2*0.9+(100-rectvalue2*100)*0.1);
-    temp2.style="width:"+rectangleTmp2+"%";
-    },64);
-}) ();
+    setInterval(function() {
+        var temp2 = document.getElementById("rect2")
+        var rectvalue2 = temp2.textContent.split(":")[1];
+        rectangleTmp2 = parseInt(rectangleTmp2 * 0.9 + (100 - rectvalue2 * 100) * 0.1);
+        temp2.style = "width:" + rectangleTmp2 + "%";
+    }, 64);
+})();
 
 
- // function drawPie(pieNo,portion,colors){
-    // document.write('<span id="pie'+pieNo+'" class="pie">'+{{logo_matched[0].theme_weights | join(",")}}',800                            </span>")
-    jQuery(function(){
-    function pieAnimation(pieNo){
-        var updatingChart = $("#pie"+pieNo).peity("pie", {"fill":["red","green","blue","white"], "radius":40 })
-        setInterval(function() {
-        var values = updatingChart.text().split(",");
-        var tmp = values.pop();
-        if (tmp>100){
-            tmp = tmp*0.3;}
-        else if (tmp>0.1){
-            tmp=tmp*0.7;}
-        else if(tmp>0.05){
-            tmp = tmp-0.01;}
-        else if (tmp>0.00){
-            tmp = tmp -0.005;}
-        values.push(tmp);
-        updatingChart.text(values.join(",")).change();
-        }, 64)};
-    pieAnimation("1");
-    pieAnimation("2");
-})
-// }
+// function drawPie(pieNo,portion,colors){
+// document.write('<span id="pie'+pieNo+'" class="pie">'+{{logo_matched[0].theme_weights | join(",")}}',800                            </span>")
+jQuery(function() {
+        function pieAnimation(pieNo) {
+            var updatingChart = $("#pie" + pieNo).peity("pie", { "fill": ["red", "green", "blue", "white"], "radius": 40 })
+            setInterval(function() {
+                var values = updatingChart.text().split(",");
+                var tmp = values.pop();
+                if (tmp > 100) {
+                    tmp = tmp * 0.3;
+                } else if (tmp > 0.1) {
+                    tmp = tmp * 0.7;
+                } else if (tmp > 0.05) {
+                    tmp = tmp - 0.01;
+                } else if (tmp > 0.00) {
+                    tmp = tmp - 0.005;
+                }
+                values.push(tmp);
+                updatingChart.text(values.join(",")).change();
+            }, 64)
+        };
+        pieAnimation("1");
+        pieAnimation("2");
+    })
+    // }
