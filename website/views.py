@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-22 20:25:31
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-09 14:01:22
+# @Last Modified time: 2017-01-09 19:09:48
 
 from flask import Blueprint, render_template, abort, request, flash, redirect, url_for
 
@@ -45,10 +45,12 @@ def search():
         return redirect(url_for("bp.index"))
     else:
         if type_ == 'search':
-            logo_matched = search_(keywords=kw, ent_name='', n_colors=[])
+            logo_matched, t  = search_(keywords=kw, ent_name='', n_colors=[])
         else:
-            logo_matched = search_(keywords=kw, ent_name=ent_name, n_colors=n_color_list,
+            logo_matched, t = search_(keywords=kw, ent_name=ent_name, n_colors=n_color_list,
                                    saturation_levels=saturation_list, value_levels=value_list)
+
+        flash("Time consumed: %.5f sec" % t)
 
         # new parameter `n_colors` is added to search function!
         # also `Logo` instance has one more property `theme_colors`
