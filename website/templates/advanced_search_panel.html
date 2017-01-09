@@ -1,0 +1,59 @@
+
+<div class="advancedSearchPanel" id="advancedSearchPanel" >
+    {% for title, fields in
+        [
+        ("配色数量：", 
+            [
+                ("双色","colorNum2"),
+                ("三色","colorNum3"),
+                ("四色","colorNum4"),
+                ("五色","colorNum5"),
+                ("更多色","colorNumMore")
+            ]
+        ),
+        ("行业：",
+            [
+                ("银行", "industryBank"),
+                ("证券", "industryStock"),
+                ("互联网", "industryIT"),
+                ("制造业", "industryManufacturing"),
+                ("教育", "industryEducation"),
+            ]
+        ),
+        ("饱和度：",
+            [
+                ("低", "saturationLow"),
+                ("中", "saturationMiddle"),
+                ("高", "saturationHigh"),
+            ]
+        ),
+        ("亮度：",
+            [
+                ("低", "brightnessLow"),
+                ("中", "brightnessMiddle"),
+                ("高", "brightnessHigh"),
+            ]
+        ),
+
+
+        ]
+    %}
+    <div class="advancedSearchBar">
+        <div class="advancedSearchTitle">
+            {{ title }}
+        </div>
+        {% for caption, typeID in fields %}
+        <div class="advancedSearchType" id="{{ typeID }}">
+            {{ caption }}                        
+        </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+
+    <div class="advancedSearchBar">
+        <div class="advancedSearchTitle">
+            企业名：
+        </div>
+        <input type="text" class="enterpriseName" name="enterpriseName" id="advancedEnterpriseName" placeholder="请输入企业名称" onkeyup="enterpriseNameInput()">
+    </div>
+</div>

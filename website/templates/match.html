@@ -15,14 +15,45 @@
 	<script src="static/jquery.peity.js"></script>
 {% endblock %}
 
-
 {% block body %}
     <div class="container" id="totalContainer">
         <div class="titleContainerDefault" id="titleContainer">
             <div class="title" id="title">
                 AlphaLogo
             </div>
-            {% include "search_bar.html" %}
+            <div class="linkBar">
+                <div class="currentLinkTitle" id="search">
+                    <span class="textDefaultStyle">搜索</span>
+                </div>
+                <div class="linkTitle" id="match">
+                    <span class="textDefaultStyle">匹配</span>
+                </div>
+            </div>
+            <div class="input" id="inputSearch" hidden>
+                <form id="textForm" action="/search" method="GET">
+                    <input type="text" class="keyword" name="kw" placeholder="请输入要搜索的logo特征">
+                    <input name="type" id="typeSearch" value="search" hidden>
+                    <input type="text" id="enterpriseName" name="enterpriseName" value="" hidden>
+                    <input type="text" id="nColors" name="nColors" value="0,0,0,0,0" hidden>
+                    <input type="text" id="saturation" name="saturation" value="0,0,0" hidden>
+                    <input type="text" id="brightness" name="brightness" value="0,0,0" hidden>
+                    <div class="passiveAdvancedTitle" id="advanced">
+                        <span class="textDefaultStyle">高级搜索</span>
+                    </div>
+                    <button type="submit" class="submit">Go</button>
+                </form>
+            </div>
+            <div class="input" id="inputMatch">
+                <form id="imageForm" action="/match" enctype="multipart/form-data" method="POST">
+                    <input type="text" name="textfield" id="textfield" class="textfield" value="{{ kw }}" disabled="disable"> 
+                    <input type="file" class="logo" id="logo" name="logo" onchange="showTextField()">
+                    <input type="button" class="browse" id="browse" value="浏览">
+                    <input name="type" id="typeMatch" value="match" hidden>
+                    <button type="submit" class="submit" id="imgSubmit">Go</button> 
+                </form>
+            </div>
+            
+            {% include "advanced_search_panel.html" %}
         </div>
 
         <div class="container" id="rightSideContainer">
