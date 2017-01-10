@@ -57,25 +57,37 @@
 	        {% include "advanced_search_panel.html" %}
     	</div>
 
-    	<div class="searchResultContainer" id="resultContainer">
+    	<div class="container" id="rightSideContainer">
+    		<div class="moreInfoChosenImgDivDefault" id="chosenImgDiv">
+    			{% include "moreinfo_side_container.html" %}
+    		</div>
+    	</div>
+
+    	<div class="defaultPositionedResultContainer" id="resultContainer">
 		    <div class="container" id="similarResultContainer">
 		        <div class="resultTitle" id="similarResultTitle">
 		            共搜索到{{ logo_matched|length }}个结果
 		        </div>
 
-		        {% for logo in logo_matched %}
-		            <div class="similarResult">
-		                <div>{{ logo.ent_name }}</div>
-		                <img src="{{ url_for('static',filename=logo.filename) }}" class="matchedImg">
-	                    <div>
-	                    {% for color in logo.theme_colors %}
-	                        <div style="width: 20px;height: 20px;float:left;background-color: {{color}}"></div>
-	                    {% endfor %}
-	                    </div>
-	                    {{ logo.s }}
-		                {{ logo.v }}
-		            </div>
-		        {% endfor %}
+		        {%- for row in logo_matched|batch(4) %}
+		        	<div class="imgSimilarResultRow">
+		        		{%- for logo in row %}
+		        			<div class="similarResult" onclick="showChosenImgMoreInfo(this, 1)" dataFilename={{logo.filename}} dataEntName={{logo.ent_name}} 
+                            dataInfo={{logo.info}} dataThemeColors={{logo.theme_colors}} dataThemeWeights={{logo.theme_weights}} dataS={{logo.s}} 
+                            dataV={{logo.v}} >
+				                <div>{{ logo.ent_name }}</div>
+				                <img src="{{ url_for('static',filename=logo.filename) }}" class="similarImg" >
+			                    <div>
+			                    {% for color in logo.theme_colors %}
+			                        <div style="width: 20px;height: 20px;float:left;background-color: {{color}}"></div>
+			                    {% endfor %}
+			                    </div>
+			                    {{ logo.s }}
+				                {{ logo.v }}
+				            </div>
+		        		{%- endfor %}
+		        	</div>
+		        {%- endfor %}
 	        </div>
     	</div>
     </div>

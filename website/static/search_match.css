@@ -29,18 +29,46 @@ div#similarResultContainer {
     justify-content: flex-start;
 }
 
-div.searchResultContainer {
-    margin: 0px 0px 0 20px;
+div.defaultPositionedResultContainer {
+    transition: margin-right 1.2s;
+
+    margin: 10px 0 0 0;
+    padding: 20px; 
 
     width: 100%;
+
+    border: 3px #FFFFFF solid;
+    border-radius: 20px;
+    box-shadow: 3px 3px 6px 2px #888888;
 
     flex-grow: 10;
 }
 
-div.matchResultContainer {
-    margin: 0px 250px 0 20px;
+div.leftPositionedResultContainer {
+    transition: margin-right 1.2s;
+
+    margin: 10px 250px 0 0;
+    padding: 20px; 
 
     width: 100%;
+
+    border: 3px #FFFFFF solid;
+    border-radius: 20px;
+    box-shadow: 3px 3px 6px 2px #888888;
+
+    flex-grow: 10;
+}
+div.doubleLeftPositionedContainer {
+    transition: margin-right 1.2s;
+
+    margin: 10px 500px 0 0;
+    padding: 20px; 
+
+    width: 100%;
+
+    border: 3px #FFFFFF solid;
+    border-radius: 20px;
+    box-shadow: 3px 3px 6px 2px #888888;
 
     flex-grow: 10;
 }
@@ -49,8 +77,14 @@ div.titleContainerDefault {
     position: relative;
     background-color: #FFFFFF;
 
-    width: 1000px;
-    height: 130px;
+    margin: 0px 0 0 0px;
+
+    width: 700px;
+    height: 110px;
+
+    border: 3px #FFFFFF solid;
+    border-radius: 15px;
+    box-shadow: 3px 3px 6px 2px #888888;
 
     z-index: 100;
 }
@@ -61,12 +95,16 @@ div.titleContainerPassive {
     position: fixed;
     background-color: #FFFFFF;
 
-    top: 0;
-    left: 0;
+    top: 0px;
+    left: 0px;
     z-index: 100;
 
-    width: 1000px;
-    height: 140px;
+    width: 700px;
+    height: 110px;
+
+    border: 3px #FFFFFF solid;
+    border-radius: 15px;
+    box-shadow: 3px 3px 6px 2px #888888;
 
     opacity: 0.1;
 }
@@ -79,7 +117,7 @@ div.titleContainerPassive:hover {
 div.title {
     cursor: pointer;
 
-    margin: 40px 20px 40px 20px;
+    margin: 35px 20px 25px 20px;
     float: left;
 
     width: 210px;
@@ -93,14 +131,14 @@ div.linkBar {
     height: 40px;
     width: 700px;
 
-    padding: 20px;
+    padding: 5px 5px 15px 15px;
 
     text-align: left;
 }
 
 div.linkTitle {
     display: inline-block;
-    background-color: #DDDDDD;
+    background-color: transparent;
     cursor: pointer;
 
     width: 120px;
@@ -109,7 +147,7 @@ div.linkTitle {
     margin: 0 -2.5px;
     padding-top: 10px;
 
-    border: 2px #888888 solid;
+    border: 2px transparent solid;
     border-radius: 5px;
 
     text-align: center;
@@ -117,14 +155,14 @@ div.linkTitle {
     font-size: 18px;
 }
 div.linkTitle:hover {
-    border: 2px #444444 solid;
+    border: 2px #BBBBBB solid;
 
     color: #444444;
 }
 
 div.currentLinkTitle {
     display: inline-block;
-    background-color: #DDDDDD;
+    background-color: transparent;
     cursor: default;
 
     width: 120px;
@@ -133,7 +171,7 @@ div.currentLinkTitle {
     margin: 0 -2.5px;
     padding-top: 10px;
 
-    border: 2px #888888 solid;
+    border: 2px transparent solid;
     border-bottom-width: 4px;
     border-bottom-color: #0000FF;
     border-radius: 5px;
@@ -245,7 +283,7 @@ div.advancedSearchPanel {
 
     background-color: #EEEEEE;
 
-    margin: 20px;
+    margin: 30px 20px 20px 0px;
     padding-bottom: 5px;
 
     width: 750px;
@@ -415,19 +453,42 @@ div.resultTitle {
     font-weight: bold;
 }
 
+div.imgMatchedResultRow {
+    display: flex;
+
+    margin: 30px 0 30px 0;
+
+    width: 100%;
+
+    flex-flow: row wrap;
+    justify-content: flex-start;
+}
+
+div.imgSimilarResultRow {
+    display: flex;
+
+    margin: 30px 0 30px 0;
+
+    width: 100%;
+
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+
 div.matchedResult {
-    transition: box-shadow,border,transform 1s,1s,0.3s;
+    transition: box-shadow,border,transform 1s,1s,0.5s;
 
     display: inline-block;
 
-    margin: 30px; 
+    margin: 50px; 
     padding: 20px 10px 0 10px;
 
     width: 190px;
     height: 210px;
 
-    border: 1px #FFFFFF solid;
+    border: 3px #FFFFFF solid;
     border-radius: 25px;
+    border-color: transparent;
 
     text-align: center;
     font-size: 20px;
@@ -440,12 +501,33 @@ div.matchedResult:hover{
     border: 3px #888888 solid;
 }
 
+div.matchedResultActive {
+    transition: box-shadow,border,transform 1s,1s,0.5s;
+
+    transform: scale(1.2);
+    display: inline-block;
+
+    margin: 50px; 
+    padding: 20px 10px 0 10px;
+
+    width: 190px;
+    height: 210px;
+    
+    box-shadow: 3px 3px 6px 2px #888888;
+
+    border: 3px #888888 solid;
+    border-radius: 25px;
+
+    text-align: center;
+    font-size: 20px;
+}
+
 div.similarResult {
-    transition: box-shadow,border,transform 1s,1s,0.3s;
+    transition: box-shadow,border,transform 1s,1s,0.5s;
 
     display: inline-block;
 
-    margin: 25px 50px 25px 30px;
+    margin: 10px;
     padding: 20px 10px 0 10px;
 
     width: 170px;
@@ -466,6 +548,27 @@ div.similarResult:hover{
     border: 3px #888888 solid;
 }
 
+div.similarResultActive {
+    transition: box-shadow,border,transform 1s,1s,0.5s;
+
+    transform: scale(1.2);
+    display: inline-block;
+
+    margin: 10px;
+    padding: 20px 10px 0 10px;
+
+    width: 170px;
+    height: 190px;
+    
+    box-shadow: 3px 3px 6px 2px #888888;
+
+    border: 3px #888888 solid;
+    border-radius: 25px;
+
+    text-align: center;
+    font-size: 18px;
+}
+
 img.matchedImg {
     padding-top: 10px;
 
@@ -480,15 +583,17 @@ img.similarImg {
     max-height: 140px;
 }
 
-div.moreInfoImgDiv {
+div.moreInfoTargetImgDiv {
     position: fixed;
-    background-color: transparent;
+    background-color: #FFFFFF;
+    transition: top 1.2s;
 
     top: 0px;
     right: 0px;
+    z-index: 1;
 
     height: 99%;
-    width: 250px;
+    width: 230px;
     
     border: 3px #888888 solid;
     border-radius: 25px;
@@ -518,16 +623,69 @@ img.previewImg {
     max-height: 150px;
 }
 
-div.moreInfoContainer {
-    padding: 20px;
+div.moreInfoChosenImgDivDefault {
+    position: fixed;
+    background-color: transparent;
+    transition: right 1.2s;
 
+    top: 0px;
+    right: -240px;
+
+    height: 99%;
+    width: 230px;
+    
     border: 3px #888888 solid;
     border-radius: 25px;
+
+    text-align: center;
+}
+
+div.moreInfoChosenImgDivLeft {
+    position: fixed;
+    background-color: transparent;
+    transition: right 1.2s;
+
+    top: 0px;
+    right: 0px;
+
+    height: 99%;
+    width: 230px;
+    
+    border: 3px #888888 solid;
+    border-radius: 25px;
+
+    text-align: center;
+}
+
+div.moreInfoChosenImgDivDoubleLeft {
+    position: fixed;
+    background-color: transparent;
+    transition: right 1.2s;
+
+    top: 0px;
+    right: 240px;
+
+    height: 99%;
+    width: 230px;
+    
+    border: 3px #888888 solid;
+    border-radius: 25px;
+
+    text-align: center;
 }
 
 .textDefaultStyle {
     padding-left:8px;
     padding-right:8px;
+}
+
+/*-----------------------------------------------------------------------------------------*/
+
+div.moreInfoContainer {
+    padding: 15px;
+
+    border: 3px #888888 solid;
+    border-radius: 25px;
 }
 
 div.rectangle {

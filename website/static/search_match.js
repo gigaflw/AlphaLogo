@@ -44,6 +44,23 @@ var advancedBrightnessMiddle = document.getElementById("brightnessMiddle");
 var advancedBrightnessHigh = document.getElementById("brightnessHigh");
 var advancedEnterpriseName = document.getElementById("advancedEnterpriseName");
 
+var currentChosenImg = null;
+var divChosenImg = document.getElementById("chosenImgDiv");
+var chosenImg = document.getElementById("chosenImg");
+var chosenImgEntName = document.getElementById("chosenImgEntName");
+var chosenImgSaturation = document.getElementById("chosenImgSaturation");
+var chosenImgValue = document.getElementById("chosenImgValue");
+var chosenImgRectSaturation = document.getElementById("chosenRectSaturation");
+var chosenImgRectValue = document.getElementById("chosenRectValue");
+var chosenImgPie = document.getElementById("chosenPie");
+var chosenImgThemeColor0 = document.getElementById("chosenImgThemeColor0");
+var chosenImgThemeColorTitle0 = document.getElementById("chosenImgThemeColorTitle0");
+var chosenImgThemeWeights0 = document.getElementById("chosenImgThemeWeights0");
+var chosenImgThemeColor1 = document.getElementById("chosenImgThemeColor1");
+var chosenImgThemeColorTitle1 = document.getElementById("chosenImgThemeColorTitle1");
+var chosenImgThemeWeights1 = document.getElementById("chosenImgThemeWeights1");
+var chosenImgInfo = document.getElementById("chosenImgInfo");
+
 window.addEventListener('load', function() {
     advancedSearchTypeInitialization();
     titleContainerActivate();
@@ -179,7 +196,7 @@ function titleContainerActivate() {
     }
 }
 
-function nColorsInput(n, advancedColorNum) {
+function nColorsInput (n, advancedColorNum) {
     var inputNColors = idNColors.value;
     inputNColors = advancedValueModification(n, inputNColors);
     idNColors.value = inputNColors;
@@ -191,13 +208,13 @@ function saturationInput(n, advancedSaturationNum) {
     idSaturation.value = inputSaturation;
 }
 
-function brightnessInput(n, advancedBrightnessNum) {
+function brightnessInput (n, advancedBrightnessNum) {
     var inputBrightness = idBrightness.value;
     inputBrightness = advancedValueModification(n, inputBrightness);
     idBrightness.value = inputBrightness;
 }
 
-function advancedValueModification(n, value) {
+function advancedValueModification (n, value) {
     var valueList = value.split(",");
     var nDigit = valueList[n];
     if (nDigit == "0") {
@@ -209,4 +226,161 @@ function advancedValueModification(n, value) {
     return value;
 }
 
-// Moving the rectangle function into match.js, in order to prevent the collapse of the search webpage.
+function showChosenImgMoreInfo (pointer, mode) {
+    // mode0 = matchedResult; mode1 = similarResult;
+    if (mode == 0) {
+        if (currentChosenImg == pointer) { // from active to passive
+            currentChosenImg.className = "matchedResult";
+            currentChosenImg = null;
+            moveMoreInfoChosenImg(1);
+            moveResultContainer(1);
+        } else if (currentChosenImg != null) { // from active to active 
+            currentChosenImg.className = "matchedResult";
+            currentChosenImg = pointer;
+            currentChosenImg.className = "matchedResultActive";
+            fillMoreInfoChosenImg(pointer);
+        } else {  // from passive to active
+            currentChosenImg = pointer;
+            currentChosenImg.className = "matchedResultActive";
+            moveMoreInfoChosenImg(0);
+            moveResultContainer(0);
+            fillMoreInfoChosenImg(pointer);
+        }
+    } else {
+        if (currentChosenImg == pointer) { // from active to passive
+            currentChosenImg.className = "similarResult";
+            currentChosenImg = null;
+            moveMoreInfoChosenImg(1);
+            moveResultContainer(1);
+        } else if (currentChosenImg != null) { // from active to active 
+            currentChosenImg.className = "similarResult";
+            currentChosenImg = pointer;
+            currentChosenImg.className = "similarResultActive";
+            fillMoreInfoChosenImg(pointer);
+        } else {  // from passive to active
+            currentChosenImg = pointer;
+            currentChosenImg.className = "similarResultActive";
+            moveMoreInfoChosenImg(0);
+            moveResultContainer(0);
+            fillMoreInfoChosenImg(pointer);
+        }
+    }
+}
+
+function moveMoreInfoChosenImg(mode) {  
+    // mode0 = left move; mode1 = right move;
+    if (mode == 0) {
+        if ( divChosenImg.className == "moreInfoChosenImgDivLeft") {
+            divChosenImg.className = "moreInfoChosenImgDivDoubleLeft";
+        } else {
+            divChosenImg.className = "moreInfoChosenImgDivLeft";
+        }
+    } else {
+        if ( divChosenImg.className == "moreInfoChosenImgDivDoubleLeft") {
+            divChosenImg.className = "moreInfoChosenImgDivLeft";
+        } else {
+            divChosenImg.className = "moreInfoChosenImgDivDefault";
+        }
+    }
+}
+
+function moveResultContainer(mode) {  
+    // mode0 = left move; mode1 = right move;
+    if (mode == 0) {
+        if ( divResultContainer.className == "leftPositionedResultContainer") {
+            divResultContainer.className = "doubleLeftPositionedContainer";
+        } else {
+            divResultContainer.className = "leftPositionedResultContainer";
+        }
+    } else {
+        if ( divResultContainer.className == "doubleLeftPositionedContainer") {
+            divResultContainer.className = "leftPositionedResultContainer";
+        } else {
+            divResultContainer.className = "defaultPositionedResultContainer";
+        }
+    }
+}
+
+function fillMoreInfoChosenImg (pointer) {
+    chosenImg.src = "/static/" + pointer.getAttribute("dataFilename");
+    chosenImgEntName.textContent = pointer.getAttribute("dataEntName");
+    chosenImgSaturation.textContent = pointer.getAttribute("dataS");
+    chosenImgValue.textContent = pointer.getAttribute("dataV");
+    chosenImgRectSaturation.textContent = pointer.getAttribute("dataS");
+    chosenImgRectValue.textContent = pointer.getAttribute("dataV");
+    var chosenImgThemeColorsList = extractListElement(pointer.getAttribute("dataThemeColors"));
+    var chosenImgThemeColorWeightsList = extractListElement(pointer.getAttribute("dataThemeWeights"));
+    chosenImgPie.textContent = pointer.getAttribute("dataThemeWeights") + ", 800";
+    chosenImgThemeColor0.style.backgroundColor = chosenImgThemeColorsList[0];
+    chosenImgThemeColorTitle0.style.title = chosenImgThemeColorsList[0];
+    chosenImgThemeWeights0.textContent = chosenImgThemeColorWeightsList[0];
+    chosenImgThemeColor1.style.backgroundColor = chosenImgThemeColorsList[1];
+    chosenImgThemeColorTitle1.style.title = chosenImgThemeColorsList[1];
+    chosenImgThemeWeights1.textContent = chosenImgThemeColorWeightsList[1];
+    chosenImgInfo.textContent = pointer.getAttribute("dataInfo");
+
+    setRectLength(chosenImgRectSaturation);
+    setRectLength(chosenImgRectValue);
+}
+
+function extractListElement (listInStr) {
+    listInStr = listInStr.substring(1, listInStr.length-2); // cut the first and the last list sign
+    var listCutted = listInStr.split(",");
+    //alert(listCutted);
+    return listCutted;
+}
+
+function setRectLength(rect) {
+    var rectangleTmp = 111;
+    setInterval(function() {
+        var rectValue = rect.textContent;
+        rect.style.width = Math.min(100, rectangleTmp) + "%";
+        rectangleTmp = parseInt(rectangleTmp * 0.92 + (100 - rectValue * 100) * 0.08);
+    }, 50);
+}
+
+// (function() {
+//     var rectangleTmp = 111;
+//     setInterval(function() {
+//         var temp = document.getElementById("chosenRectSaturation")
+//         var rectvalue = temp.textContent.split(":")[1];
+//         temp.style = "width:" + Math.min(100,rectangleTmp) + "%";
+//         rectangleTmp = parseInt(rectangleTmp * 0.92 + (100 - rectvalue * 100) * 0.08);
+//     }, 50);
+// })();
+
+// (function() {
+//     var rectangleTmp2 = 111;
+//     setInterval(function() {
+//         var temp2 = document.getElementById("chosenRectValue")
+//         var rectvalue2 = temp2.textContent.split(":")[1];
+//         temp2.style = "width:" + Math.min(100,rectangleTmp2) + "%";
+//         rectangleTmp2 = parseInt(rectangleTmp2 * 0.92 + (100 - rectvalue2 * 100) * 0.08);
+//     }, 50);
+// })();
+
+// function drawPie(pieNo,portion,colors){
+// document.write('<span id="pie'+pieNo+'" class="pie">'+{{logo_matched[0].theme_weights | join(",")}}',800                            </span>")
+jQuery(function() {
+        function pieAnimation(pieNo) {
+            var updatingChart = $("#chosenPie" + pieNo).peity("pie", { "fill": ["red", "green", "blue", "white"], "radius": 40 })
+            setInterval(function() {
+                var values = updatingChart.text().split(",");
+                var tmp = values.pop();
+                if (tmp > 100) {
+                    tmp = tmp * 0.3;
+                } else if (tmp > 0.1) {
+                    tmp = tmp * 0.7;
+                } else if (tmp > 0.05) {
+                    tmp = tmp - 0.01;
+                } else if (tmp > 0.00) {
+                    tmp = tmp - 0.005;
+                }
+                values.push(tmp);
+                updatingChart.text(values.join(",")).change();
+            }, 64)
+        };
+        pieAnimation("1");
+        pieAnimation("2");
+    })
+    // }

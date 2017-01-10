@@ -52,22 +52,23 @@
                     <button type="submit" class="submit" id="imgSubmit">Go</button> 
                 </form>
             </div>
-            
+
             {% include "advanced_search_panel.html" %}
         </div>
 
         <div class="container" id="rightSideContainer">
-            <div class="moreInfoImgDiv" id="previewDiv">
+
+            <div class="moreInfoTargetImgDiv" id="previewDiv">
                 <div class="previewImgDiv" id="previewImgDiv">
                     <img src="/static/uploads/{{ upload.filename }}" class="previewImg" id="previewImg">
                 </div>
 
-                <div class="moreInfoContainer" id="moreInfoContainer" >
+                <div class="moreInfoContainer" id="moreInfoContainerForPreview" >
                     <!-- Write the codes of moreInfoContainer here, including various infos of the certain picture(preview image here), the color graph and the style. The border is shown only for the location, which needn't be used in the future. 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
                     <div class="moreInfoTitle" style="line-height: 125%; text-align: left; " style="text-">
                         <h1 style="font-size: 15px"> 产品或组织名称： </h1>
-                        {{ upload.filename }}
+                        {{ upload.ent_name }}
                     </div>
 
                     </br>
@@ -116,28 +117,39 @@
 
                 </div>
             </div>
+
+            <div class="moreInfoChosenImgDivLeft" id="chosenImgDiv">
+                {% include "moreinfo_side_container.html" %}
+            </div>
         </div>
 
-        <div class="matchResultContainer" id="resultContainer">
+
+        <div class="leftPositionedResultContainer" id="resultContainer">
             <div class="container" id="matchedResultContainer">
+
                 {% if (logo_matched|length > 0) %}
                     <div class="resultTitle" id="matchedResultTitle">
                         您要找的是不是：
                     </div>
-                    {% for logo in logo_matched %}
-                        <div class="matchedResult">
-                            <div>{{ logo.ent_name }}</div>
-                            <img src="{{ url_for('static',filename=logo.filename) }}" class="matchedImg">
-                            <!-- Just for demo, such code style is never encouraged -->
-                            <div>
-                            {% for color in logo.theme_colors %}
-                                <div style="width: 20px;height: 20px;float:left;background-color: {{color}}"></div>
-                            {% endfor %}
-                            </div>
-                            {{ logo.s }}
-                            {{ logo.v }}
+                    {%- for row in logo_matched|batch(2) %}
+                        <div class="imgMatchedResultRow">
+                            {%- for logo in row %}
+                                <div class="matchedResult" onclick="showChosenImgMoreInfo(this, 0)" dataFilename={{logo.filename}} dataEntName={{logo.ent_name}} 
+                                dataInfo={{logo.info}} dataThemeColors="{{ logo.theme_colors|string }}" dataThemeWeights={{logo.theme_weights}} dataS={{logo.s}} 
+                                dataV={{logo.v}} >
+                                    <div>{{ logo.ent_name }}</div>
+                                    <img src="{{ url_for('static',filename=logo.filename) }}" class="matchedImg" >
+                                    <div>
+                                    {% for color in logo.theme_colors %}
+                                        <div style="width: 20px;height: 20px;float:left;background-color: {{color}}"></div>
+                                    {% endfor %}
+                                    </div>
+                                    {{ logo.s }}
+                                    {{ logo.v }}
+                                </div>
+                            {%- endfor %}
                         </div>
-                    {% endfor %}
+                    {%- endfor %}
                 {% endif %}
             </div>
 
@@ -146,19 +158,25 @@
                     共搜索到{{ logo_similar|length }}个相似结果
                 </div>
 
-                {% for logo in logo_similar %}
-                    <div class="similarResult">
-                        <div>{{ logo.ent_name }}</div>
-                        <img src="{{ url_for('static',filename=logo.filename) }}" class="similarImg">
-                        <div>
-                        {% for color in logo.theme_colors %}
-                            <div style="width: 20px;height: 20px;float:left;background-color: {{color}}"></div>
-                        {% endfor %}
-                        </div>
-                        {{ logo.s }}
-                        {{ logo.v }}
+                {%- for row in logo_similar|batch(3) %}
+                    <div class="imgSimilarResultRow">
+                        {%- for logo in row %}
+                            <div class="similarResult" onclick="showChosenImgMoreInfo(this, 1)" dataFilename={{logo.filename}} dataEntName={{logo.ent_name}} 
+                            dataInfo={{logo.info}} dataThemeColors="{{ logo.theme_colors|string }}" dataThemeWeights={{logo.theme_weights}} dataS={{logo.s}} 
+                            dataV={{logo.v}} >
+                                <div>{{ logo.ent_name }}</div>
+                                <img src="{{ url_for('static',filename=logo.filename) }}" class="similarImg" >
+                                <div>
+                                {% for color in logo.theme_colors %}
+                                    <div style="width: 20px;height: 20px;float:left;background-color: {{color}}"></div>
+                                {% endfor %}
+                                </div>
+                                {{ logo.s }}
+                                {{ logo.v }}
+                            </div>
+                        {%- endfor %}
                     </div>
-                {% endfor %}
+                {%- endfor %}
             </div>
         </div>
     </div>
