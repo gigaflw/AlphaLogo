@@ -2,14 +2,13 @@
 # @Author: GigaFlower
 # @Date:   2016-12-27 21:45:08
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-11 12:44:31
+# @Last Modified time: 2017-01-11 22:25:32
 
 from __future__ import with_statement, print_function
 
 from time import time
 import lucene
 import jieba
-
 
 # nasty Lucene imports
 from java.io import File

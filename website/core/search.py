@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-23 23:18:28
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-11 21:55:21
+# @Last Modified time: 2017-01-11 22:42:27
 from __future__ import unicode_literals, print_function, division
 
 from cv2 import imread as cv2_imread
@@ -59,7 +59,7 @@ class Searcher(object):
 
     @time_it
     def text_search(self, keywords, ent_name="", n_colors=[],
-                    saturation_levels=[], value_levels=[]):
+                    saturation_levels=[], value_levels=[], industry=[]):
         """
         Search logos by keywords
 
@@ -73,6 +73,9 @@ class Searcher(object):
 
         @param: saturation_levels, value_levels: a list of constants denoted the level of s,v values,
             defined in `website.core.config.py `, named something like 'SAT_LEVEL_LOW'
+
+        @param: industry: a list of int constant denoting the industry 
+            this logo envolved with, defined in `core.algorithm.industry_classify`
 
         @returns: one list of 'Logo' instance
         """
@@ -107,7 +110,14 @@ class Searcher(object):
             else:
                 return any(val_level_check(level, logo.v) for level in value_levels)
 
-        filters = lambda logo: all(f(logo) for f in (check_ent_name, check_n_colors, check_sat, check_val))
+        def check_indu(logo):
+            if not industry :
+                return True
+            else:
+                return logo.industry == industry
+
+        filters = lambda logo: all(f(logo) for f in (check_ent_name, check_n_colors,
+                                                     check_sat, check_val, check_indu))
 
         ret = list(filter(filters, self.get_logos_from_db(ret)))
         return ret
@@ -135,8 +145,8 @@ class Searcher(object):
 
         for ind, score in zip(logo_inds_s, scores_s):
             scores.setdefault(ind, 0)
-            scores[ind] += score 
-        
+            scores[ind] += score
+
         for ind, score in zip(logo_inds_c, scores_c):
             scores.setdefault(ind, 0)
             scores[ind] += score
@@ -153,14 +163,14 @@ class Searcher(object):
 
         inds = np.argpartition(scores, -max_n)[-max_n:]
         inds = inds[np.argsort(scores[inds])][::-1]
-        
+
         scores = scores[inds]
-        logo_inds = logo_inds[inds] 
+        logo_inds = logo_inds[inds]
 
         print(logo_inds)
         print(scores)
 
-        logo_inds += 1 # ind begins with 1
+        logo_inds += 1  # ind begins with 1
         logos = self.get_logos_from_db(logo_inds)
 
         good = []
