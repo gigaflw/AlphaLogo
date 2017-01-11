@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends "layout.html" %}
 
 {% block title %}
@@ -50,11 +51,11 @@
             </div>
             <div class="input" id="inputMatch">
                 <form id="imageForm" action="/match" enctype="multipart/form-data" method="POST">
-                    <input type="text" name="textfield" id="textfield" class="textfield" value="{{ kw }}" disabled="disable"> 
+                    <input type="text" name="textfield" id="textfield" class="textfield" value="{{ kw }}" disabled="disable">
                     <input type="file" class="logo" id="logo" name="logo" onchange="showTextField()">
                     <input type="button" class="browse" id="browse" value="浏览">
                     <input name="type" id="typeMatch" value="match" hidden>
-                    <button type="submit" class="submit" id="imgSubmit">Go</button> 
+                    <button type="submit" class="submit" id="imgSubmit">Go</button>
                 </form>
             </div>
 
@@ -62,64 +63,57 @@
         </div>
 
         <div class="container" id="rightSideContainer">
-
             <div class="moreInfoTargetImgDiv" id="previewDiv">
                 <div class="previewImgDiv" id="previewImgDiv">
                     <img src="/static/uploads/{{ upload.filename }}" class="previewImg" id="previewImg">
                 </div>
 
-                <div class="moreInfoContainer" id="moreInfoContainerForPreview" >
-                    <!-- Write the codes of moreInfoContainer here, including various infos of the certain picture(preview image here), the color graph and the style. The border is shown only for the location, which needn't be used in the future. 
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-                    <div class="moreInfoTitle" style="line-height: 125%; text-align: left; " style="text-">
-                        <h1 style="font-size: 15px"> 产品或组织名称： </h1>
-                        {{ upload.ent_name }}
+                <div class="moreInfoContainer" id="moreInfoContainerForPreview">
+                    <div class="moreInfoTitle">
+                        <p class="infoTitle"> 产品或组织名称</p>
+                        <span style="font-size: 15px">[您上传的图片]</span>
                     </div>
-
                     </br>
-
-                    
-
-					<div class="moreInfoPie" style="line-height: 125%; text-align: left;" s>
-                        <h1 style="font-size: 15px"> 图像sv数据：</h1>
-                        <h6 style="font-size: 11px;">灰度:{{upload.s}}</h6>
-                        <div class="rectangle">
-                            <div class="rectanglePart" id="rect1">灰度:{{upload.s}}</div>
-                        </div>
-                        <h6 style="font-size: 11px;">鲜艳度:{{upload.v}}</h6>
-                        <div class="rectangle2">
-                            <div class="rectanglePart2" id="rect2">鲜艳度:{{upload.v}}</div>
-                        </div>
-                        </br>
-                        <h1 style="font-size: 15px"> 图像主要颜色占比图：</h1>
-                        <div class="pieAnimationDiv" style="font-size: 0px; display:block;float: left; min-width: 81px;min-height: 91px;">
-                            <span id="pie1" class="pie">{{upload.theme_weights | join(",")}},800
-                            </span>
-                        </div>
-                        <div style="width:12px;height:50px;float: left;display: block;"></div>
-                        <div style="display: block;float: left">
-                        <div style="height:19px;width:110px;border-width:0px; border-style: solid; display: block;background-color: transparent;"></div>
-                            <div style="height:8px;width:8px;padding: 0;border-width:1px; border-style: solid; display: block;background-color: {{upload.theme_colors[0]}}">
-                                <a onlick="return false;" title={{upload.theme_colors[0]}}s style="float:left; width:9px;height:9px;text-decoration: none;"></a>
+                    <div class="moreInfoPie">
+                        <div class="aboutColors">
+                            <p class="infoTitle"> 图像色彩分析</p>
+                            <span class="infoSubtitle">亮度&nbsp;{{upload.v}}</span>
+                            <div class="rectangle">
+                                <div class="rectanglePart" id="rect1a">{{upload.v}}</div>
                             </div>
-                            <div style="font-size: 10px;display: block; margin:auto"> {{upload.theme_weights[0]}} </div>
-                            <div style="height:8px;width:8px; border-width: 1px;border-style: solid;display: block;background-color: {{upload.theme_colors[1]}}">
-                                <a onlick="return false;" title={{upload.theme_colors[1]}} style="float:left; width:9px;height:9px;text-decoration: none;"></a>
+                            <span class="infoSubtitle">饱和度&nbsp;{{upload.s}}</span>
+                            <div class="rectangle2">
+                                <div class="rectanglePart2" id="rect1b">{{upload.s}}</div>
                             </div>
-                            <div style="font-size: 10px;display: block; margin:auto"> {{upload.theme_weights[1]}} </div>
+                            </br>
+                            <p class="infoTitle"> 图像主要颜色占比</p>
+                            <div class="pieAnimationDiv">
+                                <span id="chosenPie1" class="pie">{{upload.theme_weights | join(",")}},800
+                                </span>
+                            </div>
+                        </div>
+                        <div class="auxForMargin"></div>
+                        <div class="colorDetail">
+                            <div class="colorDetailBlock" style="background-color: {{upload.theme_colors[0]}}">
+                                <abbr class="linkShowInfo" onlick="return false;" title={{upload.theme_colors[0]}}></abbr>
+                            </div>
+                            <div class="colorDetailFigure"> {{upload.theme_weights[0]}} </div>
+                            <div class="colorDetailBlock" style="background-color: {{upload.theme_colors[1]}}">
+                                <abbr class="linkShowInfo" onlick="return false;" title={{upload.theme_colors[1]}}></abbr>
+                            </div>
+                            <div class="colorDetailFigure"> {{upload.theme_weights[1]}} </div>
                         </div>
                     </div>
                     </br>
-                    <div  style="height: 150px; overflow-x: hidden; min-width: 150px;";>
-                    <p style="text-indent: 2em;font-size: 15px; text-align:justify; line-height: 120%">
-                    饼图的颜色还不是实际的分布颜色，需要更改。未来需要把style等属性移到css！！！
-                    <a onclick="return false;" title="饼图的颜色还不是实际的分布颜色，需要更改。&#13;未来需要把style等属性移到css！！！" 
-                    style="float:left;width: auto;text-indent: 0;background-color:#33CC70 ;text-decoration: none;cursor:default;color: #FFFFFF">MORE</a>
-                    {{ upload.info }}
-                    </p>
+                    <div class="moreText">
+                        <p class="infoTitle">图像说明</p>
+                        <div class="moreText">
+                            <p>这是您上传的图片~</p>
+                            <abbr class="moreText" onclick="return false;" title="这是您上传的图片~">
+                                MORE
+                            </abbr> {{ upload.info }}
+                        </div>
                     </div>
-<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-
                 </div>
             </div>
 
@@ -128,32 +122,30 @@
             </div>
         </div>
 
-
         <div class="resultContainerPositionMatch" id="resultContainer">
             <div class="container" id="matchedResultContainer">
                 {% if (logo_matched|length > 0) %}
                     <div class="resultTitle" id="matchedResultTitle">
                         您要找的是不是：
                     </div>
+
                     {%- for row in logo_matched|batch(2) %}
                         <div class="imgMatchedResultRow">
                             {%- for logo in row %}
-                                <div class="matchedResult" onclick="showChosenImgMoreInfo(this, 0)" dataFilename={{logo.filename}} dataEntName={{logo.ent_name}} 
-                                dataInfo={{logo.info}} dataThemeColors="{{ logo.theme_colors|string }}" dataThemeWeights={{logo.theme_weights}} dataS={{logo.s}} 
-                                dataV={{logo.v}} >
+                                <div class="matchedResult" onclick="showChosenImgMoreInfo(this, 1)" dataFilename="{{logo.filename}}" dataEntName="{{logo.ent_name}}" dataInfo="{{logo.info}}" dataThemeColors="{{ logo.theme_colors|string }}" dataThemeWeights="{{logo.theme_weights|string}}" dataS="{{logo.s}}"
+                                dataV="{{logo.v}}">
                                     <div>{{ logo.ent_name }}</div>
-                                    <img src="{{ url_for('static',filename=logo.filename) }}" class="matchedImg" >
+                                    <img src="{{ url_for('static',filename=logo.filename) }}" class="matchedImg">
                                     <div>
-                                    {% for color in logo.theme_colors %}
+                                        {% for color in logo.theme_colors %}
                                         <div style="width: 20px;height: 20px;float:left;background-color: {{color}}"></div>
-                                    {% endfor %}
+                                        {% endfor %}
                                     </div>
-                                    {{ logo.s }}
-                                    {{ logo.v }}
+                                    {{ logo.s }} {{ logo.v }}
                                 </div>
                             {%- endfor %}
                         </div>
-                    {%- endfor %}
+                    {%- endfor %} 
                 {% endif %}
             </div>
 
@@ -165,15 +157,14 @@
                 {%- for row in logo_similar|batch(3) %}
                     <div class="imgSimilarResultRow">
                         {%- for logo in row %}
-                            <div class="similarResult" onclick="showChosenImgMoreInfo(this, 1)" dataFilename={{logo.filename}} dataEntName={{logo.ent_name}} 
-                            dataInfo={{logo.info}} dataThemeColors="{{ logo.theme_colors|string }}" dataThemeWeights={{logo.theme_weights}} dataS={{logo.s}} 
-                            dataV={{logo.v}} >
+                            <div class="similarResult" onclick="showChosenImgMoreInfo(this, 1)" dataFilename="{{logo.filename}}" dataEntName="{{logo.ent_name}}" dataInfo="{{logo.info}}" dataThemeColors="{{ logo.theme_colors|string }}" dataThemeWeights="{{logo.theme_weights|string}}" dataS="{{logo.s}}"
+                            dataV="{{logo.v}}">
                                 <div>{{ logo.ent_name }}</div>
-                                <img src="{{ url_for('static',filename=logo.filename) }}" class="similarImg" >
+                                <img src="{{ url_for('static',filename=logo.filename) }}" class="similarImg">
                                 <div>
-                                {% for color in logo.theme_colors %}
+                                    {% for color in logo.theme_colors %}
                                     <div style="width: 20px;height: 20px;float:left;background-color: {{color}}"></div>
-                                {% endfor %}
+                                    {% endfor %}
                                 </div>
                                 {{ logo.s }}
                                 {{ logo.v }}
@@ -184,5 +175,5 @@
             </div>
         </div>
     </div>
-    
+
 {% endblock %}
