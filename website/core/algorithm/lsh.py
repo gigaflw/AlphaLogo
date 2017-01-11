@@ -2,7 +2,7 @@
 # @Author: BigFlower
 # @Date:   2016-12-23 16:54:28
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-07 21:51:25
+# @Last Modified time: 2017-01-11 14:13:34
 
 from __future__ import division, print_function
 import numpy as np
@@ -73,9 +73,9 @@ class LSH:
         max_n = min(self._im_ind, max_n)
 
         for dp in dps:
+            # print(dp)
             im_inds = self._lsh_match(dp)
             # print("total : ", len(im_inds))
-            # print(im_inds.count(10408) >= 1)
             stat[im_inds] += 1
 
         ret = np.argpartition(stat, -max_n)[-max_n:]
@@ -90,7 +90,9 @@ class LSH:
             return ()
 
         cosine_hash = self.lsh_hash(dp)
+        print(cosine_hash)
         bucket = self._hash_tables.get(cosine_hash, ())
+        # print(cosine_hash, bucket)
         return bucket
 
     def lsh_hash(self, dp):
@@ -115,12 +117,12 @@ class LSH:
         ret = (np.dot(vec, rand_vecs.T) > 0).astype(np.int)
         return tuple(ret)
 
-    def save(self, filename='lsh.pickle'):
+    def save(self, filename):
         with open(filename, 'wb') as f:
             pickle.dump(self, f, protocol=2)
 
     @staticmethod
-    def restore(filename='lsh.pickle'):
+    def restore(filename):
         with open(filename, 'rb') as f:
             return pickle.load(f)
 

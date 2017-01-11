@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-23 23:18:28
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-09 14:23:05
+# @Last Modified time: 2017-01-11 13:33:46
 from __future__ import unicode_literals, print_function
 
 from cv2 import imread as cv2_imread
@@ -11,9 +11,10 @@ from functools import wraps
 
 from website.models import Logo
 from website.database import db
+from website.core.algorithm.utility import deserialize_floats
 from website.core.search_text import get_search_func as get_text_search_func
 from website.core.search_image import get_search_func as get_image_search_func
-from website.core.search_image.color_match import get_search_func as tth_get_image_search_func
+from website.core.search_tth import get_search_func as get_tth_search_func  # todo
 from website.core.config import N_COLORS_MORE_THAN_SIX, LEVEL_NOT_REQUIRED, sat_level_check, val_level_check
 
 
@@ -37,15 +38,15 @@ class Searcher(object):
     def init(self):
         self._text_search = get_text_search_func()
 
-        self._image_search = get_image_search_func()
-        # self._image_search = tth_get_image_search_func()
+        # self._image_search = get_image_search_func()
+        self._image_search = get_tth_search_func()
         
         print("Searcher inited")
 
     def para_to_logo(self, para):
         para['filename'] = 'dataset/%s' % para['filename']
         para['theme_colors'] = para['theme_colors'].split()
-        para['theme_weights'] = [int(w, base=16)/255.0 for w in para['theme_weights'].split()]
+        para['theme_weights'] = deserialize_floats(para['theme_weights'])
         return Logo(**para)
 
     def get_logos_from_db(self, inds):
