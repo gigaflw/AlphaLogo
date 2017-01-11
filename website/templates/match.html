@@ -8,17 +8,22 @@
 <script src="static/jquery.peity.js"></script>
 {% endblock %} {% block body %}
 <div class="container" id="totalContainer">
+    <div style="position: absolute; right: 300px; top: 0;">
+        Time consumed: {{ time }} sec
+    </div>
+
     <div class="titleContainerDefault" id="titleContainer">
         <div class="title" id="title">
             AlphaLogo
         </div>
         <div class="linkBar">
-            <div class="currentLinkTitle" id="search">
+            <div class="linkTitle" id="search">
                 <span class="textDefaultStyle">搜索</span>
             </div>
-            <div class="linkTitle" id="match">
+            <div class="currentLinkTitle" id="match">
                 <span class="textDefaultStyle">匹配</span>
             </div>
+            <div class="currentPointerMatch" id="currentPointer"></div>
         </div>
         <div class="input" id="inputSearch" hidden>
             <form id="textForm" action="/search" method="GET">
@@ -48,38 +53,37 @@
     </div>
 
     <div class="container" id="rightSideContainer">
-
         <div class="moreInfoTargetImgDiv" id="previewDiv">
             <div class="previewImgDiv" id="previewImgDiv">
                 <img src="/static/uploads/{{ upload.filename }}" class="previewImg" id="previewImg">
             </div>
-
-            <div class="moreInfoContainer" id="moreInfoContainerForPreview">
-                <div class="moreInfoTitle">
-                    <p class="infoTitle"> 产品或组织名称</p>
-                    <span style="font-size: 15px">[您上传的图片]</span>
-                </div>
-                </br>
-                <div class="moreInfoPie">
-                    <div class="aboutColors">
-                        <p class="infoTitle"> 图像色彩分析</p>
-                        <span class="infoSubtitle">亮度&nbsp;{{upload.v}}</span>
-                        <div class="rectangle">
-                            <div class="rectanglePart" id="rect1a">{{upload.v}}</div>
-                        </div>
-                        <span class="infoSubtitle">饱和度&nbsp;{{upload.s}}</span>
-                        <div class="rectangle2">
-                            <div class="rectanglePart2" id="rect1b">{{upload.s}}</div>
-                        </div>
-                        </br>
-                        <p class="infoTitle"> 图像主要颜色占比</p>
-                        <p class="uploadColorsList" id="uploadColorsList">{{upload.theme_colors}}</p>
-                        <div class="pieAnimationDiv">
-                            <span id="chosenPie1" class="pie">{{upload.theme_weights | join(",")}},800
-                            </span>
-                        </div>
+            </br>
+            <div class="moreInfoPie">
+                <div class="aboutColors">
+                    <p class="infoTitle"> 图像色彩分析</p>
+                    <span class="infoSubtitle">亮度&nbsp;{{upload.v}}</span>
+                    <div class="rectangle">
+                        <div class="rectanglePart" id="rect1a">{{upload.v}}</div>
                     </div>
-                    <div class="auxForMargin">*返回最主要的两个颜色</div>
+                    <span class="infoSubtitle">饱和度&nbsp;{{upload.s}}</span>
+                    <div class="rectangle2">
+                        <div class="rectanglePart2" id="rect1b">{{upload.s}}</div>
+                    </div>
+                    </br>
+                    <p class="infoTitle"> 图像主要颜色占比</p>
+                    <p class="uploadColorsList" id="uploadColorsList">{{upload.theme_colors}}</p>
+                    <div class="pieAnimationDiv">
+                        <span id="chosenPie1" class="pie">{{upload.theme_weights | join(",")}},800
+                            </span>
+                    </div>
+                </div>
+
+                <div class="auxForMargin">*返回最主要的两个颜色</div>
+                <div class="colorDetail">
+                    <div class="colorDetailBlock" style="background-color: {{upload.theme_colors[0]}}">
+                        <abbr class="linkShowInfo" onlick="return false;" title={{upload.theme_colors[0]}}></abbr> >>>>>>> 动画完成度提升！
+                    </div>
+                    <div class="auxForMargin"></div>
                     <div class="colorDetail">
                         <div class="colorDetailBlock" style="background-color: {{upload.theme_colors[0]}}">
                             <abbr class="linkShowInfo" onlick="return false;" title={{upload.theme_colors[0]}}></abbr>
@@ -91,73 +95,88 @@
                         <div class="colorDetailFigure"> {{upload.theme_weights[1]}} </div>
                     </div>
                 </div>
-                </br>
+            </div>
+            </br>
+            <div class="moreText">
+                <p class="infoTitle">图像说明</p>
                 <div class="moreText">
-                    <p class="infoTitle">图像说明</p>
-                    <div class="moreText">
-                        <p>这是您上传的图片~</p>
-                        <abbr class="moreText" title="这是您上传的图片~(嗯我只能告诉你这么多了！)">MORE</abbr> {{ upload.info }}
-                    </div>
+                    <p>这是您上传的图片~</p>
+                    <abbr class="moreText" title="这是您上传的图片~(嗯我只能告诉你这么多了！)">MORE</abbr>
                 </div>
             </div>
-
         </div>
+
         <div class="moreInfoChosenImgDivLeft" id="chosenImgDiv">
             {% include "moreinfo_side_container.html" %}
         </div>
     </div>
 
-
-    <div class="leftPositionedResultContainer" id="resultContainer">
+    <div class="resultContainerPositionMatch" id="resultContainer">
         <div class="container" id="matchedResultContainer">
-
             {% if (logo_matched|length > 0) %}
-            <div class="resultTitle" id="matchedResultTitle">
-                您要找的是不是：
-            </div>
-            {%- for row in logo_matched|batch(2) %}
-            <div class="imgMatchedResultRow">
-                {%- for logo in row %}
-                <div class="matchedResult" onclick="showChosenImgMoreInfo(this, 1)" dataFilename="{{logo.filename}}" dataEntName="{{logo.ent_name}}" dataInfo="{{logo.info}}" dataThemeColors="{{ logo.theme_colors|string }}" dataThemeWeights="{{logo.theme_weights|string}}" dataS="{{logo.s}}"
-                    dataV="{{logo.v}}">
-                    <div>{{ logo.ent_name }}</div>
-                    <img src="{{ url_for('static',filename=logo.filename) }}" class="matchedImg">
-                    <div>
-                        {% for color in logo.theme_colors %}
-                        <div style="width: 20px; height: 20px; float:left; background-color: {{color}}"></div>
-                        {% endfor %}
-                    </div>
-                    {{ logo.s }} {{ logo.v }}
+                <div class="resultTitle" id="matchedResultTitle">
+                    您要找的是不是：
                 </div>
-                {%- endfor %}
-            </div>
-            {%- endfor %} {% endif %}
-        </div>
+                {%- for row in logo_matched|batch(2) %}
+                <div class="imgMatchedResultRow">
+                    {%- for logo in row %}
+                    <div class="matchedResult" onclick="showChosenImgMoreInfo(this, 1)" dataFilename="{{logo.filename}}" dataEntName="{{logo.ent_name}}" dataInfo="{{logo.info}}" dataThemeColors="{{ logo.theme_colors|string }}" dataThemeWeights="{{logo.theme_weights|string}}"
+                        dataS="{{logo.s}}" dataV="{{logo.v}}">
+                        <div>{{ logo.ent_name }}</div>
+                        <img src="{{ url_for('static',filename=logo.filename) }}" class="matchedImg">
+                        <div>
+                            {% for color in logo.theme_colors %}
+                            <div style="width: 20px; height: 20px; float:left; background-color: {{color}}"></div>
+                            {% endfor %} >>>>>>> 动画完成度提升！
+                        </div>
 
-        <div class="matchResultContainer" id="similarResultContainer">
-            <div class="resultTitle" id="similarResultTitle">
-                共搜索到{{ logo_similar|length }}个相似结果
-            </div>
-
-            {%- for row in logo_similar|batch(3) %}
-            <div class="imgSimilarResultRow">
-                {%- for logo in row %}
-                <div class="similarResult" onclick="showChosenImgMoreInfo(this, 1)" dataFilename="{{logo.filename}}" dataEntName="{{logo.ent_name}}" dataInfo="{{logo.info}}" dataThemeColors="{{ logo.theme_colors|string }}" dataThemeWeights="{{logo.theme_weights|string}}" dataS="{{logo.s}}"
-                    dataV="{{logo.v}}">
-                    <div>{{ logo.ent_name }}</div>
-                    <img src="{{ url_for('static',filename=logo.filename) }}" class="similarImg">
-                    <div>
-                        {% for color in logo.theme_colors %}
-                        <div style="width: 20px;height: 20px;float:left;background-color: {{color}}"></div>
-                        {% endfor %}
+                        {%- for row in logo_matched|batch(2) %}
+                        <div class="imgMatchedResultRow">
+                            {%- for logo in row %}
+                            <div class="matchedResult" onclick="showChosenImgMoreInfo(this, 1)" dataFilename="{{logo.filename}}" dataEntName="{{logo.ent_name}}" dataInfo="{{logo.info}}" dataThemeColors="{{ logo.theme_colors|string }}" dataThemeWeights="{{logo.theme_weights|string}}"
+                                dataS="{{logo.s}}" dataV="{{logo.v}}">
+                                <div>{{ logo.ent_name }}</div>
+                                <img src="{{ url_for('static',filename=logo.filename) }}" class="matchedImg">
+                                <div>
+                                    {% for color in logo.theme_colors %}
+                                    <div style="width: 20px;height: 20px;float:left;background-color: {{color}}"></div>
+                                    {% endfor %}
+                                </div>
+                                {{ logo.s }} {{ logo.v }}
+                            </div>
+                            {%- endfor %}
+                        </div>
+                        {%- endfor %} {% endif %}
                     </div>
-                    {{ logo.s }} {{ logo.v }}
+
+                    <div class="matchResultContainer" id="similarResultContainer">
+                        <div class="resultTitle" id="similarResultTitle">
+                            共搜索到{{ logo_similar|length }}个相似结果
+                        </div>
+
+                        {%- for row in logo_similar|batch(3) %}
+                        <div class="imgSimilarResultRow">
+                            {%- for logo in row %}
+                            <div class="similarResult" onclick="showChosenImgMoreInfo(this, 1)" dataFilename="{{logo.filename}}" dataEntName="{{logo.ent_name}}" dataInfo="{{logo.info}}" dataThemeColors="{{ logo.theme_colors|string }}" dataThemeWeights="{{logo.theme_weights|string}}"
+                                dataS="{{logo.s}}" dataV="{{logo.v}}">
+                                <div>{{ logo.ent_name }}</div>
+                                <img src="{{ url_for('static',filename=logo.filename) }}" class="similarImg">
+                                <div>
+                                    {% for color in logo.theme_colors %}
+                                    <div style="width: 20px;height: 20px;float:left;background-color: {{color}}"></div>
+                                    {% endfor %}
+                                </div>
+                                {{ logo.s }} {{ logo.v }}
+                            </div>
+                            {%- endfor %}
+                        </div>
+                        {%- endfor %}
+                    </div>
                 </div>
-                {%- endfor %}
             </div>
-            {%- endfor %}
+
+            <script type="text/javascript" src="static/canvas-nest.min.js"></script>
+            <canvas class="canvasPage" id="canvasPage"></canvas> {% endblock %}
         </div>
     </div>
 </div>
-
-{% endblock %}

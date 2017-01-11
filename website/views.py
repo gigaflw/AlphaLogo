@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-22 20:25:31
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-09 19:09:48
+# @Last Modified time: 2017-01-11 22:42:59
 
 from flask import Blueprint, render_template, abort, request, flash, redirect, url_for
 
@@ -45,19 +45,20 @@ def search():
         return redirect(url_for("bp.index"))
     else:
         if type_ == 'search':
-            logo_matched, t  = search_(keywords=kw, ent_name='', n_colors=[])
+            logo_matched, t  = search_(keywords=kw)
         else:
             logo_matched, t = search_(keywords=kw, ent_name=ent_name, n_colors=n_color_list,
-                                   saturation_levels=saturation_list, value_levels=value_list)
+                                   saturation_levels=saturation_list, value_levels=value_list,
+                                   industry=1)
 
-        flash("Time consumed: %.5f sec" % t)
+        #flash("Time consumed: %.5f sec" % t)
 
         # new parameter `n_colors` is added to search function!
         # also `Logo` instance has one more property `theme_colors`
         # It will be required to match `n_colors` goodly to gain a 'good match'!
         # more detail can be seen in the docstring of `core.search.text_search`
 
-    return render_template(tmpl, logo_matched=logo_matched, logo_similar=[], kw=kw, ent_name=ent_name, n_colors=n_colors)
+    return render_template(tmpl, logo_matched=logo_matched, logo_similar=[], kw=kw, ent_name=ent_name, n_colors=n_colors, time=t)
 
 
 @bp.route('/match', methods=['POST'])
@@ -87,7 +88,7 @@ def match():
         return redirect(url_for("bp.index"))
     else:
         (logo_matched, logo_similar), t = image_search(full_path_uploads(upload_name))
-        flash("Time consumed: %.5f sec" % t)
+        #flash("Time consumed: %.5f sec" % t)
 
     return render_template(tmpl, logo_matched=logo_matched, logo_similar=logo_similar,
                            kw=kw, upload=uploaded_logo, time=t)

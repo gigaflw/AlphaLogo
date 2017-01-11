@@ -22,6 +22,7 @@ var idSaturation = document.getElementById("saturation");
 var idBrightness = document.getElementById("brightness");
 var idPreviewImg = document.getElementById("previewImg");
 var idImgSubmit = document.getElementById("imgSubmit");
+var idCurrentPointer = document.getElementById("currentPointer");
 
 var divAdvancedSearch = document.getElementById("advanced");
 var idAdvancedSearchPanel = document.getElementById("advancedSearchPanel");
@@ -30,11 +31,12 @@ var advancedColorNum3 = document.getElementById("colorNum3");
 var advancedColorNum4 = document.getElementById("colorNum4");
 var advancedColorNum5 = document.getElementById("colorNum5");
 var advancedColorNumMore = document.getElementById("colorNumMore");
-var advancedIndustryBank = document.getElementById("industryBank");
-var advancedIndustryStock = document.getElementById("industryStock");
-var advancedIndustryIT = document.getElementById("industryIT");
-var advancedIndustryManufacturing = document.getElementById("industryManufacturing");
-var advancedIndustryEducation = document.getElementById("industryEducation");
+var advancedIndustryProfit = document.getElementById("industryProfit");
+var advancedIndustryOrganization = document.getElementById("industryOrganization");
+var advancedIndustryEntertainment = document.getElementById("industryEntertainment");
+var advancedIndustryExhibition = document.getElementById("industryExhibition");
+var advancedIndustryFestival = document.getElementById("industryFestival");
+var advancedIndustryTeam = document.getElementById("industryTeam");
 var advancedSaturationLow = document.getElementById("saturationLow");
 var advancedSaturationMiddle = document.getElementById("saturationMiddle");
 var advancedSaturationHigh = document.getElementById("saturationHigh");
@@ -96,6 +98,7 @@ function modeSearch() {
     idInputMatch.style.display = "none";
     idTitle.className = "title";
     idAdvancedSearchPanel.style.transform = "rotateX(90deg)";
+    idCurrentPointer.style.left = "32px";
 }
 
 function modeMatch() {
@@ -106,6 +109,7 @@ function modeMatch() {
     idInputMatch.style.display = "block";
     idTitle.className = "title";
     idAdvancedSearchPanel.style.transform = "rotateX(90deg)";
+    idCurrentPointer.style.left = "157px";
 }
 
 function switchAdvancedSearch() {
@@ -123,10 +127,10 @@ function switchAdvancedSearch() {
 }
 
 function advancedSearchTypeInitialization() {
-    var advancedSearchTypeArray = new Array(advancedColorNum2, advancedColorNum3, advancedColorNum4, advancedColorNum5, advancedColorNumMore, 
-                                            advancedSaturationLow, advancedSaturationMiddle, advancedSaturationHigh, advancedBrightnessLow, 
-                                            advancedBrightnessMiddle, advancedBrightnessHigh,advancedIndustryBank, advancedIndustryStock, 
-                                            advancedIndustryIT, advancedIndustryManufacturing, advancedIndustryEducation);
+    var advancedSearchTypeArray = new Array(advancedColorNum2, advancedColorNum3, advancedColorNum4, advancedColorNum5, advancedColorNumMore,
+        advancedSaturationLow, advancedSaturationMiddle, advancedSaturationHigh, advancedBrightnessLow,
+        advancedBrightnessMiddle, advancedBrightnessHigh, advancedIndustryProfit, advancedIndustryOrganization,
+        advancedIndustryEntertainment, advancedIndustryExhibition, advancedIndustryFestival, advancedIndustryTeam);
     for (var x=0; x<advancedSearchTypeArray.length; ++x) {
         (function(){    // js的函数闭包问题
             var i = x;

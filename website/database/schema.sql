@@ -8,6 +8,7 @@ CREATE TABLE LOGOS
     THEME_COLORS  VARCHAR(128),
     THEME_WEIGHTS VARCHAR(32),
     S             REAL,
-    V             REAL
+    V             REAL,
     -- TODO: not thrifty to store s,v deliberately
+    INDUSTRY      INTEGER       
 );
