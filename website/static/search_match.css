@@ -506,7 +506,7 @@ div.matchedResult {
     box-shadow: 3px 3px 6px 2px #888888;
 
     border: 3px #FFFFFF solid;
-    border-radius: 0px;
+    border-radius: 3px;
     border-color: transparent;
 
     text-align: center;
@@ -536,7 +536,7 @@ div.matchedResultActive {
     box-shadow: 3px 3px 6px 2px #888888;
 
     border: 3px #888888 solid;
-    border-radius: 0px;
+    border-radius: 3px;
 
     text-align: center;
     font-size: 20px;
@@ -557,7 +557,7 @@ div.similarResult {
     box-shadow: 3px 3px 6px 2px #888888;
 
     border: 3px #FFFFFF solid;
-    border-radius: 0px;
+    border-radius: 3px;
     border-color: transparent;
 
     text-align: center;
@@ -587,7 +587,7 @@ div.similarResultActive {
     box-shadow: 3px 3px 6px 2px #888888;
 
     border: 3px #888888 solid;
-    border-radius: 0px;
+    border-radius: 3px;
 
     text-align: center;
     font-size: 18px;
@@ -611,16 +611,15 @@ div.moreInfoTargetImgDiv {
     position: fixed;
     background-color: #FFFFFF;
     transition: top 1.2s;
-    padding:
     top: 0px;
     right: 0px;
     z-index: 2;
 
-    height: 99%;
+    height: 100%;
     width: 230px;
     
-    border: 3px #888888 solid;
-    border-radius: 25px;
+    border: 0px #888888 solid;
+    border-radius: 10px;
 
     text-align: center;
 }
@@ -659,8 +658,8 @@ div.moreInfoChosenImgDivDefault {
     height: 99%;
     width: 230px;
     
-    border: 3px #888888 solid;
-    border-radius: 25px;
+    border: 0px #888888 solid;
+    border-radius: 10px;
 
     text-align: center;
 }
@@ -677,8 +676,8 @@ div.moreInfoChosenImgDivLeft {
     height: 99%;
     width: 230px;
     
-    border: 3px #888888 solid;
-    border-radius: 25px;
+    border: 0px #888888 solid;
+    border-radius: 10px;
 
     text-align: center;
 }
@@ -694,8 +693,8 @@ div.moreInfoChosenImgDivDoubleLeft {
     height: 99%;
     width: 230px;
     
-    border: 3px #888888 solid;
-    border-radius: 25px;
+    border: 0px #888888 solid;
+    border-radius: 10px;
 
     text-align: center;
 }
@@ -819,8 +818,8 @@ div#resultPart3 {
 
 div.moreInfoContainer {
     padding: 15px;
-    border: 3px #888888 solid;
-    border-radius: 25px;
+    border: 0px #888888 solid;
+    border-radius: 10px;
 }
 
 div.rectangle {
