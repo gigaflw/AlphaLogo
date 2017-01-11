@@ -132,7 +132,7 @@
                             {%- for logo in row %}
                                 <div class="matchedResult" onclick="showChosenImgMoreInfo(this, 0)" dataFilename="{{logo.filename}}" dataEntName="{{logo.ent_name}}" dataInfo="{{logo.info}}" dataThemeColors="{{ logo.theme_colors|string }}" dataThemeWeights="{{logo.theme_weights|string}}" dataS="{{logo.s}}" dataV="{{logo.v}}" >
                                     <img src="{{ url_for('static',filename=logo.filename) }}" class="matchedImg" >
-                                    <div>{{ logo.ent_name }}</div>
+                                    <!-- <div>{{ logo.ent_name }}</div> -->
                                 </div>
                             {%- endfor %}
                         </div>
@@ -140,7 +140,8 @@
                 {% endif %}
             </div>
 
-            <div class="matchResultContainer" id="similarResultContainer">
+            <!-- <div class="matchResultContainer" id="similarResultContainer"> wrong id ?--> 
+            <div class="matchResultContainer" id="resultContainer">
                 <div class="resultTitle" id="similarResultTitle">
                     共搜索到{{ logo_similar|length }}个相似结果
                 </div>

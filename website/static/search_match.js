@@ -2,7 +2,7 @@
  * @Author: GigaFlower
  * @Date:   2016-12-23 23:12:23
  * @Last Modified by:   GigaFlower
- * @Last Modified time: 2016-12-23 23:16:48
+ * @Last Modified time: 2017-01-12 06:10:42
  */
 
 'use strict';
@@ -304,12 +304,14 @@ function moveMoreInfoChosenImg(mode) {
 function moveResultContainer(mode) {
     // mode0 = left move; mode1 = right move;
     if (mode == 0) {
+        divResultContainer.classList.add('compressed');
         if ( divResultContainer.style.marginRight == "0px") {
             divResultContainer.style.marginRight = "250px";
         } else {
             divResultContainer.style.marginRight = "500px";
         }
     } else {
+        divResultContainer.classList.remove('compressed');
         if ( divResultContainer.style.marginRight == "500px") {
             divResultContainer.style.marginRight = "250px";
         } else {
