@@ -381,6 +381,19 @@ img.previewImg{
     max-height: 200px;
 }
 
+canvas.canvasPage {
+    position: fixed;
+
+    top: 0px;
+    left: 0px;
+    z-index: -1;
+
+    width: 800px;
+    height: 600px;
+
+    opacity: 0.5;
+}
+
 .textDefaultStyle {
     padding-left:8px;
     padding-right:8px;
