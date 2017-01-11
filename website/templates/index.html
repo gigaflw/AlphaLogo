@@ -40,7 +40,7 @@
                 <input type="text" id="brightness" name="brightness" value="0,0,0" hidden>
                 <input type="text" id="industry" name="industry" value="0,0,0,0,0,0" hidden>
                 <div class="passiveAdvancedTitle" id="advanced">
-                    <span class="textDefaultStyle">高级搜索</span>
+                    <span class="textDefaultStyle">+</span>
                 </div>
                 <button type="submit" class="submit">Go</button>
             </form>
@@ -51,7 +51,7 @@
             <form id="imageForm" action="/match" enctype="multipart/form-data" method="POST">
                 <input type="text" name="textfield" id="textfield" class="textfield" placeholder="请选择一张logo图片" disabled="disable"> 
                 <input type="file" class="logo" id="logo" name="logo" onchange="showTextField()">
-                <input type="button" class="browse" id="browse" value="浏览">
+                <input type="button" class="browse" id="browse" value="+">
                 <input name="type" id="typeMatch" value="match" hidden>
                 <button type="submit" class="submit" id="imgSubmit">Go</button> 
             </form>
