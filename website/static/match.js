@@ -20,10 +20,10 @@ var idCurrentPointer = document.getElementById("currentPointer");
 
 window.addEventListener('load', function(){
     console.log('远看黄山黑黝黝,上面小来下面大,若将黄山倒过来,上面大来下面小');
-    modeMatch();
+    modeMatchInitial();
 });
 
-function modeMatch() {
+function modeMatchInitial() {
     divSearch.className = "linkTitle";
     divMatch.className = "currentLinkTitle";
     divAdvancedSearch.style.display = "none";

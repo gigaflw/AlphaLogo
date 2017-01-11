@@ -28,7 +28,7 @@ var logoNum = parseInt(idTriangleRight.getAttribute("dataLogoNum"));
 window.addEventListener('load', function(){
     console.log('远看黄山黑黝黝,上面小来下面大,若将黄山倒过来,上面大来下面小');
     resultPartInitialization();
-    modeSearch();
+    modeSearchInitial();
 });
 
 idTriangleLeft.addEventListener("click", function() {
@@ -43,7 +43,7 @@ idTriangleRight.addEventListener("click", function() {
     }
 })
 
-function modeSearch() {
+function modeSearchInitial() {
     divSearch.className = "currentLinkTitle";
     divMatch.className = "linkTitle";
     divAdvancedSearch.className = "passiveAdvancedTitle";
@@ -52,8 +52,8 @@ function modeSearch() {
     idInputSearch.style.display = "block";
     idInputMatch.style.display = "none";
     idAdvancedSearchPanel.style.transform = "rotateX(90deg)";
-    divResultContainer.style.marginRight = "0px";
     idCurrentPointer.style.left = "252px";
+    divResultContainer.style.marginRight = "0px";
 }
 
 function resultPartInitialization () {
