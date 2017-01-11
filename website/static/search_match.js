@@ -336,8 +336,7 @@ function fillMoreInfoChosenImg(pointer) {
     chosenPieTmp = chosenPieTmp.substring(1, chosenPieTmp.length - 2);
     chosenImgPie.textContent = chosenPieTmp + ",800";
     pieAnimationClick(chosenImgThemeColorsList);
-
-
+    chosenImgInfo.textContent = pointer.getAttribute("dataInfo");
     try {
         chosenImgThemeColor1.style.backgroundColor = chosenImgThemeColorsList[1].substring(3, 10);
         chosenImgThemeColorTitle1.style.title = chosenImgThemeColorsList[1];
@@ -347,9 +346,6 @@ function fillMoreInfoChosenImg(pointer) {
         chosenImgThemeWeights1.textContent = "(无其他主要颜色)";
         chosenImgThemeColor1.style.backgroundColor = "#FFFFFF";
     } //console.log(chosenImgThemeWeights0.textContent,chosenImgThemeWeights1.textContent,chosenImgThemeColorWeightsList[1].toString());
-    chosenImgInfo.textContent = pointer.getAttribute("dataInfo");
-
-
 }
 
 function pieAnimationClick(colorlist) {
@@ -373,6 +369,7 @@ function pieAnimationUpload() {
     for (var x = 0; x < colorlist.length; ++x) {
         tmp.push(colorlist[x].substring(2, 9));
     }
+    console.log(tmp);
     pieAnimation("chosenPie1", tmp);
 }
 

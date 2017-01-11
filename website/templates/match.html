@@ -1,108 +1,118 @@
-{% extends "layout.html" %} {% block title %}
-<title>LOGO相似匹配 - AlphaLogo</title>
-{% endblock %} {% block styles %}
-<link rel="stylesheet" href="static/search_match.css"> {% endblock %} {% block scripts %}
-<script src="static/search_match.js"></script>
-<script src="static/match.js"></script>
-<script src="static/jquery.js"></script>
-<script src="static/jquery.peity.js"></script>
-{% endblock %} {% block body %}
-<div class="container" id="totalContainer">
-    <div style="position: absolute; right: 300px; top: 0;">
-        Time consumed: {{ time }} sec
-    </div>
+{% extends "layout.html" %} 
 
-    <div class="titleContainerDefault" id="titleContainer">
-        <div class="title" id="title">
-            AlphaLogo
+{% block title %}
+    <title>LOGO相似匹配 - AlphaLogo</title>
+{% endblock %} 
+
+{% block styles %}
+    <link rel="stylesheet" href="static/search_match.css"> 
+{% endblock %} 
+
+{% block scripts %}
+    <script src="static/search_match.js"></script>
+    <script src="static/match.js"></script>
+    <script src="static/jquery.js"></script>
+    <script src="static/jquery.peity.js"></script>
+{% endblock %} 
+
+{% block body %}
+    <div class="container" id="totalContainer">
+        <div style="position: absolute; right: 300px; top: 0;">
+            Time consumed: {{ time }} sec
         </div>
-        <div class="linkBar">
-            <div class="linkTitle" id="search">
-                <span class="textDefaultStyle">搜索</span>
+
+        <div class="titleContainerDefault" id="titleContainer">
+            <div class="title" id="title">
+                AlphaLogo
             </div>
-            <div class="currentLinkTitle" id="match">
-                <span class="textDefaultStyle">匹配</span>
-            </div>
-            <div class="currentPointerMatch" id="currentPointer"></div>
-        </div>
-        <div class="input" id="inputSearch" hidden>
-            <form id="textForm" action="/search" method="GET">
-                <input type="text" class="keyword" name="kw" placeholder="请输入要搜索的logo特征">
-                <input name="type" id="typeSearch" value="search" hidden>
-                <input type="text" id="enterpriseName" name="enterpriseName" value="" hidden>
-                <input type="text" id="nColors" name="nColors" value="0,0,0,0,0" hidden>
-                <input type="text" id="saturation" name="saturation" value="0,0,0" hidden>
-                <input type="text" id="brightness" name="brightness" value="0,0,0" hidden>
-                <input type="text" id="industry" name="industry" value="0,0,0,0,0,0" hidden>
-                <div class="passiveAdvancedTitle" id="advanced">
-                    <span class="textDefaultStyle">高级搜索</span>
+            <div class="linkBar">
+                <div class="linkTitle" id="search">
+                    <span class="textDefaultStyle">搜索</span>
                 </div>
-                <button type="submit" class="submit">Go</button>
-            </form>
-        </div>
-        <div class="input" id="inputMatch">
-            <form id="imageForm" action="/match" enctype="multipart/form-data" method="POST">
-                <input type="text" name="textfield" id="textfield" class="textfield" value="{{ kw }}" disabled="disable">
-                <input type="file" class="logo" id="logo" name="logo" onchange="showTextField()">
-                <input type="button" class="browse" id="browse" value="浏览">
-                <input name="type" id="typeMatch" value="match" hidden>
-                <button type="submit" class="submit" id="imgSubmit">Go</button>
-            </form>
-        </div>
-
-        {% include "advanced_search_panel.html" %}
-    </div>
-
-    <div class="container" id="rightSideContainer">
-        <div class="moreInfoTargetImgDiv" id="previewDiv">
-            <div class="previewImgDiv" id="previewImgDiv">
-                <img src="/static/uploads/{{ upload.filename }}" class="previewImg" id="previewImg">
+                <div class="currentLinkTitle" id="match">
+                    <span class="textDefaultStyle">匹配</span>
+                </div>
+                <div class="currentPointerMatch" id="currentPointer"></div>
             </div>
-            </br>
-            <div class="moreInfoPie">
-                <div class="aboutColors">
-                    <p class="infoTitle"> 图像色彩分析</p>
-                    <span class="infoSubtitle">亮度&nbsp;{{upload.v}}</span>
-                    <div class="rectangle">
-                        <div class="rectanglePart" id="rect1a">{{upload.v}}</div>
+            <div class="input" id="inputSearch" hidden>
+                <form id="textForm" action="/search" method="GET">
+                    <input type="text" class="keyword" name="kw" placeholder="请输入要搜索的logo特征">
+                    <input name="type" id="typeSearch" value="search" hidden>
+                    <input type="text" id="enterpriseName" name="enterpriseName" value="" hidden>
+                    <input type="text" id="nColors" name="nColors" value="0,0,0,0,0" hidden>
+                    <input type="text" id="saturation" name="saturation" value="0,0,0" hidden>
+                    <input type="text" id="brightness" name="brightness" value="0,0,0" hidden>
+                    <input type="text" id="industry" name="industry" value="0,0,0,0,0,0" hidden>
+                    <div class="passiveAdvancedTitle" id="advanced">
+                        <span class="textDefaultStyle">高级搜索</span>
                     </div>
-                    <span class="infoSubtitle">饱和度&nbsp;{{upload.s}}</span>
-                    <div class="rectangle2">
-                        <div class="rectanglePart2" id="rect1b">{{upload.s}}</div>
+                    <button type="submit" class="submit">Go</button>
+                </form>
+            </div>
+            <div class="input" id="inputMatch">
+                <form id="imageForm" action="/match" enctype="multipart/form-data" method="POST">
+                    <input type="text" name="textfield" id="textfield" class="textfield" value="{{ kw }}" disabled="disable">
+                    <input type="file" class="logo" id="logo" name="logo" onchange="showTextField()">
+                    <input type="button" class="browse" id="browse" value="浏览">
+                    <input name="type" id="typeMatch" value="match" hidden>
+                    <button type="submit" class="submit" id="imgSubmit">Go</button>
+                </form>
+            </div>
+
+            {% include "advanced_search_panel.html" %}
+        </div>
+
+        <div class="container" id="rightSideContainer">
+            <div class="moreInfoTargetImgDiv" id="previewDiv">
+                <div class="previewImgDiv" id="previewImgDiv">
+                    <img src="/static/uploads/{{ upload.filename }}" class="previewImg" id="previewImg">
+                </div>
+                <div class="moreInfoContainer" id="moreInfoContainerForTarget">
+                    <div class="moreInfoTitle">
+                        <p class="infoTitle"> 产品或组织名称 </p>
+                        <span style="font-size: 15px">[您上传的图片] </span>
                     </div>
                     </br>
-                    <p class="infoTitle"> 图像主要颜色占比</p>
-                    <p class="uploadColorsList" id="uploadColorsList">{{upload.theme_colors}}</p>
-                    <div class="pieAnimationDiv">
-                        <span id="chosenPie1" class="pie">{{upload.theme_weights | join(",")}},800
-                            </span>
-                    </div>
-                </div>
+                    <div class="moreInfoPie">
+                        <div class="aboutColors">
+                            <p class="infoTitle"> 图像色彩分析</p>
+                            <span class="infoSubtitle">亮度&nbsp;{{upload.v}}</span>
+                            <div class="rectangle">
+                                <div class="rectanglePart" id="rect1a">{{upload.v}}</div>
+                            </div>
+                            <span class="infoSubtitle">饱和度&nbsp;{{upload.s}}</span>
+                            <div class="rectangle2">
+                                <div class="rectanglePart2" id="rect1b">{{upload.s}}</div>
+                            </div>
+                            </br>
+                            <p class="infoTitle"> 图像主要颜色占比</p>
+                            <p class="uploadColorsList" id="uploadColorsList">{{upload.theme_colors}}</p>
+                            <div class="pieAnimationDiv">
+                                <span id="chosenPie1" class="pie">{{upload.theme_weights | join(",")}},800
+                                </span>
+                            </div>
+                        </div>
 
-                <div class="auxForMargin">*返回最主要的两个颜色</div>
-                <div class="colorDetail">
-                    <div class="colorDetailBlock" style="background-color: {{upload.theme_colors[0]}}">
-                        <abbr class="linkShowInfo" onlick="return false;" title={{upload.theme_colors[0]}}></abbr> 
-                    </div>
-                    <div class="auxForMargin"></div>
-                    <div class="colorDetail">
-                        <div class="colorDetailBlock" style="background-color: {{upload.theme_colors[0]}}">
-                            <abbr class="linkShowInfo" onlick="return false;" title={{upload.theme_colors[0]}}></abbr>
+                        <div class="auxForMargin">*返回最主要的两个颜色</div>
+                        <div class="colorDetail">
+                            <div class="colorDetailBlock" style="background-color: {{upload.theme_colors[0]}}">
+                                <abbr class="linkShowInfo" onlick="return false;" title={{upload.theme_colors[0]}}></abbr>
+                            </div>
+                            <div class="colorDetailFigure"> {{upload.theme_weights[0]}} </div>
+                            <div class="colorDetailBlock" style="background-color: {{upload.theme_colors[1]}}">
+                                <abbr class="linkShowInfo" onlick="return false;" title={{upload.theme_colors[1]}}></abbr>
+                            </div>
+                            <div class="colorDetailFigure"> {{upload.theme_weights[1]}} </div>
                         </div>
-                        <div class="colorDetailFigure"> {{upload.theme_weights[0]}} </div>
-                        <div class="colorDetailBlock" style="background-color: {{upload.theme_colors[1]}}">
-                            <abbr class="linkShowInfo" onlick="return false;" title={{upload.theme_colors[1]}}></abbr>
-                        </div>
-                        <div class="colorDetailFigure"> {{upload.theme_weights[1]}} </div>
                     </div>
-                </div>
-            </div>
-            </br>
-            <div class="moreText">
-                <p class="infoTitle">图像说明</p>
-                <div class="moreText">
-                    <p>这是您上传的图片~</p>
-                    <abbr class="moreText" title="这是您上传的图片~(嗯我只能告诉你这么多了！)">MORE</abbr>
+                    </br>
+                    <div class="moreText">
+                        <p class="infoTitle">图像说明</p>
+                        <div class="moreText">
+                            <p>这是您上传的图片~</p>
+                            <abbr class="moreText" title="这是您上传的图片~(嗯我只能告诉你这么多了！)">MORE</abbr>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -110,10 +120,9 @@
         <div class="moreInfoChosenImgDivLeft" id="chosenImgDiv">
             {% include "moreinfo_side_container.html" %}
         </div>
-    </div>
 
-    <div class="resultContainerPositionMatch" id="resultContainer">
-        <div class="container" id="matchedResultContainer">
+        <div class="resultContainerPositionMatch" id="resultContainer">
+            <div class="container" id="matchedResultContainer">
                 {% if (logo_matched|length > 0) %}
                     <div class="resultTitle" id="matchedResultTitle">
                         您要找的是不是：
@@ -147,9 +156,9 @@
                     </div>
                 {%- endfor %}
             </div>
-
-            <script type="text/javascript" src="static/canvas-nest.min.js"></script>
-            <canvas class="canvasPage" id="canvasPage"></canvas> {% endblock %}
         </div>
+
+        <script type="text/javascript" src="static/canvas-nest.min.js"></script>
+        <canvas class="canvasPage" id="canvasPage"></canvas>
     </div>
-</div>
+ {% endblock %}
