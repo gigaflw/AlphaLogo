@@ -39,6 +39,7 @@ div.linkBar {
     position: relative;
 
     height: 40px;
+    width: 300px;
 
     margin: 5px auto;
 
@@ -51,7 +52,7 @@ div.currentPointer {
     position: absolute;
     background-color: #0000FF;
 
-    left: 320px;
+    left: 32px;
     bottom: -2px;
 
     height: 4px;

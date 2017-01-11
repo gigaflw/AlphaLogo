@@ -97,7 +97,7 @@ function modeSearch() {
     idInputMatch.style.display = "none";
     idTitle.className = "title";
     idAdvancedSearchPanel.style.transform = "rotateX(90deg)";
-    idCurrentPointer.style.left = "320px";
+    idCurrentPointer.style.left = "32px";
 }
 
 function modeMatch() {
@@ -108,7 +108,7 @@ function modeMatch() {
     idInputMatch.style.display = "block";
     idTitle.className = "title";
     idAdvancedSearchPanel.style.transform = "rotateX(90deg)";
-    idCurrentPointer.style.left = "443px";
+    idCurrentPointer.style.left = "157px";
 }
 
 function switchAdvancedSearch() {
