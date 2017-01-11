@@ -73,12 +73,13 @@
                         </div>
                         </br>
                         <p class="infoTitle"> 图像主要颜色占比</p>
+                        <p class="uploadColorsList" id="uploadColorsList">{{upload.theme_colors}}</p>
                         <div class="pieAnimationDiv">
                             <span id="chosenPie1" class="pie">{{upload.theme_weights | join(",")}},800
                             </span>
                         </div>
                     </div>
-                    <div class="auxForMargin"></div>
+                    <div class="auxForMargin">*返回最主要的两个颜色</div>
                     <div class="colorDetail">
                         <div class="colorDetailBlock" style="background-color: {{upload.theme_colors[0]}}">
                             <abbr class="linkShowInfo" onlick="return false;" title={{upload.theme_colors[0]}}></abbr>
@@ -95,9 +96,7 @@
                     <p class="infoTitle">图像说明</p>
                     <div class="moreText">
                         <p>这是您上传的图片~</p>
-                        <abbr class="moreText" onclick="return false;" title="这是您上传的图片~">
-                            MORE
-                        </abbr> {{ upload.info }}
+                        <abbr class="moreText" title="这是您上传的图片~(嗯我只能告诉你这么多了！)">MORE</abbr> {{ upload.info }}
                     </div>
                 </div>
             </div>
@@ -125,7 +124,7 @@
                     <img src="{{ url_for('static',filename=logo.filename) }}" class="matchedImg">
                     <div>
                         {% for color in logo.theme_colors %}
-                        <div style="width: 20px;height: 20px;float:left;background-color: {{color}}"></div>
+                        <div style="width: 20px; height: 20px; float:left; background-color: {{color}}"></div>
                         {% endfor %}
                     </div>
                     {{ logo.s }} {{ logo.v }}

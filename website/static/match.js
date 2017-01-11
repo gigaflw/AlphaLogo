@@ -52,22 +52,3 @@ function modeMatch() {
 })();
 
 
-(function() {
-    var rectangleTmp3 = 111;
-    setInterval(function() {
-        var temp3 = document.getElementById('chosenRectSaturation')
-        var rectvalue3 = temp3.textContent;
-        temp3.style = "width:" + Math.min(100,rectangleTmp3) + "%";
-        rectangleTmp3 = parseInt(rectangleTmp3 * 0.92 + (100 - rectvalue3 * 100) * 0.08);
-    }, 50);
-})();
-
-(function() {
-    var rectangleTmp4 = 111;
-    setInterval(function() {
-        var temp4 = document.getElementById('chosenRectValue')
-        var rectvalue4 = temp4.textContent;
-        temp4.style = "width:" + Math.min(100,rectangleTmp4) + "%";
-        rectangleTmp4 = parseInt(rectangleTmp4 * 0.92 + (100 - rectvalue4 * 100) * 0.08);
-    }, 50);
-})();

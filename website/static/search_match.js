@@ -60,11 +60,14 @@ var chosenImgThemeColor1 = document.getElementById("chosenImgThemeColor1");
 var chosenImgThemeColorTitle1 = document.getElementById("chosenImgThemeColorTitle1");
 var chosenImgThemeWeights1 = document.getElementById("chosenImgThemeWeights1");
 var chosenImgInfo = document.getElementById("chosenImgInfo");
+var timer_pie = null;
 
 window.addEventListener('load', function() {
     advancedSearchTypeInitialization();
     titleContainerActivate();
-    pieAnimation("chosenPie1", ["red", "green",'pink']);
+    pieAnimationUpload();
+    setRectLength(chosenImgRectSaturation);
+    setRectLength(chosenImgRectValue);
 });
 
 window.onscroll = function() {
@@ -300,26 +303,10 @@ function moveResultContainer(mode) {
             divResultContainer.className = "defaultPositionedResultContainer";
         }
     }
-}
-
-// var currentChosenImg = null;
-// var divChosenImg = document.getElementById("chosenImgDiv");
-// var chosenImg = document.getElementById("chosenImg");
-// var chosenImgEntName = document.getElementById("chosenImgEntName");
-// var chosenImgSaturation = document.getElementById("chosenImgSaturation");
-// var chosenImgValue = document.getElementById("chosenImgValue");
-// var chosenImgRectSaturation = document.getElementById("chosenRectSaturation");
-// var chosenImgRectValue = document.getElementById("chosenRectValue");
-// var chosenImgPie = document.getElementById("chosenPie");
-// var chosenImgThemeColor0 = document.getElementById("chosenImgThemeColor0");
-// var chosenImgThemeColorTitle0 = document.getElementById("chosenImgThemeColorTitle0");
-// var chosenImgThemeWeights0 = document.getElementById("chosenImgThemeWeights0");
-// var chosenImgThemeColor1 = document.getElementById("chosenImgThemeColor1");
-// var chosenImgThemeColorTitle1 = document.getElementById("chosenImgThemeColorTitle1");
-// var chosenImgThemeWeights1 = document.getElementById("chosenImgThemeWeights1");
-// var chosenImgInfo = document.getElementById("chosenImgInfo");
+};
 
 function fillMoreInfoChosenImg(pointer) {
+
     chosenImg.src = "/static/" + pointer.getAttribute("dataFilename");
     chosenImgEntName.textContent = pointer.getAttribute("dataEntName");
     chosenImgSaturation.textContent = pointer.getAttribute("dataS");
@@ -328,36 +315,52 @@ function fillMoreInfoChosenImg(pointer) {
     chosenImgRectValue.textContent = pointer.getAttribute("dataV");
     var chosenImgThemeColorsList = extractListElement(pointer.getAttribute("dataThemeColors"));
     var chosenImgThemeColorWeightsList = extractListElement(pointer.getAttribute("dataThemeWeights"));
-    chosenImgThemeColor0.style.backgroundColor = chosenImgThemeColorsList[0];
+    chosenImgThemeColor0.style.backgroundColor = chosenImgThemeColorsList[0].substring(2, 9);
     chosenImgThemeColorTitle0.style.title = chosenImgThemeColorsList[0];
-    chosenImgThemeWeights0.textContent = chosenImgThemeColorWeightsList[0];
+    chosenImgThemeWeights0.textContent = (chosenImgThemeColorWeightsList[0].toString() + '000000000').substring(0, 7);
     var chosenPieTmp = pointer.getAttribute("dataThemeWeights");
     var chosenPieColor = pointer.getAttribute("dataThemeColors");
     chosenPieTmp = chosenPieTmp.substring(1, chosenPieTmp.length - 2);
     chosenImgPie.textContent = chosenPieTmp + ",800";
+    pieAnimationClick(chosenImgThemeColorsList);
 
-    chosenImgThemeColor1.style.backgroundColor = chosenImgThemeColorsList[1];
-    chosenImgThemeColorTitle1.style.title = chosenImgThemeColorsList[1];
-    chosenImgThemeWeights1.textContent = chosenImgThemeColorWeightsList[1];
+
+    try {
+        chosenImgThemeColor1.style.backgroundColor = chosenImgThemeColorsList[1].substring(3, 10);
+        chosenImgThemeColorTitle1.style.title = chosenImgThemeColorsList[1];
+        chosenImgThemeWeights1.textContent = (chosenImgThemeColorWeightsList[1].toString() + '000000000').substring(0, 8);
+    } catch (e) {
+        console.log(e.message);
+        chosenImgThemeWeights1.textContent = "(无其他主要颜色)";
+        chosenImgThemeColor1.style.backgroundColor = "#FFFFFF";
+    } //console.log(chosenImgThemeWeights0.textContent,chosenImgThemeWeights1.textContent,chosenImgThemeColorWeightsList[1].toString());
     chosenImgInfo.textContent = pointer.getAttribute("dataInfo");
 
 
-    pieAnimationClick(chosenImgThemeColorsList);
-    setRectLength(chosenImgRectSaturation);
-    setRectLength(chosenImgRectValue);
 }
 
 function pieAnimationClick(colorlist) {
-    var resList=[];
-    //console.log(colorlist);
-    var tmp='';
-    resList.push(colorlist[0].toString(16).substring(2,9));
+    var resList = [];
+    var tmp = '';
+    resList.push(colorlist[0].toString(16).substring(2, 9));
     for (var i = 1; i < colorlist.length; i++) {
         tmp = colorlist[i];
-        resList.push(tmp.toString(16).substring(3,10));
-        //console.log(resList);
+        resList.push(tmp.toString(16).substring(3, 10));
     }
-    pieAnimation("chosenPie", resList);
+    if (timer_pie != null) {
+        clearInterval(timer_pie);
+    }
+    timer_pie = pieAnimation("chosenPie", resList);
+}
+
+function pieAnimationUpload() {
+    var tmp = [];
+    var colorlist = document.getElementById(
+        "uploadColorsList").textContent.split(',');
+    for (var x = 0; x < colorlist.length; ++x) {
+        tmp.push(colorlist[x].substring(2, 9));
+    }
+    pieAnimation("chosenPie1", tmp);
 }
 
 function extractListElement(listInStr) {
@@ -369,22 +372,18 @@ function extractListElement(listInStr) {
 
 function setRectLength(rect) {
     var rectangleTmp = 111;
-    setInterval(function() {
+    var timerID = setInterval(function() {
         var rectValue = rect.textContent;
         rect.style.width = Math.min(100, rectangleTmp) + "%";
-        rectangleTmp = parseInt(rectangleTmp * 0.9 + (100 - rectValue * 100) * 0.1);
+        rectangleTmp = parseInt(rectangleTmp * 0.88 + (100 - rectValue * 100) * 0.12);
     }, 50);
+    return timerID;
 }
-// function drawPie(pieNo,portion,colors){
-// document.write('<span id="pie'+pieNo+'" class="pie">'+{{logo_matched[0].theme_weights | join(",")}}',800                            </span>")
 
-function pieAnimation(pieNo, colors_tmp) {
-
-    //alert(colors_tmp);
+function pieAnimation(pieID, colors_tmp) {
     colors_tmp.push("white");
-    //alert(colors_tmp);
-    var updatingChart = $("#" + pieNo).peity("pie", { "fill": colors_tmp, "radius": 38 })
-    setInterval(function() {
+    var updatingChart = $("#" + pieID).peity("pie", { "fill": colors_tmp, "radius": 38 })
+    var timerID = setInterval(function() {
         var values = updatingChart.text().split(",");
         var tmp = values.pop();
         if (tmp > 100) {
@@ -398,7 +397,6 @@ function pieAnimation(pieNo, colors_tmp) {
         }
         values.push(tmp);
         updatingChart.text(values.join(",")).change();
-    }, 60)
+    }, 60);
+    return timerID;
 };
-
-// }

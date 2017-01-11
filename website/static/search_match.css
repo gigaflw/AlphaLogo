@@ -542,9 +542,6 @@ div.moreInfoChosenImgDivDoubleLeft {
     padding-right: 8px;
 }
 
-
-/*-----------------------------------------------------------------------------------------*/
-
 div.moreInfoContainer {
     padding: 15px;
     border: 3px #888888 solid;
@@ -612,6 +609,10 @@ div.auxForMargin {
     width: 100%;
     height: 15px;
     display: block;
+    text-align: left;
+    font-size: 9px;
+    color: #555555;
+    padding-bottom: 9px;
 }
 
 div.colorDetail {
@@ -653,7 +654,7 @@ p.infoTitle {
     border-bottom-width: 1px;
     border-bottom-color: #555555;
     border-style: solid;
-    margin-bottom: 1px;
+    margin-bottom: 3px;
     text-align: left;
     overflow-y: hidden;
 }
@@ -685,15 +686,26 @@ abbr.moreText {
 
 div.moreText {
     height: 150px;
+    overflow-x: hidden;
     overflow-y: hidden;
     min-width: 150px;
-    text-align: left;
+    font-size: 12px;
+    text-align: justify;
+    line-height: 130%;
 }
 
-p.moreText {
+div.moreText2 {
     height: 150px;
     overflow-x: hidden;
+    overflow-y: scroll;
     min-width: 150px;
-    font-size: 9px;
+    font-size: 12px;
     text-align: left;
+    line-height: 130%;
+}
+
+
+p.uploadColorsList {
+    font-size: 0px;
+    height: 0px;
 }
