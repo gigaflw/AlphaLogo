@@ -121,18 +121,9 @@
                     {%- for row in logo_matched|batch(2) %}
                         <div class="imgMatchedResultRow">
                             {%- for logo in row %}
-                                <div class="matchedResult" onclick="showChosenImgMoreInfo(this, 0)" dataFilename={{logo.filename}} dataEntName={{logo.ent_name}} 
-                                dataInfo={{logo.info}} dataThemeColors="{{ logo.theme_colors|string }}" dataThemeWeights={{logo.theme_weights|string}} dataS={{logo.s}} 
-                                dataV={{logo.v}} >
-                                    <div>{{ logo.ent_name }}</div>
+                                <div class="matchedResult" onclick="showChosenImgMoreInfo(this, 0)" dataFilename="{{logo.filename}}" dataEntName="{{logo.ent_name}}" dataInfo="{{logo.info}}" dataThemeColors="{{ logo.theme_colors|string }}" dataThemeWeights="{{logo.theme_weights|string}}" dataS="{{logo.s}}" dataV="{{logo.v}}" >
                                     <img src="{{ url_for('static',filename=logo.filename) }}" class="matchedImg" >
-                                    <div>
-                                    {% for color in logo.theme_colors %}
-                                        <div style="width: 20px;height: 20px;float:left;background-color: {{color}}"></div>
-                                    {% endfor %}
-                                    </div>
-                                    {{ logo.s }}
-                                    {{ logo.v }}
+                                    <div>{{ logo.ent_name }}</div>
                                 </div>
                             {%- endfor %}
                         </div>
@@ -148,18 +139,9 @@
                 {%- for row in logo_similar|batch(3) %}
                     <div class="imgSimilarResultRow">
                         {%- for logo in row %}
-                            <div class="similarResult" onclick="showChosenImgMoreInfo(this, 1)" dataFilename={{logo.filename}} dataEntName={{logo.ent_name}} 
-                            dataInfo={{logo.info}} dataThemeColors="{{ logo.theme_colors|string }}" dataThemeWeights={{logo.theme_weights}} dataS={{logo.s}} 
-                            dataV={{logo.v}} >
-                                <div>{{ logo.ent_name }}</div>
+                            <div class="similarResult" onclick="showChosenImgMoreInfo(this, 1)" dataFilename="{{logo.filename}}" dataEntName="{{logo.ent_name}}" dataInfo="{{logo.info}}" dataThemeColors="{{ logo.theme_colors|string }}" dataThemeWeights="{{logo.theme_weights|string}}" dataS="{{logo.s}}" dataV="{{logo.v}}" >
                                 <img src="{{ url_for('static',filename=logo.filename) }}" class="similarImg" >
-                                <div>
-                                {% for color in logo.theme_colors %}
-                                    <div style="width: 20px;height: 20px;float:left;background-color: {{color}}"></div>
-                                {% endfor %}
-                                </div>
-                                {{ logo.s }}
-                                {{ logo.v }}
+                                <div>{{ logo.ent_name }}</div>
                             </div>
                         {%- endfor %}
                     </div>
