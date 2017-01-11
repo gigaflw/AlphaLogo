@@ -500,8 +500,8 @@ div.matchedResult {
     margin: 50px; 
     padding: 20px 0px 0px 0px;
 
-    width: 200px;
-    height: 220px;
+    width: 170px;
+    height: 190px;
 
     box-shadow: 3px 3px 6px 2px #888888;
 
@@ -530,8 +530,8 @@ div.matchedResultActive {
     margin: 50px; 
     padding: 20px 0px 0px 0px;
 
-    width: 200px;
-    height: 220px;
+    width: 170px;
+    height: 190px;
     
     box-shadow: 3px 3px 6px 2px #888888;
 
@@ -596,8 +596,8 @@ div.similarResultActive {
 img.matchedImg {
     padding: 10px 0 10px 0;
 
-    max-width: 180px;
-    max-height: 180px;
+    max-width: 150px;
+    max-height: 150px;
 }
 
 img.similarImg {
