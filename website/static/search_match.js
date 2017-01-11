@@ -349,13 +349,13 @@ function fillMoreInfoChosenImg(pointer) {
 
 function pieAnimationClick(colorlist) {
     var resList=[];
-    console.log(colorlist);
+    //console.log(colorlist);
     var tmp='';
     resList.push(colorlist[0].toString(16).substring(2,9));
     for (var i = 1; i < colorlist.length; i++) {
         tmp = colorlist[i];
         resList.push(tmp.toString(16).substring(3,10));
-        console.log(resList);
+        //console.log(resList);
     }
     pieAnimation("chosenPie", resList);
 }
@@ -372,7 +372,7 @@ function setRectLength(rect) {
     setInterval(function() {
         var rectValue = rect.textContent;
         rect.style.width = Math.min(100, rectangleTmp) + "%";
-        rectangleTmp = parseInt(rectangleTmp * 0.92 + (100 - rectValue * 100) * 0.08);
+        rectangleTmp = parseInt(rectangleTmp * 0.9 + (100 - rectValue * 100) * 0.1);
     }, 50);
 }
 // function drawPie(pieNo,portion,colors){
@@ -380,9 +380,9 @@ function setRectLength(rect) {
 
 function pieAnimation(pieNo, colors_tmp) {
 
-    alert(colors_tmp);
+    //alert(colors_tmp);
     colors_tmp.push("white");
-    alert(colors_tmp);
+    //alert(colors_tmp);
     var updatingChart = $("#" + pieNo).peity("pie", { "fill": colors_tmp, "radius": 38 })
     setInterval(function() {
         var values = updatingChart.text().split(",");
@@ -398,7 +398,7 @@ function pieAnimation(pieNo, colors_tmp) {
         }
         values.push(tmp);
         updatingChart.text(values.join(",")).change();
-    }, 40)
+    }, 60)
 };
 
 // }
