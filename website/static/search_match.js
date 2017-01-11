@@ -23,6 +23,7 @@ var idSaturation = document.getElementById("saturation");
 var idBrightness = document.getElementById("brightness");
 var idImgSubmit = document.getElementById("imgSubmit");
 var divResultContainer = document.getElementById("resultContainer");
+var idCurrentPointer = document.getElementById("currentPointer");
 
 var divAdvancedSearch = document.getElementById("advanced");
 var idAdvancedSearchPanel = document.getElementById("advancedSearchPanel");
@@ -115,6 +116,7 @@ function modeSearch() {
     idInputSearch.style.display = "block";
     idInputMatch.style.display = "none";
     idAdvancedSearchPanel.style.transform = "rotateX(90deg)";
+    idCurrentPointer.style.left = "252px";
 }
 
 function modeMatch() {
@@ -124,6 +126,7 @@ function modeMatch() {
     idInputSearch.style.display = "none";
     idInputMatch.style.display = "block";
     idAdvancedSearchPanel.style.transform = "rotateX(90deg)";
+    idCurrentPointer.style.left = "375px";
 }
 
 function switchAdvancedSearch() {
@@ -287,16 +290,16 @@ function moveMoreInfoChosenImg(mode) {
 function moveResultContainer(mode) {  
     // mode0 = left move; mode1 = right move;
     if (mode == 0) {
-        if ( divResultContainer.className == "leftPositionedResultContainer") {
-            divResultContainer.className = "doubleLeftPositionedContainer";
+        if ( divResultContainer.style.marginRight == "0px") {
+            divResultContainer.style.marginRight = "250px";
         } else {
-            divResultContainer.className = "leftPositionedResultContainer";
+            divResultContainer.style.marginRight = "500px";
         }
     } else {
-        if ( divResultContainer.className == "doubleLeftPositionedContainer") {
-            divResultContainer.className = "leftPositionedResultContainer";
+        if ( divResultContainer.style.marginRight == "500px") {
+            divResultContainer.style.marginRight = "250px";
         } else {
-            divResultContainer.className = "defaultPositionedResultContainer";
+            divResultContainer.style.marginRight = "0px";
         }
     }
 }

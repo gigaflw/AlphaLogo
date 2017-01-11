@@ -36,11 +36,26 @@ div.titleUp {
 }
 
 div.linkBar {
+    position: relative;
+
     height: 40px;
 
     margin: 5px auto;
 
     text-align: center;
+}
+
+div.currentPointer {
+    transition: left 0.5s;
+
+    position: absolute;
+    background-color: #0000FF;
+
+    left: 320px;
+    bottom: -2px;
+
+    height: 4px;
+    width: 110px;
 }
 
 div.linkTitle {
@@ -77,11 +92,6 @@ div.currentLinkTitle {
 
     margin: 0 -2.5px;
     padding-top: 10px;
-
-    border: 2px transparent solid;
-    border-bottom-width: 4px;
-    border-bottom-color: #0000FF;
-    border-radius: 5px;
 
     text-align: center;
     font-size: 18px;

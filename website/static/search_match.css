@@ -29,25 +29,29 @@ div#similarResultContainer {
     justify-content: flex-start;
 }
 
-div.defaultPositionedResultContainer {
+div.resultContainerPositionSearch {
     transition: margin-right 1.2s;
+    display: flex;
+    position: relative;
 
-    margin: 10px 0 0 0;
+    margin-top: 10px;
+    margin-right: 0px;
     padding: 20px; 
 
     width: 100%;
 
-    border: 3px #FFFFFF solid;
-    border-radius: 20px;
-    box-shadow: 3px 3px 6px 2px #888888;
-
     flex-grow: 10;
+    flex-flow: row wrap;
+    justify-content: flex-start;
 }
 
-div.leftPositionedResultContainer {
+div.resultContainerPositionMatch {
     transition: margin-right 1.2s;
+    display: flex;
+    position: relative;
 
-    margin: 10px 250px 0 0;
+    margin-top: 10px;
+    margin-right: 250px;
     padding: 20px; 
 
     width: 100%;
@@ -57,20 +61,8 @@ div.leftPositionedResultContainer {
     box-shadow: 3px 3px 6px 2px #888888;
 
     flex-grow: 10;
-}
-div.doubleLeftPositionedContainer {
-    transition: margin-right 1.2s;
-
-    margin: 10px 500px 0 0;
-    padding: 20px; 
-
-    width: 100%;
-
-    border: 3px #FFFFFF solid;
-    border-radius: 20px;
-    box-shadow: 3px 3px 6px 2px #888888;
-
-    flex-grow: 10;
+    flex-flow: row wrap;
+    justify-content: flex-start;
 }
 
 div.titleContainerDefault {
@@ -128,12 +120,40 @@ div.title {
 }
 
 div.linkBar {
+    position: relative;
+
     height: 40px;
     width: 700px;
 
     padding: 5px 5px 15px 15px;
 
     text-align: left;
+}
+
+div.currentPointerSearch {
+    transition: left 0.5s;
+
+    position: absolute;
+    background-color: #0000FF;
+
+    left: 252px;
+    bottom: 12px;
+
+    height: 4px;
+    width: 110px;
+}
+
+div.currentPointerMatch {
+    transition: left 0.5s;
+
+    position: absolute;
+    background-color: #0000FF;
+
+    left: 375px;
+    bottom: 12px;
+
+    height: 4px;
+    width: 110px;
 }
 
 div.linkTitle {
@@ -170,11 +190,6 @@ div.currentLinkTitle {
 
     margin: 0 -2.5px;
     padding-top: 10px;
-
-    border: 2px transparent solid;
-    border-bottom-width: 4px;
-    border-bottom-color: #0000FF;
-    border-radius: 5px;
 
     text-align: center;
     font-size: 18px;
@@ -630,6 +645,7 @@ div.moreInfoChosenImgDivDefault {
 
     top: 0px;
     right: -240px;
+    z-index: 100;
 
     height: 99%;
     width: 230px;
@@ -647,6 +663,7 @@ div.moreInfoChosenImgDivLeft {
 
     top: 0px;
     right: 0px;
+    z-index: 100;
 
     height: 99%;
     width: 230px;
@@ -672,6 +689,118 @@ div.moreInfoChosenImgDivDoubleLeft {
     border-radius: 25px;
 
     text-align: center;
+}
+
+div.sideButtonRight {
+    position: fixed;
+    background-color: transparent;
+
+    top: 40%;
+    right: 0;
+    z-index: 150;
+
+    height: 100px;
+    width: 50px;
+
+    border: 1px #AAAAAA solid;
+    border-radius: 15px;
+}
+
+div.triangleRight {
+    margin-left: 18px;
+    margin-top: 30px;
+
+    z-index: 150;
+
+    width: 0px;
+    height: 0px;
+    
+    border: 20px solid transparent;
+    border-left: 20px solid #888888;
+}
+div.triangleRight:hover {
+    border-left: 20px solid #222222;
+}
+
+div.triangleRightUnable {
+    margin-left: 18px;
+    margin-top: 30px;
+
+    z-index: 150;
+
+    width: 0px;
+    height: 0px;
+    
+    border: 20px solid transparent;
+    border-left: 20px solid #DDDDDD;
+}
+
+div.sideButtonLeft {
+    position: fixed;
+    background-color: transparent;
+
+    top: 40%;
+    left: 0;
+    z-index: 150;
+
+    height: 100px;
+    width: 50px;
+
+    border: 1px #AAAAAA solid;
+    border-radius: 15px;
+}
+
+div.triangleLeft {
+    margin-left: -8px;
+    margin-top: 30px;
+
+    z-index: 150;
+
+    width: 0px;
+    height: 0px;
+    
+    border: 20px solid transparent;
+    border-right: 20px solid #888888;
+}
+div.triangleLeft:hover {
+    border-right: 20px solid #222222;
+}
+
+div.triangleLeftUnable {
+    margin-left: -8px;
+    margin-top: 30px;
+
+    z-index: 150;
+
+    width: 0px;
+    height: 0px;
+    
+    border: 20px solid transparent;
+    border-right: 20px solid #DDDDDD;
+}
+
+div.resultPartPositionDefault {
+    transition: margin-right,left,opacity 1.2s,3s,1s;
+    position: absolute;
+
+    padding-top: 50px;
+
+    top: 0px;
+    left: 0%;
+
+    width: 99%;
+
+    opacity: 0;
+
+    border: 3px #FFFFFF solid;
+    border-radius: 20px;
+    box-shadow: 3px 3px 6px 2px #888888;
+}
+div#resultPart2 {
+    left: 140%;
+}
+div#resultPart3 {
+    left: 280%;
 }
 
 .textDefaultStyle {

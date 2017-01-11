@@ -50,14 +50,14 @@ def search():
             logo_matched, t = search_(keywords=kw, ent_name=ent_name, n_colors=n_color_list,
                                    saturation_levels=saturation_list, value_levels=value_list)
 
-        flash("Time consumed: %.5f sec" % t)
+        #flash("Time consumed: %.5f sec" % t)
 
         # new parameter `n_colors` is added to search function!
         # also `Logo` instance has one more property `theme_colors`
         # It will be required to match `n_colors` goodly to gain a 'good match'!
         # more detail can be seen in the docstring of `core.search.text_search`
 
-    return render_template(tmpl, logo_matched=logo_matched, logo_similar=[], kw=kw, ent_name=ent_name, n_colors=n_colors)
+    return render_template(tmpl, logo_matched=logo_matched, logo_similar=[], kw=kw, ent_name=ent_name, n_colors=n_colors, time=t)
 
 
 @bp.route('/match', methods=['POST'])
@@ -87,7 +87,7 @@ def match():
         return redirect(url_for("bp.index"))
     else:
         (logo_matched, logo_similar), t = image_search(full_path_uploads(upload_name))
-        flash("Time consumed: %.5f sec" % t)
+        #flash("Time consumed: %.5f sec" % t)
 
     return render_template(tmpl, logo_matched=logo_matched, logo_similar=logo_similar,
                            kw=kw, upload=uploaded_logo, time=t)

@@ -17,17 +17,22 @@
 
 {% block body %}
     <div class="container" id="totalContainer">
+        <div style="position: absolute; right: 300px; top: 0;">
+            Time consumed: {{ time }} sec
+        </div>
+
         <div class="titleContainerDefault" id="titleContainer">
             <div class="title" id="title">
                 AlphaLogo
             </div>
             <div class="linkBar">
-                <div class="currentLinkTitle" id="search">
+                <div class="linkTitle" id="search">
                     <span class="textDefaultStyle">搜索</span>
                 </div>
-                <div class="linkTitle" id="match">
+                <div class="currentLinkTitle" id="match">
                     <span class="textDefaultStyle">匹配</span>
                 </div>
+                <div class="currentPointerMatch" id="currentPointer"></div>
             </div>
             <div class="input" id="inputSearch" hidden>
                 <form id="textForm" action="/search" method="GET">
@@ -124,9 +129,8 @@
         </div>
 
 
-        <div class="leftPositionedResultContainer" id="resultContainer">
+        <div class="resultContainerPositionMatch" id="resultContainer">
             <div class="container" id="matchedResultContainer">
-
                 {% if (logo_matched|length > 0) %}
                     <div class="resultTitle" id="matchedResultTitle">
                         您要找的是不是：

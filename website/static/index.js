@@ -22,6 +22,7 @@ var idSaturation = document.getElementById("saturation");
 var idBrightness = document.getElementById("brightness");
 var idPreviewImg = document.getElementById("previewImg");
 var idImgSubmit = document.getElementById("imgSubmit");
+var idCurrentPointer = document.getElementById("currentPointer");
 
 var divAdvancedSearch = document.getElementById("advanced");
 var idAdvancedSearchPanel = document.getElementById("advancedSearchPanel");
@@ -96,6 +97,7 @@ function modeSearch() {
     idInputMatch.style.display = "none";
     idTitle.className = "title";
     idAdvancedSearchPanel.style.transform = "rotateX(90deg)";
+    idCurrentPointer.style.left = "320px";
 }
 
 function modeMatch() {
@@ -106,6 +108,7 @@ function modeMatch() {
     idInputMatch.style.display = "block";
     idTitle.className = "title";
     idAdvancedSearchPanel.style.transform = "rotateX(90deg)";
+    idCurrentPointer.style.left = "443px";
 }
 
 function switchAdvancedSearch() {
