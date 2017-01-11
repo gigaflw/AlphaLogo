@@ -114,7 +114,7 @@ class Searcher(object):
             if not industry :
                 return True
             else:
-                return logo.industry == industry
+                return logo.industry in industry
 
         filters = lambda logo: all(f(logo) for f in (check_ent_name, check_n_colors,
                                                      check_sat, check_val, check_indu))

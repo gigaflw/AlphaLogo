@@ -34,12 +34,14 @@ def search():
     n_colors = request.args.get('nColors')
     saturation = request.args.get('saturation')
     value = request.args.get('brightness')
+    industry = request.args.get('industry')
     tmpl = "search.html"
     search_ = text_search
 
     n_color_list = data_convertion(n_colors, 1)
     saturation_list = data_convertion(saturation)
     value_list = data_convertion(value)
+    industry_list = data_convertion(industry)
 
     if len(kw) == 0:
         return redirect(url_for("bp.index"))
@@ -49,7 +51,7 @@ def search():
         else:
             logo_matched, t = search_(keywords=kw, ent_name=ent_name, n_colors=n_color_list,
                                    saturation_levels=saturation_list, value_levels=value_list,
-                                   industry=1)
+                                   industry=industry_list)
 
         #flash("Time consumed: %.5f sec" % t)
 

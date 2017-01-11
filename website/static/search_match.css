@@ -42,7 +42,7 @@ div.resultContainerPositionSearch {
 
     flex-grow: 10;
     flex-flow: row wrap;
-    justify-content: flex-start;
+    justify-content: space-around;
 }
 
 div.resultContainerPositionMatch {
@@ -472,7 +472,7 @@ div.resultTitle {
 div.imgMatchedResultRow {
     display: flex;
 
-    margin: 30px 0 30px 0;
+    margin: 30px 0px 30px 0px;
 
     width: 100%;
 
@@ -483,7 +483,7 @@ div.imgMatchedResultRow {
 div.imgSimilarResultRow {
     display: flex;
 
-    margin: 30px 0 30px 0;
+    margin: 30px 50px 30px 0px;
 
     width: 100%;
 
