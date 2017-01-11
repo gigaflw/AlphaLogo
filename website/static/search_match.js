@@ -21,6 +21,7 @@ var idTitle = document.getElementById("title");
 var idNColors = document.getElementById("nColors");
 var idSaturation = document.getElementById("saturation");
 var idBrightness = document.getElementById("brightness");
+var idIndustry = document.getElementById("industry");
 var idImgSubmit = document.getElementById("imgSubmit");
 var divResultContainer = document.getElementById("resultContainer");
 var idCurrentPointer = document.getElementById("currentPointer");
@@ -35,9 +36,9 @@ var advancedColorNumMore = document.getElementById("colorNumMore");
 var advancedIndustryProfit = document.getElementById("industryProfit");
 var advancedIndustryOrganization = document.getElementById("industryOrganization");
 var advancedIndustryEntertainment = document.getElementById("industryEntertainment");
-var advancedIndustryExhibition = document.getElementById("industryExhibition");
 var advancedIndustryFestival = document.getElementById("industryFestival");
 var advancedIndustryTeam = document.getElementById("industryTeam");
+var advancedIndustryOthers = document.getElementById("industryOthers");
 var advancedSaturationLow = document.getElementById("saturationLow");
 var advancedSaturationMiddle = document.getElementById("saturationMiddle");
 var advancedSaturationHigh = document.getElementById("saturationHigh");
@@ -156,7 +157,7 @@ function advancedSearchTypeInitialization() {
     var advancedSearchTypeArray = new Array(advancedColorNum2, advancedColorNum3, advancedColorNum4, advancedColorNum5, advancedColorNumMore,
         advancedSaturationLow, advancedSaturationMiddle, advancedSaturationHigh, advancedBrightnessLow,
         advancedBrightnessMiddle, advancedBrightnessHigh, advancedIndustryProfit, advancedIndustryOrganization,
-        advancedIndustryEntertainment, advancedIndustryExhibition, advancedIndustryFestival, advancedIndustryTeam);
+        advancedIndustryEntertainment, advancedIndustryFestival, advancedIndustryTeam, advancedIndustryOthers);
     for (var x = 0; x < advancedSearchTypeArray.length; ++x) {
         (function() { // js的函数闭包问题
             var i = x;
@@ -168,6 +169,8 @@ function advancedSearchTypeInitialization() {
                     saturationInput(i - 5, this);
                 } else if (i < 11) {
                     brightnessInput(i - 8, this);
+                } else if (i < 17) {
+                    industryInput(i - 11, this);
                 }
             });
         })();
@@ -217,6 +220,12 @@ function brightnessInput(n, advancedBrightnessNum) {
     var inputBrightness = idBrightness.value;
     inputBrightness = advancedValueModification(n, inputBrightness);
     idBrightness.value = inputBrightness;
+}
+
+function industryInput(n, advancedIndustryNum) {
+    var inputIndustry = idIndustry.value;
+    inputIndustry = advancedValueModification(n, inputIndustry);
+    idIndustry.value = inputIndustry;
 }
 
 function advancedValueModification(n, value) {

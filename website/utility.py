@@ -55,4 +55,4 @@ def get_uploaded_logo(name):
 
     return Logo(ind=-1, filename=name, ent_name='', info='',
                 theme_colors=theme_colors_for_web, theme_weights=theme_weights,
-                s=s, v=v)
+                s=s, v=v, industry=-1)
