@@ -603,7 +603,7 @@ div.moreInfoTargetImgDiv {
     position: fixed;
     background-color: #FFFFFF;
     transition: top 1.2s;
-
+    padding:
     top: 0px;
     right: 0px;
     z-index: 2;
