@@ -1,56 +1,48 @@
-
 <div class="previewImgDiv" id="chosenImgPreviewDiv">
     <img src="" class="previewImg" id="chosenImg">
 </div>
 
-<div class="moreInfoContainer" id="moreInfoContainerForChosen" >
-    <!-- Write the codes of moreInfoContainer here, including various infos of the certain picture(preview image here), the color graph and the style. The border is shown only for the location, which needn't be used in the future. 
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-    <div class="moreInfoTitle" style="line-height: 125%; text-align: left; ">
-        <p style="font-size: 15px"> 产品或组织名称： </p>
+<div class="moreInfoContainer" id="moreInfoContainerForChosen">
+    <div class="moreInfoTitle">
+        <p class="infoTitle"> 产品或组织名称 </p>
         <span style="font-size: 15px" id="chosenImgEntName"> </span>
     </div>
-
     </br>
-
-    <div class="moreInfoPie" style="line-height: 125%; text-align: left;">
-        <p style="font-size: 15px"> 图像sv数据：</p>
-        <span style="font-size: 11px;">灰度:</span>
-        <span style="font-size: 11px;" id="chosenImgSaturation"></span>
-        <div class="rectangle">
-            <div class="rectanglePart" id="chosenRectSaturation"></div>
-        </div>
-        <span style="font-size: 11px;">鲜艳度:</span>
+    <div class="moreInfoPie" >
+        <p class="infoTitle"> 图像色彩分析</p>
+        <span class="infoSubtitle">亮度</span>
         <span style="font-size: 11px;" id="chosenImgValue"></span>
+        <div class="rectangle">
+            <div class="rectanglePart" id="chosenRectValue"></div>
+        </div>
+        <span class="infoSubtitle">饱和度</span>
+        <span style="font-size: 11px;" id="chosenImgSaturation"></span>
         <div class="rectangle2">
-            <div class="rectanglePart2" id="chosenRectValue"></div>
+            <div class="rectanglePart2" id="chosenRectSaturation"></div>
         </div>
         </br>
-        <p style="font-size: 15px"> 图像主要颜色占比图：</p>
-        <div class="pieAnimationDiv" style="font-size: 0px; display:block;float: left; min-width: 81px;min-height: 91px;">
-            <span id="chosenPie" class="pie" >,800</span>
+        <p class="infoTitle">图像主要颜色占比</p>
+        <div class="pieAnimationDiv">
+            <span id="chosenPie" class="pie">,800</span>
         </div>
-        <div style="width:12px;height:50px;float: left;display: block;"></div>
-        <div style="display: block;float: left">
-        <div style="height:19px;width:110px;border-width:0px; border-style: solid; display: block;background-color: transparent;"></div>
-            <div style="height:8px;width:8px;padding: 0;border-width:1px; border-style: solid; display: block; background-color: " id="chosenImgThemeColor0">
-                <a onlick="return false;" title="" style="float:left; width:9px;height:9px;text-decoration: none;" id="chosenImgThemeColorTitle0"></a>
+        <div class="auxForMargin"></div>
+        <div class="colorDetail">
+            <div class="colorDetailBlock" id="chosenImgThemeColor0">
+                <abbr class="linkShowInfo" title="" id="chosenImgThemeColorTitle0"></abbr>
             </div>
-            <div style="font-size: 10px;display: block; margin:auto" id="chosenImgThemeWeights0">  </div>
-            <div style="height:8px;width:8px; border-width: 1px;border-style: solid;display: block;background-color: " id="chosenImgThemeColor1">
-                <a onlick="return false;" title="" style="float:left; width:9px;height:9px;text-decoration: none;" id="chosenImgThemeColorTitle1"></a>
+            <div class="colorDetailFigure" id="chosenImgThemeWeights0"> </div>
+            <div class="colorDetailBlock" id="chosenImgThemeColor1">
+                <abbr class="linkShowInfo" title="" id="chosenImgThemeColorTitle1"></abbr>
             </div>
-            <div style="font-size: 10px;display: block; margin:auto" id="chosenImgThemeWeights1">  </div>
+            <div class="colorDetailFigure" id="chosenImgThemeWeights1"> </div>
         </div>
     </div>
     </br>
-    <div  style="height: 150px; overflow-x: hidden; min-width: 150px;";>
-    <p style="text-indent: 2em;font-size: 15px; text-align:justify; line-height: 120%">
-        <a onclick="return false;" title="饼图的颜色还不是实际的分布颜色，需要更改。&#13;未来需要把style等属性移到css！！！" 
-        style="float:left;width: auto;text-indent: 0;background-color:#33CC70 ;text-decoration: none;cursor:default;color: #FFFFFF">MORE</a>
-        <p id="chosenImgInfo"></p>
-    </p>
+    <div class="moreText">
+        <p class="infoTitle">图像说明</p>
+        <div class="moreText">
+            <p style="overflow-x:hidden" id="chosenImgInfo"></p>
+            <abbr class="moreText" title="HIGH UP">MORE</abbr>
+        </div>
     </div>
-<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-
 </div>

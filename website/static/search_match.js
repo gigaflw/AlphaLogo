@@ -64,6 +64,7 @@ var chosenImgInfo = document.getElementById("chosenImgInfo");
 window.addEventListener('load', function() {
     advancedSearchTypeInitialization();
     titleContainerActivate();
+    pieAnimation("chosenPie1", ["red", "green",'pink']);
 });
 
 window.onscroll = function() {
@@ -196,7 +197,7 @@ function titleContainerActivate() {
     }
 }
 
-function nColorsInput (n, advancedColorNum) {
+function nColorsInput(n, advancedColorNum) {
     var inputNColors = idNColors.value;
     inputNColors = advancedValueModification(n, inputNColors);
     idNColors.value = inputNColors;
@@ -208,13 +209,13 @@ function saturationInput(n, advancedSaturationNum) {
     idSaturation.value = inputSaturation;
 }
 
-function brightnessInput (n, advancedBrightnessNum) {
+function brightnessInput(n, advancedBrightnessNum) {
     var inputBrightness = idBrightness.value;
     inputBrightness = advancedValueModification(n, inputBrightness);
     idBrightness.value = inputBrightness;
 }
 
-function advancedValueModification (n, value) {
+function advancedValueModification(n, value) {
     var valueList = value.split(",");
     var nDigit = valueList[n];
     if (nDigit == "0") {
@@ -226,7 +227,7 @@ function advancedValueModification (n, value) {
     return value;
 }
 
-function showChosenImgMoreInfo (pointer, mode) {
+function showChosenImgMoreInfo(pointer, mode) {
     // mode0 = matchedResult; mode1 = similarResult;
     if (mode == 0) {
         if (currentChosenImg == pointer) { // from active to passive
@@ -239,7 +240,7 @@ function showChosenImgMoreInfo (pointer, mode) {
             currentChosenImg = pointer;
             currentChosenImg.className = "matchedResultActive";
             fillMoreInfoChosenImg(pointer);
-        } else {  // from passive to active
+        } else { // from passive to active
             currentChosenImg = pointer;
             currentChosenImg.className = "matchedResultActive";
             moveMoreInfoChosenImg(0);
@@ -257,7 +258,7 @@ function showChosenImgMoreInfo (pointer, mode) {
             currentChosenImg = pointer;
             currentChosenImg.className = "similarResultActive";
             fillMoreInfoChosenImg(pointer);
-        } else {  // from passive to active
+        } else { // from passive to active
             currentChosenImg = pointer;
             currentChosenImg.className = "similarResultActive";
             moveMoreInfoChosenImg(0);
@@ -267,16 +268,16 @@ function showChosenImgMoreInfo (pointer, mode) {
     }
 }
 
-function moveMoreInfoChosenImg(mode) {  
+function moveMoreInfoChosenImg(mode) {
     // mode0 = left move; mode1 = right move;
     if (mode == 0) {
-        if ( divChosenImg.className == "moreInfoChosenImgDivLeft") {
+        if (divChosenImg.className == "moreInfoChosenImgDivLeft") {
             divChosenImg.className = "moreInfoChosenImgDivDoubleLeft";
         } else {
             divChosenImg.className = "moreInfoChosenImgDivLeft";
         }
     } else {
-        if ( divChosenImg.className == "moreInfoChosenImgDivDoubleLeft") {
+        if (divChosenImg.className == "moreInfoChosenImgDivDoubleLeft") {
             divChosenImg.className = "moreInfoChosenImgDivLeft";
         } else {
             divChosenImg.className = "moreInfoChosenImgDivDefault";
@@ -284,16 +285,16 @@ function moveMoreInfoChosenImg(mode) {
     }
 }
 
-function moveResultContainer(mode) {  
+function moveResultContainer(mode) {
     // mode0 = left move; mode1 = right move;
     if (mode == 0) {
-        if ( divResultContainer.className == "leftPositionedResultContainer") {
+        if (divResultContainer.className == "leftPositionedResultContainer") {
             divResultContainer.className = "doubleLeftPositionedContainer";
         } else {
             divResultContainer.className = "leftPositionedResultContainer";
         }
     } else {
-        if ( divResultContainer.className == "doubleLeftPositionedContainer") {
+        if (divResultContainer.className == "doubleLeftPositionedContainer") {
             divResultContainer.className = "leftPositionedResultContainer";
         } else {
             divResultContainer.className = "defaultPositionedResultContainer";
@@ -301,7 +302,24 @@ function moveResultContainer(mode) {
     }
 }
 
-function fillMoreInfoChosenImg (pointer) {
+// var currentChosenImg = null;
+// var divChosenImg = document.getElementById("chosenImgDiv");
+// var chosenImg = document.getElementById("chosenImg");
+// var chosenImgEntName = document.getElementById("chosenImgEntName");
+// var chosenImgSaturation = document.getElementById("chosenImgSaturation");
+// var chosenImgValue = document.getElementById("chosenImgValue");
+// var chosenImgRectSaturation = document.getElementById("chosenRectSaturation");
+// var chosenImgRectValue = document.getElementById("chosenRectValue");
+// var chosenImgPie = document.getElementById("chosenPie");
+// var chosenImgThemeColor0 = document.getElementById("chosenImgThemeColor0");
+// var chosenImgThemeColorTitle0 = document.getElementById("chosenImgThemeColorTitle0");
+// var chosenImgThemeWeights0 = document.getElementById("chosenImgThemeWeights0");
+// var chosenImgThemeColor1 = document.getElementById("chosenImgThemeColor1");
+// var chosenImgThemeColorTitle1 = document.getElementById("chosenImgThemeColorTitle1");
+// var chosenImgThemeWeights1 = document.getElementById("chosenImgThemeWeights1");
+// var chosenImgInfo = document.getElementById("chosenImgInfo");
+
+function fillMoreInfoChosenImg(pointer) {
     chosenImg.src = "/static/" + pointer.getAttribute("dataFilename");
     chosenImgEntName.textContent = pointer.getAttribute("dataEntName");
     chosenImgSaturation.textContent = pointer.getAttribute("dataS");
@@ -310,21 +328,40 @@ function fillMoreInfoChosenImg (pointer) {
     chosenImgRectValue.textContent = pointer.getAttribute("dataV");
     var chosenImgThemeColorsList = extractListElement(pointer.getAttribute("dataThemeColors"));
     var chosenImgThemeColorWeightsList = extractListElement(pointer.getAttribute("dataThemeWeights"));
-    chosenImgPie.textContent = pointer.getAttribute("dataThemeWeights") + ", 800";
     chosenImgThemeColor0.style.backgroundColor = chosenImgThemeColorsList[0];
     chosenImgThemeColorTitle0.style.title = chosenImgThemeColorsList[0];
     chosenImgThemeWeights0.textContent = chosenImgThemeColorWeightsList[0];
+    var chosenPieTmp = pointer.getAttribute("dataThemeWeights");
+    var chosenPieColor = pointer.getAttribute("dataThemeColors");
+    chosenPieTmp = chosenPieTmp.substring(1, chosenPieTmp.length - 2);
+    chosenImgPie.textContent = chosenPieTmp + ",800";
+
     chosenImgThemeColor1.style.backgroundColor = chosenImgThemeColorsList[1];
     chosenImgThemeColorTitle1.style.title = chosenImgThemeColorsList[1];
     chosenImgThemeWeights1.textContent = chosenImgThemeColorWeightsList[1];
     chosenImgInfo.textContent = pointer.getAttribute("dataInfo");
 
+
+    pieAnimationClick(chosenImgThemeColorsList);
     setRectLength(chosenImgRectSaturation);
     setRectLength(chosenImgRectValue);
 }
 
-function extractListElement (listInStr) {
-    listInStr = listInStr.substring(1, listInStr.length-2); // cut the first and the last list sign
+function pieAnimationClick(colorlist) {
+    var resList=[];
+    console.log(colorlist);
+    var tmp='';
+    resList.push(colorlist[0].toString(16).substring(2,9));
+    for (var i = 1; i < colorlist.length; i++) {
+        tmp = colorlist[i];
+        resList.push(tmp.toString(16).substring(3,10));
+        console.log(resList);
+    }
+    pieAnimation("chosenPie", resList);
+}
+
+function extractListElement(listInStr) {
+    listInStr = listInStr.substring(1, listInStr.length - 2); // cut the first and the last list sign
     var listCutted = listInStr.split(",");
     //alert(listCutted);
     return listCutted;
@@ -338,49 +375,30 @@ function setRectLength(rect) {
         rectangleTmp = parseInt(rectangleTmp * 0.92 + (100 - rectValue * 100) * 0.08);
     }, 50);
 }
-
-// (function() {
-//     var rectangleTmp = 111;
-//     setInterval(function() {
-//         var temp = document.getElementById("chosenRectSaturation")
-//         var rectvalue = temp.textContent.split(":")[1];
-//         temp.style = "width:" + Math.min(100,rectangleTmp) + "%";
-//         rectangleTmp = parseInt(rectangleTmp * 0.92 + (100 - rectvalue * 100) * 0.08);
-//     }, 50);
-// })();
-
-// (function() {
-//     var rectangleTmp2 = 111;
-//     setInterval(function() {
-//         var temp2 = document.getElementById("chosenRectValue")
-//         var rectvalue2 = temp2.textContent.split(":")[1];
-//         temp2.style = "width:" + Math.min(100,rectangleTmp2) + "%";
-//         rectangleTmp2 = parseInt(rectangleTmp2 * 0.92 + (100 - rectvalue2 * 100) * 0.08);
-//     }, 50);
-// })();
-
 // function drawPie(pieNo,portion,colors){
 // document.write('<span id="pie'+pieNo+'" class="pie">'+{{logo_matched[0].theme_weights | join(",")}}',800                            </span>")
-jQuery(function() {
-        function pieAnimation(pieNo) {
-            var updatingChart = $("#chosenPie" + pieNo).peity("pie", { "fill": ["red", "green", "blue", "white"], "radius": 40 })
-            setInterval(function() {
-                var values = updatingChart.text().split(",");
-                var tmp = values.pop();
-                if (tmp > 100) {
-                    tmp = tmp * 0.3;
-                } else if (tmp > 0.1) {
-                    tmp = tmp * 0.7;
-                } else if (tmp > 0.05) {
-                    tmp = tmp - 0.01;
-                } else if (tmp > 0.00) {
-                    tmp = tmp - 0.005;
-                }
-                values.push(tmp);
-                updatingChart.text(values.join(",")).change();
-            }, 64)
-        };
-        pieAnimation("1");
-        pieAnimation("2");
-    })
-    // }
+
+function pieAnimation(pieNo, colors_tmp) {
+
+    alert(colors_tmp);
+    colors_tmp.push("white");
+    alert(colors_tmp);
+    var updatingChart = $("#" + pieNo).peity("pie", { "fill": colors_tmp, "radius": 38 })
+    setInterval(function() {
+        var values = updatingChart.text().split(",");
+        var tmp = values.pop();
+        if (tmp > 100) {
+            tmp = tmp * 0.3;
+        } else if (tmp > 0.1) {
+            tmp = tmp * 0.7;
+        } else if (tmp > 0.05) {
+            tmp = tmp - 0.01;
+        } else if (tmp >= 0.00) {
+            tmp = tmp - 0.005;
+        }
+        values.push(tmp);
+        updatingChart.text(values.join(",")).change();
+    }, 40)
+};
+
+// }

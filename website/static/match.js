@@ -34,8 +34,8 @@ function modeMatch() {
 (function() {
     var rectangleTmp = 111;
     setInterval(function() {
-        var temp = document.getElementById("rect1")
-        var rectvalue = temp.textContent.split(":")[1];
+        var temp = document.getElementById("rect1a")
+        var rectvalue = temp.textContent;
         temp.style = "width:" + Math.min(100,rectangleTmp) + "%";
         rectangleTmp = parseInt(rectangleTmp * 0.92 + (100 - rectvalue * 100) * 0.08);
     }, 50);
@@ -44,35 +44,30 @@ function modeMatch() {
 (function() {
     var rectangleTmp2 = 111;
     setInterval(function() {
-        var temp2 = document.getElementById("rect2")
-        var rectvalue2 = temp2.textContent.split(":")[1];
+        var temp2 = document.getElementById("rect1b")
+        var rectvalue2 = temp2.textContent;
         temp2.style = "width:" + Math.min(100,rectangleTmp2) + "%";
         rectangleTmp2 = parseInt(rectangleTmp2 * 0.92 + (100 - rectvalue2 * 100) * 0.08);
     }, 50);
 })();
 
-// function drawPie(pieNo,portion,colors){
-// document.write('<span id="pie'+pieNo+'" class="pie">'+{{logo_matched[0].theme_weights | join(",")}}',800                            </span>")
-jQuery(function() {
-        function pieAnimation(pieNo) {
-            var updatingChart = $("#pie" + pieNo).peity("pie", { "fill": ["red", "green", "blue", "white"], "radius": 40 })
-            setInterval(function() {
-                var values = updatingChart.text().split(",");
-                var tmp = values.pop();
-                if (tmp > 100) {
-                    tmp = tmp * 0.3;
-                } else if (tmp > 0.1) {
-                    tmp = tmp * 0.7;
-                } else if (tmp > 0.05) {
-                    tmp = tmp - 0.01;
-                } else if (tmp > 0.00) {
-                    tmp = tmp - 0.005;
-                }
-                values.push(tmp);
-                updatingChart.text(values.join(",")).change();
-            }, 64)
-        };
-        pieAnimation("1");
-        pieAnimation("2");
-    })
-    // }
+
+(function() {
+    var rectangleTmp3 = 111;
+    setInterval(function() {
+        var temp3 = document.getElementById('chosenRectSaturation')
+        var rectvalue3 = temp3.textContent;
+        temp3.style = "width:" + Math.min(100,rectangleTmp3) + "%";
+        rectangleTmp3 = parseInt(rectangleTmp3 * 0.92 + (100 - rectvalue3 * 100) * 0.08);
+    }, 50);
+})();
+
+(function() {
+    var rectangleTmp4 = 111;
+    setInterval(function() {
+        var temp4 = document.getElementById('chosenRectValue')
+        var rectvalue4 = temp4.textContent;
+        temp4.style = "width:" + Math.min(100,rectangleTmp4) + "%";
+        rectangleTmp4 = parseInt(rectangleTmp4 * 0.92 + (100 - rectvalue4 * 100) * 0.08);
+    }, 50);
+})();
