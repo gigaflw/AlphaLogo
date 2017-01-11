@@ -10,6 +10,7 @@
 
 {% block scripts %}
     <script src="static/index.js"></script>
+    <script src="static/searchbar.js"></script>
 {% endblock %}
 
 {% block body %}
@@ -32,7 +33,7 @@
         </div>
         <div class="input" id="inputSearch">
             <form id="textForm" action="/search" method="GET">
-                <input type="text" class="keyword" name="kw" placeholder="请输入要搜索的logo特征">
+                <input type="text" class="keyword" name="kw" autocomplete="off" placeholder="请输入要搜索的logo特征">
                 <input name="type" id="typeSearch" value="search" hidden>
                 <input type="text" id="enterpriseName" name="enterpriseName" value="" hidden>
                 <input type="text" id="nColors" name="nColors" value="0,0,0,0,0" hidden>
@@ -43,6 +44,8 @@
                     <span class="textDefaultStyle">+</span>
                 </div>
                 <button type="submit" class="submit">Go</button>
+
+                <div class="suggest"></div>
             </form>
             
             {% include "advanced_search_panel.html" %}

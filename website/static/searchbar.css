@@ -1,0 +1,33 @@
+/*
+* @Author: GigaFlower
+* @Date:   2017-01-12 06:41:35
+* @Last Modified by:   GigaFlower
+* @Last Modified time: 2017-01-12 06:42:22
+*/
+
+.suggest {
+    width: 60%;
+    position: relative;
+    box-sizing: border-box;
+    margin: 0px auto;
+    /*padding: 0 20px;*/
+
+    text-align: left;
+}
+.suggest ul{
+    position: absolute;
+    width: 100%;
+    /*transform-origin: top center;*/
+    user-select: none;
+    background-color: rgba(240,240,220, 0.4);
+}
+.suggest li{
+    padding-left: 10px;
+    margin-top: 10px;
+    color: #888;
+    transition: color 0.2s;
+    cursor: pointer;
+}
+.suggest li:hover{
+    color: #000;
+}
