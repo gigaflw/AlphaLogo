@@ -16,7 +16,6 @@ var idAdvancedSearchPanel = document.getElementById("advancedSearchPanel");
 var idPreviewImg = document.getElementById("previewImg");
 var divResultContainer = document.getElementById("resultContainer");
 var divPreview = document.getElementById("previewDiv");
-var idCurrentPointer = document.getElementById("currentPointer");
 
 window.addEventListener('load', function(){
     console.log('远看黄山黑黝黝,上面小来下面大,若将黄山倒过来,上面大来下面小');
@@ -30,8 +29,6 @@ function modeMatch() {
     idInputSearch.style.display = "none";
     idInputMatch.style.display = "block";
     idAdvancedSearchPanel.style.transform = "rotateX(90deg)";
-    divResultContainer.style.marginRight = "250px";
-    idCurrentPointer.style.left = "375px";
 }
 
 (function() {

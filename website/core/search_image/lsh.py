@@ -2,7 +2,7 @@
 # @Author: BigFlower
 # @Date:   2016-12-23 16:54:28
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-11 20:45:17
+# @Last Modified time: 2017-01-07 21:51:25
 
 from __future__ import division, print_function
 import numpy as np
@@ -43,7 +43,6 @@ class LSH:
 
     def feed(self, dp):
         self.lsh_hash_and_save(dp)
-        self._im_ind += 1
 
     def feed_n(self, dps):
         for dp in dps:
@@ -75,25 +74,23 @@ class LSH:
 
         for dp in dps:
             im_inds = self._lsh_match(dp)
+            # print("total : ", len(im_inds))
+            # print(im_inds.count(10408) >= 1)
             stat[im_inds] += 1
 
         ret = np.argpartition(stat, -max_n)[-max_n:]
         ret = ret[np.argsort(stat[ret])][::-1]
-        print("LSH: Match inds(begin with 0):\t", ret)
-        print("LSH: Their scores(max %d):\t" % (len(dps)), stat[ret])
+        print("Match inds(begin with 0):\t", ret)
+        print("Their scores(max %d):\t" % (len(dps)), stat[ret])
 
         return ret, stat[ret] / len(dps)
 
-    def find_neighbor(self, dp):
-        return self._lsh_match(dp)
-
     def _lsh_match(self, dp):
         if len(dp) == 0:
-            return []
+            return ()
 
         cosine_hash = self.lsh_hash(dp)
         bucket = self._hash_tables.get(cosine_hash, ())
-        # print(cosine_hash, bucket)
         return bucket
 
     def lsh_hash(self, dp):
@@ -116,15 +113,14 @@ class LSH:
         -> return int(v1 * v2 > 0)
         """
         ret = (np.dot(vec, rand_vecs.T) > 0).astype(np.int)
-        # print(vec, ret)
         return tuple(ret)
 
-    def save(self, filename):
+    def save(self, filename='lsh.pickle'):
         with open(filename, 'wb') as f:
             pickle.dump(self, f, protocol=2)
 
     @staticmethod
-    def restore(filename):
+    def restore(filename='lsh.pickle'):
         with open(filename, 'rb') as f:
             return pickle.load(f)
 

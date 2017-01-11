@@ -2,13 +2,19 @@
 # @Author: GigaFlower
 # @Date:   2016-12-27 21:45:08
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-11 22:25:32
+# @Last Modified time: 2017-01-07 13:59:16
 
 from __future__ import with_statement, print_function
 
+import os
 from time import time
 import lucene
 import jieba
+
+from website.database import db
+from website.utility import full_path_dataset
+from website.core.config import *
+from website.core.index.utility import get_theme_colors, to_web_color
 
 # nasty Lucene imports
 from java.io import File
@@ -21,6 +27,42 @@ from org.apache.lucene.store import SimpleFSDirectory
 from org.apache.lucene.util import Version
 # end
 
+
+def create_db():
+    print("Reseting sqlite database...")
+    db.reset_db()
+    db.init()
+    
+    print("Database inited")
+
+    with open(LUCENE_CATELOG_FILE, 'r') as index_f:
+
+        for line in index_f:
+            ind, ent_name, info, keywords, imgurl, filename, url = line.split('\t')
+            print("adding %s" % ind)
+
+            filename = "{:05d}".format(int(ind)) + '.jpg'
+
+            theme_colors, theme_weights, s, v = get_theme_colors(full_path_dataset(filename))
+
+            theme_colors_for_web = " ".join(map(to_web_color, theme_colors))
+            theme_weights = " ".join("%02x" % (x*255) for x in theme_weights)
+
+            n_colors = str(len(theme_colors))
+
+            
+            to_store = {"ind": ind,
+                        "filename": filename,
+                        "ent_name": ent_name,
+                        "info": info,
+                        "theme_colors": theme_colors_for_web,
+                        "theme_weights": theme_weights,
+                        "s": s,
+                        "v": v
+                        }
+            db.insert(**to_store)
+
+    print("Sqlite database created.")
 
 def create_index():
 
@@ -66,7 +108,7 @@ def _index_docs(indexFile, writer):
 
         ent_name = " ".join(x.strip() for x in jieba.cut_for_search(ent_name))
         keywords = " ".join(x.strip() for x in jieba.cut_for_search(keywords))
-
+        
         try:
             doc = Document()
 

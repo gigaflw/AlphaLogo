@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2017-01-07 20:39:08
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-11 10:58:06
+# @Last Modified time: 2017-01-09 14:06:25
 
 from __future__ import division
 import math
@@ -31,6 +31,7 @@ def get_search_func():
         return ret, scores[ret]
 
     return match
+
 
 def vectorize(im):
     a = find_maincolor(im)

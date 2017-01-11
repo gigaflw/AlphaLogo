@@ -15,10 +15,6 @@
 
 {% block body %}
     <div class="container" id="totalContainer">
-    	<div style="position: absolute; right: 0; top: 0;">
-            Time consumed: {{ time }} sec
-        </div>
-
     	<div class="titleContainerDefault" id="titleContainer">
     		<div class="title" id="title">
 	            AlphaLogo
@@ -30,7 +26,6 @@
 	            <div class="linkTitle" id="match">
 	                <span class="textDefaultStyle">匹配</span>
 	            </div>
-	            <div class="currentPointerSearch" id="currentPointer"></div>
 	        </div>
 	        <div class="input" id="inputSearch">
 	            <form id="textForm" action="/search" method="GET">
@@ -66,49 +61,34 @@
     		<div class="moreInfoChosenImgDivDefault" id="chosenImgDiv">
     			{% include "moreinfo_side_container.html" %}
     		</div>
-
-    		<div class="sideButtonLeft">
-		        <div class="triangleLeftUnable" id="triangleLeft">
-		        </div>
-		    </div>
-    		<div class="sideButtonRight">
-		        <div class="triangleRight" id="triangleRight" dataLogoNum="{{logo_matched|length}}">
-		        </div>
-		    </div>
     	</div>
 
-    	<div class="resultContainerPositionSearch" id="resultContainer">
-	        <div class="resultTitle" id="similarResultTitle">
-	            共搜索到{{ logo_matched|length }}个结果
-	        </div>
+    	<div class="defaultPositionedResultContainer" id="resultContainer">
+		    <div class="container" id="similarResultContainer">
+		        <div class="resultTitle" id="similarResultTitle">
+		            共搜索到{{ logo_matched|length }}个结果
+		        </div>
 
-	        {%- for part in logo_matched|batch(20) %}
-	        	<div class="resultPartPositionDefault" id="resultPart{{loop.index}}"> 
-	        		{%- for row in part|batch(4) %}
-		        		<div class="imgSimilarResultRow">
-			        		{%- for logo in row %}
-			        			<div class="similarResult" onclick="showChosenImgMoreInfo(this, 1)" dataFilename={{logo.filename}} dataEntName={{logo.ent_name}} 
-	                            dataInfo={{logo.info}} dataThemeColors={{logo.theme_colors}} dataThemeWeights={{logo.theme_weights}} dataS={{logo.s}} 
-	                            dataV={{logo.v}} >
-					                <div>{{ logo.ent_name }}</div>
-					                <img src="{{ url_for('static',filename=logo.filename) }}" class="similarImg" >
-				                    <div>
-				                    {% for color in logo.theme_colors %}
-				                        <div style="width: 20px;height: 20px;float:left;background-color: {{color}}"></div>
-				                    {% endfor %}
-				                    </div>
-				                    {{ logo.s }}
-					                {{ logo.v }}
-					            </div>
-			        		{%- endfor %}
-			        	</div>
-	        		{%- endfor %}
-	        	</div>
-	        {%- endfor %}
+		        {%- for row in logo_matched|batch(4) %}
+		        	<div class="imgSimilarResultRow">
+		        		{%- for logo in row %}
+		        			<div class="similarResult" onclick="showChosenImgMoreInfo(this, 1)" dataFilename={{logo.filename}} dataEntName={{logo.ent_name}} 
+                            dataInfo={{logo.info}} dataThemeColors={{logo.theme_colors}} dataThemeWeights={{logo.theme_weights}} dataS={{logo.s}} 
+                            dataV={{logo.v}} >
+				                <div>{{ logo.ent_name }}</div>
+				                <img src="{{ url_for('static',filename=logo.filename) }}" class="similarImg" >
+			                    <div>
+			                    {% for color in logo.theme_colors %}
+			                        <div style="width: 20px;height: 20px;float:left;background-color: {{color}}"></div>
+			                    {% endfor %}
+			                    </div>
+			                    {{ logo.s }}
+				                {{ logo.v }}
+				            </div>
+		        		{%- endfor %}
+		        	</div>
+		        {%- endfor %}
+	        </div>
     	</div>
     </div>
-
-    <script type="text/javascript" src="static/canvas-nest.min.js"></script>
-    <canvas class="canvasPage" id="canvasPage"></canvas>
-    
 {% endblock %}

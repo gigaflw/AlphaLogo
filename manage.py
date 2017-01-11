@@ -2,9 +2,9 @@
 # @Author: GigaFlower
 # @Date:   2017-01-02 09:41:37
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-11 12:53:58
+# @Last Modified time: 2017-01-07 15:31:34
 
-#
+# 
 # To reset index dirs :
 #   python manage.py -r
 # To create index for images:
@@ -13,8 +13,8 @@
 #   python manage.py -c
 # To do the above altogether:
 #   python manage.py --init
-#
-
+# 
+ 
 import subprocess
 import os
 import shutil
@@ -22,10 +22,8 @@ import argparse
 
 import cv2
 
-from website.database import create_db
-from website.core.search_text import create_index as text_create_index
+from website.core.index import lucene_create_index, create_db
 from website.core.search_image import create_index as image_create_index
-from website.core.search_tth import create_index as tth_create_index
 from website.config import DATASET_DIR, ALLOWED_TYPES
 from website.core.config import LUCENE_INDEX_DIR, LUCENE_CATELOG_FILE, IMAGE_INDEX_DIR
 
@@ -41,17 +39,13 @@ parser = argparse.ArgumentParser()
 parser.add_argument('-r', action="store_true", help="Reset index dirs")
 parser.add_argument('-d', action="store_true", help="Create sqlite database")
 parser.add_argument('-i', action="store_true", help="Create index files for image search")
-parser.add_argument('-t', action="store_true", help="Create index files for tth search")
 parser.add_argument('-l', action="store_true", help="Create lucene index files for non-image search")
-
 parser.add_argument('--init', action="store_true", help="Do everything")
 
 # TODO: not move, but symlink!
 ##########################
 # Functions
 ##########################
-
-
 def reset_index():
     dirs = [LUCENE_INDEX_DIR, IMAGE_INDEX_DIR]
     exist_dirs = list(filter(os.path.exists, dirs))
@@ -71,6 +65,7 @@ def reset_index():
         os.mkdir(d)
         print("'%s' created" % d)
 
+
     # print("Creating symlink '%s' to '%s'..." % (CRAWL_IMAGE_PATH, DATASET_DIR))
     # subprocess.call(['ln', '-s', CRAWL_IMAGE_PATH, DATASET_DIR])
 
@@ -89,7 +84,6 @@ def create_index():
 
     lucene_create_index()
     image_create_index()
-    tth_create_index()
     create_db()
 
 
@@ -104,8 +98,6 @@ def main():
         image_create_index()
     elif args.l:
         lucene_create_index()
-    elif args.t:
-        tth_create_index()
     elif args.init:
         create_index()
     else:

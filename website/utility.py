@@ -2,14 +2,12 @@
 # @Author: GigaFlower
 # @Date:   2016-12-25 14:02:13
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-11 16:32:41
+# @Last Modified time: 2017-01-07 23:10:00
 
 import os
 import shutil
 from time import ctime
 from hashlib import md5
-
-from flask import g
 
 from config import UPLOAD_DIR, DATASET_DIR, ALLOWED_TYPES
 
@@ -45,10 +43,10 @@ def full_path_dataset(name):
 
 # delayed import to avoid cyclic import
 from website.models import Logo
-from website.core.algorithm.utility import get_theme_colors, to_web_color
+from website.core.index.utility import get_theme_colors, to_web_color
 
 
-def get_uploaded_logo(name):    
+def get_uploaded_logo(name):
     theme_colors, theme_weights, s, v = get_theme_colors(full_path_uploads(name))
     theme_colors_for_web = list(map(to_web_color, theme_colors))
     theme_weights = list(theme_weights)

@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-25 13:07:33
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-11 10:49:44
+# @Last Modified time: 2017-01-09 14:24:10
 
 import os
 import traceback
@@ -12,7 +12,8 @@ import cv2
 
 from website.config import DATASET_DIR
 from website.core.config import IMAGE_INDEX_PKL_FILE
-from website.core.algorithm import SIFT, LSH
+from website.core.search_image.sift import SIFT
+from website.core.search_image.lsh import LSH
 
 
 def create_index():

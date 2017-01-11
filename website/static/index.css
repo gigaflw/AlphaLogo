@@ -36,27 +36,11 @@ div.titleUp {
 }
 
 div.linkBar {
-    position: relative;
-
     height: 40px;
-    width: 300px;
 
     margin: 5px auto;
 
     text-align: center;
-}
-
-div.currentPointer {
-    transition: left 0.5s;
-
-    position: absolute;
-    background-color: #0000FF;
-
-    left: 32px;
-    bottom: -2px;
-
-    height: 4px;
-    width: 110px;
 }
 
 div.linkTitle {
@@ -93,6 +77,11 @@ div.currentLinkTitle {
 
     margin: 0 -2.5px;
     padding-top: 10px;
+
+    border: 2px transparent solid;
+    border-bottom-width: 4px;
+    border-bottom-color: #0000FF;
+    border-radius: 5px;
 
     text-align: center;
     font-size: 18px;
@@ -202,7 +191,7 @@ div.advancedSearchPanel {
 
     margin: 40px 0 0 0;
 
-    width: 700px;
+    width: 750px;
 
     box-shadow: 3px 3px 6px 3px #888888;
 
@@ -379,19 +368,6 @@ img.previewImg{
 
     max-width: 200px;
     max-height: 200px;
-}
-
-canvas.canvasPage {
-    position: fixed;
-
-    top: 0px;
-    left: 0px;
-    z-index: -1;
-
-    width: 800px;
-    height: 600px;
-
-    opacity: 0.5;
 }
 
 .textDefaultStyle {
