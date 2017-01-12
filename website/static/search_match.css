@@ -970,3 +970,13 @@ canvas.canvasPage {
 
     opacity: 0.5;
 }
+
+div.noResultDiv {
+    height: 300px;
+    width: 300px;
+}
+
+img.noResultImg {
+    max-height: 300px;
+    max-width: 300px;
+}
