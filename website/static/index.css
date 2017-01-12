@@ -87,8 +87,6 @@ div.linkTitle {
 
 div.linkTitle:hover {
     border: 2px #BBBBBB solid;
-
-    color: #444444;
 }
 
 div.currentLinkTitle {

@@ -137,6 +137,10 @@
         </div>
 
         <div class="resultContainerPositionMatch" id="resultContainer">
+            <div class="resultTitle" id="timeTitle">
+                您的时间减少了：{{ time }} 秒
+            </div>
+            
             <div class="container" id="matchedResultContainer">
                 {% if (logo_matched|length > 0) %}
                     <div class="resultTitle" id="matchedResultTitle">
@@ -157,9 +161,16 @@
 
             <!-- <div class="matchResultContainer" id="similarResultContainer"> wrong id ?--> 
             <div class="matchResultContainer" id="resultContainer">
-                <div class="resultTitle" id="similarResultTitle">
-                    共搜索到{{ logo_similar|length }}个相似结果
-                </div>
+                {% if logo_matched|length > 0 %}
+                    <div class="resultTitle" id="similarResultTitle">
+                        共搜索到{{ logo_matched|length }}个结果
+                    </div>
+                {% else %}
+                    <div class="resultTitle" id="similarResultTitle">
+                        虽然什么都没有搜索到，但你并非一无所有
+                    </div>
+                    <img class="noResultImg" src="static/noResult.png">
+                {% endif %}
 
                 {%- for row in logo_similar|batch(3) %}
                     <div class="imgSimilarResultRow">

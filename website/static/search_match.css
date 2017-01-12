@@ -296,7 +296,7 @@ div.activeAdvancedTitle {
 }
 
 div.advancedSearchPanel {
-    background-color: rgba(255,255,255,0.9);
+    background-color: rgba(255,255,255,0.9)!important;
     margin-top: -5px;
     display: block;
 }
@@ -441,12 +441,15 @@ input.textfield:hover {
 }
 
 div.resultTitle {
-    margin: 30px 20px 20px 0;
+    margin: 20px 20px 20px 0;
 
     width: 100%;
 
     font-size: 22px;
     font-weight: bold;
+}
+div#timeTitle {
+    margin: 20px 0 20px 0;
 }
 
 div.imgMatchedResultRow {
@@ -744,7 +747,7 @@ div.resultPartPositionDefault {
     transition: margin-right,left,opacity 1.2s,3s,1s;
     position: absolute;
 
-    padding-top: 70px;
+    padding-top: 140px;
 
     top: 0px;
     left: 0%;
@@ -978,6 +981,9 @@ div.noResultDiv {
 }
 
 img.noResultImg {
+    background-color: transparent;
+
     max-height: 300px;
     max-width: 300px;
+    margin-left: -100px;
 }

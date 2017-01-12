@@ -97,6 +97,8 @@ def match():
         weight = round(weight, 5)
         rounded_weights.append(weight)
 
+    t = round(t, 5)
+
     return render_template(tmpl, logo_matched=logo_matched, logo_similar=logo_similar,
                            kw=kw, upload=uploaded_logo, time=t, upload_theme_weights=rounded_weights)
 
