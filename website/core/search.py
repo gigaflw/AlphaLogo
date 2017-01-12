@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-23 23:18:28
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-11 22:42:27
+# @Last Modified time: 2017-01-12 12:08:39
 from __future__ import unicode_literals, print_function, division
 
 from cv2 import imread as cv2_imread
@@ -143,20 +143,21 @@ class Searcher(object):
         print(scores_c, scores_s)
         scores = {}
 
+        r = 0.5
+
         for ind, score in zip(logo_inds_s, scores_s):
             scores.setdefault(ind, 0)
-            scores[ind] += score
+            scores[ind] += r * score ** 2
 
         for ind, score in zip(logo_inds_c, scores_c):
             scores.setdefault(ind, 0)
-            scores[ind] += score
+            scores[ind] += (1-r) * score ** 2
 
         # scores[logo_inds_s - mn] += scores_s ** 3 / 2
         # scores[logo_inds_c - mn] += scores_c ** 3 / 2
         # score = 0.5 * (score1 ** 2.5 + score2 ** 2.5)
         logo_inds = np.array(scores.keys())
         scores = np.array(scores.values())
-        scores = (scores / 2) ** 0.5
 
         # get max_n
         max_n = min(np.sum(scores > threshold / 2), max_n)

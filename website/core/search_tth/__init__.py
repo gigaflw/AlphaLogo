@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-25 13:07:33
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-11 21:50:52
+# @Last Modified time: 2017-01-12 11:23:38
 from __future__ import division, print_function
 
 import os
@@ -96,11 +96,11 @@ def get_search_func():
 
     def search(im, max_n=50):
         im = im[:, :, ::-1]
-        dp = vectorize(im)  
+        dp = vectorize(im)
 
         inds = lsh.find_neighbor(dp)
 
-        dist = np.linalg.norm(data[inds] - dp, axis=1) / 30.0  # todo: hard code 
+        dist = np.linalg.norm(data[inds] - dp, axis=1) / 30.0  # todo: hard code
 
         # get max_n-th cloest
         max_n = min(len(inds)-1, max_n)
@@ -112,8 +112,7 @@ def get_search_func():
         print("TTH: Match inds(begin with 0):\t", inds)
         print("TTH: Vector distance:\t", dist[ret])
 
-        score = 1 - dist[ret]
-        score[score < 0] = 0
+        score = 1 / (dist[ret]+1)
 
         return inds, score
 
