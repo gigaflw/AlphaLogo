@@ -301,9 +301,10 @@ div.advancedSearchPanel {
     transform: rotateX(90deg);
     transform-origin: 50% 0;
 
-    background-color: #EEEEEE;
+    display: inline-block;
+    background-color: #e5e0cc;
 
-    margin: 30px 20px 20px 0px;
+    margin: 0px 20px 20px 0px;
     padding-bottom: 5px;
 
     width: 700px;
@@ -354,37 +355,30 @@ div.advancedSearchType {
     width: 80px;
     height: 25px;
     
-    border: 2px #FFFFFF solid;
+    border: 2px #fff solid;
     border-radius: 10px;
     border-color: transparent;
 
     text-align: center;
-    color: #888888;
+    color: #888;
     font-size: 18px;
+
+    transition: color .2s, border-color .2s, background-color .2s;
 }
+
 div.advancedSearchType:hover {
-    border: 2px solid #CCCCCC;
-
-    color: #444444;
+    border-color: #ccc;
+    color: #444;
 }
 
-div.advancedSearchTypeActive {
-    cursor: pointer;
-    background-color: #DDDDDD;
+div.advancedSearchType.active {
+    background-color: rgba(0,0,0,0.3);
+    border-color: #888;
+    color: #fff;
+}
 
-    margin: 0 5px 0 5px;
-    padding-top: 10px;
-    float: left;
-
-    width: 80px;
-    height: 25px;
-    
-    border: 2px #888888 solid;
-    border-radius: 10px;
-
-    text-align: center;
-    color: #000000;
-    font-size: 18px;
+div.advancedSearchType.active:hover {
+    border-color: #ddd;
 }
 
 input.enterpriseName {
@@ -958,3 +952,25 @@ p.uploadColorsList {
     font-size: 0px;
     height: 0px;
 }
+
+div.colorDetailDiv {
+    display: flex;
+
+    height: 91px;
+    width: 100px;
+
+    flex-flow: column wrap;
+    justify-content: center;
+}
+
+div.colorDetailRow {
+    display: flex;
+
+    padding-left: 10px;
+
+    height: 18px;
+
+    flex-flow: row wrap;
+    justify-content: flex-start;
+}
+
