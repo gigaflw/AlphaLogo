@@ -182,7 +182,7 @@ function advancedSearchTypeInitialization() {
         (function() { // js的函数闭包问题
             var i = x;
             advancedSearchTypeArray[i].addEventListener("click", function() {
-                switchAdvancedSearchType(this);
+                this.classList.toggle('active')
                 if (i < 5) {
                     nColorsInput(i, this);
                 } else if (i < 8) {

@@ -301,10 +301,9 @@ div.advancedSearchPanel {
     transform: rotateX(90deg);
     transform-origin: 50% 0;
 
-    display: inline-block;
     background-color: #e5e0cc;
 
-    margin: 0px 20px 20px 0px;
+    margin: 20px 20px 20px 0px;
     padding-bottom: 5px;
 
     width: 700px;
@@ -974,3 +973,15 @@ div.colorDetailRow {
     justify-content: flex-start;
 }
 
+canvas.canvasPage {
+    position: fixed;
+
+    top: 0px;
+    left: 0px;
+    z-index: -1;
+
+    width: 800px;
+    height: 600px;
+
+    opacity: 0.5;
+}
