@@ -139,7 +139,7 @@ function modeSearch() {
     idInputSearch.style.display = "block";
     idInputMatch.style.display = "none";
     idAdvancedSearchPanel.style.transform = "rotateX(90deg)";
-    idCurrentPointer.style.left = "252px";
+    idCurrentPointer.style.left = "33px";
 }
 
 function modeMatch() {
@@ -149,7 +149,7 @@ function modeMatch() {
     idInputSearch.style.display = "none";
     idInputMatch.style.display = "block";
     idAdvancedSearchPanel.style.transform = "rotateX(90deg)";
-    idCurrentPointer.style.left = "375px";
+    idCurrentPointer.style.left = "158px";
 }
 
 function switchAdvancedSearch() {

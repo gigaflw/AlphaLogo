@@ -52,7 +52,7 @@ function modeSearchInitial() {
     idInputSearch.style.display = "block";
     idInputMatch.style.display = "none";
     idAdvancedSearchPanel.style.transform = "rotateX(90deg)";
-    idCurrentPointer.style.left = "252px";
+    idCurrentPointer.style.left = "33px";
     divResultContainer.style.marginRight = "0px";
 }
 
