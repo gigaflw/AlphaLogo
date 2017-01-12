@@ -32,7 +32,7 @@ function modeMatchInitial() {
     idInputMatch.style.display = "block";
     idAdvancedSearchPanel.style.transform = "rotateX(90deg)";
     divResultContainer.style.marginRight = "250px";
-    idCurrentPointer.style.left = "375px";
+    idCurrentPointer.style.left = "158px";
 }
 
 

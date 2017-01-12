@@ -6,6 +6,7 @@
 
 {% block styles %}
     <link rel="stylesheet" href="static/search_match.css">
+    <link rel="stylesheet" type="text/css" href="static/searchbar.css">
 {% endblock %}
 
 {% block scripts %}
@@ -13,6 +14,7 @@
     <script src="static/search.js"></script>
     <script src="static/jquery.js"></script>
     <script src="static/jquery.peity.js"></script>
+    <script src="static/searchbar.js"></script>
 {% endblock %}
 
 {% block body %}
@@ -23,7 +25,7 @@
 
     	<div class="titleContainerDefault" id="titleContainer">
     		<div class="title" id="title">
-	            AlphaLogo
+	            <img class="titleImg" src="static/logo.png">
 	        </div>
 	        <div class="linkBar">
 	            <div class="currentLinkTitle" id="search">
@@ -36,7 +38,7 @@
 	        </div>
 	        <div class="input" id="inputSearch">
 	            <form id="textForm" action="/search" method="GET">
-	                <input type="text" class="keyword" name="kw" value="{{ kw }}" placeholder="请输入要搜索的logo特征">
+	                <input type="text" class="keyword" name="kw" value="{{ kw }}" autocomplete="off" placeholder="请输入要搜索的logo特征">
 	                <input name="type" id="typeSearch" value="search" hidden>
 	                <input type="text" id="enterpriseName" name="enterpriseName" value="" hidden>
 	                <input type="text" id="nColors" name="nColors" value="0,0,0,0,0" hidden>
@@ -44,16 +46,18 @@
 	                <input type="text" id="brightness" name="brightness" value="0,0,0" hidden>
 	                <input type="text" id="industry" name="industry" value="0,0,0,0,0,0" hidden>
 	                <div class="passiveAdvancedTitle" id="advanced">
-	                    <span class="textDefaultStyle">高级搜索</span>
+	                    <span class="textDefaultStyle">+</span>
 	                </div>
 	                <button type="submit" class="submit">Go</button>
+
+	                <div class="suggest"></div>
 	            </form>
 	        </div>
 	        <div class="input" id="inputMatch" hidden>
 	            <form id="imageForm" action="/match" enctype="multipart/form-data" method="POST">
 	                <input type="text" name="textfield" id="textfield" class="textfield" placeholder="请选择一张logo图片" disabled="disable"> 
 	                <input type="file" class="logo" id="logo" name="logo" onchange="showTextField()">
-	                <input type="button" class="browse" id="browse" value="浏览">
+	                <input type="button" class="browse" id="browse" value="+">
 	                <input name="type" id="typeMatch" value="match" hidden>
 	                <button type="submit" class="submit" id="imgSubmit">Go</button> 
 	            </form>

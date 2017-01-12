@@ -74,6 +74,26 @@ div.resultContainerPositionMatch {
     justify-content: flex-start;
 }
 
+div.title {
+    cursor: pointer;
+
+    margin: 20px -10px 0px 30px;
+    float: left;
+
+    width: 180px;
+
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+
+    font-family: fantasy;
+}
+
+img.titleImg {
+    max-height: 130px;
+    max-width: 200px;
+}
+
 div.titleContainerDefault {
     position: relative;
     background-color: transparent;
@@ -115,38 +135,26 @@ div.titleContainerPassive:hover {
     opacity: 1;
 }
 
-div.title {
-    cursor: pointer;
-
-    margin: 35px 20px 25px 20px;
-    float: left;
-
-    width: 210px;
-
-    text-align: center;
-    font-size: 40px;
-    font-weight: bold;
-}
-
 div.linkBar {
     position: relative;
 
     height: 40px;
-    width: 700px;
+    width: 300px;
 
-    padding: 5px 5px 15px 15px;
-
-    text-align: left;
+    margin: 0 auto;
+    
+    text-align: center;
+    transition: margin-top 0.6s;
 }
 
 div.currentPointerSearch {
     transition: left 0.5s;
 
     position: absolute;
-    background-color: #0000FF;
+    background-color: #aa9;
 
-    left: 252px;
-    bottom: 12px;
+    left: 33px;
+    bottom: 0px;
 
     height: 4px;
     width: 110px;
@@ -156,10 +164,10 @@ div.currentPointerMatch {
     transition: left 0.5s;
 
     position: absolute;
-    background-color: #0000FF;
+    background-color: #aa9;
 
-    left: 375px;
-    bottom: 12px;
+    left: 158px;
+    bottom: 0px;
 
     height: 4px;
     width: 110px;
@@ -205,18 +213,16 @@ div.currentLinkTitle {
 }
 
 div.input {
-    width: 700px;
+    margin-top: 10px;
 
-    text-align: left;
+    text-align: center;
     font-size: 16px;
 }
 
 input.keyword {
     background-color: transparent;
 
-    margin-left: -10px;
-
-    width: 400px;
+    width: 60%;
     height: 30px;
 
     border: 3px #AAAAAA solid;
@@ -257,25 +263,20 @@ div.passiveAdvancedTitle {
     cursor: pointer;
     background-color: transparent;
 
-    margin-left: -150px;
+    margin-left: -80px;
     padding-top: 8px;
 
     height: 24px;
-    width: 100px;
-
-    border: 3px #FFFFFF solid;
-    border-radius: 10px;
-    border-color: transparent;
 
     font-size: 18px;
     text-align: center;
     color: #888888;
     outline-width: 0;
-    vertical-align: top;
-}
-div.passiveAdvancedTitle:hover {
-    border-color: #888888;
 
+    transition: color .3s;
+}
+
+div.passiveAdvancedTitle:hover {
     color: #444444;
 }
 
@@ -284,20 +285,15 @@ div.activeAdvancedTitle {
     cursor: pointer;
     background-color: transparent;
 
-    margin-left: -150px;
+    margin-left: -80px;
     padding-top: 8px;
 
     height: 24px;
-    width: 100px;
-
-    border: 3px #888888 solid;
-    border-radius: 10px;
 
     font-size: 18px;
     text-align: center;
     color: #000000;
     outline-width: 0;
-    vertical-align: top;
 }
 
 div.advancedSearchPanel {
@@ -305,9 +301,10 @@ div.advancedSearchPanel {
     transform: rotateX(90deg);
     transform-origin: 50% 0;
 
-    background-color: #EEEEEE;
+    display: inline-block;
+    background-color: #e5e0cc;
 
-    margin: 30px 20px 20px 0px;
+    margin: 0px 20px 20px 0px;
     padding-bottom: 5px;
 
     width: 700px;
@@ -358,37 +355,30 @@ div.advancedSearchType {
     width: 80px;
     height: 25px;
     
-    border: 2px #FFFFFF solid;
+    border: 2px #fff solid;
     border-radius: 10px;
     border-color: transparent;
 
     text-align: center;
-    color: #888888;
+    color: #888;
     font-size: 18px;
+
+    transition: color .2s, border-color .2s, background-color .2s;
 }
+
 div.advancedSearchType:hover {
-    border: 2px solid #CCCCCC;
-
-    color: #444444;
+    border-color: #ccc;
+    color: #444;
 }
 
-div.advancedSearchTypeActive {
-    cursor: pointer;
-    background-color: #DDDDDD;
+div.advancedSearchType.active {
+    background-color: rgba(0,0,0,0.3);
+    border-color: #888;
+    color: #fff;
+}
 
-    margin: 0 5px 0 5px;
-    padding-top: 10px;
-    float: left;
-
-    width: 80px;
-    height: 25px;
-    
-    border: 2px #888888 solid;
-    border-radius: 10px;
-
-    text-align: center;
-    color: #000000;
-    font-size: 18px;
+div.advancedSearchType.active:hover {
+    border-color: #ddd;
 }
 
 input.enterpriseName {
@@ -412,26 +402,26 @@ input.enterpriseName:hover {
     border: 3px #888888 solid;
 }
 
-
 input.browse {
     cursor: pointer;
-    background-color: #DDDDDD;
+    background-color: transparent;
 
     height: 38px;
-    width: 65px;
+    margin-left: -80px;
 
-    border: 3px #AAAAAA solid;
-    border-radius: 10px;
-
-    font-size: 18px;
+    font-size: 21px;
     text-align: center;
-    color: #888888;
+    color: #888;
+
+    border: none;
+
     outline-width: 0;
     vertical-align: top;
-}
-input.browse:hover {
-    border: 3px #888888 solid;
 
+    transition: color .2s;
+}
+
+input.browse:hover {
     color: #000000;
 }
 
@@ -451,9 +441,7 @@ input.logo {
 input.textfield {
     background-color: transparent;
 
-    margin-left: -10px;
-
-    width: 290px;
+    width: 60%;
     height: 30px;
 
     border: 3px #AAAAAA solid;
@@ -964,3 +952,25 @@ p.uploadColorsList {
     font-size: 0px;
     height: 0px;
 }
+
+div.colorDetailDiv {
+    display: flex;
+
+    height: 91px;
+    width: 100px;
+
+    flex-flow: column wrap;
+    justify-content: center;
+}
+
+div.colorDetailRow {
+    display: flex;
+
+    padding-left: 10px;
+
+    height: 18px;
+
+    flex-flow: row wrap;
+    justify-content: flex-start;
+}
+

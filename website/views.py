@@ -89,7 +89,7 @@ def match():
     if kw is None:
         return redirect(url_for("bp.index"))
     else:
-        (logo_matched, logo_similar), t = image_search(full_path_uploads(upload_name))
+        (logo_matched, logo_similar), t = image_search(full_path_uploads(upload_name), max_n=20)
         #flash("Time consumed: %.5f sec" % t)
 
     rounded_weights = []
