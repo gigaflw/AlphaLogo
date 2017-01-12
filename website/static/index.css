@@ -2,7 +2,7 @@
 * @Author: GigaFlower
 * @Date:   2016-12-23 23:12:10
 * @Last Modified by:   GigaFlower
-* @Last Modified time: 2017-01-12 10:09:34
+* @Last Modified time: 2017-01-12 10:43:29
 */
 
 body {
@@ -30,6 +30,8 @@ div.title {
     font-weight: bold;
     
     font-family: fantasy;
+
+    color: #fff;
 }
 
 div.title.up {
@@ -43,6 +45,8 @@ div.linkBar {
     height: 40px;
     width: 300px;
 
+    color: #eee;
+
     margin: 0 auto;
     
     text-align: center;
@@ -53,7 +57,7 @@ div.currentPointer {
     transition: left 0.5s;
 
     position: absolute;
-    background-color: #aa9;
+    background-color: #ddd;
 
     left: 32px;
     bottom: -2px;
@@ -77,9 +81,10 @@ div.linkTitle {
     border-radius: 5px;
 
     text-align: center;
-    color: #888888;
+    color: #aaa;
     font-size: 18px;
 }
+
 div.linkTitle:hover {
     border: 2px #BBBBBB solid;
 
@@ -108,43 +113,48 @@ div.input {
     font-size: 16px;
 }
 
+input.textfield,
 input.keyword {
     background-color: transparent;
-
+    color: #fff;
     width: 60%;
-    height: 30px;
+    height: 40px;
 
-    border: 3px #AAAAAA solid;
-    border-radius: 15px;
+    border: 3px rgba(255,255,255,0.8) solid;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-right: none;
 
     font-size: 18px;
     text-indent: 10px;
     outline-width: 0;
     vertical-align: top;
 }
+/*
 input.keyword:hover {
     border: 3px #888888 solid;
-}
+}*/
 
 button.submit {
     cursor: pointer;
-    background-color: #DDDDDD;
-
-    height: 38px;
+    background-color: transparent;
+    color: #ddd;
+    height: 48px;
     width: 55px;
 
-    border: 3px #AAAAAA solid;
+    border: 3px rgba(255,255,255,0.8) solid;
     border-radius: 10px;
 
     font-size: 18px;
     text-align: center;
-    color: #888888;
+    /*color: #888888;*/
     outline-width: 0;
+    vertical-align: top;
 }
 button.submit:hover {
-    border: 3px #888888 solid;
+    background-color: transparent;
 
-    color: #000000;
+    color: #fff;
 }
 
 div.passiveAdvancedTitle {
@@ -155,18 +165,18 @@ div.passiveAdvancedTitle {
     margin-left: -80px;
     padding-top: 8px;
 
-    height: 24px;
+    height: 40px;
 
-    font-size: 18px;
+    font-size: 38px;
     text-align: center;
-    color: #888888;
+    color: #ddd;
     outline-width: 0;
 
     transition: color .3s;
 }
 
 div.passiveAdvancedTitle:hover {
-    color: #444444;
+    color: #fff;
 }
 
 div.activeAdvancedTitle {
@@ -179,7 +189,7 @@ div.activeAdvancedTitle {
 
     height: 24px;
 
-    font-size: 18px;
+    font-size: 38px;
     text-align: center;
     color: #000000;
     outline-width: 0;
@@ -271,7 +281,6 @@ div.advancedSearchType.active:hover {
 
 input.enterpriseName {
     background-color: transparent;
-
     margin-top: 3px;
 
     width: 200px;
@@ -296,21 +305,24 @@ input.browse {
 
     height: 38px;
     margin-left: -80px;
+    margin-top: -4px;
 
-    font-size: 21px;
+    font-size: 38px;
     text-align: center;
-    color: #888;
+    color: #ddd;
 
     border: none;
 
     outline-width: 0;
     vertical-align: top;
 
-    transition: color .2s;
+    transition: color .3s;
+
+    display: inline-block;
 }
 
 input.browse:hover {
-    color: #000000;
+    color: #eee;
 }
 
 input.logo {
@@ -324,25 +336,6 @@ input.logo {
 
     font-size: 18px;
     text-indent: 10px;
-}
-
-input.textfield {
-    background-color: transparent;
-
-    width: 60%;
-    height: 30px;
-
-    border: 3px #AAAAAA solid;
-    border-radius: 15px;
-
-    font-size: 18px;
-    text-indent: 10px;
-    color: #888888;
-    outline-width: 0;
-    vertical-align: top;
-}
-input.textfield:hover {
-    border: 3px #888888 solid;
 }
 
 div.previewDiv{
