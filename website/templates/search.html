@@ -87,12 +87,12 @@
 
     	<div class="resultContainerPositionSearch" id="resultContainer">
     		<div class="resultTitle" id="timeTitle">
-                您的时间减少了：{{ time }} 秒
+                您的时间又减少了：{{ time }} 秒
             </div>
 	        
 	        {% if logo_matched|length > 0 %}
 	        	<div class="resultTitle" id="similarResultTitle">
-	            	共搜索到{{ logo_matched|length }}个结果
+	            	{{ logo_matched|length }}只野生的相似结果出现了
 	            </div>
 	        {% else %}
 	        	<div class="resultTitle" id="similarResultTitle">
