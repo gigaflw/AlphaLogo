@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-23 23:18:28
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-12 12:08:39
+# @Last Modified time: 2017-01-12 21:38:34
 from __future__ import unicode_literals, print_function, division
 
 from cv2 import imread as cv2_imread
@@ -136,40 +136,33 @@ class Searcher(object):
             print("No image at '%s' ,match failed!" % path)
             return [], []
 
+        im = im[:,:,::-1] # BGR -> RGB
+
         logo_inds_s, scores_s = self._image_search_sift(im, max_n=50)
         logo_inds_c, scores_c = self._image_search_color(im, max_n=50)
 
-        print(logo_inds_c, logo_inds_s)
-        print(scores_c, scores_s)
         scores = {}
 
-        r = 0.5
+        r = 0.5 # the ratio between color score and sift score
 
         for ind, score in zip(logo_inds_s, scores_s):
             scores.setdefault(ind, 0)
-            scores[ind] += r * score ** 2
+            scores[ind] += r * score 
 
         for ind, score in zip(logo_inds_c, scores_c):
             scores.setdefault(ind, 0)
-            scores[ind] += (1-r) * score ** 2
+            scores[ind] += (1-r) * score 
 
-        # scores[logo_inds_s - mn] += scores_s ** 3 / 2
-        # scores[logo_inds_c - mn] += scores_c ** 3 / 2
-        # score = 0.5 * (score1 ** 2.5 + score2 ** 2.5)
         logo_inds = np.array(scores.keys())
         scores = np.array(scores.values())
 
         # get max_n
-        max_n = min(np.sum(scores > threshold / 2), max_n)
-
+        max_n = min(np.sum(scores > threshold / 4), max_n)
         inds = np.argpartition(scores, -max_n)[-max_n:]
         inds = inds[np.argsort(scores[inds])][::-1]
 
         scores = scores[inds]
         logo_inds = logo_inds[inds]
-
-        print(logo_inds)
-        print(scores)
 
         logo_inds += 1  # ind begins with 1
         logos = self.get_logos_from_db(logo_inds)

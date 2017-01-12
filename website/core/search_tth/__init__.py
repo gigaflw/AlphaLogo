@@ -2,7 +2,11 @@
 # @Author: GigaFlower
 # @Date:   2016-12-25 13:07:33
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-12 11:23:38
+# @Last Modified time: 2017-01-12 21:20:46
+# 
+# The vectorize, index and search algorithm based on color vectors
+# No specific name, so the aurthor's name's abbreviation is used, i.e. 'tth'
+# 
 from __future__ import division, print_function
 
 import os
@@ -25,36 +29,38 @@ from website.core.algorithm.utility import get_theme_colors, hsv_reduce_colors, 
 from website.utility import full_path_dataset
 
 
-def vectorize(im):
-    """assert im in float type and in RGB mode"""
+def vectorize(im, n=2, color_level=8):
+    """
+    @param: im: float type 3d array, in RGB color mode
+    @param: n: the image will be split into `n*n` blocks and comput vector respectively
+    @param: color_level: the precision of floats for each RGB component, no more than 256
 
-    # theme_colors, theme_weights, s, v = get_theme_colors('', im=im)
-    # theme_colors is a int type 2d np.array with max value 255
-    # while theme_weights is a 1d float array
+    Compute the color vector of the image, two main RGB color will be extrieve in each block,
+    thus a (n*n) * 6 -d vector will be returned. 
+    The main color is conputed by MMCQ algorithm
+    """
 
     dps = []
 
-    block_w, block_h = im.shape[0] // 2, im.shape[1] // 2
+    block_w, block_h = im.shape[0] // n, im.shape[1] // n
 
-    for i, j in product(range(2), range(2)):
+    for i, j in product(range(n), range(n)):
         region = im[i*block_w:(i+1)*block_w, i*block_h:(i+1)*block_h]
-        colors = MMCQ(region, 8, 2)
+        colors = MMCQ(region, color_level, 2)
         colors, weights = zip(*colors)
-        # hsv_colors = rgb_to_hsv(colors) / 255
 
-        # h, s, v = np.split(hsv_colors, 3, axis=1)
-        # x, y, z = s * v * np.cos(h), s * v * np.sin(h), v
-        # hsv_colors = np.hstack([x, y, z])
-
-        # weights = np.array(weights)
-
-        # dps = np.hstack([hsv_colors, weights.reshape(-1, 1)])
         dps.append(np.hstack(colors))
 
     return np.hstack(dps)
 
 
 def create_index():
+    """
+    For each jpg logo image in `DATASETDIR`, a vector will be computed.
+    An `LSH` instance will be fed the vector, both the LSH and vectors will be piclked.
+
+    `LSH` will be saved into `IMAGE_INDEX_TTH_FILE`, and vectors into `IMAGE_INDEX_TTH_DATA_FILE`
+    """
     lsh = LSH(d=24, l=16)
     data = []
 
@@ -81,12 +87,21 @@ def create_index():
         lsh.save(IMAGE_INDEX_TTH_FILE)
 
         with open(IMAGE_INDEX_TTH_DATA_FILE, 'wb') as f:
-            pickle.dump(np.array(data), f)
+            pickle.dump(np.array(data), f, protocol=2)
 
         print("Image index saved to %s" % IMAGE_INDEX_TTH_FILE)
 
 
 def get_search_func():
+    """
+    Lazy load search function factory
+
+    @the search function's return:
+    two list, the first is the list of indexes of images matched in the SIFT data index file,
+    the second is the list of scores ranging in [0, 1], the larger the score, the better the match
+
+    A image in RGB color mode is asserted as the argument.
+    """
     lsh = LSH.restore(IMAGE_INDEX_TTH_FILE)
 
     with open(IMAGE_INDEX_TTH_DATA_FILE, 'rb') as f:
@@ -95,12 +110,11 @@ def get_search_func():
     print("TTH index data loaded")
 
     def search(im, max_n=50):
-        im = im[:, :, ::-1]
         dp = vectorize(im)
 
         inds = lsh.find_neighbor(dp)
 
-        dist = np.linalg.norm(data[inds] - dp, axis=1) / 30.0  # todo: hard code
+        dist = np.linalg.norm(data[inds] - dp, axis=1) / 30.0  # todo: hard code, 30 is experience threshold
 
         # get max_n-th cloest
         max_n = min(len(inds)-1, max_n)

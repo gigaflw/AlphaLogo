@@ -2,8 +2,10 @@
 # @Author: GigaFlower
 # @Date:   2017-01-04 13:18:25
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-07 11:14:33
-
+# @Last Modified time: 2017-01-12 20:59:30
+# 
+# A wrap around sqlite3 refers to 'http://dormousehole.readthedocs.io/en/latest/patterns/sqlite3.html'
+# 
 
 from contextlib import closing
 
@@ -49,14 +51,4 @@ class DB(object):
 
 db = DB()
 
-
-if __name__ == '__main__':
-    db.init()
-    # db.insert(**{'ind':'2', 'filename':'001.jpg', 'info':'foo', 'theme_colors':'bar', 'ent_name':'alibaba'})
-    a = db.query("SELECT * from LOGOS")
-    print(len(a))
-    # for aa in a:
-        # for k, v in aa.items():
-            # print(k)
-            # print(v)
 

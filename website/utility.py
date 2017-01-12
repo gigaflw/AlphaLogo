@@ -2,19 +2,26 @@
 # @Author: GigaFlower
 # @Date:   2016-12-25 14:02:13
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-11 16:32:41
+# @Last Modified time: 2017-01-12 20:56:30
 
 import os
 import shutil
 from time import ctime
 from hashlib import md5
 
-from flask import g
-
 from config import UPLOAD_DIR, DATASET_DIR, ALLOWED_TYPES
 
 
 def save_img_to_uploads(im, clear_others_if_more_than=10):
+    """
+    Save imgs to upload dir, which also
+    1) clean the dir if there are more than `clear_others_if_more_than` imgs
+    2) check the image extension
+    3) hash file name to avoid cache
+
+    @param: im: the image binary data get from flask uploads
+    @return: the hashed filename of the uploaded file
+    """
     if clear_others_if_more_than and len(os.listdir(UPLOAD_DIR)) > clear_others_if_more_than:
         shutil.rmtree(UPLOAD_DIR)
         os.mkdir(UPLOAD_DIR)

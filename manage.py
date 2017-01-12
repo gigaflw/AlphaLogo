@@ -2,30 +2,38 @@
 # @Author: GigaFlower
 # @Date:   2017-01-02 09:41:37
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-11 12:53:58
+# @Last Modified time: 2017-01-12 20:48:34
 
+#
+# This file provides cmd tools to manage index files and database initilization
+#
+# Requires:
+#
 #
 # To reset index dirs :
 #   python manage.py -r
 # To create index for images:
 #   python manage.py -i
+# To create index for tth search:
+#   python manage.py -t
 # To run pylucene index script :
-#   python manage.py -c
+#   python manage.py -l
+# To init database :
+#   python manage.py -d
 # To do the above altogether:
 #   python manage.py --init
 #
 
-import subprocess
+
 import os
 import shutil
 import argparse
-
-import cv2
 
 from website.database import create_db
 from website.core.search_text import create_index as text_create_index
 from website.core.search_image import create_index as image_create_index
 from website.core.search_tth import create_index as tth_create_index
+
 from website.config import DATASET_DIR, ALLOWED_TYPES
 from website.core.config import LUCENE_INDEX_DIR, LUCENE_CATELOG_FILE, IMAGE_INDEX_DIR
 
@@ -46,11 +54,10 @@ parser.add_argument('-l', action="store_true", help="Create lucene index files f
 
 parser.add_argument('--init', action="store_true", help="Do everything")
 
-# TODO: not move, but symlink!
+
 ##########################
 # Functions
 ##########################
-
 
 def reset_index():
     dirs = [LUCENE_INDEX_DIR, IMAGE_INDEX_DIR]
@@ -71,9 +78,6 @@ def reset_index():
         os.mkdir(d)
         print("'%s' created" % d)
 
-    # print("Creating symlink '%s' to '%s'..." % (CRAWL_IMAGE_PATH, DATASET_DIR))
-    # subprocess.call(['ln', '-s', CRAWL_IMAGE_PATH, DATASET_DIR])
-
     if os.path.isfile(CRAWL_CATELOG_FILE):
         shutil.copyfile(CRAWL_CATELOG_FILE, LUCENE_CATELOG_FILE)
         print("Catelog file '%s' copied to '%s'" % (CRAWL_CATELOG_FILE, LUCENE_CATELOG_FILE))
@@ -84,6 +88,9 @@ def reset_index():
 
 
 def create_index():
+    assert os.path.isdir(CRAWL_IMAGE_PATH), "You need to put crawled images at '%s'" % CRAWL_IMAGE_PATH
+    assert os.path.isfile(CRAWL_CATELOG_FILE), "You need to put crawled catelog file as '%s'" % CRAWL_CATELOG_FILE
+
     if not reset_index():
         return
 

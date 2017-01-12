@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2017-01-11 10:35:19
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-11 22:34:35
+# @Last Modified time: 2017-01-12 20:58:31
 
 
 from website.database import db
@@ -13,13 +13,19 @@ from website.core.algorithm import industry_classify
 
 
 def create_db():
+    """
+    Create the sqlite database, which
+    1) reset the database
+    2) read lines from `LUCENE_CATELOG_FILE`
+    3) extrieve info from logo's text and image data
+    4) insert into db
+    """
     print("Reseting sqlite database...")
     db.reset_db()
     db.init()
     
     print("Database inited")
 
-    stat = [0] * 7
 
     with open(LUCENE_CATELOG_FILE, 'r') as index_f:
 
@@ -37,7 +43,6 @@ def create_db():
             n_colors = str(len(theme_colors))
 
             indust = industry_classify(info)
-            stat[indust] += 1
 
             to_store = {"ind": ind,
                         "filename": filename,
@@ -50,6 +55,5 @@ def create_db():
                         "industry": indust
                         }
             db.insert(**to_store)
-    print("industry stat", stat)
 
     print("Sqlite database created.")

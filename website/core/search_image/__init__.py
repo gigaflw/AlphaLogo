@@ -2,8 +2,11 @@
 # @Author: GigaFlower
 # @Date:   2016-12-25 13:07:33
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-11 10:49:44
-
+# @Last Modified time: 2017-01-12 21:20:48
+# 
+# Image search algorithm based on SIFT and LSH
+# The implementation locates at 'website.core.algorirhm', here is the interface
+# 
 import os
 import traceback
 
@@ -16,8 +19,13 @@ from website.core.algorithm import SIFT, LSH
 
 
 def create_index():
+    """
+    For each jpg logo image in `DATASETDIR`, a vector will be computed.
+    Then, create index file for sift search, whose data is compressed by LSH.
+    Index file will be saved to `IMAGE_INDEX_PKL_FILE`
+    """
     sift = SIFT(debug=False)
-    lsh = LSH(d=128, l=12)
+    lsh = LSH(d=128, l=12) # 128 = dimension of SIFT descriptor, 12 = experience number of hash function
 
     try:
         for fname in os.listdir(DATASET_DIR):
@@ -40,11 +48,18 @@ def create_index():
 
 
 def get_search_func():
+    """
+    Lazy load search function by SIFT and LSH.
+    @return: a search function
+    @the search function's return:
+        two list, the first is the list of indexes of images matched in the SIFT data index file,
+        the second is the list of scores ranging in [0, 1], the larger the score, the better the match
+    """
     sift = SIFT(debug=False)
     lsh = LSH.restore(IMAGE_INDEX_PKL_FILE)
     print("Image index data loaded")
 
-    def search(im, max_n=10):
+    def search(im, max_n=20):
         if len(im.shape) == 3:
             im = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
 

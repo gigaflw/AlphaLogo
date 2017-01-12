@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2017-01-01 20:51:30
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-11 13:49:02
+# @Last Modified time: 2017-01-12 21:26:11
 #
 # Helper function for search engine indexing
 #
@@ -14,20 +14,6 @@ import cv2
 
 from website.core.algorithm import MMCQ
 
-COLOR_LEVEL = 8
-COLOR_SLOTS = 8
-STYLE_0 = 0
-STYLE_1 = 1
-STYLE_2 = 2
-STYLE_3 = 3
-STYLE_4 = 4
-STYLE_5 = 5
-STYLE_6 = 6
-STYLE_7 = 7
-STYLE_8 = 8
-STYLE_9 = 9
-# to have better names
-
 
 def get_theme_colors(im_name, color_level=8, color_slots=8):
     """
@@ -36,7 +22,7 @@ def get_theme_colors(im_name, color_level=8, color_slots=8):
     1) search the image from `DATASET_DIR` from config.py
     2) compute the main colors by MMCQ algorithm, parametered by the same config file
     3) reduce the similiar colors returned
-    4) compute color style
+    4) compute hsv stat
 
     @returns : (theme_colors, theme_weights, s_aver, v_aver), where
         theme_colors: a list of rgb colors, typed int
@@ -57,14 +43,12 @@ def get_theme_colors(im_name, color_level=8, color_slots=8):
 
     # remove white backgrounds
     if len(theme_colors) > 2 and theme_weights[0] > 0.5 and theme_colors[0][2] >= 220:
-        # print(colors, weights, theme_colors)
         print("white background ignored")
-        colors, weights = colors[1:], weights[1:]
+        # colors, weights = colors[1:], weights[1:]
 
     aver, std = hsv_stat(colors, weights)
     s_aver, v_aver = aver[1], aver[2]
 
-    # print(theme_colors, theme_weights, s_aver, v_aver)
     return theme_colors, theme_weights, s_aver, v_aver
 
 
@@ -80,40 +64,25 @@ def hsv_stat(colors, weights):
 
 
 def serialize_colors(colors):
+    """
+    [[255, 255, 255], [255, 0, 0]] -> '#ffffff #ff0000'
+    """
     return " ".join(map(to_web_color, colors))
 
 def deserialize_colors(color_string):
     pass
 
 def serialize_floats(floats):
+    """
+    [1, 0, 0.2] -> "ff 00 33"
+    """
     return " ".join("%02x" % (x*255) for x in floats)
 
 def deserialize_floats(float_string):
+    """
+    "ff 00 33" -> [1, 0, 0.2]
+    """
     return [int(f, base=16)/255.0 for f in float_string.split()]
-
-
-def color_style_tag(colors, weights):
-    """
-    Compute style from a list of colors and weights according to hsv averages
-
-    @param: colors: a list of RGB colors, typed uint8
-    @param: weights: a list of floats
-
-    @returns: a interger among `STYLE_X` constants denoting the style of color composition
-    """
-    colors = rgb_to_hsv(colors)
-    sv = colors[:, 1:] / 255
-    aver, std = np.average(sv, axis=0, weights=weights), np.std(sv, axis=0)
-    print("s: %.5f %.5f" % (aver[0], std[0]), end='\t')
-    print("v: %.5f %.5f" % (aver[1], std[1]))
-    # range : aver : [0, 1], std: [0, 0.5]
-    aver = (aver * 3).astype(np.int)  # discretization
-    # range : aver : {1, 2, 3}  # 4 is ignored
-    # raw_input('?')
-
-    tag = aver[0] + aver[1] * 3
-
-    return tag
 
 
 def lab_reduce_colors(colors, weights,  threshold=30, return_rgb=True):
@@ -126,7 +95,6 @@ def lab_reduce_colors(colors, weights,  threshold=30, return_rgb=True):
     inds = []
 
     for i, color in enumerate(lab_colors):
-        # dist = ((lab_colors[inds] - color)**2).sum(axis=1)**0.5
         dist = np.linalg.norm(hsv_colors_xyz[inds] - color, axis=1)
         if not dist.size or dist.min() > threshold:
             inds.append(i)
@@ -135,7 +103,6 @@ def lab_reduce_colors(colors, weights,  threshold=30, return_rgb=True):
         ret = colors[inds]
     else:
         ret = lab_colors[inds]
-    # print(len(ret))
 
     return ret
 
@@ -152,8 +119,12 @@ def hsv_reduce_colors(colors, weights, threshold=0.4, return_rgb=True):
     >>> reduce_colors([[0,0,0],[255,255,255],[1,1,1],[25,25,25],[70,70,70]], threshold=70)
     [[0, 0, 0], [255, 255, 255], [70, 70, 70]]
 
-    returned color is in RGB mode
+    @param: return_rgb:
+        returned color is in RGB mode if `True`
+        else hsv mode
 
+    @return:
+        the result colors and their weights
     """
     hsv_colors = rgb_to_hsv(colors)
     hsv_colors /= 255
@@ -166,7 +137,6 @@ def hsv_reduce_colors(colors, weights, threshold=0.4, return_rgb=True):
     inds = []
 
     for i, color in enumerate(hsv_colors_xyz):
-        # dist = ((hsv_colors_xyz[inds] - color)**2).sum(axis=1)**0.5
         dist = np.linalg.norm(hsv_colors_xyz[inds] - color, axis=1)
         if not dist.size or dist.min() > threshold:
             inds.append(i)
@@ -178,7 +148,6 @@ def hsv_reduce_colors(colors, weights, threshold=0.4, return_rgb=True):
 
     w = np.array(weights)[inds]
     w /= w.sum()
-    # print(len(ret), ret)
 
     return ret, w
 

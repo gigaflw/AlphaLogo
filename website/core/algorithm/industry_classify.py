@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+#
+# According to a paragraph introducing a logo, judge the possible industry the logo belongs to.
+
 import jieba
 import time
 

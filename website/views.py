@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-22 20:25:31
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-12 04:36:21
+# @Last Modified time: 2017-01-12 21:39:10
 
 from flask import Blueprint, render_template, abort, request, flash, redirect, url_for
 
@@ -18,15 +18,10 @@ def index():
     return render_template('index.html')
 
 
-@bp.route('/im')
-def index_image():
-    return render_template('index_image.html')
-
-
 @bp.route('/search', methods=['GET'])
 def search():
     """
-    Searching by the name of the company or the keywords.
+    Search logos by literal characters
     """
     type_ = request.args.get('type')
     kw = request.args.get('kw')
@@ -35,8 +30,6 @@ def search():
     saturation = request.args.get('saturation')
     value = request.args.get('brightness')
     industry = request.args.get('industry')
-    tmpl = "search.html"
-    search_ = text_search
 
     n_color_list = data_convertion(n_colors, 1)
     saturation_list = data_convertion(saturation)
@@ -47,20 +40,14 @@ def search():
         return redirect(url_for("bp.index"))
     else:
         if type_ == 'search':
-            logo_matched, t  = search_(keywords=kw)
+            logo_matched, t = text_search(keywords=kw)
         else:
-            logo_matched, t = search_(keywords=kw, ent_name=ent_name, n_colors=n_color_list,
-                                   saturation_levels=saturation_list, value_levels=value_list,
-                                   industry=industry_list)
+            logo_matched, t = text_search(keywords=kw, ent_name=ent_name, n_colors=n_color_list,
+                                          saturation_levels=saturation_list, value_levels=value_list,
+                                          industry=industry_list)
 
-        #flash("Time consumed: %.5f sec" % t)
-
-        # new parameter `n_colors` is added to search function!
-        # also `Logo` instance has one more property `theme_colors`
-        # It will be required to match `n_colors` goodly to gain a 'good match'!
-        # more detail can be seen in the docstring of `core.search.text_search`
-
-    return render_template(tmpl, logo_matched=logo_matched, logo_similar=[], kw=kw, ent_name=ent_name, n_colors=n_colors, time=t)
+    return render_template("search.html", logo_matched=logo_matched, logo_similar=[],
+                           kw=kw, ent_name=ent_name, n_colors=n_colors, time=t)
 
 
 @bp.route('/match', methods=['POST'])
@@ -75,7 +62,6 @@ def match():
         flash("parameter 'type' is required in the post data!")
 
     elif type_ == "match":
-        tmpl = "match.html"
         kw = request.files.get('logo')
 
         if not kw.filename:
@@ -90,16 +76,11 @@ def match():
         return redirect(url_for("bp.index"))
     else:
         (logo_matched, logo_similar), t = image_search(full_path_uploads(upload_name), max_n=20)
-        #flash("Time consumed: %.5f sec" % t)
 
-    rounded_weights = []
-    for weight in uploaded_logo.theme_weights:
-        weight = round(weight, 5)
-        rounded_weights.append(weight)
-
+    rounded_weights = [round(w, 5) for w in uploaded_logo.theme_weights]
     t = round(t, 5)
 
-    return render_template(tmpl, logo_matched=logo_matched, logo_similar=logo_similar,
+    return render_template("match.html", logo_matched=logo_matched, logo_similar=logo_similar,
                            kw=kw, upload=uploaded_logo, time=t, upload_theme_weights=rounded_weights)
 
 

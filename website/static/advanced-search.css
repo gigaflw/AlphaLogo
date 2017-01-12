@@ -2,7 +2,7 @@
 * @Author: GigaFlower
 * @Date:   2017-01-12 10:59:00
 * @Last Modified by:   GigaFlower
-* @Last Modified time: 2017-01-12 11:16:10
+* @Last Modified time: 2017-01-12 13:01:01
 */
 
 div.advancedSearchPanel {
@@ -10,7 +10,7 @@ div.advancedSearchPanel {
     transform: rotateX(90deg);
     transform-origin: 50% 0;
 
-    /*display: inline-block;*/
+    display: inline-block;
     background-color: rgba(255,255,255,0.4);
 
     margin-top: 40px;

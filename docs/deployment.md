@@ -1,6 +1,3 @@
-# 部署
-本文将指导你搭建环境
-
 ### 系统要求
 * python >= 2.7
 * flask >= 0.10
@@ -10,7 +7,8 @@
 
     < install pylucene yourself >    
     `pip install -r requirements.txt`
-    `python manage.py -i`   # create index
+    < assert your crawled data are in their places (see manage.py)>
+    `python manage.py --init`   # create index
     
 ### 运行
     
