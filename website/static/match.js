@@ -21,6 +21,7 @@ var idCurrentPointer = document.getElementById("currentPointer");
 window.addEventListener('load', function(){
     console.log('远看黄山黑黝黝,上面小来下面大,若将黄山倒过来,上面大来下面小');
     modeMatchInitial();
+    pieAnimationUpload();
 });
 
 function modeMatchInitial() {
@@ -33,6 +34,39 @@ function modeMatchInitial() {
     divResultContainer.style.marginRight = "250px";
     idCurrentPointer.style.left = "375px";
 }
+
+
+function pieAnimationUpload() {
+    var tmp = [];
+    var colorlist = document.getElementById(
+        "uploadColorsList").textContent.split(',');
+    for (var x = 0; x < colorlist.length; ++x) {
+        tmp.push(colorlist[x].substring(2, 9));
+    }
+    console.log(tmp);
+    pieAnimation("chosenPie1", tmp);
+}
+
+function pieAnimation(pieID, colors_tmp) {
+    colors_tmp.push("white");
+    var updatingChart = $("#" + pieID).peity("pie", { "fill": colors_tmp, "radius": 38 })
+    var timerID = setInterval(function() {
+        var values = updatingChart.text().split(",");
+        var tmp = values.pop();
+        if (tmp > 100) {
+            tmp = tmp * 0.3;
+        } else if (tmp > 0.1) {
+            tmp = tmp * 0.7;
+        } else if (tmp > 0.05) {
+            tmp = tmp - 0.01;
+        } else if (tmp >= 0.00) {
+            tmp = tmp - 0.005;
+        }
+        values.push(tmp);
+        updatingChart.text(values.join(",")).change();
+    }, 60);
+    return timerID;
+};
 
 (function() {
     var rectangleTmp = 111;

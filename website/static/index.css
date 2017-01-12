@@ -7,12 +7,13 @@
 
 body {
     background-color: #e5e0cc;
+    overflow-y: hidden;
 }
 
 div.container {
     width: 100%;
 
-    font-family: "微软雅黑","华文黑体", "Arial", sans-serif;
+    font-family: sans-serif, "微软雅黑","华文黑体", "Arial";
 }
 
 div.title {

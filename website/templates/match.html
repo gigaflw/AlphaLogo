@@ -17,9 +17,9 @@
 
 {% block body %}
     <div class="container" id="totalContainer">
-        <div style="position: absolute; right: 300px; top: 0;">
+        <!-- <div style="position: absolute; right: 300px; top: 0;">
             Time consumed: {{ time }} sec
-        </div>
+        </div> -->
 
         <div class="titleContainerDefault" id="titleContainer">
             <div class="title" id="title">
@@ -93,17 +93,27 @@
                             </div>
                         </div>
 
-                        <div class="auxForMargin">*返回最主要的两个颜色</div>
-                        <div class="colorDetail">
-                            <div class="colorDetailBlock" style="background-color: {{upload.theme_colors[0]}}">
+                        <!-- <div class="auxForMargin">*返回最主要的两个颜色</div> -->
+                        <div class="colorDetailDiv">
+                            {%- for themeColor in upload.theme_colors %}
+                                <div class="colorDetailRow">
+                                    <div class="colorDetailBlock" style="background-color: {{ themeColor }}">
+                                        <abbr class="linkShowInfo" onlick="return false;" title="{{ themeColor }}"></abbr>
+                                    </div>
+                                    <div class="colorDetailFigure"> {{ upload_theme_weights[ loop.index0 ] }} </div>
+                                </div>
+                            {%- endfor %}  
+                        </div>
+                            
+                            <!-- <div class="colorDetailBlock" style="background-color: {{upload.theme_colors[0]}}">
                                 <abbr class="linkShowInfo" onlick="return false;" title={{upload.theme_colors[0]}}></abbr>
                             </div>
                             <div class="colorDetailFigure"> {{upload.theme_weights[0]}} </div>
                             <div class="colorDetailBlock" style="background-color: {{upload.theme_colors[1]}}">
                                 <abbr class="linkShowInfo" onlick="return false;" title={{upload.theme_colors[1]}}></abbr>
                             </div>
-                            <div class="colorDetailFigure"> {{upload.theme_weights[1]}} </div>
-                        </div>
+                            <div class="colorDetailFigure"> {{upload.theme_weights[1]}} </div> -->
+                        
                     </div>
                     </br>
                     <div class="moreText">

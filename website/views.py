@@ -92,8 +92,13 @@ def match():
         (logo_matched, logo_similar), t = image_search(full_path_uploads(upload_name))
         #flash("Time consumed: %.5f sec" % t)
 
+    rounded_weights = []
+    for weight in uploaded_logo.theme_weights:
+        weight = round(weight, 5)
+        rounded_weights.append(weight)
+
     return render_template(tmpl, logo_matched=logo_matched, logo_similar=logo_similar,
-                           kw=kw, upload=uploaded_logo, time=t)
+                           kw=kw, upload=uploaded_logo, time=t, upload_theme_weights=rounded_weights)
 
 
 def data_convertion(data, mode=0):

@@ -56,19 +56,36 @@ var chosenImgValue = document.getElementById("chosenImgValue");
 var chosenImgRectSaturation = document.getElementById("chosenRectSaturation");
 var chosenImgRectValue = document.getElementById("chosenRectValue");
 var chosenImgPie = document.getElementById("chosenPie");
+var chosenColorDetailRow0 = document.getElementById("chosenColorDetailRow0");
+var chosenColorDetailRow1 = document.getElementById("chosenColorDetailRow1");
+var chosenColorDetailRow2 = document.getElementById("chosenColorDetailRow2");
+var chosenColorDetailRow3 = document.getElementById("chosenColorDetailRow3");
+var chosenColorDetailRow4 = document.getElementById("chosenColorDetailRow4");
+var chosenColorDetailRow5 = document.getElementById("chosenColorDetailRow5");
 var chosenImgThemeColor0 = document.getElementById("chosenImgThemeColor0");
 var chosenImgThemeColorTitle0 = document.getElementById("chosenImgThemeColorTitle0");
 var chosenImgThemeWeights0 = document.getElementById("chosenImgThemeWeights0");
 var chosenImgThemeColor1 = document.getElementById("chosenImgThemeColor1");
 var chosenImgThemeColorTitle1 = document.getElementById("chosenImgThemeColorTitle1");
 var chosenImgThemeWeights1 = document.getElementById("chosenImgThemeWeights1");
+var chosenImgThemeColor2 = document.getElementById("chosenImgThemeColor2");
+var chosenImgThemeColorTitle2 = document.getElementById("chosenImgThemeColorTitle2");
+var chosenImgThemeWeights2 = document.getElementById("chosenImgThemeWeights2");
+var chosenImgThemeColor3 = document.getElementById("chosenImgThemeColor3");
+var chosenImgThemeColorTitle3 = document.getElementById("chosenImgThemeColorTitle3");
+var chosenImgThemeWeights3 = document.getElementById("chosenImgThemeWeights3");
+var chosenImgThemeColor4 = document.getElementById("chosenImgThemeColor4");
+var chosenImgThemeColorTitle4 = document.getElementById("chosenImgThemeColorTitle4");
+var chosenImgThemeWeights4 = document.getElementById("chosenImgThemeWeights4");
+var chosenImgThemeColor5 = document.getElementById("chosenImgThemeColor5");
+var chosenImgThemeColorTitle5 = document.getElementById("chosenImgThemeColorTitle5");
+var chosenImgThemeWeights5 = document.getElementById("chosenImgThemeWeights5");
 var chosenImgInfo = document.getElementById("chosenImgInfo");
 var timer_pie = null;
 
 window.addEventListener('load', function() {
     advancedSearchTypeInitialization();
     titleContainerActivate();
-    pieAnimationUpload();
     setRectLength(chosenImgRectSaturation);
     setRectLength(chosenImgRectValue);
 });
@@ -339,15 +356,54 @@ function fillMoreInfoChosenImg(pointer) {
     chosenImgPie.textContent = chosenPieTmp + ",800";
     pieAnimationClick(chosenImgThemeColorsList);
     chosenImgInfo.textContent = pointer.getAttribute("dataInfo");
+
     try {
         chosenImgThemeColor1.style.backgroundColor = chosenImgThemeColorsList[1].substring(3, 10);
         chosenImgThemeColorTitle1.style.title = chosenImgThemeColorsList[1];
         chosenImgThemeWeights1.textContent = (chosenImgThemeColorWeightsList[1].toString() + '000000000').substring(0, 8);
+        chosenColorDetailRow1.style.display = "flex";
     } catch (e) {
         console.log(e.message);
-        chosenImgThemeWeights1.textContent = "(无其他主要颜色)";
-        chosenImgThemeColor1.style.backgroundColor = "#FFFFFF";
+        chosenColorDetailRow1.style.display = "none";
+        // chosenImgThemeWeights1.textContent = "(无其他主要颜色)";
+        // chosenImgThemeColor1.style.backgroundColor = "#FFFFFF";
     } //console.log(chosenImgThemeWeights0.textContent,chosenImgThemeWeights1.textContent,chosenImgThemeColorWeightsList[1].toString());
+    try {
+        chosenImgThemeColor2.style.backgroundColor = chosenImgThemeColorsList[2].substring(3, 10);
+        chosenImgThemeColorTitle2.style.title = chosenImgThemeColorsList[2];
+        chosenImgThemeWeights2.textContent = (chosenImgThemeColorWeightsList[2].toString() + '000000000').substring(0, 8);
+        chosenColorDetailRow2.style.display = "flex";
+    } catch (e) {
+        console.log(e.message);
+        chosenColorDetailRow2.style.display = "none";
+    }
+    try {
+        chosenImgThemeColor3.style.backgroundColor = chosenImgThemeColorsList[3].substring(3, 10);
+        chosenImgThemeColorTitle3.style.title = chosenImgThemeColorsList[3];
+        chosenImgThemeWeights3.textContent = (chosenImgThemeColorWeightsList[3].toString() + '000000000').substring(0, 8);
+        chosenColorDetailRow3.style.display = "flex";
+    } catch (e) {
+        console.log(e.message);
+        chosenColorDetailRow3.style.display = "none";
+    }
+    try {
+        chosenImgThemeColor4.style.backgroundColor = chosenImgThemeColorsList[4].substring(3, 10);
+        chosenImgThemeColorTitle4.style.title = chosenImgThemeColorsList[4];
+        chosenImgThemeWeights4.textContent = (chosenImgThemeColorWeightsList[4].toString() + '000000000').substring(0, 8);
+        chosenColorDetailRow4.style.display = "flex";
+    } catch (e) {
+        console.log(e.message);
+        chosenColorDetailRow4.style.display = "none";
+    }
+    try {
+        chosenImgThemeColor5.style.backgroundColor = chosenImgThemeColorsList[5].substring(3, 10);
+        chosenImgThemeColorTitle5.style.title = chosenImgThemeColorsList[5];
+        chosenImgThemeWeights5.textContent = (chosenImgThemeColorWeightsList[5].toString() + '000000000').substring(0, 8);
+        chosenColorDetailRow5.style.display = "flex";
+    } catch (e) {
+        console.log(e.message);
+        chosenColorDetailRow5.style.display = "none";
+    }
 }
 
 function pieAnimationClick(colorlist) {
@@ -362,17 +418,6 @@ function pieAnimationClick(colorlist) {
         clearInterval(timer_pie);
     }
     timer_pie = pieAnimation("chosenPie", resList);
-}
-
-function pieAnimationUpload() {
-    var tmp = [];
-    var colorlist = document.getElementById(
-        "uploadColorsList").textContent.split(',');
-    for (var x = 0; x < colorlist.length; ++x) {
-        tmp.push(colorlist[x].substring(2, 9));
-    }
-    console.log(tmp);
-    pieAnimation("chosenPie1", tmp);
 }
 
 function extractListElement(listInStr) {
