@@ -14,12 +14,15 @@
 
     text-align: left;
 }
+div#suggestResult {
+    margin-left: 230px;
+}
 .suggest ul{
     position: absolute;
     width: 100%;
     /*transform-origin: top center;*/
     user-select: none;
-    background-color: rgba(240,240,220, 0.4);
+    background-color: rgba(240,240,220, 0.8);
 }
 .suggest li{
     padding-left: 10px;
