@@ -2,7 +2,7 @@
 * @Author: GigaFlower
 * @Date:   2016-12-23 23:12:10
 * @Last Modified by:   GigaFlower
-* @Last Modified time: 2017-01-12 11:20:03
+* @Last Modified time: 2017-01-12 11:31:36
 */
 
 body {
@@ -298,6 +298,7 @@ div.activeAdvancedTitle {
 div.advancedSearchPanel {
     background-color: rgba(255,255,255,0.9);
     margin-top: -5px;
+    display: block;
 }
 
 /*
