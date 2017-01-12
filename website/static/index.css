@@ -2,12 +2,14 @@
 * @Author: GigaFlower
 * @Date:   2016-12-23 23:12:10
 * @Last Modified by:   GigaFlower
-* @Last Modified time: 2017-01-12 06:42:28
+* @Last Modified time: 2017-01-12 10:09:34
 */
 
 body {
-    background-color: #e5e0cc;
+    /*background-color: #e5e0cc;*/
     overflow-y: hidden;
+    background: #fff url(bg.jpg) no-repeat fixed top;
+    background-size: cover;
 }
 
 div.container {
