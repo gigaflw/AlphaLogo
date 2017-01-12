@@ -1,0 +1,110 @@
+/*
+* @Author: GigaFlower
+* @Date:   2017-01-12 10:59:00
+* @Last Modified by:   GigaFlower
+* @Last Modified time: 2017-01-12 11:16:10
+*/
+
+div.advancedSearchPanel {
+    transition: transform 0.6s;
+    transform: rotateX(90deg);
+    transform-origin: 50% 0;
+
+    /*display: inline-block;*/
+    background-color: rgba(255,255,255,0.4);
+
+    margin-top: 40px;
+
+    width: 700px;
+
+    box-shadow: 3px 3px 6px 3px #888888;
+
+    border: 3px #FFFFFF solid;
+    border-radius: 20px;
+    border-color: transparent;
+    
+    text-align: center;
+    font-size: 18px;
+}
+
+div.advancedSearchBar {
+    margin: 5px 0px 5px 0px;
+
+    height: 40px;
+
+    text-align: center;
+    font-size: 18px;
+}
+
+div.advancedSearchTitle {
+    cursor: default;
+
+    padding-top: 10px;
+    padding-left: 20px;
+
+    width: 100px;
+    height: 25px;
+    float: left;
+    
+    border: 3px #FFFFFF solid;
+    border-color: transparent;
+
+    text-align: left;
+    font-size: 18px;
+}
+
+div.advancedSearchType {
+    cursor: pointer;
+
+    margin: 0 5px 0 5px;
+    padding-top: 10px;
+    float: left;
+
+    width: 80px;
+    height: 25px;
+    
+    border: 2px #fff solid;
+    border-radius: 10px;
+    border-color: transparent;
+
+    text-align: center;
+    color: #888;
+    font-size: 18px;
+
+    transition: color .2s, border-color .2s, background-color .2s;
+}
+
+div.advancedSearchType:hover {
+    border-color: #ccc;
+    color: #444;
+}
+
+div.advancedSearchType.active {
+    background-color: rgba(0,0,0,0.3);
+    border-color: #888;
+    color: #fff;
+}
+
+div.advancedSearchType.active:hover {
+    border-color: #ddd;
+}
+
+input.enterpriseName {
+    background-color: transparent;
+    margin-top: 3px;
+
+    width: 200px;
+    height: 28px;
+    float: left;
+
+    border: 3px #AAAAAA solid;
+    border-radius: 15px;
+
+    font-size: 18px;
+    text-indent: 10px;
+    outline-width: 0;
+    vertical-align: top;
+}
+input.enterpriseName:hover {
+    border: 3px #888888 solid;
+}

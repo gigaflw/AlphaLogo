@@ -7,6 +7,7 @@
 {% block styles %}
     <link rel="stylesheet" href="static/search_match.css"> 
     <link rel="stylesheet" type="text/css" href="static/searchbar.css">
+    <link rel="stylesheet" type="text/css" href="static/advanced-search.css">
 {% endblock %} 
 
 {% block scripts %}
@@ -141,7 +142,7 @@
                     <div class="resultTitle" id="matchedResultTitle">
                         您要找的是不是：
                     </div>
-                    {%- for row in logo_matched|batch(2) %}
+                    {%- for row in logo_matched|batch(3) %}
                         <div class="imgMatchedResultRow">
                             {%- for logo in row %}
                                 <div class="matchedResult" onclick="showChosenImgMoreInfo(this, 0)" dataFilename="{{logo.filename}}" dataEntName="{{logo.ent_name}}" dataInfo="{{logo.info}}" dataThemeColors="{{ logo.theme_colors|string }}" dataThemeWeights="{{logo.theme_weights|string}}" dataS="{{logo.s}}" dataV="{{logo.v}}" >
