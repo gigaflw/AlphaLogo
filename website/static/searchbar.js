@@ -17,6 +17,7 @@ function updateSuggestBar(suggestElem, values) {
         // assert only one child remains
         while(suggestElem.childElementCount > 1){
             suggestElem.removeChild(suggestElem.firstChild);
+            // fixme: you need to remove event here!
         }
 
         if(suggestElem.childElementCount == 1) {
@@ -24,6 +25,12 @@ function updateSuggestBar(suggestElem, values) {
                 suggestElem.removeChild(suggestElem.firstChild);
             }, 100);
         }
+
+        ul.addEventListener('click', function(e){
+            var input = document.querySelector("#textForm > input.keyword");
+            input.value = e.target.textContent;
+        });
+
         suggestElem.appendChild(ul);
     }
 }
@@ -76,6 +83,7 @@ window.addEventListener('load', function () {
     window.addEventListener('scroll', function(){
         suggest.innerHTML = '';
     });
+
 
 
     // searchType.addEventListener('click', function () {
