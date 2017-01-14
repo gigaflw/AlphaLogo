@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-25 13:07:33
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-12 21:20:48
+# @Last Modified time: 2017-01-13 15:45:38
 # 
 # Image search algorithm based on SIFT and LSH
 # The implementation locates at 'website.core.algorirhm', here is the interface
@@ -26,7 +26,7 @@ def create_index():
     """
     sift = SIFT(debug=False)
     lsh = LSH(d=128, l=12) # 128 = dimension of SIFT descriptor, 12 = experience number of hash function
-
+    i = 0
     try:
         for fname in os.listdir(DATASET_DIR):
             if not fname.endswith('.jpg'):
@@ -36,6 +36,10 @@ def create_index():
             print("Processing '%s'..." % im_path)
             dps, _ = sift.process(cv2.imread(im_path, 0))
             lsh.feed_n(dps)
+
+            i+= 1
+            if i >= 100:
+                break
 
     except Exception, e:
         traceback.print_exc()
@@ -63,7 +67,14 @@ def get_search_func():
         if len(im.shape) == 3:
             im = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
 
+        import time
+        t0 = time.time()
         dps, _ = sift.process(im)
-        return lsh.match(dps, max_n=max_n)
+        t1 = time.time()
+        ret = lsh.match(dps, max_n=max_n)
+        t2 = time.time()
+        print(t1 - t0)
+        print(t2 - t1)
+        return ret
 
     return search

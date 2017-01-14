@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2017-01-02 09:41:37
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-12 20:48:34
+# @Last Modified time: 2017-01-14 13:40:07
 
 #
 # This file provides cmd tools to manage index files and database initilization
@@ -94,7 +94,7 @@ def create_index():
     if not reset_index():
         return
 
-    lucene_create_index()
+    text_create_index()
     image_create_index()
     tth_create_index()
     create_db()

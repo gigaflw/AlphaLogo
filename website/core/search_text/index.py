@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-27 21:45:08
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-11 22:25:32
+# @Last Modified time: 2017-01-14 13:42:14
 
 from __future__ import with_statement, print_function
 
@@ -20,6 +20,8 @@ from org.apache.lucene.index import FieldInfo, IndexWriter, IndexWriterConfig
 from org.apache.lucene.store import SimpleFSDirectory
 from org.apache.lucene.util import Version
 # end
+
+from website.core.config import LUCENE_CATELOG_FILE, LUCENE_INDEX_DIR
 
 
 def create_index():

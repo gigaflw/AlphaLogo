@@ -2,7 +2,7 @@
 # @Author: GigaFlower
 # @Date:   2016-12-28 22:46:45
 # @Last Modified by:   GigaFlower
-# @Last Modified time: 2017-01-06 21:51:26
+# @Last Modified time: 2017-01-13 16:49:53
 #
 # MMCQ (Modified Median Cut Quantization) Algorithm
 # src: http://collaboration.cmc.ec.gc.ca/science/rpn/biblio/ddj/Website/articles/DDJ/1994/9409/9409e/9409e.htm
@@ -169,6 +169,7 @@ class VBox(object):
             2) number of pixels
         """
         return max(self._color_var_rel) * self.n_pix
+        # return reduce(int.__mul__, (l-u for u,l in self.bounds)) * self.n_pix
 
     def __lt__(self, other):
         """
@@ -229,14 +230,17 @@ def demo():
             continue
 
         im = cv2.imread(os.path.join(path, f))
-        colors = list(MMCQ(im, color_level=8, slots=8))
+        colors = MMCQ(im, color_level=8, slots=8)
+        colors, weights = zip(*colors)
+
         rows, cols, _ = im.shape
 
-        n = np.zeros((rows, cols+20, 3), dtype=np.uint8) + 255
+        n = np.zeros((rows, cols+200, 3), dtype=np.uint8) + 255
         n[:rows, :cols, :] = im
 
+        cv2.rectangle(n, (cols+9, 29), (cols+190, 190), (0, 0, 0))
         for i, c in enumerate(colors):
-            n[i*10: (i+1)*10, cols:cols+20, :] = [int(cc) for cc in c]
+            n[i*20+30: (i+1)*20+30, cols+10:cols+190, :] = [int(cc) for cc in c]
 
         cv2.imshow("test", n)
 
